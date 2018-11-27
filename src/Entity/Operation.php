@@ -51,6 +51,18 @@ class Operation
      */
     private $operationBinding;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Commercial", inversedBy="idOperation")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $idCommercial;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\OperationTypeOperation", inversedBy="idOperation")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $idOperationTypeOperation;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -136,6 +148,30 @@ class Operation
     public function setOperationBinding(bool $operationBinding): self
     {
         $this->operationBinding = $operationBinding;
+
+        return $this;
+    }
+
+    public function getIdCommercial(): ?Commercial
+    {
+        return $this->idCommercial;
+    }
+
+    public function setIdCommercial(?Commercial $idCommercial): self
+    {
+        $this->idCommercial = $idCommercial;
+
+        return $this;
+    }
+
+    public function getIdOperationTypeOperation(): ?OperationTypeOperation
+    {
+        return $this->idOperationTypeOperation;
+    }
+
+    public function setIdOperationTypeOperation(?OperationTypeOperation $idOperationTypeOperation): self
+    {
+        $this->idOperationTypeOperation = $idOperationTypeOperation;
 
         return $this;
     }

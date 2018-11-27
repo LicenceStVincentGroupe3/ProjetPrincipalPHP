@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -85,6 +87,34 @@ class Commercial
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $commercialPhoto;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Operation", mappedBy="idCommercial")
+     */
+    private $idOperation;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Commercial", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $commercialManager;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Commercial", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $commercialWorker;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Parameter", mappedBy="idCommercial")
+     */
+    private $idParameter;
+
+    public function __construct()
+    {
+        $this->idOperation = new ArrayCollection();
+        $this->idParameter = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -255,6 +285,92 @@ class Commercial
     public function setCommercialPhoto(?string $commercialPhoto): self
     {
         $this->commercialPhoto = $commercialPhoto;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Operation[]
+     */
+    public function getIdOperation(): Collection
+    {
+        return $this->idOperation;
+    }
+
+    public function addIdOperation(Operation $idOperation): self
+    {
+        if (!$this->idOperation->contains($idOperation)) {
+            $this->idOperation[] = $idOperation;
+            $idOperation->setIdCommercial($this);
+        }
+
+        return $this;
+    }
+
+    public function removeIdOperation(Operation $idOperation): self
+    {
+        if ($this->idOperation->contains($idOperation)) {
+            $this->idOperation->removeElement($idOperation);
+            // set the owning side to null (unless already changed)
+            if ($idOperation->getIdCommercial() === $this) {
+                $idOperation->setIdCommercial(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getCommercialManager(): ?self
+    {
+        return $this->commercialManager;
+    }
+
+    public function setCommercialManager(self $commercialManager): self
+    {
+        $this->commercialManager = $commercialManager;
+
+        return $this;
+    }
+
+    public function getCommercialWorker(): ?self
+    {
+        return $this->commercialWorker;
+    }
+
+    public function setCommercialWorker(self $commercialWorker): self
+    {
+        $this->commercialWorker = $commercialWorker;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Parameter[]
+     */
+    public function getIdParameter(): Collection
+    {
+        return $this->idParameter;
+    }
+
+    public function addIdParameter(Parameter $idParameter): self
+    {
+        if (!$this->idParameter->contains($idParameter)) {
+            $this->idParameter[] = $idParameter;
+            $idParameter->setIdCommercial($this);
+        }
+
+        return $this;
+    }
+
+    public function removeIdParameter(Parameter $idParameter): self
+    {
+        if ($this->idParameter->contains($idParameter)) {
+            $this->idParameter->removeElement($idParameter);
+            // set the owning side to null (unless already changed)
+            if ($idParameter->getIdCommercial() === $this) {
+                $idParameter->setIdCommercial(null);
+            }
+        }
 
         return $this;
     }
