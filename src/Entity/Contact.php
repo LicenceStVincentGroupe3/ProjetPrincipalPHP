@@ -116,6 +116,24 @@ class Contact
      */
     private $contactOptInCommercialOffers;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Commercial", inversedBy="contacts")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $idUser;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Company", inversedBy="contacts")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $idCompany;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\ContactJob", inversedBy="contacts")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $idContactJob;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -357,6 +375,42 @@ class Contact
     public function setContactOptInCommercialOffers(?bool $contactOptInCommercialOffers): self
     {
         $this->contactOptInCommercialOffers = $contactOptInCommercialOffers;
+
+        return $this;
+    }
+
+    public function getIdUser(): ?Commercial
+    {
+        return $this->idUser;
+    }
+
+    public function setIdUser(?Commercial $idUser): self
+    {
+        $this->idUser = $idUser;
+
+        return $this;
+    }
+
+    public function getIdCompany(): ?Company
+    {
+        return $this->idCompany;
+    }
+
+    public function setIdCompany(?Company $idCompany): self
+    {
+        $this->idCompany = $idCompany;
+
+        return $this;
+    }
+
+    public function getIdContactJob(): ?ContactJob
+    {
+        return $this->idContactJob;
+    }
+
+    public function setIdContactJob(?ContactJob $idContactJob): self
+    {
+        $this->idContactJob = $idContactJob;
 
         return $this;
     }

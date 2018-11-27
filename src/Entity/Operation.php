@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -50,6 +52,16 @@ class Operation
      * @ORM\Column(type="boolean")
      */
     private $operationBinding;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Participation", mappedBy="idOperation")
+     */
+    private $participations;
+
+    public function __construct()
+    {
+        $this->participations = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -136,6 +148,37 @@ class Operation
     public function setOperationBinding(bool $operationBinding): self
     {
         $this->operationBinding = $operationBinding;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Participation[]
+     */
+    public function getParticipations(): Collection
+    {
+        return $this->participations;
+    }
+
+    public function addParticipation(Participation $participation): self
+    {
+        if (!$this->participations->contains($participation)) {
+            $this->participations[] = $participation;
+            $participation->setIdOperation($this);
+        }
+
+        return $this;
+    }
+
+    public function removeParticipation(Participation $participation): self
+    {
+        if ($this->participations->contains($participation)) {
+            $this->participations->removeElement($participation);
+            // set the owning side to null (unless already changed)
+            if ($participation->getIdOperation() === $this) {
+                $participation->setIdOperation(null);
+            }
+        }
 
         return $this;
     }
