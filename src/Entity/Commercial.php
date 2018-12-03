@@ -97,6 +97,16 @@ class Commercial
     {
         $this->contacts = new ArrayCollection();
     }
+  
+    /** 
+     * @ORM\OneToMany(targetEntity="App\Entity\Company", mappedBy="idUser")
+     */
+    private $companies;
+
+    public function __construct()
+    {
+        $this->companies = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -285,6 +295,22 @@ class Commercial
             $this->contacts[] = $contact;
             $contact->setIdUser($this);
         }
+    }
+  
+    /**
+     * @return Collection|Company[]
+     */
+    public function getCompanies(): Collection
+    {
+        return $this->companies;
+    }
+
+    public function addCompany(Company $company): self
+    {
+        if (!$this->companies->contains($company)) {
+            $this->companies[] = $company;
+            $company->setIdUser($this);
+        }
 
         return $this;
     }
@@ -296,6 +322,17 @@ class Commercial
             // set the owning side to null (unless already changed)
             if ($contact->getIdUser() === $this) {
                 $contact->setIdUser(null);
+            }
+        }
+    }
+  
+    public function removeCompany(Company $company): self
+    {
+        if ($this->companies->contains($company)) {
+            $this->companies->removeElement($company);
+            // set the owning side to null (unless already changed)
+            if ($company->getIdUser() === $this) {
+                $company->setIdUser(null);
             }
         }
 
