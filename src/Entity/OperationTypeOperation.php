@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Asset;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\OperationTypeOperationRepository")
@@ -18,6 +19,7 @@ class OperationTypeOperation
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
      */
     private $operationTypeOperationHtmlTemplateName;
 
