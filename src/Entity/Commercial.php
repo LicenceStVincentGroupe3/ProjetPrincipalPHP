@@ -96,17 +96,13 @@ class Commercial
     public function __construct()
     {
         $this->contacts = new ArrayCollection();
+        $this->companies = new ArrayCollection();
     }
   
     /** 
      * @ORM\OneToMany(targetEntity="App\Entity\Company", mappedBy="idUser")
      */
     private $companies;
-
-    public function __construct()
-    {
-        $this->companies = new ArrayCollection();
-    }
 
     public function getId(): ?int
     {
