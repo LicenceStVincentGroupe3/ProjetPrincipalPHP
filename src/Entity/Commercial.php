@@ -5,7 +5,7 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Asset;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CommercialRepository")
@@ -50,14 +50,12 @@ class Commercial
 
     /**
      * @ORM\Column(type="datetime")
-     * @Assert\NotBlank
      * @Assert\DateTime
      */
     private $commercialPlugCreation;
 
     /**
-     * @ORM\Column(type="datetime")
-     * @Assert\NotBlank
+     * @ORM\Column(type="datetime", nullable=true)
      * @Assert\DateTime
      */
     private $commercialLastUpdate;
@@ -104,6 +102,9 @@ class Commercial
 
     public function __construct()
     {
+        // Par défaut, la date de création de la fiche commercial est la date d'aujourd'hui
+        $this->commercialPlugCreation = new \DateTime();
+
         $this->contacts = new ArrayCollection();
         $this->companies = new ArrayCollection();
     }

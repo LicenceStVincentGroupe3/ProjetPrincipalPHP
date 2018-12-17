@@ -1,0 +1,17 @@
+{# {% extends 'base.html.twig' %} #}
+
+{# {% block title %}Hello {{ controller_name }}!{% endblock %} #}
+
+{# {% block body %} #}
+
+{% for operation in listOp %}
+<tr>
+  <td><a href="{{ path('editOperation', {'id':operation.Id}) }}">{{operation.OperationName}}</a></td>
+</tr>
+{% else %}
+<tr>
+  <td>Aucune opération de campagne marketing</td>
+</tr>
+{% endfor %}
+
+{# {% endblock %} #}
