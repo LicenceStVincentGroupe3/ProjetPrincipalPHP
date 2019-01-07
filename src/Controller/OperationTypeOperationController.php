@@ -2,8 +2,8 @@
 
 namespace App\Controller;
 
-use App\Entity\Commercial;
-use App\Form\CommercialType;
+use App\Entity\OperationTypeOperation;
+use App\Form\OperationTypeOperationType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
@@ -16,9 +16,9 @@ use Symfony\Component\Serializer\Annotation\Groups;*/
 //* @Groups({"Light"})
 //* @MaxDepth(1)
 /**
- * @Route("/commercial")
+ * @Route("/operation/typeOperation")
  */
-class CommercialController extends AbstractController
+class OperationTypeOperationController extends AbstractController
 {
     /* ---------------------------------------------------------------------
     ------------------------------------------------------------------------
@@ -28,27 +28,27 @@ class CommercialController extends AbstractController
     */
 
     /**
-     * @Route("/new", methods={"GET","POST"}, name="newCommercial")
+     * @Route("/new", methods={"GET","POST"}, name="newOperationTypeOperation")
      */
     public function new(Request $request)
     {
-    	$newCommercial = new Commercial();
+    	$newOperationTypeOperation = new OperationTypeOperation();
 
-    	$form = $this->createForm(CommercialType::class, $newCommercial);
+    	$form = $this->createForm(OperationTypeOperationType::class, $newOperationTypeOperation);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid() && $request->isMethod('POST'))
         {
-            $newCommercial = $form->getData();
+            $newOperationTypeOperation = $form->getData();
 
             $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($newCommercial);
+            $entityManager->persist($newOperationTypeOperation);
             $entityManager->flush();
 
-            return $this->redirect($this->generateUrl('listCommercial'));
+            return $this->redirect($this->generateUrl('listOperationTypeOperation'));
         }
 
-        return $this->render('commercial/new.html.twig', ['form' => $form->createView()]);
+        return $this->render('operation_type_operation/new.html.twig', ['form' => $form->createView()]);
     }
 
     /**
@@ -57,7 +57,7 @@ class CommercialController extends AbstractController
     /*public function newApi(Request $request, SerializerInterface $serializer)
     {
         $json = $serializer->serialize(
-            $commercial,
+            $operationTypeOperation,
             'json',
             ['groups'=>["Light"]]
         );
@@ -77,7 +77,7 @@ class CommercialController extends AbstractController
     */
 
     /**
-     * @Route("/edit/{id}", requirements={"id"="\d+"}, methods={"GET","POST"}, name="editCommercial")
+     * @Route("/edit/{id}", requirements={"id"="\d+"}, methods={"GET","POST"}, name="editOperationTypeOperation")
      */
     public function edit($id, Request $request)
     {
@@ -85,12 +85,12 @@ class CommercialController extends AbstractController
         $display = $this->getDoctrine()->getManager();
 
         // Variable qui contient le Repository
-        $commercialRepository = $display->getRepository(Commercial::class);
+        $operationTypeOperationRepository = $display->getRepository(OperationTypeOperation::class);
 
         // Equivalent du SELECT * where id=(paramètre)
-        $edit = $commercialRepository->find($id);
+        $edit = $operationTypeOperationRepository->find($id);
 
-        $form = $this->createForm(CommercialType::class, $edit);
+        $form = $this->createForm(OperationTypeOperationType::class, $edit);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid() && $request->isMethod('POST'))
@@ -99,17 +99,15 @@ class CommercialController extends AbstractController
 
             $entityManager = $this->getDoctrine()->getManager();
 
-            $edit->setCommercialLastUpdate(new \DateTime());
-
             $entityManager->flush();
 
-            return $this->redirect($this->generateUrl('listCommercial'));
+            return $this->redirect($this->generateUrl('listOperationTypeOperation'));
         }
 
         // ----------------------------------
         // On demande à la vue d'afficher la commande plus tous ses produits
         // ----------------------------------
-        return $this->render('commercial/edit.html.twig', ['editCom' => $edit, 'form' => $form->createView()]);
+        return $this->render('operation_type_operation/edit.html.twig', ['editOTO' => $edit, 'form' => $form->createView()]);
     }
 
     /**
@@ -118,7 +116,7 @@ class CommercialController extends AbstractController
     /*public function editApi($id, Request $request, SerializerInterface $serializer)
     {
         $json = $serializer->serialize(
-            $commercial,
+            $operationTypeOperation,
             'json',
             ['groups'=>["Light"]]
         );
@@ -138,22 +136,22 @@ class CommercialController extends AbstractController
     */
 
     /**
-     * @Route("/delete/{id}", requirements={"id"="\d+"}, methods={"GET","POST"}, name="deleteCommercial")
+     * @Route("/delete/{id}", requirements={"id"="\d+"}, methods={"GET","POST"}, name="deleteOperationTypeOperation")
      */
     public function delete($id)
     {
         // Appel de Doctrine
         $display = $this->getDoctrine()->getManager();
 
-        $commercialRepository = $display->getRepository(Commercial::class);
+        $operationTypeOperationRepository = $display->getRepository(OperationTypeOperation::class);
 
-        $delete = $commercialRepository->find($id);
+        $delete = $operationTypeOperationRepository->find($id);
 
         $display->remove($delete);
 
         $display->flush();
 
-        return $this->redirect($this->generateUrl('listCommercial'));
+        return $this->redirect($this->generateUrl('listOperationTypeOperation'));
     }
 
     /**
@@ -162,7 +160,7 @@ class CommercialController extends AbstractController
     /*public function deleteApi($id, SerializerInterface $serializer)
     {
         $json = $serializer->serialize(
-            $commercial,
+            $operationTypeOperation,
             'json',
             ['groups'=>["Light"]]
         );
@@ -182,7 +180,7 @@ class CommercialController extends AbstractController
     */
 
     /**
-     * @Route("/list", name="listCommercial", methods={"GET"})
+     * @Route("/list", name="listOperationTypeOperation", methods={"GET"})
      */
     public function list(Request $request/*, SerializerInterface $serializer*/)
     {
@@ -190,14 +188,14 @@ class CommercialController extends AbstractController
         $display = $this->getDoctrine()->getManager();
 
         // Variable qui contient le Repository
-        $commercialRepository = $display->getRepository(Commercial::class);
+        $operationTypeOperationRepository = $display->getRepository(OperationTypeOperation::class);
 
         // Equivalent du SELECT *
-        $list = $commercialRepository->findAll();
+        $list = $operationTypeOperationRepository->findAll();
 
         /*if ($request->isXmlHttpRequest()) {
             $json = $serializer->serialize(
-                $commercial,
+                $operationTypeOperation,
                 'json',
                 ['groups'=>["Light"]]
             );
@@ -212,7 +210,7 @@ class CommercialController extends AbstractController
             // ----------------------------------
             // On demande à la vue d'afficher la liste des commandes
             // ----------------------------------
-            return $this->render('commercial/list.html.twig', ['listCom' => $list]);
+            return $this->render('operation_type_operation/list.html.twig', ['listOTO' => $list]);
             // On affecte notre tableau contenant la(les) valeur(s) de la variable à la vue
         //}
     }

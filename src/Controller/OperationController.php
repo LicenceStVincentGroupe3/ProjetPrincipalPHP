@@ -10,13 +10,22 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\VarDumper\VarDumper;
 
 // Préfix url
+//* @Groups({"Light"})
+//* @MaxDepth(1)
 /**
  * @Route("/operation")
  */
 class OperationController extends AbstractController
 {
+    /* ---------------------------------------------------------------------
+    ------------------------------------------------------------------------
+    ------------------------------------------------------------------------
+    ------------------------------------------------------------------------
+    ------------------------------------------------------------------------
+    */
+
     /**
-     * @Route("/new", name="newOperation")
+     * @Route("/new", methods={"GET","POST"}, name="newOperation")
      */
     public function new(Request $request)
     {
@@ -40,7 +49,32 @@ class OperationController extends AbstractController
     }
 
     /**
-     * @Route("/edit/{id}", name="editOperation")
+     * @Route("/", methods={"POST"})
+     */
+    /*public function newApi(Request $request, SerializerInterface $serializer)
+    {
+        $json = $serializer->serialize(
+            $operation,
+            'json',
+            ['groups'=>["Light"]]
+        );
+
+        $response = new Response();
+        $response->setContent($json);
+        $response->headers->set('Content-type', 'application/JSON');
+
+        return $response;
+    }*/
+
+    /* ---------------------------------------------------------------------
+    ------------------------------------------------------------------------
+    ------------------------------------------------------------------------
+    ------------------------------------------------------------------------
+    ------------------------------------------------------------------------
+    */
+
+    /**
+     * @Route("/edit/{id}", requirements={"id"="\d+"}, methods={"GET","POST"}, name="editOperation")
      */
     public function edit($id, Request $request)
     {
@@ -74,17 +108,76 @@ class OperationController extends AbstractController
     }
 
     /**
-     * @Route("/delete/{id}", name="deleteOperation")
+     * @Route("/", requirements={"id"="\d+"}, methods={"POST"})
      */
-    public function delete()
+    /*public function editApi($id, Request $request, SerializerInterface $serializer)
     {
-        return $this->render('operation/delete.html.twig', [
-            'controller_name' => 'OperationController',
-        ]);
+        $json = $serializer->serialize(
+            $operation,
+            'json',
+            ['groups'=>["Light"]]
+        );
+
+        $response = new Response();
+        $response->setContent($json);
+        $response->headers->set('Content-type', 'application/JSON');
+
+        return $response;
+    }*/
+
+    /* ---------------------------------------------------------------------
+    ------------------------------------------------------------------------
+    ------------------------------------------------------------------------
+    ------------------------------------------------------------------------
+    ------------------------------------------------------------------------
+    */
+
+    /**
+     * @Route("/delete/{id}", requirements={"id"="\d+"}, methods={"GET","POST"}, name="deleteOperation")
+     */
+    public function delete($id)
+    {
+        // Appel de Doctrine
+        $display = $this->getDoctrine()->getManager();
+
+        $operationRepository = $display->getRepository(Operation::class);
+
+        $delete = $operationRepository->find($id);
+
+        $display->remove($delete);
+
+        $display->flush();
+
+        return $this->redirect($this->generateUrl('listOperation'));
     }
 
     /**
-     * @Route("/list", name="listOperation")
+     * @Route("/", requirements={"id"="\d+"}, methods={"GET","POST"})
+     */
+    /*public function deleteApi($id, SerializerInterface $serializer)
+    {
+        $json = $serializer->serialize(
+            $operation,
+            'json',
+            ['groups'=>["Light"]]
+        );
+
+        $response = new Response();
+        $response->setContent($json);
+        $response->headers->set('Content-type', 'application/JSON');
+
+        return $response;
+    }*/
+
+    /* ---------------------------------------------------------------------
+    ------------------------------------------------------------------------
+    ------------------------------------------------------------------------
+    ------------------------------------------------------------------------
+    ------------------------------------------------------------------------
+    */
+
+    /**
+     * @Route("/list", name="listOperation", methods={"GET"})
      */
     public function list()
     {

@@ -6,7 +6,12 @@
 
 {% for commercial in listCom %}
 <tr>
-  <td><a href="{{ path('editCommercial', {'id':commercial.id}) }}">{{commercial.commercialPlugCreation|date("d/m/Y")}}</a></td>
+  <td><a href="{{ path('editCommercial', {'id':commercial.Id}) }}">{{commercial.CommercialPlugCreation|date("d/m/Y")}}</a></td>
+  <td>
+  	<a class="btn btn-danger" href="{{ path('deleteCommercial', {'id':commercial.Id}) }}">
+  		<i class="glyphicon glyphicon-trash"></i>Supprimer
+  	</a>
+  </td>
 </tr>
 {% else %}
 <tr>

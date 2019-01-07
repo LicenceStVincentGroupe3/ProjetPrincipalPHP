@@ -7,6 +7,11 @@
 {% for operation in listOp %}
 <tr>
   <td><a href="{{ path('editOperation', {'id':operation.Id}) }}">{{operation.OperationName}}</a></td>
+  <td>
+  	<a class="btn btn-danger" href="{{ path('deleteOperation', {'id':operation.Id}) }}">
+  		<i class="glyphicon glyphicon-trash"></i>Supprimer
+  	</a>
+  </td>
 </tr>
 {% else %}
 <tr>
