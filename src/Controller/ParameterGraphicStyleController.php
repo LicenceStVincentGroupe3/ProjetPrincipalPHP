@@ -2,8 +2,8 @@
 
 namespace App\Controller;
 
-use App\Entity\OperationTypeOperation;
-use App\Form\OperationTypeOperationType;
+use App\Entity\ParameterGraphicStyle;
+use App\Form\ParameterGraphicStyleType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,9 +15,9 @@ use Symfony\Component\Serializer\Annotation\Groups;*/
 //* @Groups({"Light"})
 //* @MaxDepth(1)
 /**
- * @Route("/operation/typeOperation")
+ * @Route("/parameterGraphicStyle")
  */
-class OperationTypeOperationController extends AbstractController
+class ParameterGraphicStyleController extends AbstractController
 {
     /* ---------------------------------------------------------------------
     ------------------------------------------------------------------------
@@ -27,27 +27,28 @@ class OperationTypeOperationController extends AbstractController
     */
 
     /**
-     * @Route("/new", methods={"GET","POST"}, name="newOperationTypeOperation")
+     * @Route("/new", methods={"GET","POST"}, name="newParameterGraphicStyle")
      */
     public function new(Request $request)
     {
-    	$newOperationTypeOperation = new OperationTypeOperation();
+    	$newParameterGraphicStyle = new ParameterGraphicStyle();
+					
 
-    	$form = $this->createForm(OperationTypeOperationType::class, $newOperationTypeOperation);
+    	$form = $this->createForm(ParameterGraphicStyleType::class, $newParameterGraphicStyle);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid() && $request->isMethod('POST'))
         {
-            $newOperationTypeOperation = $form->getData();
+            $newParameterGraphicStyle = $form->getData();
 
             $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($newOperationTypeOperation);
+            $entityManager->persist($newParameterGraphicStyle);
             $entityManager->flush();
 
-            return $this->redirect($this->generateUrl('listOperationTypeOperation'));
+            return $this->redirect($this->generateUrl('listParameterGraphicStyle'));
         }
 
-        return $this->render('operation_type_operation/new.html.twig', ['form' => $form->createView()]);
+        return $this->render('parameter_graphic_style/new.html.twig', ['form' => $form->createView()]);
     }
 
     /**
@@ -56,7 +57,7 @@ class OperationTypeOperationController extends AbstractController
     /*public function newApi(Request $request, SerializerInterface $serializer)
     {
         $json = $serializer->serialize(
-            $operationTypeOperation,
+            $parameterGraphicStyle,
             'json',
             ['groups'=>["Light"]]
         );
@@ -76,7 +77,7 @@ class OperationTypeOperationController extends AbstractController
     */
 
     /**
-     * @Route("/edit/{id}", requirements={"id"="\d+"}, methods={"GET","POST"}, name="editOperationTypeOperation")
+     * @Route("/edit/{id}", requirements={"id"="\d+"}, methods={"GET","POST"}, name="editParameterGraphicStyle")
      */
     public function edit($id, Request $request)
     {
@@ -84,12 +85,12 @@ class OperationTypeOperationController extends AbstractController
         $display = $this->getDoctrine()->getManager();
 
         // Variable qui contient le Repository
-        $operationTypeOperationRepository = $display->getRepository(OperationTypeOperation::class);
+        $parameterGraphicStyleRepository = $display->getRepository(ParameterGraphicStyle::class);
 
         // Equivalent du SELECT * where id=(paramètre)
-        $edit = $operationTypeOperationRepository->find($id);
+        $edit = $parameterGraphicStyleRepository->find($id);
 
-        $form = $this->createForm(OperationTypeOperationType::class, $edit);
+        $form = $this->createForm(ParameterGraphicStyleType::class, $edit);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid() && $request->isMethod('POST'))
@@ -100,13 +101,13 @@ class OperationTypeOperationController extends AbstractController
 
             $entityManager->flush();
 
-            return $this->redirect($this->generateUrl('listOperationTypeOperation'));
+            return $this->redirect($this->generateUrl('listParameterGraphicStyle'));
         }
 
         // ----------------------------------
         // On demande à la vue d'afficher la commande plus tous ses produits
         // ----------------------------------
-        return $this->render('operation_type_operation/edit.html.twig', ['editOTO' => $edit, 'form' => $form->createView()]);
+        return $this->render('parameter_graphic_style/edit.html.twig', ['form' => $form->createView()]);
     }
 
     /**
@@ -115,7 +116,7 @@ class OperationTypeOperationController extends AbstractController
     /*public function editApi($id, Request $request, SerializerInterface $serializer)
     {
         $json = $serializer->serialize(
-            $operationTypeOperation,
+            $parameterGraphicStyle,
             'json',
             ['groups'=>["Light"]]
         );
@@ -135,22 +136,22 @@ class OperationTypeOperationController extends AbstractController
     */
 
     /**
-     * @Route("/delete/{id}", requirements={"id"="\d+"}, methods={"GET","POST"}, name="deleteOperationTypeOperation")
+     * @Route("/delete/{id}", requirements={"id"="\d+"}, methods={"GET","POST"}, name="deleteParameterGraphicStyle")
      */
     public function delete($id)
     {
         // Appel de Doctrine
         $display = $this->getDoctrine()->getManager();
 
-        $operationTypeOperationRepository = $display->getRepository(OperationTypeOperation::class);
+        $parameterGraphicStyleRepository = $display->getRepository(ParameterGraphicStyle::class);
 
-        $delete = $operationTypeOperationRepository->find($id);
+        $delete = $parameterGraphicStyleRepository->find($id);
 
         $display->remove($delete);
 
         $display->flush();
 
-        return $this->redirect($this->generateUrl('listOperationTypeOperation'));
+        return $this->redirect($this->generateUrl('listParameterGraphicStyle'));
     }
 
     /**
@@ -159,7 +160,7 @@ class OperationTypeOperationController extends AbstractController
     /*public function deleteApi($id, SerializerInterface $serializer)
     {
         $json = $serializer->serialize(
-            $operationTypeOperation,
+            $parameterGraphicStyle,
             'json',
             ['groups'=>["Light"]]
         );
@@ -179,7 +180,7 @@ class OperationTypeOperationController extends AbstractController
     */
 
     /**
-     * @Route("/list", name="listOperationTypeOperation", methods={"GET"})
+     * @Route("/list", name="listParameterGraphicStyle", methods={"GET"})
      */
     public function list(Request $request/*, SerializerInterface $serializer*/)
     {
@@ -187,14 +188,14 @@ class OperationTypeOperationController extends AbstractController
         $display = $this->getDoctrine()->getManager();
 
         // Variable qui contient le Repository
-        $operationTypeOperationRepository = $display->getRepository(OperationTypeOperation::class);
+        $parameterGraphicStyleRepository = $display->getRepository(ParameterGraphicStyle::class);
 
         // Equivalent du SELECT *
-        $list = $operationTypeOperationRepository->findAll();
+        $list = $parameterGraphicStyleRepository->findAll();
 
         /*if ($request->isXmlHttpRequest()) {
             $json = $serializer->serialize(
-                $operationTypeOperation,
+                $parameterGraphicStyle,
                 'json',
                 ['groups'=>["Light"]]
             );
@@ -209,7 +210,7 @@ class OperationTypeOperationController extends AbstractController
             // ----------------------------------
             // On demande à la vue d'afficher la liste des commandes
             // ----------------------------------
-            return $this->render('operation_type_operation/list.html.twig', ['listOTO' => $list]);
+            return $this->render('parameter_graphic_style/list.html.twig', ['listParameterGraphicStyle' => $list]);
             // On affecte notre tableau contenant la(les) valeur(s) de la variable à la vue
         //}
     }

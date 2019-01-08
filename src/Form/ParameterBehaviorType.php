@@ -2,20 +2,23 @@
 
 namespace App\Form;
 
-use App\Entity\OperationTypeOperation;
+use App\Entity\ParameterBehavior;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\UrlType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;//FileType
 
-class OperationTypeOperationType extends AbstractType
+class ParameterBehaviorType extends AbstractType
 {
 	public function buildForm(FormBuilderInterface $builder, array $option)
 	{
 		$builder
-			->add('operationTypeOperationHtmlTemplateName', TextType::class, ['label' => 'Nom du template de l\'opération*'])
+			->add('parameterBehaviorBehavior', TextareaType::class, ['label' => 'Comportement du paramètre',
+																		'attr' => ['class' => 'tinymce']
+																	]
+					)
 			->add('save', SubmitType::class, ['label' => 'Valider'])
 			->getForm()
 		;
@@ -23,7 +26,7 @@ class OperationTypeOperationType extends AbstractType
 
 	public function configureOptions(OptionsResolver $resolver)
 	{
-		$resolver->setDefaults(['data_class' => OperationTypeOperation::class]);
+		$resolver->setDefaults(['data_class' => ParameterBehavior::class]);
 	}
 }
 

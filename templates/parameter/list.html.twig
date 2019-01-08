@@ -1,0 +1,22 @@
+{# {% extends 'base.html.twig' %} #}
+
+{# {% block title %}Hello {{ controller_name }}!{% endblock %} #}
+
+{# {% block body %} #}
+
+{% for parameter in listParameter %}
+<tr>
+  <td><a href="{{ path('editParameter', {'id':parameter.Id}) }}">{{parameter.ParameterAppliName }}</a></td>
+  <td>
+  	<a class="btn btn-danger" href="{{ path('deleteParameter', {'id':parameter.Id}) }}">
+  		<i class="glyphicon glyphicon-trash"></i>Supprimer
+  	</a>
+  </td>
+</tr>
+{% else %}
+<tr>
+  <td>Aucun Commercial</td>
+</tr>
+{% endfor %}
+
+{# {% endblock %} #}

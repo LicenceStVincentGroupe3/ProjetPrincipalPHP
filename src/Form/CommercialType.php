@@ -48,4 +48,5 @@ class CommercialType extends AbstractType
 		$resolver->setDefaults(['data_class' => Commercial::class]);
 	}
 }
+
 ?>

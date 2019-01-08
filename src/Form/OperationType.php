@@ -36,4 +36,5 @@ class OperationType extends AbstractType
 		$resolver->setDefaults(['data_class' => Operation::class]);
 	}
 }
+
 ?>

@@ -197,4 +197,5 @@ class OperationController extends AbstractController
         // On affecte notre tableau contenant la(les) valeur(s) de la variable à la vue
     }
 }
+
 ?>

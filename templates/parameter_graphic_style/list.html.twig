@@ -1,0 +1,26 @@
+{# {% extends 'base.html.twig' %} #}
+
+{# {% block title %}Hello {{ controller_name }}!{% endblock %} #}
+
+{# {% block body %} #}
+
+{% for parameterGraphicStyle in listParameterGraphicStyle %}
+<tr>
+  <td>
+	  <a href="{{ path('editParameterGraphicStyle', {'id':parameterGraphicStyle.Id}) }}">
+	  	{{ parameterGraphicStyle.ParameterGraphicStyleStyle }}
+	  </a>
+  </td>
+  <td>
+  	<a class="btn btn-danger" href="{{ path('deleteParameterGraphicStyle', {'id':parameterGraphicStyle.Id}) }}">
+  		<i class="glyphicon glyphicon-trash"></i>Supprimer
+  	</a>
+  </td>
+</tr>
+{% else %}
+<tr>
+  <td>Aucun style graphique</td>
+</tr>
+{% endfor %}
+
+{# {% endblock %} #}

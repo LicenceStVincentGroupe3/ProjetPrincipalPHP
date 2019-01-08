@@ -1,0 +1,11 @@
+{# {% extends 'base.html.twig' %} #}
+
+{# {% block title %}Hello {{ controller_name }}!{% endblock %} #}
+
+{# {% block body %} #}
+
+{{ form_start(form, {'method': 'POST'}, {'attr': {'novalidate': 'novalidate'}}) }}
+{{ form_widget(form) }}
+{{ form_end(form) }}
+
+{# {% endblock %} #}

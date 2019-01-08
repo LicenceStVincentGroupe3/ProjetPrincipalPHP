@@ -71,12 +71,12 @@ class Contact
     private $contactBirthDate;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="string", length=14, nullable=true)
      */
     private $contactMobilePhone;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="string", nullable=true)
      */
     private $contactDirectLandline;
 
