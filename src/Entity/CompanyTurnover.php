@@ -20,7 +20,7 @@ class CompanyTurnover
     private $id;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string", length=255, nullable=false)
      * @Assert\NotBlank
      */
     private $turnover;
@@ -40,12 +40,12 @@ class CompanyTurnover
         return $this->id;
     }
 
-    public function getTurnover(): ?int
+    public function getTurnover(): ?string
     {
         return $this->turnover;
     }
 
-    public function setTurnover(int $turnover): self
+    public function setTurnover(string $turnover): self
     {
         $this->turnover = $turnover;
 

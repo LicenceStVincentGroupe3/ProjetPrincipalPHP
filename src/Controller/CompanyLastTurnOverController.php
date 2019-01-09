@@ -16,20 +16,27 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 class CompanyLastTurnOverController extends AbstractController
 {
     /**
-     * @Route("/list", name="listLastTurnOver")
+     * @Route("/new", name="newLastTurnOver")
      */
-    public function list()
+    public function new(Request $request)
     {
-        // ---------------------------------------
-        // Récupération de la liste des derniers chiffres d'affaires
-        // ---------------------------------------
-        $repository = $this->getDoctrine()->getManager()->getRepository(CompanyLastTurnover::class);
+        $newLastTurnOver = new CompanyLastTurnover();
+        $form = $this->createForm(CompanyLastTurnoverType::class, $newLastTurnOver);
 
-        $listLastTurnOver = $repository->findAll();
-        // -------------------------------------------------------------
-        // On demande à la vue d'afficher la liste des derniers chiffres d'affaires
-        // -------------------------------------------------------------
-        return $this->render('companyLastTurnOver/list.html.twig', array('lesDerniersChiffresDAffaires' => $listLastTurnOver)); // On affecte le tableau à la vue
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid())
+        {
+            $newLastTurnOver = $form->getData();
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($newLastTurnOver);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('listLastTurnOver');
+        }
+
+        return $this->render('companyLastTurnOver/new.html.twig', array('form' => $form->createView(),));
     }
 
     /**
@@ -56,6 +63,44 @@ class CompanyLastTurnOverController extends AbstractController
         return $this->render('companyLastTurnOver/edit.html.twig', array(
         'form' => $form->createView(),'turnOver' => $editLastTurnOver
         ));
+    }
+
+    /**
+     * @Route("/delete/{id}", name="deleteLastTurnOver", requirements={"id"="\d+"})
+     */
+    public function delete($id)
+    {
+        $suppBD = $this->getDoctrine()->getManager();
+
+        // On crée un objet, instance de CompanyTurnover
+        $suppLastTurnOver = new CompanyLastTurnover();
+
+        $suppLastTurnOver = $suppBD->getRepository(CompanyLastTurnover::class)->find($id);
+
+        // Suppression du chiffre d'affaire
+        $suppBD->remove($suppLastTurnOver);
+
+        // Exécution
+        $suppBD->flush();
+
+        return $this->redirectToRoute('listLastTurnOver');
+    }
+
+    /**
+     * @Route("/list", name="listLastTurnOver")
+     */
+    public function list()
+    {
+        // ---------------------------------------
+        // Récupération de la liste des derniers chiffres d'affaires
+        // ---------------------------------------
+        $repository = $this->getDoctrine()->getManager()->getRepository(CompanyLastTurnover::class);
+
+        $listLastTurnOver = $repository->findAll();
+        // -------------------------------------------------------------
+        // On demande à la vue d'afficher la liste des derniers chiffres d'affaires
+        // -------------------------------------------------------------
+        return $this->render('companyLastTurnOver/list.html.twig', array('lesDernsChiffresDAffaires' => $listLastTurnOver)); // On affecte le tableau à la vue
     }
 
 }

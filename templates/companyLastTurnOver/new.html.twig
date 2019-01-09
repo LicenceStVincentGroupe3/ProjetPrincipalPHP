@@ -1,14 +1,12 @@
 {% extends "layout.html.twig" %}
 
 {% block title %}
-	{{parent()}} - Modification d'une entreprise
+	{{parent()}} - Ajouter un chiffre d'affaire
 {% endblock %}
 
 {% block gsbobjcom_body %}
-	<h2>Modification de l'entreprise numéro {{company.id}}</h2>
+	<h2>Ajout d'un chiffre d'affaire</h2>
 	{{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
 	{{ form_widget(form) }}
 	{{ form_end(form) }}
-
-	<a href="/company/list">Annulation de la modification : Retour aux entreprises</a>
 {% endblock %}
