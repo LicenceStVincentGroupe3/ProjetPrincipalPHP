@@ -1,0 +1,26 @@
+{# {% extends 'base.html.twig' %} #}
+
+{# {% block title %}Hello {{ controller_name }}!{% endblock %} #}
+
+{# {% block body %} #}
+
+{% for typeOperation in listOTO %}
+<tr>
+  <td>
+  	<a href="{{ path('editOperationTypeOperation', {'id':typeOperation.Id}) }}">
+  		{{typeOperation.OperationTypeOperationHtmlTemplateName}}
+  	</a>
+  </td>
+  <td>
+  	<a class="btn btn-danger" href="{{ path('deleteOperationTypeOperation', {'id':typeOperation.Id}) }}">
+  		<i class="glyphicon glyphicon-trash"></i>Supprimer
+  	</a>
+  </td>
+</tr>
+{% else %}
+<tr>
+  <td>Aucun type d'opération de campagne marketing</td>
+</tr>
+{% endfor %}
+
+{# {% endblock %} #}

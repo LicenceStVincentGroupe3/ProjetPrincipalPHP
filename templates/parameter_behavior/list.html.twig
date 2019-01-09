@@ -1,0 +1,26 @@
+{# {% extends 'base.html.twig' %} #}
+
+{# {% block title %}Hello {{ controller_name }}!{% endblock %} #}
+
+{# {% block body %} #}
+
+{% for parameterBehavior in listParameterBehavior %}
+<tr>
+  <td>
+	  <a href="{{ path('editParameterBehavior', {'id':parameterBehavior.Id}) }}">
+	  	{{ parameterBehavior.ParameterBehaviorBehavior }}
+	  </a>
+  </td>
+  <td>
+  	<a class="btn btn-danger" href="{{ path('deleteParameterBehavior', {'id':parameterBehavior.Id}) }}">
+  		<i class="glyphicon glyphicon-trash"></i>Supprimer
+  	</a>
+  </td>
+</tr>
+{% else %}
+<tr>
+  <td>Aucun comportement</td>
+</tr>
+{% endfor %}
+
+{# {% endblock %} #}

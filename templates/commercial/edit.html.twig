@@ -1,0 +1,16 @@
+{# {% extends 'base.html.twig' %} #}
+
+{# {% block title %}Hello {{ controller_name }}!{% endblock %} #}
+
+{# {% block body %} #}
+
+{% if editCom.CommercialLastUpdate is not null %}
+<p>La dernière modification a été effectuée le {{ editCom.CommercialLastUpdate|date("d/m/Y") }} à {{ editCom.CommercialLastUpdate|date("H") }}h{{ editCom.CommercialLastUpdate|date("i") }}</p>
+{% endif %}
+
+{{ form_start(form, {'method': 'POST'}, {'attr': {'novalidate': 'novalidate'}}) }}
+{{ form_widget(form) }}
+{{ form_end(form) }}
+
+{# {% endblock %} #}
+

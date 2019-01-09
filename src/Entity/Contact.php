@@ -69,7 +69,7 @@ class Contact
     private $contactBirthDate;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=14, nullable=true)
      */
     private $contactMobilePhone;
 

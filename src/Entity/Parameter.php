@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ParameterRepository")
@@ -20,16 +21,19 @@ class Parameter
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
      */
     private $parameterAppliName;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
      */
     private $parameterCustomerLogo;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
      */
     private $parameterAddress;
 
@@ -50,6 +54,7 @@ class Parameter
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
      */
     private $parameterEmail;
 
@@ -231,6 +236,9 @@ class Parameter
         if (!$this->idParameterContactJob->contains($idParameterContactJob)) {
             $this->idParameterContactJob[] = $idParameterContactJob;
         }
+
+        $idParameterContactJob->addParameter($this);
+        $this->idParameterContactJob->add($idParameterContactJob);
 
         return $this;
     }

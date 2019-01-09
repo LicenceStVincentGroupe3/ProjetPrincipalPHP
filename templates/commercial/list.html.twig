@@ -1,0 +1,22 @@
+{# {% extends 'base.html.twig' %} #}
+
+{# {% block title %}Hello {{ controller_name }}!{% endblock %} #}
+
+{# {% block body %} #}
+
+{% for commercial in listCom %}
+<tr>
+  <td><a href="{{ path('editCommercial', {'id':commercial.Id}) }}">{{commercial.CommercialPlugCreation|date("d/m/Y")}}</a></td>
+  <td>
+  	<a class="btn btn-danger" href="{{ path('deleteCommercial', {'id':commercial.Id}) }}">
+  		<i class="glyphicon glyphicon-trash"></i>Supprimer
+  	</a>
+  </td>
+</tr>
+{% else %}
+<tr>
+  <td>Aucun Commercial</td>
+</tr>
+{% endfor %}
+
+{# {% endblock %} #}
