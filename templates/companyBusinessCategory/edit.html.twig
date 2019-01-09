@@ -1,0 +1,14 @@
+{% extends "layout.html.twig" %}
+
+{% block title %}
+	{{parent()}} - Modification d'une catégorie
+{% endblock %}
+
+{% block gsbobjcom_body %}
+	<h2>Modification de la catégorie numéro {{businessCategory.id}}</h2>
+	{{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+	{{ form_widget(form) }}
+	{{ form_end(form) }}
+
+	<a href="/company/business/category/list">Annulation de la modification : Retour au catégories</a>
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends "layout.html.twig" %}
+
+{% block title %}
+	{{parent()}} - Liste des derniers chiffres d'affaires
+{% endblock %}
+
+{% block gsbobjcom_body %}
+	<h2>Liste des derniers chiffres d'affaires</h2>
+	<ul>
+		{% for unChiffre in lesDernsChiffresDAffaires %}
+		<li>
+			{# Déclaration de la variable id_modif pour la passer d'URL #}
+			{% set id_modif='/company/lastTurnOver/edit/' ~ unChiffre.id %}
+
+			<p>{{unChiffre.turnover}}
+			<a href={{id_modif}} class="btn btn-default"><i class="glyphicon glyphicon-edit"></i> Modifier</a>&nbsp;&nbsp;
+
+
+			{# Déclaration de la variable id_suppress pour la passer d'URL #}
+			{% set id_suppress='/company/lastTurnOver/delete/' ~ unChiffre.id %}
+			<a href={{id_suppress}} class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i> Supprimer</a></p>
+		</li>
+		{% else %}
+		<li>Pas de chiffre d'affaires enregistrés</li>
+		{% endfor %}
+	</ul>
+{% endblock %}

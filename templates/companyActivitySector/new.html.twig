@@ -1,0 +1,12 @@
+{% extends "layout.html.twig" %}
+
+{% block title %}
+	{{parent()}} - Ajouter un secteur d'activité
+{% endblock %}
+
+{% block gsbobjcom_body %}
+	<h2>Ajout d'un secteur d'activité</h2>
+	{{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+	{{ form_widget(form) }}
+	{{ form_end(form) }}
+{% endblock %}

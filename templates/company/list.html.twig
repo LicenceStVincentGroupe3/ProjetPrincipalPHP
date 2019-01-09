@@ -1,0 +1,26 @@
+{% extends "layout.html.twig" %}
+
+{% block title %}
+	{{parent()}} - Liste des entreprises
+{% endblock %}
+
+{% block gsbobjcom_body %}
+	<h2>Liste des entreprises</h2>
+	<ul>
+		{% for uneEntreprise in lesEntreprises %}
+		<li>
+			{# Déclaration de la variable id_modif pour la passer d'URL #}
+			{% set id_modif='/company/edit/' ~ uneEntreprise.id %}
+
+			<p>{{uneEntreprise.CompanyLastName}}
+			<a href={{id_modif}} class="btn btn-default"><i class="glyphicon glyphicon-edit"></i> Modifier</a>&nbsp;&nbsp;
+
+			{# Déclaration de la variable id_suppress pour la passer d'URL #}
+			{% set id_suppress='/company/delete/' ~ uneEntreprise.id %}
+			<a href={{id_suppress}} class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i> Supprimer</a></p>
+		</li>
+		{% else %}
+		<li>Pas d'entreprises enregistrées</li>
+		{% endfor %}
+	</ul>
+{% endblock %}

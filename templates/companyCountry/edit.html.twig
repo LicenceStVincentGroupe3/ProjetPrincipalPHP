@@ -1,0 +1,14 @@
+{% extends "layout.html.twig" %}
+
+{% block title %}
+	{{parent()}} - Modification d'un pays
+{% endblock %}
+
+{% block gsbobjcom_body %}
+	<h2>Modification du pays numéro {{country.id}}</h2>
+	{{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+	{{ form_widget(form) }}
+	{{ form_end(form) }}
+
+	<a href="/company/country/list">Annulation de la modification : Retour au pays</a>
+{% endblock %}

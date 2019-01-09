@@ -1,0 +1,27 @@
+{% extends "layout.html.twig" %}
+
+{% block title %}
+	{{parent()}} - Liste des pays
+{% endblock %}
+
+{% block gsbobjcom_body %}
+	<h2>Liste des pays</h2>
+	<ul>
+		{% for unPays in lesPays %}
+		<li>
+			{# Déclaration de la variable id_modif pour la passer d'URL #}
+			{% set id_modif='/company/country/edit/' ~ unPays.id %}
+
+			<p>{{unPays.label}}
+			<a href={{id_modif}} class="btn btn-default"><i class="glyphicon glyphicon-edit"></i> Modifier</a>&nbsp;&nbsp;
+
+
+			{# Déclaration de la variable id_suppress pour la passer d'URL #}
+			{% set id_suppress='/company/country/delete/' ~ unPays.id %}
+			<a href={{id_suppress}} class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i> Supprimer</a></p>
+		</li>
+		{% else %}
+		<li>Pas de pays enregistré</li>
+		{% endfor %}
+	</ul>
+{% endblock %}
