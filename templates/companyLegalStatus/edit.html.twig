@@ -1,0 +1,14 @@
+{% extends "layout.html.twig" %}
+
+{% block title %}
+	{{parent()}} - Modification d'un status légal
+{% endblock %}
+
+{% block gsbobjcom_body %}
+	<h2>Modification du status légal numéro {{legalStatus.id}}</h2>
+	{{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+	{{ form_widget(form) }}
+	{{ form_end(form) }}
+
+	<a href="/company/legalStatus/list">Annulation de la modification : Retour au status légaux</a>
+{% endblock %}

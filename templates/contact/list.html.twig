@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{{parent()}} - Liste des contacts
+{% endblock %}
+
+{% block body %}
+		<h2> Liste des contacts</h2>
+		<ul>
+			{% for cont in lesContacts %}
+			<li>
+				{% set id_contact='/contact/edit/' ~ cont.id %}
+				<a href={{id_contact}}>{{cont.contactLastName}} {{cont.ContactFirstName}}</a>
+				
+				{# Déclaration de la variable id_suppress pour la passer d'URL #}
+				{% set id_suppress='/contact/delete/' ~ cont.id %}
+
+				<a href={{id_suppress}} class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i>Supprimer</a>				
+			</li>
+			{% else %}
+			<li>Pas de contacts</li>
+			{% endfor %}
+		</ul>
+{% endblock %}

@@ -36,8 +36,8 @@ class Contact
     private $contactFirstName;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank
+     * @ORM\Column(type="boolean", nullable=true)
+     * @Assert\NotBlank     
      */
     private $contactGender;
 
@@ -49,9 +49,7 @@ class Contact
     private $contactDatedCreationPlug;
 
     /**
-     * @ORM\Column(type="datetime")
-     * @Assert\NotBlank
-     * @Assert\Type("\DateTime")
+     * @ORM\Column(type="datetime", nullable=true)
      */
     private $contactDateUpdatePlug;
 
@@ -76,7 +74,7 @@ class Contact
     private $contactMobilePhone;
 
     /**
-     * @ORM\Column(type="string", nullable=true)
+     * @ORM\Column(type="string", length=255)
      */
     private $contactDirectLandline;
 
@@ -142,6 +140,12 @@ class Contact
      * @ORM\JoinColumn(nullable=false)
      */
     private $idContactJob;
+
+    public function __construct()
+    {
+        $this->contactDatedCreationPlug = new \Datetime();
+        //$this->$contactDateUpdatePlug = new \Datetime();
+    }
 
     public function getId(): ?int
     {
@@ -256,12 +260,12 @@ class Contact
         return $this;
     }
 
-    public function getContactMobilePhone(): ?int
+    public function getContactMobilePhone(): ?string
     {
         return $this->contactMobilePhone;
     }
 
-    public function setContactMobilePhone(?int $contactMobilePhone): self
+    public function setContactMobilePhone(?string $contactMobilePhone): self
     {
         $this->contactMobilePhone = $contactMobilePhone;
 

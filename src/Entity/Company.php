@@ -20,39 +20,6 @@ class Company
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $CompanyFax;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     * @Assert\Url
-     */
-    private $CompanyWebSite;
-
-    /**
-     * @ORM\Column(type="datetime", nullable=true)
-     * @Assert\NotBlank
-     * @Assert\Type("\DateTime")
-     */
-    private $CompanyCreationDate;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $CompanySiret;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $CompanyCodeNAF;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $CompanySource;
-
-    /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank
      */
@@ -65,23 +32,14 @@ class Company
     private $CompanyLastName;
 
     /**
-     * @ORM\Column(type="datetime", length=255)
-     * @Assert\NotBlank
-     * @Assert\Type("\DateTime")
+     * @ORM\Column(type="datetime")
      */
     private $CompanyDateCreatedPlug;
 
     /**
-     * @ORM\Column(type="datetime", length=255)
-     * @Assert\NotBlank
-     * @Assert\Type("\DateTime")
+     * @ORM\Column(type="datetime")
      */
     private $CompanyDateUpdate;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $CompanyCodeCommercial;
 
     /**
      * @ORM\Column(type="boolean")
@@ -100,6 +58,7 @@ class Company
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
      */
     private $CompanyAddress;
 
@@ -109,7 +68,62 @@ class Company
     private $CompanyAddressSupplement;
 
     /**
+     * @ORM\Column(type="string", length=10)
+     * @Assert\NotBlank
+     */
+    private $CompanyPostalCode;
+
+    /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
+     */
+    private $CompanyCity;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=false)
+     * @Assert\NotBlank
+     */
+    private $CompanyFax;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=false)
+     * @Assert\NotBlank
+     * @Assert\Url
+     */
+    private $CompanyWebSite;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $CompanyCreationDate;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=false)
+     * @Assert\NotBlank
+     */
+    private $CompanySiret;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=false)
+     * @Assert\NotBlank
+     */
+    private $CompanyCodeNAF;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=false)
+     * @Assert\NotBlank
+     */
+    private $CompanySource;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
+     */
+    private $CompanyCodeCommercial;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
      */
     private $CompanyStandardPhone;
 
@@ -140,6 +154,7 @@ class Company
      * @ORM\JoinColumn(nullable=false)
      */
     private $idUser;
+
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\CompanyActivitySector", inversedBy="companies")
@@ -196,30 +211,6 @@ class Company
     public function setLastName(string $lastName): self
     {
         $this->lastName = $lastName;
-
-        return $this;
-    }
-
-    public function getDateCreatedPlug(): ?\DateTimeInterface
-    {
-        return $this->dateCreatedPlug;
-    }
-
-    public function setDateCreatedPlug(\DateTimeInterface $dateCreatedPlug): self
-    {
-        $this->dateCreatedPlug = $dateCreatedPlug;
-
-        return $this;
-    }
-
-    public function getDateUpdate(): ?\DateTimeInterface
-    {
-        return $this->dateUpdate;
-    }
-
-    public function setDateUpdate(\DateTimeInterface $dateUpdate): self
-    {
-        $this->dateUpdate = $dateUpdate;
 
         return $this;
     }
@@ -332,18 +323,6 @@ class Company
         return $this;
     }
 
-    public function getCompanyCreationDate(): ?\DateTimeInterface
-    {
-        return $this->CompanyCreationDate;
-    }
-
-    public function setCompanyCreationDate(?\DateTimeInterface $CompanyCreationDate): self
-    {
-        $this->CompanyCreationDate = $CompanyCreationDate;
-
-        return $this;
-    }
-
     public function getCompanySiret(): ?string
     {
         return $this->CompanySiret;
@@ -400,30 +379,6 @@ class Company
     public function setCompanyLastName(string $CompanyLastName): self
     {
         $this->CompanyLastName = $CompanyLastName;
-
-        return $this;
-    }
-
-    public function getCompanyDateCreatedPlug(): ?string
-    {
-        return $this->CompanyDateCreatedPlug;
-    }
-
-    public function setCompanyDateCreatedPlug(string $CompanyDateCreatedPlug): self
-    {
-        $this->CompanyDateCreatedPlug = $CompanyDateCreatedPlug;
-
-        return $this;
-    }
-
-    public function getCompanyDateUpdate(): ?string
-    {
-        return $this->CompanyDateUpdate;
-    }
-
-    public function setCompanyDateUpdate(string $CompanyDateUpdate): self
-    {
-        $this->CompanyDateUpdate = $CompanyDateUpdate;
 
         return $this;
     }
@@ -630,6 +585,66 @@ class Company
     public function setIdCompanyLastTurnover(?CompanyLastTurnover $idCompanyLastTurnover): self
     {
         $this->idCompanyLastTurnover = $idCompanyLastTurnover;
+
+        return $this;
+    }
+  
+    public function getCompanyCreationDate(): ?\DateTimeInterface
+    {
+        return $this->CompanyCreationDate;
+    }
+
+    public function setCompanyCreationDate(\DateTimeInterface $CompanyCreationDate): self
+    {
+        $this->CompanyCreationDate = $CompanyCreationDate;
+
+        return $this;
+    }
+
+    public function getCompanyDateCreatedPlug(): ?\DateTimeInterface
+    {
+        return $this->CompanyDateCreatedPlug;
+    }
+
+    public function setCompanyDateCreatedPlug(\DateTimeInterface $CompanyDateCreatedPlug): self
+    {
+        $this->CompanyDateCreatedPlug = $CompanyDateCreatedPlug;
+
+        return $this;
+    }
+
+    public function getCompanyDateUpdate(): ?\DateTimeInterface
+    {
+        return $this->CompanyDateUpdate;
+    }
+
+    public function setCompanyDateUpdate(\DateTimeInterface $CompanyDateUpdate): self
+    {
+        $this->CompanyDateUpdate = $CompanyDateUpdate;
+
+        return $this;
+    }
+
+    public function getCompanyPostalCode(): ?string
+    {
+        return $this->CompanyPostalCode;
+    }
+
+    public function setCompanyPostalCode(string $CompanyPostalCode): self
+    {
+        $this->CompanyPostalCode = $CompanyPostalCode;
+
+        return $this;
+    }
+
+    public function getCompanyCity(): ?string
+    {
+        return $this->CompanyCity;
+    }
+
+    public function setCompanyCity(string $CompanyCity): self
+    {
+        $this->CompanyCity = $CompanyCity;
 
         return $this;
     }

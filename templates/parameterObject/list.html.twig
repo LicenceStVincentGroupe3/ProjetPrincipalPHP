@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{{parent()}} - Liste des objets
+{% endblock %}
+
+{% block body %}
+		<h2> Liste des objets</h2>
+		<ul>
+			{% for param in lesParamObjects %}
+			<li>
+				{% set id_paramObject='/parameterObject/edit/' ~ param.id %}
+				<a href={{id_paramObject}}>{{param.parameterObjectObject}}</a>
+				
+				{# Déclaration de la variable id_suppress pour la passer d'URL #}
+				{% set id_suppress='/parameterObject/delete/' ~ param.id %}
+
+				<a href={{id_suppress}} class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i>Supprimer</a>				
+			</li>
+			{% else %}
+			<li>Pas de contacts</li>
+			{% endfor %}
+		</ul>
+{% endblock %}

@@ -20,7 +20,7 @@ class CompanyNbEmployee
     private $id;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string")
      * @Assert\NotBlank
      */
     private $nbEmployee;
@@ -40,12 +40,12 @@ class CompanyNbEmployee
         return $this->id;
     }
 
-    public function getNbEmployee(): ?int
+    public function getNbEmployee(): ?string
     {
         return $this->nbEmployee;
     }
 
-    public function setNbEmployee(int $nbEmployee): self
+    public function setNbEmployee(string $nbEmployee): self
     {
         $this->nbEmployee = $nbEmployee;
 

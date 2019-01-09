@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{{parent()}} - Modification d'un contact
+{% endblock %}
+
+{% block body %}
+	<h2>Modifier le contact {{editContact.contactLastName}} {{editContact.contactFirstName}}</h2>
+	{% if editContact.contactDateUpdatePlug is not null %}
+	<p>La dernière modification a été effectuée le {{ editContact.contactDateUpdatePlug|date("d/m/Y") }} à {{ editContact.contactDateUpdatePlug|date("H") }}h{{ editContact.contactDateUpdatePlug|date("i") }}</p>
+	{% endif %}
+
+{# {'method' : 'POST'}, #}
+	{{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+	{{ form_widget(form) }}
+	{{ form_end(form) }}
+{% endblock %}

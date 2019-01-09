@@ -1,0 +1,15 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+	{{parent()}}
+{% endblock %}
+
+{% block body %}
+	{% block soustitre %}
+		{# On définit un sous-titre commun à toutes les pages du bundle #}
+	{% endblock %}
+	<hr>
+	{% block gsbobjcom_body %}
+		{# On définit  un nouveau block, que les vues du bundle pourront remplir #}
+	{% endblock %}
+{% endblock %}
