@@ -20,39 +20,6 @@ class Company
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $CompanyFax;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     * @Assert\Url
-     */
-    private $CompanyWebSite;
-
-    /**
-     * @ORM\Column(type="datetime", nullable=true)
-     * @Assert\NotBlank
-     * @Assert\Type("\DateTime")
-     */
-    private $CompanyCreationDate;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $CompanySiret;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $CompanyCodeNAF;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $CompanySource;
-
-    /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank
      */
@@ -65,23 +32,14 @@ class Company
     private $CompanyLastName;
 
     /**
-     * @ORM\Column(type="datetime", length=255)
-     * @Assert\NotBlank
-     * @Assert\Type("\DateTime")
+     * @ORM\Column(type="datetime")
      */
     private $CompanyDateCreatedPlug;
 
     /**
-     * @ORM\Column(type="datetime", length=255)
-     * @Assert\NotBlank
-     * @Assert\Type("\DateTime")
+     * @ORM\Column(type="datetime")
      */
     private $CompanyDateUpdate;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $CompanyCodeCommercial;
 
     /**
      * @ORM\Column(type="boolean")
@@ -100,6 +58,7 @@ class Company
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
      */
     private $CompanyAddress;
 
@@ -109,7 +68,62 @@ class Company
     private $CompanyAddressSupplement;
 
     /**
+     * @ORM\Column(type="string", length=10)
+     * @Assert\NotBlank
+     */
+    private $CompanyPostalCode;
+
+    /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
+     */
+    private $CompanyCity;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=false)
+     * @Assert\NotBlank
+     */
+    private $CompanyFax;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=false)
+     * @Assert\NotBlank
+     * @Assert\Url
+     */
+    private $CompanyWebSite;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $CompanyCreationDate;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=false)
+     * @Assert\NotBlank
+     */
+    private $CompanySiret;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=false)
+     * @Assert\NotBlank
+     */
+    private $CompanyCodeNAF;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=false)
+     * @Assert\NotBlank
+     */
+    private $CompanySource;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
+     */
+    private $CompanyCodeCommercial;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
      */
     private $CompanyStandardPhone;
 
@@ -141,17 +155,12 @@ class Company
      */
     private $idUser;
 
+
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\CompanyActivitySector", inversedBy="companies")
      * @ORM\JoinColumn(nullable=false)
      */
     private $idCompanyActivitySector;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\ParameterBehavior", inversedBy="companies")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $idParameterBehavior;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\CompanyBusinessCategory", inversedBy="companies")
@@ -176,24 +185,6 @@ class Company
      * @ORM\JoinColumn(nullable=false)
      */
     private $idCompanyLastTurnover;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\ParameterTypeSite", inversedBy="companies")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $idParameterTypeSite;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\ParameterObject", inversedBy="companies")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $idParameterObject;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\ParameterTarget", inversedBy="companies")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $idParameterTarget;
 
     public function getId(): ?int
     {
@@ -220,30 +211,6 @@ class Company
     public function setLastName(string $lastName): self
     {
         $this->lastName = $lastName;
-
-        return $this;
-    }
-
-    public function getDateCreatedPlug(): ?\DateTimeInterface
-    {
-        return $this->dateCreatedPlug;
-    }
-
-    public function setDateCreatedPlug(\DateTimeInterface $dateCreatedPlug): self
-    {
-        $this->dateCreatedPlug = $dateCreatedPlug;
-
-        return $this;
-    }
-
-    public function getDateUpdate(): ?\DateTimeInterface
-    {
-        return $this->dateUpdate;
-    }
-
-    public function setDateUpdate(\DateTimeInterface $dateUpdate): self
-    {
-        $this->dateUpdate = $dateUpdate;
 
         return $this;
     }
@@ -356,18 +323,6 @@ class Company
         return $this;
     }
 
-    public function getCompanyCreationDate(): ?\DateTimeInterface
-    {
-        return $this->CompanyCreationDate;
-    }
-
-    public function setCompanyCreationDate(?\DateTimeInterface $CompanyCreationDate): self
-    {
-        $this->CompanyCreationDate = $CompanyCreationDate;
-
-        return $this;
-    }
-
     public function getCompanySiret(): ?string
     {
         return $this->CompanySiret;
@@ -424,30 +379,6 @@ class Company
     public function setCompanyLastName(string $CompanyLastName): self
     {
         $this->CompanyLastName = $CompanyLastName;
-
-        return $this;
-    }
-
-    public function getCompanyDateCreatedPlug(): ?string
-    {
-        return $this->CompanyDateCreatedPlug;
-    }
-
-    public function setCompanyDateCreatedPlug(string $CompanyDateCreatedPlug): self
-    {
-        $this->CompanyDateCreatedPlug = $CompanyDateCreatedPlug;
-
-        return $this;
-    }
-
-    public function getCompanyDateUpdate(): ?string
-    {
-        return $this->CompanyDateUpdate;
-    }
-
-    public function setCompanyDateUpdate(string $CompanyDateUpdate): self
-    {
-        $this->CompanyDateUpdate = $CompanyDateUpdate;
 
         return $this;
     }
@@ -610,18 +541,6 @@ class Company
         return $this;
     }
 
-    public function getIdParameterBehavior(): ?ParameterBehavior
-    {
-        return $this->idParameterBehavior;
-    }
-
-    public function setIdParameterBehavior(?ParameterBehavior $idParameterBehavior): self
-    {
-        $this->idParameterBehavior = $idParameterBehavior;
-
-        return $this;
-    }
-
     public function getIdCompanyBusinessCategory(): ?CompanyBusinessCategory
     {
         return $this->idCompanyBusinessCategory;
@@ -670,38 +589,62 @@ class Company
         return $this;
     }
 
-    public function getIdParameterTypeSite(): ?ParameterTypeSite
+    public function getCompanyCreationDate(): ?\DateTimeInterface
     {
-        return $this->idParameterTypeSite;
+        return $this->CompanyCreationDate;
     }
 
-    public function setIdParameterTypeSite(?ParameterTypeSite $idParameterTypeSite): self
+    public function setCompanyCreationDate(\DateTimeInterface $CompanyCreationDate): self
     {
-        $this->idParameterTypeSite = $idParameterTypeSite;
+        $this->CompanyCreationDate = $CompanyCreationDate;
 
         return $this;
     }
 
-    public function getIdParameterObject(): ?ParameterObject
+    public function getCompanyDateCreatedPlug(): ?\DateTimeInterface
     {
-        return $this->idParameterObject;
+        return $this->CompanyDateCreatedPlug;
     }
 
-    public function setIdParameterObject(?ParameterObject $idParameterObject): self
+    public function setCompanyDateCreatedPlug(\DateTimeInterface $CompanyDateCreatedPlug): self
     {
-        $this->idParameterObject = $idParameterObject;
+        $this->CompanyDateCreatedPlug = $CompanyDateCreatedPlug;
 
         return $this;
     }
 
-    public function getIdParameterTarget(): ?ParameterTarget
+    public function getCompanyDateUpdate(): ?\DateTimeInterface
     {
-        return $this->idParameterTarget;
+        return $this->CompanyDateUpdate;
     }
 
-    public function setIdParameterTarget(?ParameterTarget $idParameterTarget): self
+    public function setCompanyDateUpdate(\DateTimeInterface $CompanyDateUpdate): self
     {
-        $this->idParameterTarget = $idParameterTarget;
+        $this->CompanyDateUpdate = $CompanyDateUpdate;
+
+        return $this;
+    }
+
+    public function getCompanyPostalCode(): ?string
+    {
+        return $this->CompanyPostalCode;
+    }
+
+    public function setCompanyPostalCode(string $CompanyPostalCode): self
+    {
+        $this->CompanyPostalCode = $CompanyPostalCode;
+
+        return $this;
+    }
+
+    public function getCompanyCity(): ?string
+    {
+        return $this->CompanyCity;
+    }
+
+    public function setCompanyCity(string $CompanyCity): self
+    {
+        $this->CompanyCity = $CompanyCity;
 
         return $this;
     }
