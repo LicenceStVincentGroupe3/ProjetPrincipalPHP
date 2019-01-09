@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-	{{parent()}} - Ajout d'un job
+	{{parent()}} - Ajout d'un objet
 {% endblock %}
 
 {% block body %}
-		<h2>Ajout d'un job</h2>
+		<h2>Ajout d'un objet</h2>
 		{{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
 		{{ form_widget(form) }}
 		{{ form_end(form) }}

@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-	{{parent()}} - Modification d'un job
+	{{parent()}} - Modification d'une cible
 {% endblock %}
 
 {% block body %}
-	<h2>Modifier le job {{editContactJob.contactJobName}}</h2>
+	<h2>Modifier la cible {{editParameterTarget.parameterTargetTarget}}</h2>
 
 {# {'method' : 'POST'}, #}
 	{{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}

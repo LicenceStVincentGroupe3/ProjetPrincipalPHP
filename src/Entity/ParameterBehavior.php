@@ -21,12 +21,7 @@ class ParameterBehavior
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $parameterBehaviorBehavior;
-
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Company", mappedBy="idParameterBehavior")
-     */
-    private $companies;
+    private $parameterBehaviorBehavior;  
 
     public function __construct()
     {
@@ -46,37 +41,6 @@ class ParameterBehavior
     public function setParameterBehaviorBehavior(string $parameterBehaviorBehavior): self
     {
         $this->parameterBehaviorBehavior = $parameterBehaviorBehavior;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Company[]
-     */
-    public function getCompanies(): Collection
-    {
-        return $this->companies;
-    }
-
-    public function addCompany(Company $company): self
-    {
-        if (!$this->companies->contains($company)) {
-            $this->companies[] = $company;
-            $company->setIdParameterBehavior($this);
-        }
-
-        return $this;
-    }
-
-    public function removeCompany(Company $company): self
-    {
-        if ($this->companies->contains($company)) {
-            $this->companies->removeElement($company);
-            // set the owning side to null (unless already changed)
-            if ($company->getIdParameterBehavior() === $this) {
-                $company->setIdParameterBehavior(null);
-            }
-        }
 
         return $this;
     }

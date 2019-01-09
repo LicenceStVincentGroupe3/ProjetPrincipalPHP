@@ -52,7 +52,7 @@ class ContactController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $editContact->setContactDateUpdatePlug(new \DateTime());
             $entityManager->flush();
-            //VarDumper::dump($this->generateUrl('listCont'));die;
+
             return $this->redirect($this->generateUrl('listCont'));
         }
         return $this->render('contact/edit.html.twig', ['editContact' => $editContact, 'form' => $form->createView()]);

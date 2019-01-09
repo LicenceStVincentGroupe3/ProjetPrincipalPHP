@@ -12,6 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -41,7 +42,7 @@ class ContactType extends AbstractType
             ->add('contactLinkedinAddress', TextType::class, array('label' => 'Adresse Linkedin'))
             ->add('contactPhoto', TextType::class, array('label' => 'Photo'))   
             ->add('contactSourceOperation', TextType::class, array('label' => 'Opération source'))
-            ->add('contactComment', TextType::class, array('label' => 'Commentaire'))  
+            ->add('contactComment', TextareaType::class, array('label' => 'Commentaire'))  
 
     		->add('idUser', EntityType::class, array('class' => Commercial::class,'choice_label' => 'CommercialName', 'label'=>'Commercial'))
 
