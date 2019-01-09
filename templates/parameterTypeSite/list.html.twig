@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{{parent()}} - Liste des types de site
+{% endblock %}
+
+{% block body %}
+		<h2> Liste des types de sites</h2>
+		<ul>
+			{% for param in lesParamTypeSite %}
+			<li>
+				{% set id_paramTypeSite='/parameterTypeSite/edit/' ~ param.id %}
+				<a href={{id_paramTypeSite}}>{{param.parameterTypeSiteLabel}}</a>
+				
+				{# Déclaration de la variable id_suppress pour la passer d'URL #}
+				{% set id_suppress='/parameterTypeSite/delete/' ~ param.id %}
+
+				<a href={{id_suppress}} class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i>Supprimer</a>				
+			</li>
+			{% else %}
+			<li>Pas de contacts</li>
+			{% endfor %}
+		</ul>
+{% endblock %}

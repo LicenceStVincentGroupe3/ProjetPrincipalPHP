@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{{parent()}} - Modification d'un type de site
+{% endblock %}
+
+{% block body %}
+	<h2>Modifier le type de site {{editParameterTypeSite.parameterTypeSiteLabel}}</h2>
+
+{# {'method' : 'POST'}, #}
+	{{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+	{{ form_widget(form) }}
+	{{ form_end(form) }}
+{% endblock %}

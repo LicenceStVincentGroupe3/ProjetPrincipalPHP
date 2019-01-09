@@ -588,7 +588,7 @@ class Company
 
         return $this;
     }
-
+  
     public function getCompanyCreationDate(): ?\DateTimeInterface
     {
         return $this->CompanyCreationDate;
