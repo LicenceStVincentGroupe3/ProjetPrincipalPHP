@@ -2,8 +2,8 @@
 
 namespace App\AdminBundle\Controller;
 
-use App\Entity\Company;
-use App\Form\CompanyType;
+use App\AdminBundle\Entity\Company;
+use App\AdminBundle\Form\CompanyType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -11,28 +11,31 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\VarDumper\VarDumper;
+use Symfony\Component\Serializer\SerializerInterface;
+use Symfony\Component\Serializer\Annotation\Groups;
 
+// Préfix url
 /**
  * @Route("/company")
  */
 class CompanyController extends AbstractController
 {
     /**
-     * @Route("/new", name="newCompany")
+     * @Route("/new", methods={"GET","POST"}, name="newCompany")
      */
     public function new(Request $request)
     {
-        $newCompany = new Company();
-        $form = $this->createForm(CompanyType::class, $newCompany);
+        $new = new Company();
 
+        $form = $this->createForm(CompanyType::class, $new);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid())
         {
-            $newCompany = $form->getData();
+            $new = $form->getData();
 
             $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($newCompany);
+            $entityManager->persist($new);
             $entityManager->flush();
 
 
@@ -42,19 +45,24 @@ class CompanyController extends AbstractController
     }
 
     /**
-     * @Route("/edit/{id}", name="editCompany", requirements={"id"="\d+"})
+     * @Route("/edit/{id}", name="editCompany", requirements={"id"="\d+"}, methods={"GET","POST"})
      */
     public function edit($id, Request $request)
     {
-        $editCompany = $this->getDoctrine()->getManager()->getRepository(Company::class)->find($id);
+        // Appel de Doctrine
+        $display = $this->getDoctrine()->getManager();
 
-        $form = $this->createForm(CompanyType::class, $editCompany);
+        // Variable qui contient le Repository
+        $companyRepository = $display->getRepository(Company::class);
+
+        // Equivalent du SELECT * where id=(paramètre)
+        $edit = $companyRepository->find($id);
+
+        $form = $this->createForm(CompanyType::class, $edit);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid() && $request->isMethod('POST')) 
         {
-            $editCompany = $form->getData();
-
             $entityManager = $this->getDoctrine()->getManager();
 
             $entityManager->flush();
@@ -63,45 +71,46 @@ class CompanyController extends AbstractController
         }
 
         return $this->render('company/edit.html.twig', array(
-        'form' => $form->createView(),'company' => $editCompany
+        'form' => $form->createView(),'company' => $edit
         ));
     }
 
     /**
-     * @Route("/delete/{id}", name="deleteCompany", requirements={"id"="\d+"})
+     * @Route("/delete/{id}", name="deleteCompany", requirements={"id"="\d+"}, methods={"GET","POST"})
      */
     public function delete($id)
     {
-        $suppBD = $this->getDoctrine()->getManager();
+        // Appel de Doctrine
+        $display = $this->getDoctrine()->getManager();
 
-        // On crée un objet, instance de Company
-        $suppCompany = new Company();
+        $companyRepository = $display->getRepository(Company::class);
 
-        $suppCompany = $suppBD->getRepository(Company::class)->find($id);
+        $delete = $companyRepository->find($id);
 
-        // Suppression de l'entreprise
-        $suppBD->remove($suppCompany);
+        $display->remove($delete);
 
-        // Exécution
-        $suppBD->flush();
+        $display->flush();
 
         return $this->redirectToRoute('listCompany');
     }
 
     /**
-     * @Route("/list", name="listCompany")
+     * @Route("/list", name="listCompany", methods={"GET")
      */
     public function list()
     {
-        // ---------------------------------------
-        // Récupération de la liste des entreprises
-        // ---------------------------------------
-        $repository = $this->getDoctrine()->getManager()->getRepository(Company::class);
+        // Appel de Doctrine
+        $display = $this->getDoctrine()->getManager();
 
-        $listCompany = $repository->findAll();
+        // Variable qui contient le Repository
+        $companyRepository = $display->getRepository(Company::class);
+
+        // Equivalent du SELECT *
+        $list = $companyRepository->findAll();
+
         // -------------------------------------------------------------
         // On demande à la vue d'afficher la liste des entreprises
         // -------------------------------------------------------------
-        return $this->render('company/list.html.twig', array('lesEntreprises' => $listCompany)); // On affecte le tableau à la vue
+        return $this->render('company/list.html.twig', array('lesEntreprises' => $list)); // On affecte le tableau à la vue
     }
 }

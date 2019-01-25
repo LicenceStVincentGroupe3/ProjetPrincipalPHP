@@ -3,6 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/ProjetPrincipalPHP.iml" filepath="$PROJECT_DIR$/.idea/ProjetPrincipalPHP.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../mini-projet-mangas_/.idea/mini-projet-mangas.iml" filepath="$PROJECT_DIR$/../mini-projet-mangas_/.idea/mini-projet-mangas.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../mini-projet-mangas/.idea/mini-projet-mangas.iml" filepath="$PROJECT_DIR$/../mini-projet-mangas/.idea/mini-projet-mangas.iml" />
     </modules>
   </component>
 </project>
