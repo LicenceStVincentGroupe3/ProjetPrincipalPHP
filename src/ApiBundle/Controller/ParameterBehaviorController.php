@@ -1,6 +1,6 @@
 <?php
 
-namespace App\AdminBundle\Controller;
+namespace App\ApiBundle\Controller;
 
 use App\AdminBundle\Entity\ParameterBehavior;
 use App\AdminBundle\Form\ParameterBehaviorType;
@@ -8,7 +8,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\VarDumper\VarDumper;
+use Symfony\Component\Serializer\SerializerInterface;
+use Symfony\Component\Serializer\Annotation\Groups;
 
+// Préfix url
+//* @Groups({"Light"})
+//* @MaxDepth(1)
 /**
  * @Route("/parameterBehavior")
  */
@@ -21,15 +26,15 @@ class ParameterBehaviorController extends AbstractController
     ------------------------------------------------------------------------
     */
 
-    /**
-     * @Route("/new", methods={"GET","POST"}, name="newParameterBehavior")
-     */
-    public function new(Request $request)
-    {
-    	$newParameterBehavior = new ParameterBehavior();
-					
 
-    	$form = $this->createForm(ParameterBehaviorType::class, $newParameterBehavior);
+    /**
+     * @Route("/", methods={"POST"})
+     */
+    public function new(Request $request, SerializerInterface $serializer)
+    {
+        $newParameterBehavior = new ParameterBehavior();
+                    
+        $form = $this->createForm(ParameterBehaviorType::class, $newParameterBehavior);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid() && $request->isMethod('POST'))
@@ -38,12 +43,20 @@ class ParameterBehaviorController extends AbstractController
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($newParameterBehavior);
-            $entityManager->flush();
+            $entityManager->flush();        
 
-            return $this->redirect($this->generateUrl('listParameterBehavior'));
+            $json = $serializer->serialize(
+            $newParameterBehavior,
+            'json',
+            ['groups'=>["Light"]]
+        );
+
+        $response = new Response();
+        $response->setContent($json);
+        $response->headers->set('Content-type', 'application/JSON');
+
+        return $response;
         }
-
-        return $this->render('parameter_behavior/new.html.twig', ['form' => $form->createView()]);
     }
 
     /* ---------------------------------------------------------------------
@@ -53,10 +66,11 @@ class ParameterBehaviorController extends AbstractController
     ------------------------------------------------------------------------
     */
 
+
     /**
-     * @Route("/edit/{id}", requirements={"id"="\d+"}, methods={"GET","POST"}, name="editParameterBehavior")
+     * @Route("/", requirements={"id"="\d+"}, methods={"PUT"})
      */
-    public function edit($id, Request $request)
+    public function edit($id, Request $request, SerializerInterface $serializer)
     {
         // Appel de Doctrine
         $display = $this->getDoctrine()->getManager();
@@ -70,21 +84,26 @@ class ParameterBehaviorController extends AbstractController
         $form = $this->createForm(ParameterBehaviorType::class, $edit);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid() && $request->isMethod('POST'))
+        if ($form->isSubmitted() && $form->isValid() && $request->isMethod('PUT'))
         {
             $edit = $form->getData();
 
             $entityManager = $this->getDoctrine()->getManager();
 
-            $entityManager->flush();
+            $entityManager->flush();        
 
-            return $this->redirect($this->generateUrl('listParameterBehavior'));
+            $json = $serializer->serialize(
+            $edit,
+            'json',
+            ['groups'=>["Light"]]
+        );
+
+        $response = new Response();
+        $response->setContent($json);
+        $response->headers->set('Content-type', 'application/JSON');
+
+        return $response;
         }
-
-        // ----------------------------------
-        // On demande à la vue d'afficher la commande plus tous ses produits
-        // ----------------------------------
-        return $this->render('parameter_behavior/edit.html.twig', ['editParameterBehavior' => $edit, 'form' => $form->createView()]);
     }
 
     /* ---------------------------------------------------------------------
@@ -94,11 +113,13 @@ class ParameterBehaviorController extends AbstractController
     ------------------------------------------------------------------------
     */
 
+
     /**
-     * @Route("/delete/{id}", requirements={"id"="\d+"}, methods={"GET","POST"}, name="deleteParameterBehavior")
+     * @Route("/", requirements={"id"="\d+"}, methods={"DELETE"})
      */
-    public function delete($id)
+    public function delete($id, SerializerInterface $serializer)
     {
+
         // Appel de Doctrine
         $display = $this->getDoctrine()->getManager();
 
@@ -108,9 +129,18 @@ class ParameterBehaviorController extends AbstractController
 
         $display->remove($delete);
 
-        $display->flush();
+        $display->flush();        
+        $json = $serializer->serialize(
+            $delete,
+            'json',
+            ['groups'=>["Light"]]
+        );
 
-        return $this->redirect($this->generateUrl('listParameterBehavior'));
+        $response = new Response();
+        $response->setContent($json);
+        $response->headers->set('Content-type', 'application/JSON');
+
+        return $response;
     }
 
     /* ---------------------------------------------------------------------
@@ -121,9 +151,9 @@ class ParameterBehaviorController extends AbstractController
     */
 
     /**
-     * @Route("/list", name="listParameterBehavior", methods={"GET"})
+     * @Route("/", name="listParameterBehavior", methods={"GET"})
      */
-    public function list()
+    public function list(Request $request, SerializerInterface $serializer)
     {
         // Appel de Doctrine
         $display = $this->getDoctrine()->getManager();
@@ -134,11 +164,19 @@ class ParameterBehaviorController extends AbstractController
         // Equivalent du SELECT *
         $list = $parameterBehaviorRepository->findAll();
 
-        // ----------------------------------
-        // On demande à la vue d'afficher la liste des commandes
-        // ----------------------------------
-        return $this->render('parameter_behavior/list.html.twig', ['listParameterBehavior' => $list]);
-        // On affecte notre tableau contenant la(les) valeur(s) de la variable à la vue
+        if ($request->isXmlHttpRequest()) {
+            $json = $serializer->serialize(
+                $list,
+                'json',
+                ['groups'=>["Light"]]
+            );
+
+            $response = new Response();
+            $response->setContent($json);
+            $response->headers->set('Content-type', 'application/JSON');
+
+            return $response;
+        }
     }
 }
 

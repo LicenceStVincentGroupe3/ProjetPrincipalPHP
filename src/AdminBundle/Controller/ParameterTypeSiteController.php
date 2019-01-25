@@ -2,8 +2,8 @@
 
 namespace App\AdminBundle\Controller;
 
-use App\Entity\ParameterTypeSite;
-use App\Form\ParameterTypeSiteType;
+use App\AdminBundle\Entity\ParameterTypeSite;
+use App\AdminBundle\Form\ParameterTypeSiteType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -16,7 +16,7 @@ use Symfony\Component\VarDumper\VarDumper;
 class ParameterTypeSiteController extends AbstractController
 {
     /**
-     * @Route("/new")
+     * @Route("/new", methods={"GET","POST"}, name="newParameterTypeSite")
      */
     public function new(Request $request)
     {
@@ -46,7 +46,7 @@ class ParameterTypeSiteController extends AbstractController
 
 
     /**
-     * @Route("/edit/{id}", name="editParameterTypeSite", requirements={"id"="\d+"})
+     * @Route("/edit/{id}", name="editParameterTypeSite", requirements={"id"="\d+"}, methods={"GET","POST"})
      */
     public function edit($id, Request $request)
     {
@@ -75,7 +75,7 @@ class ParameterTypeSiteController extends AbstractController
 
 
     /**
-     * @Route("/delete/{id}", requirements={"id"="\d+"})
+     * @Route("/delete/{id}", requirements={"id"="\d+"}, methods={"GET","POST"}, name="deleteParameterTypeSite")
      */
     public function delete($id)
     {
@@ -91,7 +91,7 @@ class ParameterTypeSiteController extends AbstractController
     } 
 
     /**
-     * @Route("/list", name="listParamTypeSite")
+     * @Route("/list", name="listParamTypeSite", methods={"GET"})
      */
     public function list()
     {
