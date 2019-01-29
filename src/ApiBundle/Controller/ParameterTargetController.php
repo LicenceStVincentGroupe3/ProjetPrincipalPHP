@@ -94,7 +94,7 @@ class ParameterTargetController extends AbstractController
      * @Route("/delete/id", requirements={"id"="\d+"}, methods={"DELETE"})
      */
     public function delete($id, SerializerInterface $serializer)
-    
+    {
         $suppBD = $this->getDoctrine()->getManager();
         // On créer un objet instance de contact
         $suppParameterTarget = $suppBD->getRepository(ParameterTarget::class)->find($id);

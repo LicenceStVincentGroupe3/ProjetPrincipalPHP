@@ -55,7 +55,8 @@ class ParameterController extends AbstractController
         $response->headers->set('Content-type', 'application/JSON');
 
         return $response;
-    }
+        }
+    }   
 
     /* ---------------------------------------------------------------------
     ------------------------------------------------------------------------
