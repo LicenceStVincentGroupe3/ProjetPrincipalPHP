@@ -66,7 +66,7 @@ class ParameterGraphicStyleController extends AbstractController
     */
 
     /**
-     * @Route("/", requirements={"id"="\d+"}, methods={"PUT"})
+     * @Route("/edit/id", requirements={"id"="\d+"}, methods={"PUT"})
      */
     public function edit($id, Request $request, SerializerInterface $serializer)
     {
@@ -112,7 +112,7 @@ class ParameterGraphicStyleController extends AbstractController
     */
 
     /**
-     * @Route("/", requirements={"id"="\d+"}, methods={"DELETE"})
+     * @Route("/delete/id", requirements={"id"="\d+"}, methods={"DELETE"})
      */
     public function delete($id, SerializerInterface $serializer)
     {
