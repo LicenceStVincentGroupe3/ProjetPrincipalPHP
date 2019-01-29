@@ -1,5 +1,5 @@
 <?php
-namespace App\AdminBundle\Controller;
+namespace App\ApiBundle\Controller;
 
 use App\AdminBundle\Entity\Contact;
 use App\AdminBundle\Form\ContactType;
@@ -16,7 +16,7 @@ use Symfony\Component\VarDumper\VarDumper;
 class ContactController extends AbstractController
 {
     /**
-     * @Route("/new", name="new")
+     * @Route("/", methods={"POST"})
      */
     public function new(Request $request)
     {
@@ -27,20 +27,25 @@ class ContactController extends AbstractController
     
         if($form->isSubmitted() && $form->isValid())
         {
-           $contact=$form->getData();
-           VarDumper::dump($contact);
-           $entityManager = $this->getDoctrine()->getManager();
-           // Persist prépare l'entité "contact" pour la création //
-           $entityManager->persist($contact);
-           // Flush envoie les infos en base (ajout) //
-           $entityManager->flush();
-           return $this->redirect($this->generateUrl('listCont'));
-           //return $this->render('contact/new.html.twig', array('form' => $form->createView(),));
-        }   
-        return $this->render('contact/new.html.twig', array('form' => $form->createView(),));
+            $contact=$form->getData();
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($contact);
+            $entityManager->flush();
+
+            $json = $serializer->serialize(
+                'json',
+                ['groups'=>["Light"]]);
+
+            $response = new Response();
+            $response->setContent($json);
+            $response->headers->set('Content-type', 'application/JSON');
+
+            return $response;
+        }
     }
     /**
-     * @Route("/edit/{id}", name="edit")
+     * @Route("/edit/{id}", requirements={"id"="\d+"}, methods={"PUT"})
      */
     public function edit($id, Request $request)
     {
@@ -56,12 +61,21 @@ class ContactController extends AbstractController
             $editContact->setContactDateUpdatePlug(new \DateTime());
             $entityManager->flush();
 
-            return $this->redirect($this->generateUrl('listCont'));
+            $json = $serializer->serialize(
+                $editContact,
+                'json',
+                ['groups'=>["Light"]]
+            );
+
+            $response = new Response();
+            $response->setContent($json);
+            $response->headers->set('Content-type', 'application/JSON');
+
+            return $response;
         }
-        return $this->render('contact/edit.html.twig', ['editContact' => $editContact, 'form' => $form->createView()]);
     } 
     /**
-     * @Route("/delete/{id}", name="delete", requirements={"id"="\d+"})
+     * @Route("/delete/{id}", requirements={"id"="\d+"}, methods={"DELETE"})
      */
     public function delete($id)
     {
@@ -72,10 +86,21 @@ class ContactController extends AbstractController
         $suppBD->remove($suppContact);
         // Execution
         $suppBD->flush();
-        return $this->redirectToRoute('listCont');
+
+        $json = $serializer->serialize(
+            $suppContact,
+            'json',
+            ['groups'=>["Light"]]
+        );
+
+        $response = new Response();
+        $response->setContent($json);
+        $response->headers->set('Content-type', 'application/JSON');
+
+        return $response;
     }
     /**
-     * @Route("/list", name="listCont")
+     * @Route("/", methods={"GET"})
      */
     public function list()
     {
@@ -88,6 +113,16 @@ class ContactController extends AbstractController
         // --------------------------
         // on demande à la vue d'afficher la liste des contacts
         // --------------------------
-        return $this->render('contact/list.html.twig', array('lesContacts'=>$listContact));
+        $json = $serializer->serialize(
+            $listContact,
+            'json',
+            ['groups'=>["Light"]]
+        );
+
+        $response = new Response();
+        $response->setContent($json);
+        $response->headers->set('Content-type', 'application/JSON');
+
+        return $response;
     }           
 }

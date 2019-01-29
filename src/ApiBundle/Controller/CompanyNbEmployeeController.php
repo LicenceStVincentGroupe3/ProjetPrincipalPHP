@@ -1,6 +1,6 @@
 <?php
 
-namespace App\AdminBundle\Controller;
+namespace App\ApiBundle\Controller;
 
 use App\AdminBundle\Entity\CompanyNbEmployee;
 use App\AdminBundle\Form\CompanyNbEmployeeType;
@@ -18,7 +18,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 class CompanyNbEmployeeController extends AbstractController
 {
     /**
-     * @Route("/new", name="newNbEmployee")
+     * @Route("/", methods={"POST"})
      */
     public function new(Request $request)
     {
@@ -35,14 +35,20 @@ class CompanyNbEmployeeController extends AbstractController
             $entityManager->persist($newNbEmployee);
             $entityManager->flush();
 
-            return $this->redirectToRoute('listNbEmployee');
-        }
+            $json = $serializer->serialize(
+                'json',
+                ['groups'=>["Light"]]);
 
-        return $this->render('companyNbEmployee/new.html.twig', array('form' => $form->createView(),));
+            $response = new Response();
+            $response->setContent($json);
+            $response->headers->set('Content-type', 'application/JSON');
+
+            return $response;
+        }
     }
 
     /**
-     * @Route("/edit/{id}", name="editNbEmployee", requirements={"id"="\d+"})
+     * @Route("/edit/{id}", requirements={"id"="\d+"}, methods={"PUT"})
      */
     public function edit($id, Request $request)
     {
@@ -59,16 +65,22 @@ class CompanyNbEmployeeController extends AbstractController
 
             $entityManager->flush();
 
-            return $this->redirectToRoute('listNbEmployee');
-        }
+            $json = $serializer->serialize(
+                $editNbEmployee,
+                'json',
+                ['groups'=>["Light"]]
+            );
 
-        return $this->render('companyNbEmployee/edit.html.twig', array(
-        'form' => $form->createView(),'company' => $editNbEmployee
-        ));
+            $response = new Response();
+            $response->setContent($json);
+            $response->headers->set('Content-type', 'application/JSON');
+
+            return $response;
+        }
     }
 
     /**
-     * @Route("/delete/{id}", name="deleteNbEmployee", requirements={"id"="\d+"})
+     * @Route("/delete/{id}", requirements={"id"="\d+"}, methods={"DELETE"})
      */
     public function delete($id)
     {
@@ -85,11 +97,21 @@ class CompanyNbEmployeeController extends AbstractController
         // Exécution
         $suppBD->flush();
 
-        return $this->redirectToRoute('listNbEmployee');
+        $json = $serializer->serialize(
+            $suppNbEmployee,
+            'json',
+            ['groups'=>["Light"]]
+        );
+
+        $response = new Response();
+        $response->setContent($json);
+        $response->headers->set('Content-type', 'application/JSON');
+
+        return $response;
     }
 
     /**
-     * @Route("/list", name="listNbEmployee")
+     * @Route("/", methods={"GET"})
      */
     public function list()
     {
@@ -102,6 +124,16 @@ class CompanyNbEmployeeController extends AbstractController
         // -------------------------------------------------------------------------
         // On demande à la vue d'afficher la liste des tranches de nombre d'employés
         // -------------------------------------------------------------------------
-        return $this->render('companyNbEmployee/list.html.twig', array('lesNbEmployees' => $listNbEmployee)); // On affecte le tableau à la vue
+        $json = $serializer->serialize(
+            $listNbEmployee,
+            'json',
+            ['groups'=>["Light"]]
+        );
+
+        $response = new Response();
+        $response->setContent($json);
+        $response->headers->set('Content-type', 'application/JSON');
+
+        return $response;
     }
 }

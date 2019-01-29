@@ -1,6 +1,6 @@
 <?php
 
-namespace App\AdminBundle\Controller;
+namespace App\ApiBundle\Controller;
 
 use App\AdminBundle\Entity\ContactJob;
 use App\AdminBundle\Form\ContactJobType;
@@ -18,7 +18,7 @@ use Symfony\Component\VarDumper\VarDumper;
 class ContactJobController extends AbstractController
 {
     /**
-     * @Route("/new")
+     * @Route("/", methods={"POST"})
      */
     public function new(Request $request)
     {
@@ -31,25 +31,30 @@ class ContactJobController extends AbstractController
  	
     	if($form->isSubmitted() && $form->isValid())
         {
-    	   $contactJob=$form->getData();
+            $contactJob=$form->getData();
 
-           $entityManager = $this->getDoctrine()->getManager();
-           // Persist prépare l'entité "contactJob" pour la création //
-           $entityManager->persist($contactJob);
-           // Flush envoie les infos en base (ajout) //
-           $entityManager->flush();
+            $entityManager = $this->getDoctrine()->getManager();
+            // Persist prépare l'entité "contactJob" pour la création //
+            $entityManager->persist($contactJob);
+            // Flush envoie les infos en base (ajout) //
+            $entityManager->flush();
 
-           return $this->redirect($this->generateUrl('listContJob'));
-    	   //return $this->render('contact/new.html.twig', array('form' => $form->createView(),));
-    	}	
+            $json = $serializer->serialize(
+                'json',
+                ['groups'=>["Light"]]);
 
-        return $this->render('contactJob/new.html.twig', array('form' => $form->createView(),));
+            $response = new Response();
+            $response->setContent($json);
+            $response->headers->set('Content-type', 'application/JSON');
+
+            return $response;
+    	}
     }
 
 
 
     /**
-     * @Route("/edit/{id}", name="editJob", requirements={"id"="\d+"})
+     * @Route("/edit/{id}", requirements={"id"="\d+"}, methods={"PUT"})
      */
     public function edit($id, Request $request)
     {
@@ -68,18 +73,23 @@ class ContactJobController extends AbstractController
 
             $entityManager->flush();
 
-            //VarDumper::dump($this->generateUrl('listContJob'));die;
-            return $this->redirectToRoute('listContJob');
+            $json = $serializer->serialize(
+                $editContactJob,
+                'json',
+                ['groups'=>["Light"]]
+            );
 
+            $response = new Response();
+            $response->setContent($json);
+            $response->headers->set('Content-type', 'application/JSON');
+
+            return $response;
         }
-
-
-        return $this->render('contactJob/edit.html.twig', ['editContactJob' => $editContactJob, 'form' => $form->createView()]);
     } 
 
 
     /**
-     * @Route("/delete/{id}", requirements={"id"="\d+"})
+     * @Route("/delete/{id}", requirements={"id"="\d+"}, methods={"DELETE"})
      */
     public function delete($id)
     {
@@ -91,11 +101,21 @@ class ContactJobController extends AbstractController
         // Execution
         $suppBD->flush();
 
-        return $this->redirectToRoute('listContJob');
+        $json = $serializer->serialize(
+            $suppContactJob,
+            'json',
+            ['groups'=>["Light"]]
+        );
+
+        $response = new Response();
+        $response->setContent($json);
+        $response->headers->set('Content-type', 'application/JSON');
+
+        return $response;
     } 
 
     /**
-     * @Route("/list", name="listContJob")
+     * @Route("/", methods={"GET"})
      */
     public function list()
     {
@@ -109,6 +129,16 @@ class ContactJobController extends AbstractController
         // --------------------------
         // on demande à la vue d'afficher la liste des contacts
         // --------------------------
-        return $this->render('contactJob/list.html.twig', array('lesContactsJobs'=>$listContactJob));
+        $json = $serializer->serialize(
+            $listContactJob,
+            'json',
+            ['groups'=>["Light"]]
+        );
+
+        $response = new Response();
+        $response->setContent($json);
+        $response->headers->set('Content-type', 'application/JSON');
+
+        return $response;
     }           
 }

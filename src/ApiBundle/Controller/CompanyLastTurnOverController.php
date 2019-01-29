@@ -86,7 +86,7 @@ class CompanyLastTurnOverController extends AbstractController
     }
 
     /**
-     * @Route("/delete/{id}", requirements={"id"="\d+"}, methods={"DELETE")
+     * @Route("/delete/{id}", requirements={"id"="\d+"}, methods={"DELETE"})
      */
     public function delete($id, SerializerInterface $serializer)
     {

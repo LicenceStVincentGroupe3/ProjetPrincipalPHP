@@ -1,6 +1,6 @@
 <?php
 
-namespace App\AdminBundle\Controller;
+namespace App\ApiBundle\Controller;
 
 use App\AdminBundle\Entity\CompanyLegalStatus;
 use App\AdminBundle\Form\CompanyLegalStatusType;
@@ -18,7 +18,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 class CompanyLegalStatusController extends AbstractController
 {
     /**
-     * @Route("/new", name="newLegalStatus")
+     * @Route("/", methods={"POST"})
      */
     public function new(Request $request, SerializerInterface $serializer)
     {
@@ -79,7 +79,7 @@ class CompanyLegalStatusController extends AbstractController
     }
 
     /**
-     * @Route("/delete/{id}", requirements={"id"="\d+"}, methods={"DELETE")
+     * @Route("/delete/{id}", requirements={"id"="\d+"}, methods={"DELETE"})
      */
     public function delete($id, SerializerInterface $serializer)
     {
@@ -124,7 +124,7 @@ class CompanyLegalStatusController extends AbstractController
         // On demande à la vue d'afficher la liste des status
         // -------------------------------------------------------------
         $json = $serializer->serialize(
-            $listLastTurnOver,
+            $listLegalStatus,
             'json',
             ['groups'=>["Light"]]
         );

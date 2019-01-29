@@ -1,6 +1,6 @@
 <?php
 
-namespace App\AdminBundle\Controller;
+namespace App\ApiBundle\Controller;
 
 use App\AdminBundle\Entity\CompanyTurnover;
 use App\AdminBundle\Form\CompanyTurnOverType;
@@ -18,7 +18,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 class CompanyTurnOverController extends AbstractController
 {
     /**
-     * @Route("/new", name="newTurnOver")
+     * @Route("/", methods={"POST"})
      */
     public function new(Request $request)
     {
@@ -35,14 +35,20 @@ class CompanyTurnOverController extends AbstractController
             $entityManager->persist($newTurnOver);
             $entityManager->flush();
 
-            return $this->redirectToRoute('listTurnOver');
-        }
+            $json = $serializer->serialize(
+                'json',
+                ['groups'=>["Light"]]);
 
-        return $this->render('companyTurnOver/new.html.twig', array('form' => $form->createView(),));
+            $response = new Response();
+            $response->setContent($json);
+            $response->headers->set('Content-type', 'application/JSON');
+
+            return $response;
+        }
     }
 
     /**
-     * @Route("/edit/{id}", name="editTurnOver", requirements={"id"="\d+"})
+     * @Route("/edit/{id}", requirements={"id"="\d+"}, methods={"PUT"})
      */
     public function edit($id, Request $request)
     {
@@ -59,16 +65,22 @@ class CompanyTurnOverController extends AbstractController
 
             $entityManager->flush();
 
-            return $this->redirectToRoute('listTurnOver');
-        }
+            $json = $serializer->serialize(
+                $editTurnOver,
+                'json',
+                ['groups'=>["Light"]]
+            );
 
-        return $this->render('companyTurnOver/edit.html.twig', array(
-        'form' => $form->createView(),'turnOver' => $editTurnOver
-        ));
+            $response = new Response();
+            $response->setContent($json);
+            $response->headers->set('Content-type', 'application/JSON');
+
+            return $response;
+        }
     }
 
     /**
-     * @Route("/delete/{id}", name="deleteTurnOver", requirements={"id"="\d+"})
+     * @Route("/delete/{id}", requirements={"id"="\d+"}, methods={"DELETE"})
      */
     public function delete($id)
     {
@@ -85,11 +97,21 @@ class CompanyTurnOverController extends AbstractController
         // Exécution
         $suppBD->flush();
 
-        return $this->redirectToRoute('listTurnOver');
+        $json = $serializer->serialize(
+            $suppTurnOver,
+            'json',
+            ['groups'=>["Light"]]
+        );
+
+        $response = new Response();
+        $response->setContent($json);
+        $response->headers->set('Content-type', 'application/JSON');
+
+        return $response;
     }
 
     /**
-     * @Route("/list", name="listTurnOver")
+     * @Route("/", methods={"GET"})
      */
     public function list()
     {
@@ -102,6 +124,16 @@ class CompanyTurnOverController extends AbstractController
         // -------------------------------------------------------------
         // On demande à la vue d'afficher la liste des chiffres d'affaires
         // -------------------------------------------------------------
-        return $this->render('companyTurnOver/list.html.twig', array('lesChiffresDAffaires' => $listTurnOver)); // On affecte le tableau à la vue
+        $json = $serializer->serialize(
+            $listTurnOver,
+            'json',
+            ['groups'=>["Light"]]
+        );
+
+        $response = new Response();
+        $response->setContent($json);
+        $response->headers->set('Content-type', 'application/JSON');
+
+        return $response;
     }
 }
