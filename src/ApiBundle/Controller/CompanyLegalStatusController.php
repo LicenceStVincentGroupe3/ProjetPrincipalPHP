@@ -6,6 +6,8 @@ use App\AdminBundle\Entity\CompanyLegalStatus;
 use App\AdminBundle\Form\CompanyLegalStatusType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Serializer\SerializerInterface;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -18,11 +20,10 @@ class CompanyLegalStatusController extends AbstractController
     /**
      * @Route("/new", name="newLegalStatus")
      */
-    public function new(Request $request)
+    public function new(Request $request, SerializerInterface $serializer)
     {
         $newLegalStatus = new CompanyLegalStatus();
         $form = $this->createForm(CompanyLegalStatusType::class, $newLegalStatus);
-
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid())
@@ -33,23 +34,29 @@ class CompanyLegalStatusController extends AbstractController
             $entityManager->persist($newLegalStatus);
             $entityManager->flush();
 
-            return $this->redirectToRoute('listLegalStatus');
-        }
+            $json = $serializer->serialize(
+                'json',
+                ['groups'=>["Light"]]);
 
-        return $this->render('companyLegalStatus/new.html.twig', array('form' => $form->createView(),));
+            $response = new Response();
+            $response->setContent($json);
+            $response->headers->set('Content-type', 'application/JSON');
+
+            return $response;
+        }
     }
 
     /**
-     * @Route("/edit/{id}", name="editLegalStatus", requirements={"id"="\d+"})
+     * @Route("/edit/{id}", requirements={"id"="\d+"}, methods={"PUT"})
      */
-    public function edit($id, Request $request)
+    public function edit($id, Request $request, SerializerInterface $serializer)
     {
         $editLegalStatus = $this->getDoctrine()->getManager()->getRepository(CompanyLegalStatus::class)->find($id);
 
         $form = $this->createForm(CompanyLegalStatusType::class, $editLegalStatus);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid() && $request->isMethod('POST')) 
+        if ($form->isSubmitted() && $form->isValid() && $request->isMethod('PUT'))
         {
             $editLegalStatus = $form->getData();
 
@@ -57,25 +64,31 @@ class CompanyLegalStatusController extends AbstractController
 
             $entityManager->flush();
 
-            return $this->redirectToRoute('listLegalStatus');
-        }
+            $json = $serializer->serialize(
+                $edit,
+                'json',
+                ['groups'=>["Light"]]
+            );
 
-        return $this->render('companyLegalStatus/edit.html.twig', array(
-        'form' => $form->createView(),'legalStatus' => $editLegalStatus
-        ));
+            $response = new Response();
+            $response->setContent($json);
+            $response->headers->set('Content-type', 'application/JSON');
+
+            return $response;
+        }
     }
 
     /**
-     * @Route("/delete/{id}", name="deleteLegalStatus", requirements={"id"="\d+"})
+     * @Route("/delete/{id}", requirements={"id"="\d+"}, methods={"DELETE")
      */
-    public function delete($id)
+    public function delete($id, SerializerInterface $serializer)
     {
         $suppBD = $this->getDoctrine()->getManager();
 
         // On crée un objet, instance de CompanyLegalStatus
         $suppBusinessCategory = new CompanyLegalStatus();
 
-        $suppBusinessCategory = $suppBD->getRepository(CompanyLegalStatus::class)->find($id);
+        $suppLegalStatus = $suppBD->getRepository(CompanyLegalStatus::class)->find($id);
 
         // Suppression du statut légal
         $suppBD->remove($suppBusinessCategory);
@@ -83,13 +96,23 @@ class CompanyLegalStatusController extends AbstractController
         // Exécution
         $suppBD->flush();
 
-        return $this->redirectToRoute('listLegalStatus');
+        $json = $serializer->serialize(
+            $suppLegalStatus,
+            'json',
+            ['groups'=>["Light"]]
+        );
+
+        $response = new Response();
+        $response->setContent($json);
+        $response->headers->set('Content-type', 'application/JSON');
+
+        return $response;
     }
 
     /**
-     * @Route("/list", name="listLegalStatus")
+     * @Route("/", methods={"GET"})
      */
-    public function list()
+    public function list(SerializerInterface $serializer)
     {
         // ---------------------------------------
         // Récupération de la liste des status
@@ -100,6 +123,16 @@ class CompanyLegalStatusController extends AbstractController
         // -------------------------------------------------------------
         // On demande à la vue d'afficher la liste des status
         // -------------------------------------------------------------
-        return $this->render('companyLegalStatus/list.html.twig', array('lesStatus' => $listLegalStatus)); // On affecte le tableau à la vue
+        $json = $serializer->serialize(
+            $listLastTurnOver,
+            'json',
+            ['groups'=>["Light"]]
+        );
+
+        $response = new Response();
+        $response->setContent($json);
+        $response->headers->set('Content-type', 'application/JSON');
+
+        return $response;
     }
 }
