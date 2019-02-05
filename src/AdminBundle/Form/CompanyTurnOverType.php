@@ -2,7 +2,7 @@
 
 namespace App\AdminBundle\Form;
 
-use App\Entity\CompanyTurnover;
+use App\AdminBundle\Entity\CompanyTurnover;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\FormType;

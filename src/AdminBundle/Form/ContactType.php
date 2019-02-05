@@ -1,10 +1,10 @@
 <?php
 namespace App\AdminBundle\Form;
 
-use App\Entity\Contact;
-use App\Entity\Company;
-use App\Entity\Commercial;
-use App\Entity\ContactJob;
+use App\AdminBundle\Entity\Contact;
+use App\AdminBundle\Entity\Company;
+use App\AdminBundle\Entity\Commercial;
+use App\AdminBundle\Entity\ContactJob;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\HttpFoundation\Request;

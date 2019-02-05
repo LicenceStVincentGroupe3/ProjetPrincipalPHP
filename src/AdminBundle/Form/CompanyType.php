@@ -2,15 +2,15 @@
 
 namespace App\AdminBundle\Form;
 
-use App\Entity\Company;
-use App\Entity\Commercial;
-use App\Entity\CompanyActivitySector;
-use App\Entity\CompanyBusinessCategory;
-use App\Entity\CompanyCountry;
-use App\Entity\CompanyTurnover;
-use App\Entity\CompanyLastTurnover;
-use App\Entity\CompanyLegalStatus;
-use App\Entity\CompanyNbEmployee;
+use App\AdminBundle\Entity\Company;
+use App\AdminBundle\Entity\Commercial;
+use App\AdminBundle\Entity\CompanyActivitySector;
+use App\AdminBundle\Entity\CompanyBusinessCategory;
+use App\AdminBundle\Entity\CompanyCountry;
+use App\AdminBundle\Entity\CompanyTurnover;
+use App\AdminBundle\Entity\CompanyLastTurnover;
+use App\AdminBundle\Entity\CompanyLegalStatus;
+use App\AdminBundle\Entity\CompanyNbEmployee;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\FormType;

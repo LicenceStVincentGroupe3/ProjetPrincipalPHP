@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\ParameterGraphicStyleRepository")
+ * @ORM\Entity(repositoryClass="App\AdminBundle\Repository\ParameterGraphicStyleRepository")
  */
 class ParameterGraphicStyle
 {
