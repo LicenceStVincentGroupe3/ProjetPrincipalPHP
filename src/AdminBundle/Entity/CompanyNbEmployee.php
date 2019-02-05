@@ -26,7 +26,7 @@ class CompanyNbEmployee
     private $nbEmployee;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Company", mappedBy="idCompanyNbEmployee")
+     * @ORM\OneToMany(targetEntity="App\AdminBundle\Entity\Company", mappedBy="idCompanyNbEmployee")
      */
     private $companies;
 

@@ -69,7 +69,7 @@ class Parameter
     private $parameterEmailContactForm;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\ContactJob", inversedBy="parameters")
+     * @ORM\ManyToMany(targetEntity="App\AdminBundle\Entity\ContactJob", inversedBy="parameters")
      */
     private $idParameterContactJob;
 

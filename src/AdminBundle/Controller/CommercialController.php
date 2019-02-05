@@ -2,8 +2,8 @@
 
 namespace App\AdminBundle\Controller;
 
-use App\Entity\Commercial;
-use App\Form\CommercialType;
+use App\AdminBundle\Entity\Commercial;
+use App\AdminBundle\Form\CommercialType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;

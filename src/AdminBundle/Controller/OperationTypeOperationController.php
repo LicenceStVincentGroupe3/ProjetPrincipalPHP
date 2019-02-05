@@ -2,8 +2,8 @@
 
 namespace App\AdminBundle\Controller;
 
-use App\Entity\OperationTypeOperation;
-use App\Form\OperationTypeOperationType;
+use App\AdminBundle\Entity\OperationTypeOperation;
+use App\AdminBundle\Form\OperationTypeOperationType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;

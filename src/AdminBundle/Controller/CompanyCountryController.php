@@ -2,8 +2,8 @@
 
 namespace App\AdminBundle\Controller;
 
-use App\Entity\CompanyCountry;
-use App\Form\CompanyCountryType;
+use App\AdminBundle\Entity\CompanyCountry;
+use App\AdminBundle\Form\CompanyCountryType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;

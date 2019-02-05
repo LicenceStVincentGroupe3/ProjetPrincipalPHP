@@ -60,7 +60,7 @@ class Operation
     private $operationBinding;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Participation", mappedBy="idOperation")
+     * @ORM\OneToMany(targetEntity="App\AdminBundle\Entity\Participation", mappedBy="idOperation")
      */
     private $participations;
 

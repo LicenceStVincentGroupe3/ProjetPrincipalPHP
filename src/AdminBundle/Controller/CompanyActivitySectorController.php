@@ -2,8 +2,8 @@
 
 namespace App\AdminBundle\Controller;
 
-use App\Entity\CompanyActivitySector;
-use App\Form\CompanyActivitySectorType;
+use App\AdminBundle\Entity\CompanyActivitySector;
+use App\AdminBundle\Form\CompanyActivitySectorType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;

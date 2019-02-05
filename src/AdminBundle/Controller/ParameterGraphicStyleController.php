@@ -2,8 +2,8 @@
 
 namespace App\AdminBundle\Controller;
 
-use App\Entity\ParameterGraphicStyle;
-use App\Form\ParameterGraphicStyleType;
+use App\AdminBundle\Entity\ParameterGraphicStyle;
+use App\AdminBundle\Form\ParameterGraphicStyleType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;

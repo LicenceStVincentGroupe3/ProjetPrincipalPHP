@@ -26,7 +26,7 @@ class CompanyCountry
     private $label;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Company", mappedBy="idCompanyCountry")
+     * @ORM\OneToMany(targetEntity="App\AdminBundle\Entity\Company", mappedBy="idCompanyCountry")
      */
     private $companies;
 

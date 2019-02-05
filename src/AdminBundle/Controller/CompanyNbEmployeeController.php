@@ -2,8 +2,8 @@
 
 namespace App\AdminBundle\Controller;
 
-use App\Entity\CompanyNbEmployee;
-use App\Form\CompanyNbEmployeeType;
+use App\AdminBundle\Entity\CompanyNbEmployee;
+use App\AdminBundle\Form\CompanyNbEmployeeType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
