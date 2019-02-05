@@ -26,7 +26,7 @@ class CompanyLegalStatus
     private $label;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Company", mappedBy="idCompanyLegalStatus")
+     * @ORM\OneToMany(targetEntity="App\AdminBundle\Entity\Company", mappedBy="idCompanyLegalStatus")
      */
     private $companies;
 

@@ -96,7 +96,7 @@ class Commercial
     private $commercialPhoto;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Contact", mappedBy="idUser")
+     * @ORM\OneToMany(targetEntity="App\AdminBundle\Entity\Contact", mappedBy="idUser")
      */
     private $contacts;
 
@@ -110,7 +110,7 @@ class Commercial
     }
   
     /** 
-     * @ORM\OneToMany(targetEntity="App\Entity\Company", mappedBy="idUser")
+     * @ORM\OneToMany(targetEntity="App\AdminBundle\Entity\Company", mappedBy="idUser")
      */
     private $companies;
 

@@ -93,11 +93,11 @@ class ParameterObjectController extends AbstractController
      */
     public function delete($id, SerializerInterface $serializer)
     {
-        $suppBD = $this->getDoctrine()->getManager();
+        $display = $this->getDoctrine()->getManager();
         // On créer un objet instance de contact
-        $suppParameterObject = $suppBD->getRepository(ParameterObject::class)->find($id);
+        $suppParameterObject = $display->getRepository(ParameterObject::class)->find($id);
         // Suppression du contact
-        $suppBD->remove($suppParameterObject);
+        $display->remove($suppParameterObject);
         // Execution
         $display->flush();        
         $json = $serializer->serialize(

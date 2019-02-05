@@ -124,19 +124,19 @@ class Contact
     private $contactOptInCommercialOffers;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Commercial", inversedBy="contacts")
+     * @ORM\ManyToOne(targetEntity="App\AdminBundle\Entity\Commercial", inversedBy="contacts")
      * @ORM\JoinColumn(nullable=false)
      */
     private $idUser;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Company", inversedBy="contacts")
+     * @ORM\ManyToOne(targetEntity="App\AdminBundle\Entity\Company", inversedBy="contacts")
      * @ORM\JoinColumn(nullable=false)
      */
     private $idCompany;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\ContactJob", inversedBy="contacts")
+     * @ORM\ManyToOne(targetEntity="App\AdminBundle\Entity\ContactJob", inversedBy="contacts")
      * @ORM\JoinColumn(nullable=false)
      */
     private $idContactJob;

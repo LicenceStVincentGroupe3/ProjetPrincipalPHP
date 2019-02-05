@@ -2,93 +2,29 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4cb3cb4e-723c-4025-b7c1-645328782794" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/ProjetPrincipalPHP.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/ProjetPrincipalPHP.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config/bundles.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/bundles.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/packages/doctrine.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/doctrine.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/routes/annotations.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/routes/annotations.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/services.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/services.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/AccueilController.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/CommercialController.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/CompanyActivitySectorController.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/CompanyBusinessCategoryController.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/CompanyController.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/CompanyCountryController.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/CompanyLastTurnOverController.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/CompanyLegalStatusController.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/CompanyNbEmployeeController.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/CompanyTurnOverController.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/ContactController.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/ContactJobController.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/OperationController.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/OperationTypeOperationController.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/ParameterBehaviorController.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/ParameterController.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/ParameterGraphicStyleController.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/ParameterObjectController.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/ParameterTargetController.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/ParameterTypeSiteController.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Commercial.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Company.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/CompanyActivitySector.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/CompanyBusinessCategory.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/CompanyCountry.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/CompanyLastTurnover.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/CompanyLegalStatus.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/CompanyNbEmployee.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/CompanyTurnover.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Contact.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/ContactJob.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Operation.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/OperationTypeOperation.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Parameter.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/ParameterBehavior.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/ParameterGraphicStyle.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/ParameterObject.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/ParameterTarget.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/ParameterTypeSite.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Participation.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/CommercialType.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/CompanyActivitySectorType.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/CompanyBusinessCategoryType.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/CompanyCountryType.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/CompanyLastTurnOverType.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/CompanyLegalStatusType.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/CompanyNbEmployeeType.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/CompanyTurnOverType.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/CompanyType.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/ContactJobType.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/ContactType.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/OperationType.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/OperationTypeOperationType.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/ParameterBehaviorType.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/ParameterGraphicStyleType.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/ParameterObjectType.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/ParameterTargetType.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/ParameterType.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/ParameterTypeSiteType.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Repository/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Repository/CommercialRepository.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Repository/CompanyActivitySectorRepository.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Repository/CompanyBusinessCategoryRepository.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Repository/CompanyCountryRepository.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Repository/CompanyLastTurnoverRepository.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Repository/CompanyLegalStatusRepository.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Repository/CompanyNbEmployeeRepository.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Repository/CompanyRepository.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Repository/CompanyTurnoverRepository.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Repository/ContactJobRepository.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Repository/ContactRepository.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Repository/OperationRepository.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Repository/OperationTypeOperationRepository.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Repository/ParameterBehaviorRepository.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Repository/ParameterGraphicStyleRepository.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Repository/ParameterObjectRepository.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Repository/ParameterRepository.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Repository/ParameterTargetRepository.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Repository/ParameterTypeSiteRepository.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Repository/ParticipationRepository.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AdminBundle/Entity/Commercial.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AdminBundle/Entity/Commercial.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AdminBundle/Entity/Company.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AdminBundle/Entity/Company.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AdminBundle/Entity/CompanyActivitySector.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AdminBundle/Entity/CompanyActivitySector.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AdminBundle/Entity/CompanyBusinessCategory.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AdminBundle/Entity/CompanyBusinessCategory.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AdminBundle/Entity/CompanyCountry.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AdminBundle/Entity/CompanyCountry.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AdminBundle/Entity/CompanyLastTurnover.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AdminBundle/Entity/CompanyLastTurnover.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AdminBundle/Entity/CompanyLegalStatus.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AdminBundle/Entity/CompanyLegalStatus.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AdminBundle/Entity/CompanyNbEmployee.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AdminBundle/Entity/CompanyNbEmployee.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AdminBundle/Entity/CompanyTurnover.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AdminBundle/Entity/CompanyTurnover.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AdminBundle/Entity/Contact.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AdminBundle/Entity/Contact.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AdminBundle/Entity/ContactJob.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AdminBundle/Entity/ContactJob.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AdminBundle/Entity/Operation.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AdminBundle/Entity/Operation.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AdminBundle/Entity/Parameter.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AdminBundle/Entity/Parameter.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AdminBundle/Entity/Participation.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AdminBundle/Entity/Participation.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ApiBundle/Controller/ParameterObjectController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/ApiBundle/Controller/ParameterObjectController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ApiBundle/Controller/ParameterTargetController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/ApiBundle/Controller/ParameterTargetController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ApiBundle/Controller/ParameterTypeSiteController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/ApiBundle/Controller/ParameterTypeSiteController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/symfony.lock" beforeDir="false" afterPath="$PROJECT_DIR$/symfony.lock" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -97,79 +33,69 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ComposerSettings" synchronizationState="SYNCHRONIZE">
+  <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
   </component>
   <component name="FileEditorManager">
-    <leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/config/packages/doctrine.yaml">
+        <entry file="file://$PROJECT_DIR$/src/AdminBundle/Entity/Operation.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="442">
-              <caret line="26" column="59" selection-start-line="26" selection-start-column="59" selection-end-line="26" selection-end-column="59" />
+            <state relative-caret-position="2754">
+              <caret line="165" column="37" selection-start-line="165" selection-start-column="37" selection-end-line="165" selection-end-column="37" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/AdminBundle/Repository/ParticipationRepository.php">
+        <entry file="file://$PROJECT_DIR$/src/AdminBundle/Entity/OperationTypeOperation.php">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/AdminBundle/Entity/Parameter.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="34">
-              <caret line="2" column="25" selection-start-line="2" selection-start-column="25" selection-end-line="2" selection-end-column="25" />
+            <state relative-caret-position="4097">
+              <caret line="244" selection-start-line="244" selection-end-line="244" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/AdminBundle/AdminBundle.php">
+        <entry file="file://$PROJECT_DIR$/src/AdminBundle/Entity/ParameterBehavior.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="510">
+              <caret line="33" column="5" selection-start-line="33" selection-start-column="5" selection-end-line="33" selection-end-column="5" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/AdminBundle/Entity/ParameterGraphicStyle.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="357">
+              <caret line="22" column="7" selection-start-line="22" selection-start-column="7" selection-end-line="22" selection-end-column="7" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/AdminBundle/Entity/Commercial.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="153">
-              <caret line="9" selection-start-line="9" selection-end-line="9" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ApiBundle/ApiBundle.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="5" column="30" selection-start-line="5" selection-start-column="30" selection-end-line="5" selection-end-column="30" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/config/routes/annotations.yaml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="8" column="16" lean-forward="true" selection-start-line="8" selection-start-column="16" selection-end-line="8" selection-end-column="16" />
+              <caret line="12" column="16" selection-start-line="12" selection-start-column="16" selection-end-line="12" selection-end-column="16" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/config/services.yaml">
+        <entry file="file://$PROJECT_DIR$/src/DataFixtures/AppFixtures.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="345">
-              <caret line="30" column="46" lean-forward="true" selection-start-line="30" selection-start-column="46" selection-end-line="30" selection-end-column="46" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/bin/console">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="10" column="48" selection-start-line="10" selection-start-column="48" selection-end-line="10" selection-end-column="48" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/config/bundles.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="14" selection-start-line="14" selection-end-line="14" />
+            <state relative-caret-position="170">
+              <caret line="13" column="21" selection-start-line="13" selection-start-column="21" selection-end-line="13" selection-end-column="21" />
+              <folding>
+                <element signature="e#36#56#0#PHP" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -182,25 +108,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/AdminBundle/Entity/OperationTypeOperation.php" />
-        <option value="$PROJECT_DIR$/src/AdminBundle/Entity/Parameter.php" />
-        <option value="$PROJECT_DIR$/src/AdminBundle/Entity/ParameterBehavior.php" />
-        <option value="$PROJECT_DIR$/src/AdminBundle/Entity/ParameterGraphicStyle.php" />
-        <option value="$PROJECT_DIR$/src/AdminBundle/Entity/ParameterObject.php" />
-        <option value="$PROJECT_DIR$/src/AdminBundle/Entity/ParameterTarget.php" />
-        <option value="$PROJECT_DIR$/src/AdminBundle/Entity/ParameterTypeSite.php" />
-        <option value="$PROJECT_DIR$/src/AdminBundle/Entity/Participation.php" />
-        <option value="$PROJECT_DIR$/src/AdminBundle/Form/CommercialType.php" />
-        <option value="$PROJECT_DIR$/src/AdminBundle/Form/CompanyActivitySectorType.php" />
-        <option value="$PROJECT_DIR$/src/AdminBundle/Form/CompanyBusinessCategoryType.php" />
-        <option value="$PROJECT_DIR$/src/AdminBundle/Form/CompanyCountryType.php" />
-        <option value="$PROJECT_DIR$/src/AdminBundle/Form/CompanyLastTurnOverType.php" />
-        <option value="$PROJECT_DIR$/src/AdminBundle/Form/CompanyLegalStatusType.php" />
-        <option value="$PROJECT_DIR$/src/AdminBundle/Form/CompanyNbEmployeeType.php" />
-        <option value="$PROJECT_DIR$/src/AdminBundle/Form/CompanyTurnOverType.php" />
-        <option value="$PROJECT_DIR$/src/AdminBundle/Form/CompanyType.php" />
-        <option value="$PROJECT_DIR$/src/AdminBundle/Form/ContactJobType.php" />
-        <option value="$PROJECT_DIR$/src/AdminBundle/Form/ContactType.php" />
         <option value="$PROJECT_DIR$/src/AdminBundle/Form/OperationType.php" />
         <option value="$PROJECT_DIR$/src/AdminBundle/Form/OperationTypeOperationType.php" />
         <option value="$PROJECT_DIR$/src/AdminBundle/Form/ParameterBehaviorType.php" />
@@ -233,6 +140,25 @@
         <option value="$PROJECT_DIR$/src/AdminBundle/AdminBundle.php" />
         <option value="$PROJECT_DIR$/config/routes/annotations.yaml" />
         <option value="$PROJECT_DIR$/config/services.yaml" />
+        <option value="$PROJECT_DIR$/config/packages/security.yaml" />
+        <option value="$PROJECT_DIR$/src/ApiBundle/Controller/ParameterObjectController.php" />
+        <option value="$PROJECT_DIR$/src/ApiBundle/Controller/ParameterTypeSiteController.php" />
+        <option value="$PROJECT_DIR$/src/ApiBundle/Controller/ParameterTargetController.php" />
+        <option value="$PROJECT_DIR$/src/AdminBundle/Entity/Commercial.php" />
+        <option value="$PROJECT_DIR$/src/AdminBundle/Entity/Company.php" />
+        <option value="$PROJECT_DIR$/src/AdminBundle/Entity/CompanyActivitySector.php" />
+        <option value="$PROJECT_DIR$/src/AdminBundle/Entity/CompanyBusinessCategory.php" />
+        <option value="$PROJECT_DIR$/src/AdminBundle/Entity/CompanyCountry.php" />
+        <option value="$PROJECT_DIR$/src/AdminBundle/Entity/CompanyLastTurnover.php" />
+        <option value="$PROJECT_DIR$/src/AdminBundle/Entity/CompanyLegalStatus.php" />
+        <option value="$PROJECT_DIR$/src/AdminBundle/Entity/CompanyNbEmployee.php" />
+        <option value="$PROJECT_DIR$/src/AdminBundle/Entity/CompanyTurnover.php" />
+        <option value="$PROJECT_DIR$/src/AdminBundle/Entity/Contact.php" />
+        <option value="$PROJECT_DIR$/src/AdminBundle/Entity/ContactJob.php" />
+        <option value="$PROJECT_DIR$/src/AdminBundle/Entity/Operation.php" />
+        <option value="$PROJECT_DIR$/src/AdminBundle/Entity/Parameter.php" />
+        <option value="$PROJECT_DIR$/src/AdminBundle/Entity/Participation.php" />
+        <option value="$PROJECT_DIR$/src/DataFixtures/AppFixtures.php" />
       </list>
     </option>
   </component>
@@ -306,6 +232,19 @@
       <path value="$PROJECT_DIR$/vendor/doctrine/orm" />
       <path value="$PROJECT_DIR$/vendor/doctrine/dbal" />
       <path value="$PROJECT_DIR$/vendor/doctrine/doctrine-cache-bundle" />
+      <path value="$PROJECT_DIR$/vendor/exsyst/swagger" />
+      <path value="$PROJECT_DIR$/vendor/nelmio/api-doc-bundle" />
+      <path value="$PROJECT_DIR$/vendor/symfony/security-bundle" />
+      <path value="$PROJECT_DIR$/vendor/symfony/security" />
+      <path value="$PROJECT_DIR$/vendor/symfony/property-info" />
+      <path value="$PROJECT_DIR$/vendor/symfony/asset" />
+      <path value="$PROJECT_DIR$/vendor/zircote/swagger-php" />
+      <path value="$PROJECT_DIR$/vendor/webmozart/assert" />
+      <path value="$PROJECT_DIR$/vendor/phpdocumentor/reflection-docblock" />
+      <path value="$PROJECT_DIR$/vendor/phpdocumentor/type-resolver" />
+      <path value="$PROJECT_DIR$/vendor/phpdocumentor/reflection-common" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/doctrine-fixtures-bundle" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/data-fixtures" />
     </include_path>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
@@ -319,50 +258,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="ProjetPrincipalPHP" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ProjetPrincipalPHP" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ProjetPrincipalPHP" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ProjetPrincipalPHP" type="462c0819:PsiDirectoryNode" />
-              <item name="config" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ProjetPrincipalPHP" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ProjetPrincipalPHP" type="462c0819:PsiDirectoryNode" />
-              <item name="config" type="462c0819:PsiDirectoryNode" />
-              <item name="routes" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ProjetPrincipalPHP" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ProjetPrincipalPHP" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ProjetPrincipalPHP" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ProjetPrincipalPHP" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="AdminBundle" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ProjetPrincipalPHP" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ProjetPrincipalPHP" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="ApiBundle" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ProjetPrincipalPHP" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ProjetPrincipalPHP" type="462c0819:PsiDirectoryNode" />
-              <item name="vendor" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
+      <pane id="ProjectPane" />
       <pane id="Scope" />
     </panes>
   </component>
@@ -395,24 +291,20 @@
       <option name="presentableId" value="Default" />
       <updated>1548057631696</updated>
       <workItem from="1548057633487" duration="4270000" />
+      <workItem from="1549352896111" duration="4834000" />
+      <workItem from="1549357846641" duration="464000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="4270000" />
+    <option name="totallyTimeSpent" value="9568000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
-    <editor active="true" />
+    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <layout>
-      <window_info id="Favorites" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24939272" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2594086" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Database Changes" />
-      <window_info anchor="bottom" id="Version Control" />
-      <window_info anchor="bottom" id="Terminal" />
-      <window_info anchor="bottom" id="Event Log" side_tool="true" />
+      <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Run" order="2" />
@@ -420,254 +312,42 @@
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="right" id="Database" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Database Changes" order="8" />
+      <window_info anchor="bottom" id="Version Control" order="9" />
+      <window_info anchor="bottom" id="Terminal" order="10" />
+      <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Database" order="3" />
     </layout>
+    <layout-to-restore>
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25268817" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Database Changes" order="8" />
+      <window_info anchor="bottom" id="Version Control" order="9" />
+      <window_info anchor="bottom" id="Terminal" order="10" />
+      <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Database" order="3" />
+    </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/AdminBundle/Entity/ParameterBehavior.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="25" selection-start-line="2" selection-start-column="25" selection-end-line="2" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AdminBundle/Entity/ParameterGraphicStyle.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="25" selection-start-line="2" selection-start-column="25" selection-end-line="2" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AdminBundle/Entity/ParameterObject.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="25" selection-start-line="2" selection-start-column="25" selection-end-line="2" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AdminBundle/Entity/ParameterTarget.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="25" selection-start-line="2" selection-start-column="25" selection-end-line="2" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AdminBundle/Entity/ParameterTypeSite.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="25" selection-start-line="2" selection-start-column="25" selection-end-line="2" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AdminBundle/Entity/Participation.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="25" selection-start-line="2" selection-start-column="25" selection-end-line="2" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AdminBundle/Form/CommercialType.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="25" selection-start-line="2" selection-start-column="25" selection-end-line="2" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AdminBundle/Form/CompanyActivitySectorType.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="25" selection-start-line="2" selection-start-column="25" selection-end-line="2" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AdminBundle/Form/CompanyBusinessCategoryType.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="25" selection-start-line="2" selection-start-column="25" selection-end-line="2" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AdminBundle/Form/CompanyCountryType.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="25" selection-start-line="2" selection-start-column="25" selection-end-line="2" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AdminBundle/Form/CompanyLastTurnOverType.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="25" selection-start-line="2" selection-start-column="25" selection-end-line="2" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AdminBundle/Form/CompanyLegalStatusType.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="25" selection-start-line="2" selection-start-column="25" selection-end-line="2" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AdminBundle/Form/CompanyNbEmployeeType.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="25" selection-start-line="2" selection-start-column="25" selection-end-line="2" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AdminBundle/Form/CompanyTurnOverType.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="25" selection-start-line="2" selection-start-column="25" selection-end-line="2" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AdminBundle/Form/CompanyType.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="25" selection-start-line="2" selection-start-column="25" selection-end-line="2" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AdminBundle/Form/ContactJobType.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" column="25" selection-start-line="1" selection-start-column="25" selection-end-line="1" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AdminBundle/Form/ContactType.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" column="25" selection-start-line="1" selection-start-column="25" selection-end-line="1" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AdminBundle/Form/OperationType.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="25" selection-start-line="2" selection-start-column="25" selection-end-line="2" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AdminBundle/Form/OperationTypeOperationType.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="25" selection-start-line="2" selection-start-column="25" selection-end-line="2" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AdminBundle/Form/ParameterBehaviorType.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="25" selection-start-line="2" selection-start-column="25" selection-end-line="2" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AdminBundle/Form/ParameterObjectType.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" column="25" selection-start-line="1" selection-start-column="25" selection-end-line="1" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AdminBundle/Form/ParameterGraphicStyleType.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="25" selection-start-line="2" selection-start-column="25" selection-end-line="2" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AdminBundle/Form/ParameterType.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="25" selection-start-line="2" selection-start-column="25" selection-end-line="2" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AdminBundle/Form/ParameterTypeSiteType.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" column="25" selection-start-line="1" selection-start-column="25" selection-end-line="1" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AdminBundle/Form/ParameterTargetType.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" column="25" selection-start-line="1" selection-start-column="25" selection-end-line="1" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AdminBundle/Repository/CommercialRepository.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="25" selection-start-line="2" selection-start-column="25" selection-end-line="2" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AdminBundle/Repository/CompanyActivitySectorRepository.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="25" selection-start-line="2" selection-start-column="25" selection-end-line="2" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AdminBundle/Repository/CompanyBusinessCategoryRepository.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="25" selection-start-line="2" selection-start-column="25" selection-end-line="2" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AdminBundle/Repository/CompanyCountryRepository.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="25" selection-start-line="2" selection-start-column="25" selection-end-line="2" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AdminBundle/Repository/CompanyLastTurnoverRepository.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="25" selection-start-line="2" selection-start-column="25" selection-end-line="2" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AdminBundle/Repository/CompanyLegalStatusRepository.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="25" selection-start-line="2" selection-start-column="25" selection-end-line="2" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AdminBundle/Repository/CompanyNbEmployeeRepository.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="25" selection-start-line="2" selection-start-column="25" selection-end-line="2" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AdminBundle/Repository/CompanyRepository.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="25" selection-start-line="2" selection-start-column="25" selection-end-line="2" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AdminBundle/Repository/CompanyTurnoverRepository.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="25" selection-start-line="2" selection-start-column="25" selection-end-line="2" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/AdminBundle/Repository/ContactJobRepository.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
@@ -710,13 +390,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/config/packages/doctrine.yaml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="26" column="59" selection-start-line="26" selection-start-column="59" selection-end-line="26" selection-end-column="59" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/AdminBundle/Repository/ParameterObjectRepository.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
@@ -745,10 +418,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/bin/console">
+    <entry file="file://$PROJECT_DIR$/config/packages/doctrine.yaml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="10" column="48" selection-start-line="10" selection-start-column="48" selection-end-line="10" selection-end-column="48" />
+        <state relative-caret-position="442">
+          <caret line="26" column="59" selection-start-line="26" selection-start-column="59" selection-end-line="26" selection-end-column="59" />
         </state>
       </provider>
     </entry>
@@ -773,17 +446,237 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/config/routes/annotations.yaml">
+    <entry file="file://$PROJECT_DIR$/bin/console">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="16" lean-forward="true" selection-start-line="8" selection-start-column="16" selection-end-line="8" selection-end-column="16" />
+        <state relative-caret-position="119">
+          <caret line="10" column="48" selection-start-line="10" selection-start-column="48" selection-end-line="10" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/bundles.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="14" selection-start-line="14" selection-end-line="14" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/config/services.yaml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="30" column="46" lean-forward="true" selection-start-line="30" selection-start-column="46" selection-end-line="30" selection-end-column="46" />
+        <state relative-caret-position="486">
+          <caret line="30" column="46" selection-start-line="30" selection-start-column="46" selection-end-line="30" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/routes/annotations.yaml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="16" selection-start-line="8" selection-start-column="16" selection-end-line="8" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/routes.yaml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Entity/User.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-891" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/packages/security.yaml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="544">
+          <caret line="32" selection-start-line="32" selection-end-line="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ApiBundle/Controller/ParameterGraphicStyleController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="119" column="12" selection-start-line="119" selection-start-column="12" selection-end-line="119" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ApiBundle/Controller/ParameterBehaviorController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1775" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ApiBundle/Controller/ParameterTypeSiteController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="459">
+          <caret line="104" column="30" selection-start-line="104" selection-start-column="30" selection-end-line="104" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AdminBundle/Controller/CommercialController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-510" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AdminBundle/Controller/AccueilController.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ApiBundle/Controller/ParameterTargetController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="97" column="54" selection-start-line="97" selection-start-column="54" selection-end-line="97" selection-end-column="54" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ApiBundle/Controller/ParameterObjectController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="95" column="54" selection-start-line="95" selection-start-column="54" selection-end-line="95" selection-end-column="54" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ApiBundle/Controller/ParameterController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-102" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AdminBundle/Entity/Company.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="10" column="35" lean-forward="true" selection-start-line="10" selection-start-column="35" selection-end-line="10" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AdminBundle/Entity/CompanyActivitySector.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="10" column="35" lean-forward="true" selection-start-line="10" selection-start-column="35" selection-end-line="10" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AdminBundle/Entity/CompanyBusinessCategory.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="10" column="35" lean-forward="true" selection-start-line="10" selection-start-column="35" selection-end-line="10" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AdminBundle/Entity/CompanyCountry.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="10" column="36" selection-start-line="10" selection-start-column="36" selection-end-line="10" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AdminBundle/Entity/CompanyLastTurnover.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="10" column="35" lean-forward="true" selection-start-line="10" selection-start-column="35" selection-end-line="10" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AdminBundle/Entity/CompanyLegalStatus.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="10" column="36" selection-start-line="10" selection-start-column="36" selection-end-line="10" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AdminBundle/Entity/CompanyNbEmployee.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="10" column="36" selection-start-line="10" selection-start-column="36" selection-end-line="10" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AdminBundle/Entity/CompanyTurnover.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="299">
+          <caret line="70" column="5" lean-forward="true" selection-start-line="70" selection-start-column="5" selection-end-line="70" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AdminBundle/Entity/Contact.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="265">
+          <caret line="413" column="38" lean-forward="true" selection-start-line="413" selection-start-column="38" selection-end-line="413" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AdminBundle/Entity/ContactJob.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2244">
+          <caret line="135" column="5" selection-start-line="135" selection-start-column="4" selection-end-line="135" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Security/AppAdminAuthenticator.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-480" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AdminBundle/Entity/Participation.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="18" column="16" selection-start-line="18" selection-start-column="16" selection-end-line="18" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AdminBundle/Entity/ParameterTypeSite.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-109" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AdminBundle/Entity/ParameterTarget.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-160" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AdminBundle/Entity/ParameterObject.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-7" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AdminBundle/Entity/Operation.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2754">
+          <caret line="165" column="37" selection-start-line="165" selection-start-column="37" selection-end-line="165" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AdminBundle/Entity/OperationTypeOperation.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AdminBundle/Entity/Parameter.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4097">
+          <caret line="244" selection-start-line="244" selection-end-line="244" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AdminBundle/Entity/ParameterBehavior.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="510">
+          <caret line="33" column="5" selection-start-line="33" selection-start-column="5" selection-end-line="33" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AdminBundle/Entity/ParameterGraphicStyle.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="22" column="7" selection-start-line="22" selection-start-column="7" selection-end-line="22" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AdminBundle/Entity/Commercial.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="12" column="16" selection-start-line="12" selection-start-column="16" selection-end-line="12" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/DataFixtures/AppFixtures.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="13" column="21" selection-start-line="13" selection-start-column="21" selection-end-line="13" selection-end-column="21" />
+          <folding>
+            <element signature="e#36#56#0#PHP" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

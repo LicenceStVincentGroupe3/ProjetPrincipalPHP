@@ -96,11 +96,11 @@ class ParameterTypeSiteController extends AbstractController
      */
     public function delete($id, SerializerInterface $serializer)
     {
-        $suppBD = $this->getDoctrine()->getManager();
+        $display = $this->getDoctrine()->getManager();
         // On créer un objet instance de contact
-        $suppParameterTypeSite = $suppBD->getRepository(ParameterTypeSite::class)->find($id);
+        $suppParameterTypeSite = $display->getRepository(ParameterTypeSite::class)->find($id);
         // Suppression du contact
-        $suppBD->remove($suppParameterTypeSite);
+        $display->remove($suppParameterTypeSite);
         // Execution
         $display->flush();        
         $json = $serializer->serialize(
