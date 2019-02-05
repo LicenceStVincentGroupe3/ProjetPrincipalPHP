@@ -26,7 +26,7 @@ class CompanyTurnover
     private $turnover;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Company", mappedBy="idCompanyTurnover")
+     * @ORM\OneToMany(targetEntity="App\AdminBundle\Entity\Company", mappedBy="idCompanyTurnover")
      */
     private $companies;
 

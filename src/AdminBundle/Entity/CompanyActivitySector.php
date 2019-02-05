@@ -26,7 +26,7 @@ class CompanyActivitySector
     private $label;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Company", mappedBy="idCompanyActivitySector")
+     * @ORM\OneToMany(targetEntity="App\AdminBundle\Entity\Company", mappedBy="idCompanyActivitySector")
      */
     private $companies;
 

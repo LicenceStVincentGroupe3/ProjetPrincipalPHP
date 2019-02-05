@@ -95,7 +95,7 @@ class CompanyController extends AbstractController
     }
 
     /**
-     * @Route("/list", name="listCompany", methods={"GET")
+     * @Route("/list", name="listCompany", methods={"GET"})
      */
     public function list()
     {

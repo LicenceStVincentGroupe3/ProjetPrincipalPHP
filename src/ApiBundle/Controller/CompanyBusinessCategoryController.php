@@ -6,6 +6,7 @@ use App\AdminBundle\AdminBundle\Entity\CompanyBusinessCategory;
 use App\AdminBundle\AdminBundle\Form\CompanyBusinessCategoryType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -51,7 +52,7 @@ class CompanyBusinessCategoryController extends AbstractController
     }
 
     /**
-     * @Route("/", requirements={"id"="\d+"}, methods={"POST"})
+     * @Route("/edit/id", requirements={"id"="\d+"}, methods={"POST"})
      */
     public function edit($id, Request $request, SerializerInterface $serializer)
     {
@@ -87,7 +88,7 @@ class CompanyBusinessCategoryController extends AbstractController
     }
 
     /**
-     * @Route("/", requirements={"id"="\d+"}, methods={"GET","POST"})
+     * @Route("/delete/id", requirements={"id"="\d+"}, methods={"DELETE"})
      */
     public function delete($id, SerializerInterface $serializer)
     {
