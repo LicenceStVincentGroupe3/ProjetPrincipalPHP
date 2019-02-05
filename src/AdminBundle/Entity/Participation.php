@@ -7,7 +7,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\ParticipationRepository")
+ * @ORM\Entity(repositoryClass="App\AdminBundle\Repository\ParticipationRepository")
  */
 class Participation
 {
