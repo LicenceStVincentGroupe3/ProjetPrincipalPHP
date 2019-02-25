@@ -2,7 +2,7 @@
 
 namespace App\AdminBundle\Form;
 
-use App\Entity\CompanyBusinessCategory;
+use App\AdminBundle\Entity\CompanyBusinessCategory;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\FormType;

@@ -7,7 +7,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\ParticipationRepository")
+ * @ORM\Entity(repositoryClass="App\AdminBundle\Repository\ParticipationRepository")
  */
 class Participation
 {
@@ -24,13 +24,13 @@ class Participation
     private $codeParticipation;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Operation", inversedBy="participations")
+     * @ORM\ManyToOne(targetEntity="App\AdminBundle\Entity\Operation", inversedBy="participations")
      * @ORM\JoinColumn(nullable=false)
      */
     private $idOperation;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\ContactJob", inversedBy="participations")
+     * @ORM\ManyToMany(targetEntity="App\AdminBundle\Entity\ContactJob", inversedBy="participations")
      */
     private $idParticipationContact;
 

@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\OperationRepository")
+ * @ORM\Entity(repositoryClass="App\AdminBundle\Repository\OperationRepository")
  */
 class Operation
 {
@@ -60,7 +60,7 @@ class Operation
     private $operationBinding;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Participation", mappedBy="idOperation")
+     * @ORM\OneToMany(targetEntity="App\AdminBundle\Entity\Participation", mappedBy="idOperation")
      */
     private $participations;
 

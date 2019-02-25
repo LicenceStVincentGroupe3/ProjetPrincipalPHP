@@ -2,35 +2,38 @@
 
 namespace App\AdminBundle\Controller;
 
-use App\Entity\CompanyActivitySector;
-use App\Form\CompanyActivitySectorType;
+use App\AdminBundle\Entity\CompanyActivitySector;
+use App\AdminBundle\Form\CompanyActivitySectorType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Serializer\SerializerInterface;
+use Symfony\Component\Serializer\Annotation\Groups;
 
+// Préfix url
 /**
  * @Route("/company/activity/sector")
  */
 class CompanyActivitySectorController extends AbstractController
 {
     /**
-     * @Route("/new", name="newActivitySector")
+     * @Route("/new", methods={"GET","POST"}, name="newActivitySector")
      */
     public function new(Request $request)
     {
-        $newActivitySector = new CompanyActivitySector();
-        $form = $this->createForm(CompanyActivitySectorType::class, $newActivitySector);
+        $new = new CompanyActivitySector();
 
+        $form = $this->createForm(CompanyActivitySectorType::class, $new);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid())
         {
-            $newActivitySector = $form->getData();
+            $new = $form->getData();
 
             $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($newActivitySector);
+            $entityManager->persist($new);
             $entityManager->flush();
 
             return $this->redirectToRoute('listActivitySector');
@@ -40,19 +43,24 @@ class CompanyActivitySectorController extends AbstractController
     }
 
     /**
-     * @Route("/edit/{id}", name="editActivitySector", requirements={"id"="\d+"})
+     * @Route("/edit/{id}", name="editActivitySector", methods={"GET","POST"}, requirements={"id"="\d+"})
      */
     public function edit($id, Request $request)
     {
-        $editActivitySector = $this->getDoctrine()->getManager()->getRepository(CompanyActivitySector::class)->find($id);
+        // Appel de Doctrine
+        $display = $this->getDoctrine()->getManager();
 
-        $form = $this->createForm(CompanyActivitySectorType::class, $editActivitySector);
+        // Variable qui contient le Repository
+        $companyActivitySectorRepository = $display->getRepository(CompanyActivitySector::class);
+
+        // Equivalent du SELECT * where id=(paramètre)
+        $edit = $companyActivitySectorRepository->find($id);
+
+        $form = $this->createForm(CompanyActivitySectorType::class, $edit);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid() && $request->isMethod('POST')) 
         {
-            $editActivitySector = $form->getData();
-
             $entityManager = $this->getDoctrine()->getManager();
 
             $entityManager->flush();
@@ -61,45 +69,46 @@ class CompanyActivitySectorController extends AbstractController
         }
 
         return $this->render('CompanyActivitySector/edit.html.twig', array(
-        'form' => $form->createView(),'activitySector' => $editActivitySector
+        'form' => $form->createView(),'activitySector' => $edit
         ));
     }
 
     /**
-     * @Route("/delete/{id}", name="deleteActivitySector", requirements={"id"="\d+"})
+     * @Route("/delete/{id}", name="deleteActivitySector", requirements={"id"="\d+"}, methods={"GET","POST"})
      */
     public function delete($id)
     {
-        $suppBD = $this->getDoctrine()->getManager();
+        // Appel de Doctrine
+        $display = $this->getDoctrine()->getManager();
 
-        // On crée un objet, instance de CompanyActivitySector
-        $suppActivitySector = new CompanyActivitySector();
+        $companyActivitySectorRepository = $display->getRepository(CompanyActivitySector::class);
 
-        $suppActivitySector = $suppBD->getRepository(CompanyActivitySector::class)->find($id);
+        $delete = $companyActivitySectorRepository->find($id);
 
-        // Suppression de l'activité
-        $suppBD->remove($suppActivitySector);
+        $display->remove($delete);
 
-        // Exécution
-        $suppBD->flush();
+        $display->flush();
 
         return $this->redirectToRoute('listActivitySector');
     }
 
     /**
-     * @Route("/list", name="listActivitySector")
+     * @Route("/list", name="listActivitySector", methods={"GET"})
      */
     public function list()
     {
-        // ---------------------------------------
-        // Récupération de la liste des secteurs d'activités
-        // ---------------------------------------
-        $repository = $this->getDoctrine()->getManager()->getRepository(CompanyActivitySector::class);
+        // Appel de Doctrine
+        $display = $this->getDoctrine()->getManager();
 
-        $listSectorActivity = $repository->findAll();
+        // Variable qui contient le Repository
+        $companyActivitySectorRepository = $display->getRepository(CompanyActivitySector::class);
+
+        // Equivalent du SELECT *
+        $list = $companyActivitySectorRepository->findAll();
+
         // -------------------------------------------------------------
         // On demande à la vue d'afficher la liste des secteurs d'activité
         // -------------------------------------------------------------
-        return $this->render('companyActivitySector/list.html.twig', array('lesSecteurs' => $listSectorActivity)); // On affecte le tableau à la vue
+        return $this->render('companyActivitySector/list.html.twig', array('lesSecteurs' => $list)); // On affecte le tableau à la vue
     }
 }

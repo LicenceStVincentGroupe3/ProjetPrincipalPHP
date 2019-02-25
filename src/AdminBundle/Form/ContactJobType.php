@@ -1,8 +1,8 @@
 <?php
 namespace App\AdminBundle\Form;
 
-use App\Entity\Contact;
-use App\Entity\ContactJob;
+use App\AdminBundle\Entity\Contact;
+use App\AdminBundle\Entity\ContactJob;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\FormBuilderInterface;

@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\CompanyRepository")
+ * @ORM\Entity(repositoryClass="App\AdminBundle\Repository\CompanyRepository")
  */
 class Company
 {
@@ -128,7 +128,7 @@ class Company
     private $CompanyStandardPhone;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Contact", mappedBy="idCompany")
+     * @ORM\OneToMany(targetEntity="App\AdminBundle\Entity\Contact", mappedBy="idCompany")
      */
     private $contacts;
 
@@ -138,50 +138,50 @@ class Company
     }
   
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\CompanyCountry", inversedBy="companies")
+     * @ORM\ManyToOne(targetEntity="App\AdminBundle\Entity\CompanyCountry", inversedBy="companies")
      * @ORM\JoinColumn(nullable=false)
      */
     private $idCompanyCountry;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\CompanyLegalStatus", inversedBy="companies")
+     * @ORM\ManyToOne(targetEntity="App\AdminBundle\Entity\CompanyLegalStatus", inversedBy="companies")
      * @ORM\JoinColumn(nullable=false)
      */
     private $idCompanyLegalStatus;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Commercial", inversedBy="companies")
+     * @ORM\ManyToOne(targetEntity="App\AdminBundle\Entity\Commercial", inversedBy="companies")
      * @ORM\JoinColumn(nullable=false)
      */
     private $idUser;
 
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\CompanyActivitySector", inversedBy="companies")
+     * @ORM\ManyToOne(targetEntity="App\AdminBundle\Entity\CompanyActivitySector", inversedBy="companies")
      * @ORM\JoinColumn(nullable=false)
      */
     private $idCompanyActivitySector;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\CompanyBusinessCategory", inversedBy="companies")
+     * @ORM\ManyToOne(targetEntity="App\AdminBundle\Entity\CompanyBusinessCategory", inversedBy="companies")
      * @ORM\JoinColumn(nullable=false)
      */
     private $idCompanyBusinessCategory;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\CompanyNbEmployee", inversedBy="companies")
+     * @ORM\ManyToOne(targetEntity="App\AdminBundle\Entity\CompanyNbEmployee", inversedBy="companies")
      * @ORM\JoinColumn(nullable=false)
      */
     private $idCompanyNbEmployee;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\CompanyTurnover", inversedBy="companies")
+     * @ORM\ManyToOne(targetEntity="App\AdminBundle\Entity\CompanyTurnover", inversedBy="companies")
      * @ORM\JoinColumn(nullable=false)
      */
     private $idCompanyTurnover;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\CompanyLastTurnover", inversedBy="companies")
+     * @ORM\ManyToOne(targetEntity="App\AdminBundle\Entity\CompanyLastTurnover", inversedBy="companies")
      * @ORM\JoinColumn(nullable=false)
      */
     private $idCompanyLastTurnover;

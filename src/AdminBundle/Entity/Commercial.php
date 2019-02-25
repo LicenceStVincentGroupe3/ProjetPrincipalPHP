@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\CommercialRepository")
+ * @ORM\Entity(repositoryClass="App\AdminBundle\Repository\CommercialRepository")
  */
 class Commercial
 {
@@ -96,7 +96,7 @@ class Commercial
     private $commercialPhoto;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Contact", mappedBy="idUser")
+     * @ORM\OneToMany(targetEntity="App\AdminBundle\Entity\Contact", mappedBy="idUser")
      */
     private $contacts;
 
@@ -110,7 +110,7 @@ class Commercial
     }
   
     /** 
-     * @ORM\OneToMany(targetEntity="App\Entity\Company", mappedBy="idUser")
+     * @ORM\OneToMany(targetEntity="App\AdminBundle\Entity\Company", mappedBy="idUser")
      */
     private $companies;
 

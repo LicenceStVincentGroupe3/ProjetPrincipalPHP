@@ -2,8 +2,8 @@
 
 namespace App\AdminBundle\Controller;
 
-use App\Entity\ParameterTypeSite;
-use App\Form\ParameterTypeSiteType;
+use App\AdminBundle\Entity\ParameterTypeSite;
+use App\AdminBundle\Form\ParameterTypeSiteType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;

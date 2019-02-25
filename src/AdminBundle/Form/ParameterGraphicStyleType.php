@@ -2,7 +2,7 @@
 
 namespace App\AdminBundle\Form;
 
-use App\Entity\ParameterGraphicStyle;
+use App\AdminBundle\Entity\ParameterGraphicStyle;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;

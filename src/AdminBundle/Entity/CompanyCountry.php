@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\CompanyCountryRepository")
+ * @ORM\Entity(repositoryClass="App\AdminBundle\Repository\CompanyCountryRepository")
  */
 class CompanyCountry
 {
@@ -26,7 +26,7 @@ class CompanyCountry
     private $label;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Company", mappedBy="idCompanyCountry")
+     * @ORM\OneToMany(targetEntity="App\AdminBundle\Entity\Company", mappedBy="idCompanyCountry")
      */
     private $companies;
 

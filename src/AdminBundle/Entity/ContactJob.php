@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\ContactJobRepository")
+ * @ORM\Entity(repositoryClass="App\AdminBundle\Repository\ContactJobRepository")
  */
 class ContactJob
 {
@@ -26,17 +26,17 @@ class ContactJob
     private $contactJobName;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Contact", mappedBy="idContactJob")
+     * @ORM\OneToMany(targetEntity="App\AdminBundle\Entity\Contact", mappedBy="idContactJob")
      */
     private $contacts;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Participation", mappedBy="idParticipationContact")
+     * @ORM\ManyToMany(targetEntity="App\AdminBundle\Entity\Participation", mappedBy="idParticipationContact")
      */
     private $participations;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Parameter", mappedBy="idParameterContactJob")
+     * @ORM\ManyToMany(targetEntity="App\AdminBundle\Entity\Parameter", mappedBy="idParameterContactJob")
      */
     private $parameters;
 

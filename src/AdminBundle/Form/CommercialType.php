@@ -2,7 +2,7 @@
 
 namespace App\AdminBundle\Form;
 
-use App\Entity\Commercial;
+use App\AdminBundle\Entity\Commercial;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;

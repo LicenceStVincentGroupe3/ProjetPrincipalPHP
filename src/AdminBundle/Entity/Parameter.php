@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\ParameterRepository")
+ * @ORM\Entity(repositoryClass="App\AdminBundle\Repository\ParameterRepository")
  */
 class Parameter
 {
@@ -69,7 +69,7 @@ class Parameter
     private $parameterEmailContactForm;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\ContactJob", inversedBy="parameters")
+     * @ORM\ManyToMany(targetEntity="App\AdminBundle\Entity\ContactJob", inversedBy="parameters")
      */
     private $idParameterContactJob;
 

@@ -2,8 +2,8 @@
 
 namespace App\AdminBundle\Controller;
 
-use App\Entity\CompanyTurnover;
-use App\Form\CompanyTurnOverType;
+use App\AdminBundle\Entity\CompanyTurnover;
+use App\AdminBundle\Form\CompanyTurnOverType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
