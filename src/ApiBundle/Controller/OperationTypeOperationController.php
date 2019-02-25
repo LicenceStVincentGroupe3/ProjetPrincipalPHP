@@ -2,34 +2,32 @@
 
 namespace App\ApiBundle\Controller;
 
-use App\AdminBundle\Entity\Company;
-use App\AdminBundle\Form\CompanyType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\AdminBundle\Entity\OperationTypeOperation;
+use App\AdminBundle\Form\OperationTypeOperationType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\VarDumper\VarDumper;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 // Préfix url
 //* @Groups({"Light"})
 //* @MaxDepth(1)
 /**
- * @Route("/company")
+ * @Route("/operation/typeOperation")
  */
-class CompanyController extends AbstractController
+class OperationTypeOperationController extends AbstractController
 {
     /**
      * @Route("/", methods={"POST"})
      */
     public function new(Request $request, SerializerInterface $serializer)
     {
-        $new = new Company();
+        $new = new OperationTypeOperation();
 
-        $form = $this->createForm(CompanyType::class, $new);
+    	$form = $this->createForm(OperationTypeOperationType::class, $new);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid() && $request->isMethod('POST'))
@@ -55,17 +53,20 @@ class CompanyController extends AbstractController
     }
 
     /**
-     * @Route("/edit/id", requirements={"id"="\d+"}, methods={"POST"})
+     * @Route("/edit/{id}", requirements={"id"="\d+"}, methods={"POST"})
      */
     public function edit($id, Request $request, SerializerInterface $serializer)
     {
+        // Appel de Doctrine
         $display = $this->getDoctrine()->getManager();
 
-        $companyRepository = $display->getRepository(Company::class);
+        // Variable qui contient le Repository
+        $operationTypeOperationRepository = $display->getRepository(OperationTypeOperation::class);
 
-        $edit = $companyRepository->find($id);
+        // Equivalent du SELECT * where id=(paramètre)
+        $edit = $operationTypeOperationRepository->find($id);
 
-        $form = $this->createForm(CompanyType::class, $edit);
+        $form = $this->createForm(OperationTypeOperationType::class, $edit);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid() && $request->isMethod('POST'))
@@ -91,15 +92,16 @@ class CompanyController extends AbstractController
     }
 
     /**
-     * @Route("/delete/id", requirements={"id"="\d+"}, methods={"DELETE"})
+     * @Route("/delete/{id}", requirements={"id"="\d+"}, methods={"GET","POST"})
      */
     public function delete($id, SerializerInterface $serializer)
     {
+        // Appel de Doctrine
         $display = $this->getDoctrine()->getManager();
 
-        $companyRepository = $display->getRepository(Company::class);
+        $operationTypeOperationRepository = $display->getRepository(OperationTypeOperation::class);
 
-        $delete = $companyRepository->find($id);
+        $delete = $operationTypeOperationRepository->find($id);
 
         $display->remove($delete);
 
@@ -127,10 +129,10 @@ class CompanyController extends AbstractController
         $display = $this->getDoctrine()->getManager();
 
         // Variable qui contient le Repository
-        $companyRepository = $display->getRepository(Company::class);
+        $operationTypeOperationRepository = $display->getRepository(OperationTypeOperation::class);
 
         // Equivalent du SELECT *
-        $list = $companyRepository->findAll();
+        $list = $operationTypeOperationRepository->findAll();
 
         if ($request->isXmlHttpRequest()) {
             $json = $serializer->serialize(

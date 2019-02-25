@@ -2,10 +2,11 @@
 
 namespace App\ApiBundle\Controller;
 
-use App\AdminBundle\AdminBundle\Entity\CompanyBusinessCategory;
-use App\AdminBundle\AdminBundle\Form\CompanyBusinessCategoryType;
+use App\AdminBundle\Entity\CompanyBusinessCategory;
+use App\AdminBundle\Form\CompanyBusinessCategoryType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -42,13 +43,13 @@ class CompanyBusinessCategoryController extends AbstractController
                 'json',
                 ['groups'=>["Light"]]
             );
+
+            $response = new Response();
+            $response->setContent($json);
+            $response->headers->set('Content-type', 'application/JSON');
+
+            return $response;
         }
-
-        $response = new Response();
-        $response->setContent($json);
-        $response->headers->set('Content-type', 'application/JSON');
-
-        return $response;
     }
 
     /**
@@ -78,13 +79,13 @@ class CompanyBusinessCategoryController extends AbstractController
                 'json',
                 ['groups'=>["Light"]]
             );
+
+            $response = new Response();
+            $response->setContent($json);
+            $response->headers->set('Content-type', 'application/JSON');
+
+            return $response;
         }
-
-        $response = new Response();
-        $response->setContent($json);
-        $response->headers->set('Content-type', 'application/JSON');
-
-        return $response;
     }
 
     /**
@@ -116,7 +117,7 @@ class CompanyBusinessCategoryController extends AbstractController
     }
 
     /**
-     * @Route("/list", name="listBusinessCategory", methods={"GET"})
+     * @Route("/", methods={"GET"})
      */
     public function list(Request $request, SerializerInterface $serializer)
     {

@@ -2,10 +2,11 @@
 
 namespace App\ApiBundle\Controller;
 
-use App\AdminBundle\AdminBundle\Entity\CompanyActivitySector;
-use App\AdminBundle\AdminBundle\Form\CompanyActivitySectorType;
+use App\AdminBundle\Entity\CompanyActivitySector;
+use App\AdminBundle\Form\CompanyActivitySectorType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -42,13 +43,13 @@ class CompanyActivitySectorController extends AbstractController
                 'json',
                 ['groups'=>["Light"]]
             );
+
+            $response = new Response();
+            $response->setContent($json);
+            $response->headers->set('Content-type', 'application/JSON');
+
+            return $response;
         }
-
-        $response = new Response();
-        $response->setContent($json);
-        $response->headers->set('Content-type', 'application/JSON');
-
-        return $response;
     }
 
     /**
@@ -78,13 +79,13 @@ class CompanyActivitySectorController extends AbstractController
                 'json',
                 ['groups'=>["Light"]]
             );
+
+            $response = new Response();
+            $response->setContent($json);
+            $response->headers->set('Content-type', 'application/JSON');
+
+            return $response;
         }
-
-        $response = new Response();
-        $response->setContent($json);
-        $response->headers->set('Content-type', 'application/JSON');
-
-        return $response;
     }
 
     /**
@@ -93,9 +94,6 @@ class CompanyActivitySectorController extends AbstractController
     public function delete($id, SerializerInterface $serializer)
     {
         $display = $this->getDoctrine()->getManager();
-
-        // On crée un objet, instance de CompanyActivitySector
-        $suppActivitySector = new CompanyActivitySector();
 
         $suppActivitySectorRepository = $display->getRepository(CompanyActivitySector::class);
 
@@ -119,7 +117,7 @@ class CompanyActivitySectorController extends AbstractController
     }
 
     /**
-     * @Route("/list", name="listActivitySector", methods={"GET"})
+     * @Route("/", methods={"GET"})
      */
     public function list(Request $request, SerializerInterface $serializer)
     {

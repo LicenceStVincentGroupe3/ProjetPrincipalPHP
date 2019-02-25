@@ -2,15 +2,16 @@
 
 namespace App\ApiBundle\Controller;
 
-use App\AdminBundle\AdminBundle\Entity\Commercial;
-use App\AdminBundle\AdminBundle\Form\CommercialType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Routing\Annotation\Route;
+use App\AdminBundle\Entity\Commercial;
+use App\AdminBundle\Form\CommercialType;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Serializer\SerializerInterface;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\VarDumper\VarDumper;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
-use Symfony\Component\Serializer\SerializerInterface;
-use Symfony\Component\Serializer\Annotation\Groups;
 
 // Préfix url
 //* @Groups({"Light"})
@@ -43,13 +44,13 @@ class CommercialController extends AbstractController
                 'json',
                 ['groups'=>["Light"]]
             );
+
+            $response = new Response();
+            $response->setContent($json);
+            $response->headers->set('Content-type', 'application/JSON');
+
+            return $response;
         }
-
-        $response = new Response();
-        $response->setContent($json);
-        $response->headers->set('Content-type', 'application/JSON');
-
-        return $response;
     }
 
     /**
@@ -81,13 +82,13 @@ class CommercialController extends AbstractController
                 'json',
                 ['groups'=>["Light"]]
             );
+
+            $response = new Response();
+            $response->setContent($json);
+            $response->headers->set('Content-type', 'application/JSON');
+
+            return $response;
         }
-
-        $response = new Response();
-        $response->setContent($json);
-        $response->headers->set('Content-type', 'application/JSON');
-
-        return $response;
     }
 
     /**
@@ -119,7 +120,7 @@ class CommercialController extends AbstractController
     }
 
     /**
-     * @Route("/", name="listCommercial", methods={"GET"})
+     * @Route("/", methods={"GET"})
      */
     public function list(Request $request, SerializerInterface $serializer)
     {

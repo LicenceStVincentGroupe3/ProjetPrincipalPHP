@@ -72,9 +72,6 @@ class CompanyLastTurnOverController extends AbstractController
     {
         $suppBD = $this->getDoctrine()->getManager();
 
-        // On crée un objet, instance de CompanyTurnover
-        $suppLastTurnOver = new CompanyLastTurnover();
-
         $suppLastTurnOver = $suppBD->getRepository(CompanyLastTurnover::class)->find($id);
 
         // Suppression du chiffre d'affaire

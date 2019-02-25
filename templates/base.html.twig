@@ -58,27 +58,27 @@
                     </ul>
                     <h3>Commerciaux</h3>
                     <ul class="nav nav-pills nav-stacked">
-                        <li><a href="/admin/commercial/list">Liste des commerciaux</a></li>
-                        <li><a href="/admin/commercial/new">Ajouter un commercial</a></li>
+                        <li><a href="{{ path('listCommercial') }}">Liste des commerciaux</a></li>
+                        <li><a href="{{ path('newCommercial') }}">Ajouter un commercial</a></li>
                     </ul>
                     <h3>Opérations</h3>
                     <ul class="nav nav-pills nav-stacked">
-                        <li><a href="/admin/operation/list">Liste des opérations</a></li>
-                        <li><a href="/admin/operation/new">Ajouter une opération</a></li>
+                        <li><a href="{{ path('listOperation') }}">Liste des opérations</a></li>
+                        <li><a href="{{ path('newOperation') }}">Ajouter une opération</a></li>
                         <hr>
-                        <li><a href="/admin/operation/typeOperation/list">Liste des types d'opérations</a></li>
-                        <li><a href="/admin/operation/typeOperation/new">Ajouter un type d'opération</a></li>
+                        <li><a href="{{ path('listOperationTypeOperation') }}">Liste des types d'opérations</a></li>
+                        <li><a href="{{ path('newOperationTypeOperation') }}">Ajouter un type d'opération</a></li>
                     </ul>
                     <h3>Paramètres</h3>
                     <ul class="nav nav-pills nav-stacked">
-                        <li><a href="/admin/parameter/list">Liste des paramètres</a></li>
-                        <li><a href="/admin/parameter/new">Ajouter un paramètre</a></li>
+                        <li><a href="{{ path('listParameter') }}">Liste des paramètres</a></li>
+                        <li><a href="{{ path('newParameter') }}">Ajouter un paramètre</a></li>
                         <hr>
                         <li><a href="/admin/parameterGraphicStyle/list">Liste des styles graphiques</a></li>
                         <li><a href="/admin/parameterGraphicStyle/new">Ajouter un style graphique</a></li>
                         <hr>
-                        <li><a href="/admin/parameterBehavior/list">Liste des comportements</a></li>
-                        <li><a href="/admin/parameterBehavior/new">Ajouter un comportement</a></li>
+                        <li><a href="{{ path('listParameterBehavior') }}">Liste des comportements</a></li>
+                        <li><a href="{{ path('newParameterBehavior') }}">Ajouter un comportement</a></li>
                         <hr>
                         <li><a href="/admin/parameterTypeSite/list">Liste des types de sites</a></li>
                         <li><a href="/admin/parameterTypeSite/new">Ajouter un type de site</a></li>
