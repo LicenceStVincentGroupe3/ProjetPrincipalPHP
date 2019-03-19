@@ -117,7 +117,7 @@ class ParameterTypeSiteController extends AbstractController
     }   
 
     /**
-     * @Route("/", name="listParameterTypeSite", methods={"GET"})
+     * @Route("/", methods={"GET"})
      */
     public function list(Request $request, SerializerInterface $serializer)
     {

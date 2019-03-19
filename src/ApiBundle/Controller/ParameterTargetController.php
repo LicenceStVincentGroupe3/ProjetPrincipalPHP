@@ -116,7 +116,7 @@ class ParameterTargetController extends AbstractController
     } 
 
     /**
-     * @Route("/", name="listParameterTarget", methods={"GET"})
+     * @Route("/", methods={"GET"})
      */
     public function list(Request $request, SerializerInterface $serializer)
     {

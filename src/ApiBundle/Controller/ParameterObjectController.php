@@ -115,7 +115,7 @@ class ParameterObjectController extends AbstractController
 
 
     /**
-     * @Route("/", name="listParameterObject", methods={"GET"})
+     * @Route("/", methods={"GET"})
      */
     public function list(Request $request, SerializerInterface $serializer)
     {

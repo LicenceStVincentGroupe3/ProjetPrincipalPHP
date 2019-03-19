@@ -16,7 +16,7 @@ use Symfony\Component\VarDumper\VarDumper;
 class ParameterObjectController extends AbstractController
 {
     /**
-     * @Route("/new", methods={"GET","POST"})
+     * @Route("/new", methods={"GET","POST"}, name="newParameterObject")
      */
     public function new(Request $request)
     {

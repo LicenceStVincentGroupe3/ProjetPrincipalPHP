@@ -1,7 +1,7 @@
 <?php
 namespace App\AdminBundle\Form;
 
-use App\Entity\ParameterObject;
+use App\AdminBundle\Entity\ParameterObject;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\FormBuilderInterface;

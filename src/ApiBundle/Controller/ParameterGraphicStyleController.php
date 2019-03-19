@@ -147,7 +147,7 @@ class ParameterGraphicStyleController extends AbstractController
     */
 
     /**
-     * @Route("/", name="listParameterGraphicStyle", methods={"GET"})
+     * @Route("/", methods={"GET"})
      */
     public function list(Request $request, SerializerInterface $serializer)
     {

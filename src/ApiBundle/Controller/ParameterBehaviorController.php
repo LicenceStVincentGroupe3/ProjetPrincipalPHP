@@ -151,7 +151,7 @@ class ParameterBehaviorController extends AbstractController
     */
 
     /**
-     * @Route("/", name="listParameterBehavior", methods={"GET"})
+     * @Route("/", methods={"GET"})
      */
     public function list(Request $request, SerializerInterface $serializer)
     {
