@@ -15,7 +15,7 @@
                 <h2>Hafa - Smartleads</h2>
                 <p>
                 	<a class="btn btn-primary btn-lg" href="https://symfony.com/" target="_blank">Accéder au site de Symfony</a>
-                    <a class="btn btn-success btn-lg" href="#"><i class="glyphicon glyphicon-user"></i> Se connecter</a>
+                    <a class="btn btn-success btn-lg" href="{{ path('login') }}"><i class="glyphicon glyphicon-user"></i> Se connecter</a>
                 </p>
             </div>
             <div class="row">
@@ -58,8 +58,12 @@
                     </ul>
                     <h3>Commerciaux</h3>
                     <ul class="nav nav-pills nav-stacked">
-                        <li><a href="{{ path('listCommercial') }}">Liste des commerciaux</a></li>
-                        <li><a href="{{ path('newCommercial') }}">Ajouter un commercial</a></li>
+                        {% if is_granted('ROLE_RESPONSABLE') %}
+                            <li class="nav-item {% if commercialWindow is defined %}active{% endif %}">
+                                <li><a href="{{ path('listCommercial') }}">Liste des commerciaux</a></li>
+                                <li><a href="{{ path('newCommercial') }}">Ajouter un commercial</a></li>
+                            </li>
+                        {% endif %}
                     </ul>
                     <h3>Opérations</h3>
                     <ul class="nav nav-pills nav-stacked">
@@ -90,6 +94,17 @@
                         <li><a href="/admin/parameterTarget/new">Ajouter une cible</a></li>
                     </ul> 
                 </div>
+                <ul class="navbar-nav ml-auto">
+                    {% if is_granted('ROLE_COMMERCIAL') %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{path('logout')}}">Déconnexion</a>
+                        </li>
+                    {% else %}
+                        <li class="nav-item {% if mainNavLogin is defined %}active{% endif %}">
+                            <a class="nav-link" href="{{path('login')}}">Connexion</a>
+                        </li>
+                    {% endif %}
+                </ul>
                 <div id="content" class="col-md-8">
                     {% block body %} {% endblock %}
                 </div>

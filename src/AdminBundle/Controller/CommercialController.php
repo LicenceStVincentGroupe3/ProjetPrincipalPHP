@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\VarDumper\VarDumper;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 // Préfix url
 /**
@@ -19,7 +20,7 @@ class CommercialController extends AbstractController
     /**
      * @Route("/new", methods={"GET","POST"}, name="newCommercial")
      */
-    public function new(Request $request)
+    public function new(Request $request, UserPasswordEncoderInterface $passwordEncoder)
     {
     	$new = new Commercial();
 
@@ -29,15 +30,23 @@ class CommercialController extends AbstractController
         if ($form->isSubmitted() && $form->isValid() && $request->isMethod('POST'))
         {
             $new = $form->getData();
+            $password = $passwordEncoder->encodePassword($new, $new->getPlainPassword());
+            
+            $new->setPassword($password);
+            $new->addRole("ROLE_COMMERCIAL");
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($new);
             $entityManager->flush();
+            // ... do any other work - like sending them an email, etc
+            // maybe set a "flash" success message for the user
+            $this->addFlash('success', 'Votre compte à bien été enregistré.');
+            //return $this->redirectToRoute('login');
 
             return $this->redirect($this->generateUrl('listCommercial'));
         }
 
-        return $this->render('commercial/new.html.twig', ['form' => $form->createView()]);
+        return $this->render('commercial/new.html.twig', ['form' => $form->createView(), 'mainNavRegistration' => true]);
     }
 
     /**
