@@ -1,6 +1,6 @@
 <?php
 
-namespace App\AdminBundle\Controller;
+namespace App\ApiBundle\Controller;
 
 use App\AdminBundle\Entity\Parameter;
 use App\AdminBundle\Form\ParameterType;
@@ -8,7 +8,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\VarDumper\VarDumper;
+use Symfony\Component\Serializer\SerializerInterface;
+use Symfony\Component\Serializer\Annotation\Groups;
 
+// Préfix url
+//* @Groups({"Light"})
+//* @MaxDepth(1)
 /**
  * @Route("/parameter")
  */
@@ -22,13 +27,12 @@ class ParameterController extends AbstractController
     */
 
     /**
-     * @Route("/new", methods={"GET","POST"}, name="newParameter")
+     * @Route("/", methods={"POST"})
      */
-    public function new(Request $request)
+    public function new(Request $request, SerializerInterface $serializer)
     {
     	$newParameter = new Parameter();
 					
-
     	$form = $this->createForm(ParameterType::class, $newParameter);
         $form->handleRequest($request);
 
@@ -38,13 +42,21 @@ class ParameterController extends AbstractController
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($newParameter);
-            $entityManager->flush();
+            $entityManager->flush();        
 
-            return $this->redirect($this->generateUrl('listParameter'));
+            $json = $serializer->serialize(
+            $newParameter,
+            'json',
+            ['groups'=>["Light"]]
+        );
+
+        $response = new Response();
+        $response->setContent($json);
+        $response->headers->set('Content-type', 'application/JSON');
+
+        return $response;
         }
-
-        return $this->render('parameter/new.html.twig', ['form' => $form->createView()]);
-    }
+    }   
 
     /* ---------------------------------------------------------------------
     ------------------------------------------------------------------------
@@ -54,9 +66,9 @@ class ParameterController extends AbstractController
     */
 
     /**
-     * @Route("/edit/{id}", requirements={"id"="\d+"}, methods={"GET","POST"}, name="editParameter")
+     * @Route("/edit/id", requirements={"id"="\d+"}, methods={"PUT"})
      */
-    public function edit($id, Request $request)
+    public function edit($id, Request $request, SerializerInterface $serializer)
     {
         // Appel de Doctrine
         $display = $this->getDoctrine()->getManager();
@@ -70,21 +82,26 @@ class ParameterController extends AbstractController
         $form = $this->createForm(ParameterType::class, $edit);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid() && $request->isMethod('POST'))
+        if ($form->isSubmitted() && $form->isValid() && $request->isMethod('PUT'))
         {
             $edit = $form->getData();
 
             $entityManager = $this->getDoctrine()->getManager();
 
-            $entityManager->flush();
+            $entityManager->flush();        
 
-            return $this->redirect($this->generateUrl('listParameter'));
+            $json = $serializer->serialize(
+            $edit,
+            'json',
+            ['groups'=>["Light"]]
+        );
+
+        $response = new Response();
+        $response->setContent($json);
+        $response->headers->set('Content-type', 'application/JSON');
+
+        return $response;
         }
-
-        // ----------------------------------
-        // On demande à la vue d'afficher la commande plus tous ses produits
-        // ----------------------------------
-        return $this->render('parameter/edit.html.twig', ['form' => $form->createView()]);
     }
 
     /* ---------------------------------------------------------------------
@@ -95,9 +112,9 @@ class ParameterController extends AbstractController
     */
 
     /**
-     * @Route("/delete/{id}", requirements={"id"="\d+"}, methods={"GET","POST"}, name="deleteParameter")
+     * @Route("/delete/id", requirements={"id"="\d+"}, methods={"DELETE"})
      */
-    public function delete($id)
+    public function delete($id, SerializerInterface $serializer)
     {
         // Appel de Doctrine
         $display = $this->getDoctrine()->getManager();
@@ -108,9 +125,18 @@ class ParameterController extends AbstractController
 
         $display->remove($delete);
 
-        $display->flush();
+        $display->flush();        
+        $json = $serializer->serialize(
+            $delete,
+            'json',
+            ['groups'=>["Light"]]
+        );
 
-        return $this->redirect($this->generateUrl('listParameter'));
+        $response = new Response();
+        $response->setContent($json);
+        $response->headers->set('Content-type', 'application/JSON');
+
+        return $response;
     }
 
     /* ---------------------------------------------------------------------
@@ -121,9 +147,9 @@ class ParameterController extends AbstractController
     */
 
     /**
-     * @Route("/list", name="listParameter", methods={"GET"})
+     * @Route("/", methods={"GET"})
      */
-    public function list()
+    public function list(Request $request, SerializerInterface $serializer)
     {
         // Appel de Doctrine
         $display = $this->getDoctrine()->getManager();
@@ -134,11 +160,19 @@ class ParameterController extends AbstractController
         // Equivalent du SELECT *
         $list = $parameterRepository->findAll();
 
-        // ----------------------------------
-        // On demande à la vue d'afficher la liste des commandes
-        // ----------------------------------
-        return $this->render('parameter/list.html.twig', ['listParameter' => $list]);
-        // On affecte notre tableau contenant la(les) valeur(s) de la variable à la vue
+        if ($request->isXmlHttpRequest()) {
+            $json = $serializer->serialize(
+                $list,
+                'json',
+                ['groups'=>["Light"]]
+            );
+
+            $response = new Response();
+            $response->setContent($json);
+            $response->headers->set('Content-type', 'application/JSON');
+
+            return $response;
+        }
     }
 }
 

@@ -132,7 +132,7 @@
         }
     },
     "symfony/asset": {
-        "version": "v4.1.10"
+        "version": "v4.1.11"
     },
     "symfony/cache": {
         "version": "v4.1.8"
@@ -237,7 +237,7 @@
         "version": "v4.1.9"
     },
     "symfony/property-info": {
-        "version": "v4.1.10"
+        "version": "v4.1.11"
     },
     "symfony/routing": {
         "version": "4.0",
