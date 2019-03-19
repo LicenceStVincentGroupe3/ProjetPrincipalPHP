@@ -2,79 +2,52 @@
 
 namespace App\AdminBundle\Controller;
 
-use App\Entity\Commercial;
-use App\Form\CommercialType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Routing\Annotation\Route;
+use App\AdminBundle\Entity\Commercial;
+use App\AdminBundle\Form\CommercialType;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\VarDumper\VarDumper;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
-/*use App\Controller\SerializerInterface;
-use Symfony\Component\Serializer\Annotation\Groups;*/
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 // Préfix url
-//* @Groups({"Light"})
-//* @MaxDepth(1)
 /**
  * @Route("/commercial")
  */
 class CommercialController extends AbstractController
 {
-    /* ---------------------------------------------------------------------
-    ------------------------------------------------------------------------
-    ------------------------------------------------------------------------
-    ------------------------------------------------------------------------
-    ------------------------------------------------------------------------
-    */
-
     /**
      * @Route("/new", methods={"GET","POST"}, name="newCommercial")
      */
-    public function new(Request $request)
+    public function new(Request $request, UserPasswordEncoderInterface $passwordEncoder)
     {
-    	$newCommercial = new Commercial();
+    	$new = new Commercial();
 
-    	$form = $this->createForm(CommercialType::class, $newCommercial);
+    	$form = $this->createForm(CommercialType::class, $new);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid() && $request->isMethod('POST'))
         {
-            $newCommercial = $form->getData();
+            $new = $form->getData();
+            $password = $passwordEncoder->encodePassword($new, $new->getPlainPassword());
+            
+            $new->setPassword($password);
+            $new->addRole("ROLE_COMMERCIAL");
 
             $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($newCommercial);
+            $entityManager->persist($new);
             $entityManager->flush();
+            // ... do any other work - like sending them an email, etc
+            // maybe set a "flash" success message for the user
+            $this->addFlash('success', 'Votre compte à bien été enregistré.');
+            //return $this->redirectToRoute('login');
 
             return $this->redirect($this->generateUrl('listCommercial'));
         }
 
-        return $this->render('commercial/new.html.twig', ['form' => $form->createView()]);
+        return $this->render('commercial/new.html.twig', ['form' => $form->createView(), 'mainNavRegistration' => true]);
     }
-
-    /**
-     * @Route("/", methods={"POST"})
-     */
-    /*public function newApi(Request $request, SerializerInterface $serializer)
-    {
-        $json = $serializer->serialize(
-            $commercial,
-            'json',
-            ['groups'=>["Light"]]
-        );
-
-        $response = new Response();
-        $response->setContent($json);
-        $response->headers->set('Content-type', 'application/JSON');
-
-        return $response;
-    }*/
-
-    /* ---------------------------------------------------------------------
-    ------------------------------------------------------------------------
-    ------------------------------------------------------------------------
-    ------------------------------------------------------------------------
-    ------------------------------------------------------------------------
-    */
 
     /**
      * @Route("/edit/{id}", requirements={"id"="\d+"}, methods={"GET","POST"}, name="editCommercial")
@@ -113,31 +86,6 @@ class CommercialController extends AbstractController
     }
 
     /**
-     * @Route("/", requirements={"id"="\d+"}, methods={"POST"})
-     */
-    /*public function editApi($id, Request $request, SerializerInterface $serializer)
-    {
-        $json = $serializer->serialize(
-            $commercial,
-            'json',
-            ['groups'=>["Light"]]
-        );
-
-        $response = new Response();
-        $response->setContent($json);
-        $response->headers->set('Content-type', 'application/JSON');
-
-        return $response;
-    }*/
-
-    /* ---------------------------------------------------------------------
-    ------------------------------------------------------------------------
-    ------------------------------------------------------------------------
-    ------------------------------------------------------------------------
-    ------------------------------------------------------------------------
-    */
-
-    /**
      * @Route("/delete/{id}", requirements={"id"="\d+"}, methods={"GET","POST"}, name="deleteCommercial")
      */
     public function delete($id)
@@ -157,34 +105,9 @@ class CommercialController extends AbstractController
     }
 
     /**
-     * @Route("/", requirements={"id"="\d+"}, methods={"GET","POST"})
-     */
-    /*public function deleteApi($id, SerializerInterface $serializer)
-    {
-        $json = $serializer->serialize(
-            $commercial,
-            'json',
-            ['groups'=>["Light"]]
-        );
-
-        $response = new Response();
-        $response->setContent($json);
-        $response->headers->set('Content-type', 'application/JSON');
-
-        return $response;
-    }*/
-
-    /* ---------------------------------------------------------------------
-    ------------------------------------------------------------------------
-    ------------------------------------------------------------------------
-    ------------------------------------------------------------------------
-    ------------------------------------------------------------------------
-    */
-
-    /**
      * @Route("/list", name="listCommercial", methods={"GET"})
      */
-    public function list(Request $request/*, SerializerInterface $serializer*/)
+    public function list()
     {
         // Appel de Doctrine
         $display = $this->getDoctrine()->getManager();
@@ -195,27 +118,10 @@ class CommercialController extends AbstractController
         // Equivalent du SELECT *
         $list = $commercialRepository->findAll();
 
-        /*if ($request->isXmlHttpRequest()) {
-            $json = $serializer->serialize(
-                $commercial,
-                'json',
-                ['groups'=>["Light"]]
-            );
-
-            $response = new Response();
-            $response->setContent($json);
-            $response->headers->set('Content-type', 'application/JSON');
-
-            return $response;
-        }*/
-        //else {
-            // ----------------------------------
-            // On demande à la vue d'afficher la liste des commandes
-            // ----------------------------------
-            return $this->render('commercial/list.html.twig', ['listCom' => $list]);
-            // On affecte notre tableau contenant la(les) valeur(s) de la variable à la vue
-        //}
+        // ----------------------------------
+        // On demande à la vue d'afficher la liste des commandes
+        // ----------------------------------
+        return $this->render('commercial/list.html.twig', ['listCom' => $list]);
+        // On affecte notre tableau contenant la(les) valeur(s) de la variable à la vue
     }
 }
-
-?>

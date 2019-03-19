@@ -6,11 +6,14 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
+ * @UniqueEntity(fields="email")
  * @ORM\Entity(repositoryClass="App\AdminBundle\Repository\CommercialRepository")
  */
-class Commercial
+class Commercial implements UserInterface, \Serializable
 {
     /**
      * @ORM\Id()
@@ -21,19 +24,19 @@ class Commercial
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank
+     * @Assert\NotBlank()
      */
     private $commercialCode;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank
+     * @Assert\NotBlank()
      */
     private $commercialName;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank
+     * @Assert\NotBlank()
      */
     private $commercialFirstname;
 
@@ -44,7 +47,7 @@ class Commercial
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank
+     * @Assert\NotBlank()
      */
     private $commercialProfil;
 
@@ -83,11 +86,6 @@ class Commercial
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $commercialEmail;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
     private $commercialLinkedinAddress;
 
     /**
@@ -100,10 +98,38 @@ class Commercial
      */
     private $contacts;
 
+    /**
+     * @ORM\Column(type="string", length=255, unique=true)
+     * @Assert\NotBlank()
+     * @Assert\Email()
+     */
+    private $email;
+
+    /**
+     * @Assert\NotBlank()
+     * @Assert\Length(max=250)
+     */
+    private $plainPassword;
+
+    /**
+     * The below length depends on the "algorithm" you use for encoding
+     * the password, but this works well with bcrypt.
+     *
+     * @ORM\Column(type="string", length=64)
+     */
+    private $password;
+
+    /**
+     * @ORM\Column(name="roles", type="array")
+     */
+    private $roles = [];
+
     public function __construct()
     {
         // Par défaut, la date de création de la fiche commercial est la date d'aujourd'hui
         $this->commercialPlugCreation = new \DateTime();
+
+        $this->commercialStatus = true;
 
         $this->contacts = new ArrayCollection();
         $this->companies = new ArrayCollection();
@@ -285,6 +311,84 @@ class Commercial
         $this->commercialPhoto = $commercialPhoto;
 
         return $this;
+    }
+
+
+
+    public function getUsername() {
+        return $this->email;
+    }
+
+    public function getSalt() {
+        // you *may* need a real salt depending on your encoder
+        // see section on salt below
+        return null;
+    }
+
+    public function getPassword() {
+        return $this->password;
+    }
+
+    function setPassword($password) {
+        $this->password = $password;
+    }
+
+    public function getRoles() {
+        if (empty($this->roles)) {
+            return ['ROLE_COMMERCIAL'];
+        }
+        return $this->roles;
+    }
+
+    function addRole($role) {
+        $this->roles[] = $role;
+    }
+
+    public function eraseCredentials() {
+        // If you store any temporary, sensitive data on the user, clear it here
+        // $this->plainPassword = null;
+    }
+
+    /** @see \Serializable::serialize() */
+    public function serialize() {
+        return serialize(array(
+            $this->id,
+            $this->email,
+            $this->password,
+            // see section on salt below
+            // $this->salt,
+        ));
+    }
+
+    /** @see \Serializable::unserialize() */
+    public function unserialize($serialized) {
+        list (
+            $this->id,
+            $this->email,
+            $this->password,
+            // see section on salt below
+            // $this->salt
+            ) = unserialize($serialized);
+    }
+
+    function getEmail() {
+        return $this->email;
+    }
+
+    function getPlainPassword() {
+        return $this->plainPassword;
+    }
+
+    function setId($id) {
+        $this->id = $id;
+    }
+
+    function setEmail($email) {
+        $this->email = $email;
+    }
+
+    function setPlainPassword($plainPassword) {
+        $this->plainPassword = $plainPassword;
     }
 
     /**

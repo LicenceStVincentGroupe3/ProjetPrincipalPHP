@@ -2,35 +2,38 @@
 
 namespace App\AdminBundle\Controller;
 
-use App\Entity\CompanyCountry;
-use App\Form\CompanyCountryType;
+use App\AdminBundle\Entity\CompanyCountry;
+use App\AdminBundle\Form\CompanyCountryType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Serializer\SerializerInterface;
+use Symfony\Component\Serializer\Annotation\Groups;
 
+// Préfix url
 /**
  * @Route("/company/country")
  */
 class CompanyCountryController extends AbstractController
 {
     /**
-     * @Route("/new", name="newCountry")
+     * @Route("/new", name="newCountry", methods={"GET","POST"})
      */
     public function new(Request $request)
     {
-        $newCountry = new CompanyCountry();
-        $form = $this->createForm(CompanyCountryType::class, $newCountry);
+        $new = new CompanyCountry();
 
+        $form = $this->createForm(CompanyCountryType::class, $new);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid())
         {
-            $newCountry = $form->getData();
+            $new = $form->getData();
 
             $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($newCountry);
+            $entityManager->persist($new);
             $entityManager->flush();
 
             return $this->redirectToRoute('listCountry');
@@ -40,19 +43,24 @@ class CompanyCountryController extends AbstractController
     }
 
     /**
-     * @Route("/edit/{id}", name="editCountry", requirements={"id"="\d+"})
+     * @Route("/edit/{id}", name="editCountry", requirements={"id"="\d+"}, methods={"GET","POST"})
      */
     public function edit($id, Request $request)
     {
-        $editCountry = $this->getDoctrine()->getManager()->getRepository(CompanyCountry::class)->find($id);
+        // Appel de Doctrine
+        $display = $this->getDoctrine()->getManager();
 
-        $form = $this->createForm(CompanyCountryType::class, $editCountry);
+        // Variable qui contient le Repository
+        $companyCountryRepository = $display->getRepository(CompanyCountry::class);
+
+        // Equivalent du SELECT * where id=(paramètre)
+        $edit = $companyCountryRepository->find($id);
+
+        $form = $this->createForm(CompanyCountryType::class, $edit);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid() && $request->isMethod('POST')) 
         {
-            $editCountry = $form->getData();
-
             $entityManager = $this->getDoctrine()->getManager();
 
             $entityManager->flush();
@@ -61,45 +69,46 @@ class CompanyCountryController extends AbstractController
         }
 
         return $this->render('companyCountry/edit.html.twig', array(
-        'form' => $form->createView(),'country' => $editCountry
+        'form' => $form->createView(),'country' => $edit
         ));
     }
 
     /**
-     * @Route("/delete/{id}", name="deleteCountry", requirements={"id"="\d+"})
+     * @Route("/delete/{id}", name="deleteCountry", requirements={"id"="\d+"}, methods={"GET","POST"})
      */
     public function delete($id)
     {
-        $suppBD = $this->getDoctrine()->getManager();
+        // Appel de Doctrine
+        $display = $this->getDoctrine()->getManager();
 
-        // On crée un objet, instance de Pays
-        $suppCountry = new CompanyCountry();
+        $companyCountryRepository = $display->getRepository(CompanyCountry::class);
 
-        $suppCountry = $suppBD->getRepository(CompanyCountry::class)->find($id);
+        $delete = $companyCountryRepository->find($id);
 
-        // Suppression du pays
-        $suppBD->remove($suppCountry);
+        $display->remove($delete);
 
-        // Exécution
-        $suppBD->flush();
+        $display->flush();
 
         return $this->redirectToRoute('listCountry');
     }
 
     /**
-     * @Route("/list", name="listCountry")
+     * @Route("/list", name="listCountry", methods={"GET"})
      */
     public function list()
     {
-        // ---------------------------------------
-        // Récupération de la liste des pays
-        // ---------------------------------------
-        $repository = $this->getDoctrine()->getManager()->getRepository(CompanyCountry::class);
+        // Appel de Doctrine
+        $display = $this->getDoctrine()->getManager();
 
-        $listCountry = $repository->findAll();
+        // Variable qui contient le Repository
+        $companyCountryRepository = $display->getRepository(CompanyCountry::class);
+
+        // Equivalent du SELECT *
+        $list = $companyCountryRepository->findAll();
+
         // -------------------------------------------------------------
         // On demande à la vue d'afficher la liste des pays
         // -------------------------------------------------------------
-        return $this->render('companyCountry/list.html.twig', array('lesPays' => $listCountry)); // On affecte le tableau à la vue
+        return $this->render('companyCountry/list.html.twig', array('lesPays' => $list)); // On affecte le tableau à la vue
     }
 }

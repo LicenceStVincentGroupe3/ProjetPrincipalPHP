@@ -2,8 +2,8 @@
 
 namespace App\AdminBundle\Controller;
 
-use App\Entity\CompanyLegalStatus;
-use App\Form\CompanyLegalStatusType;
+use App\AdminBundle\Entity\CompanyLegalStatus;
+use App\AdminBundle\Form\CompanyLegalStatusType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;

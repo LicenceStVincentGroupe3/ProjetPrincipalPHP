@@ -2,8 +2,8 @@
 
 namespace App\AdminBundle\Controller;
 
-use App\Entity\CompanyLastTurnover;
-use App\Form\CompanyLastTurnOverType;
+use App\AdminBundle\Entity\CompanyLastTurnover;
+use App\AdminBundle\Form\CompanyLastTurnOverType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -71,9 +71,6 @@ class CompanyLastTurnOverController extends AbstractController
     public function delete($id)
     {
         $suppBD = $this->getDoctrine()->getManager();
-
-        // On crée un objet, instance de CompanyTurnover
-        $suppLastTurnOver = new CompanyLastTurnover();
 
         $suppLastTurnOver = $suppBD->getRepository(CompanyLastTurnover::class)->find($id);
 

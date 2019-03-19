@@ -1,26 +1,31 @@
 <?php
 
-namespace App\AdminBundle\Controller;
+namespace App\ApiBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use App\AdminBundle\Entity\OperationTypeOperation;
 use App\AdminBundle\Form\OperationTypeOperationType;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\VarDumper\VarDumper;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 // Préfix url
+//* @Groups({"Light"})
+//* @MaxDepth(1)
 /**
  * @Route("/operation/typeOperation")
  */
 class OperationTypeOperationController extends AbstractController
 {
     /**
-     * @Route("/new", methods={"GET","POST"}, name="newOperationTypeOperation")
+     * @Route("/", methods={"POST"})
      */
-    public function new(Request $request)
+    public function new(Request $request, SerializerInterface $serializer)
     {
-    	$new = new OperationTypeOperation();
+        $new = new OperationTypeOperation();
 
     	$form = $this->createForm(OperationTypeOperationType::class, $new);
         $form->handleRequest($request);
@@ -33,16 +38,24 @@ class OperationTypeOperationController extends AbstractController
             $entityManager->persist($new);
             $entityManager->flush();
 
-            return $this->redirect($this->generateUrl('listOperationTypeOperation'));
-        }
+            $json = $serializer->serialize(
+                $new,
+                'json',
+                ['groups'=>["Light"]]
+            );
 
-        return $this->render('operation_type_operation/new.html.twig', ['form' => $form->createView()]);
+            $response = new Response();
+            $response->setContent($json);
+            $response->headers->set('Content-type', 'application/JSON');
+
+            return $response;
+        }
     }
 
     /**
-     * @Route("/edit/{id}", requirements={"id"="\d+"}, methods={"GET","POST"}, name="editOperationTypeOperation")
+     * @Route("/edit/{id}", requirements={"id"="\d+"}, methods={"POST"})
      */
-    public function edit($id, Request $request)
+    public function edit($id, Request $request, SerializerInterface $serializer)
     {
         // Appel de Doctrine
         $display = $this->getDoctrine()->getManager();
@@ -58,23 +71,30 @@ class OperationTypeOperationController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid() && $request->isMethod('POST'))
         {
+            $edit = $form->getData();
+
             $entityManager = $this->getDoctrine()->getManager();
 
             $entityManager->flush();
 
-            return $this->redirect($this->generateUrl('listOperationTypeOperation'));
-        }
+            $json = $serializer->serialize(
+                $edit,
+                'json',
+                ['groups'=>["Light"]]
+            );
 
-        // ----------------------------------
-        // On demande à la vue d'afficher la commande plus tous ses produits
-        // ----------------------------------
-        return $this->render('operation_type_operation/edit.html.twig', ['editOTO' => $edit, 'form' => $form->createView()]);
+            $response = new Response();
+            $response->setContent($json);
+            $response->headers->set('Content-type', 'application/JSON');
+
+            return $response;
+        }
     }
 
     /**
-     * @Route("/delete/{id}", requirements={"id"="\d+"}, methods={"GET","POST"}, name="deleteOperationTypeOperation")
+     * @Route("/delete/{id}", requirements={"id"="\d+"}, methods={"GET","POST"})
      */
-    public function delete($id)
+    public function delete($id, SerializerInterface $serializer)
     {
         // Appel de Doctrine
         $display = $this->getDoctrine()->getManager();
@@ -87,13 +107,23 @@ class OperationTypeOperationController extends AbstractController
 
         $display->flush();
 
-        return $this->redirect($this->generateUrl('listOperationTypeOperation'));
+        $json = $serializer->serialize(
+            $delete,
+            'json',
+            ['groups'=>["Light"]]
+        );
+
+        $response = new Response();
+        $response->setContent($json);
+        $response->headers->set('Content-type', 'application/JSON');
+
+        return $response;
     }
 
     /**
-     * @Route("/list", name="listOperationTypeOperation", methods={"GET"})
+     * @Route("/", methods={"GET"})
      */
-    public function list(Request $request/*, SerializerInterface $serializer*/)
+    public function list(Request $request, SerializerInterface $serializer)
     {
         // Appel de Doctrine
         $display = $this->getDoctrine()->getManager();
@@ -104,11 +134,18 @@ class OperationTypeOperationController extends AbstractController
         // Equivalent du SELECT *
         $list = $operationTypeOperationRepository->findAll();
 
+        if ($request->isXmlHttpRequest()) {
+            $json = $serializer->serialize(
+                $list,
+                'json',
+                ['groups'=>["Light"]]
+            );
 
-        // ----------------------------------
-        // On demande à la vue d'afficher la liste des commandes
-        // ----------------------------------
-        return $this->render('operation_type_operation/list.html.twig', ['listOTO' => $list]);
-        // On affecte notre tableau contenant la(les) valeur(s) de la variable à la vue
+            $response = new Response();
+            $response->setContent($json);
+            $response->headers->set('Content-type', 'application/JSON');
+
+            return $response;
+        }
     }
 }

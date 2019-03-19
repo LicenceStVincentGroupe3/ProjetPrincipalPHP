@@ -2,16 +2,14 @@
 
 namespace App\AdminBundle\Controller;
 
-use App\Entity\Operation;
-use App\Form\OperationType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Routing\Annotation\Route;
+use App\AdminBundle\Entity\Operation;
+use App\AdminBundle\Form\OperationType;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\VarDumper\VarDumper;
 
 // Préfix url
-//* @Groups({"Light"})
-//* @MaxDepth(1)
 /**
  * @Route("/operation")
  */
@@ -49,31 +47,6 @@ class OperationController extends AbstractController
     }
 
     /**
-     * @Route("/", methods={"POST"})
-     */
-    /*public function newApi(Request $request, SerializerInterface $serializer)
-    {
-        $json = $serializer->serialize(
-            $operation,
-            'json',
-            ['groups'=>["Light"]]
-        );
-
-        $response = new Response();
-        $response->setContent($json);
-        $response->headers->set('Content-type', 'application/JSON');
-
-        return $response;
-    }*/
-
-    /* ---------------------------------------------------------------------
-    ------------------------------------------------------------------------
-    ------------------------------------------------------------------------
-    ------------------------------------------------------------------------
-    ------------------------------------------------------------------------
-    */
-
-    /**
      * @Route("/edit/{id}", requirements={"id"="\d+"}, methods={"GET","POST"}, name="editOperation")
      */
     public function edit($id, Request $request)
@@ -108,31 +81,6 @@ class OperationController extends AbstractController
     }
 
     /**
-     * @Route("/", requirements={"id"="\d+"}, methods={"POST"})
-     */
-    /*public function editApi($id, Request $request, SerializerInterface $serializer)
-    {
-        $json = $serializer->serialize(
-            $operation,
-            'json',
-            ['groups'=>["Light"]]
-        );
-
-        $response = new Response();
-        $response->setContent($json);
-        $response->headers->set('Content-type', 'application/JSON');
-
-        return $response;
-    }*/
-
-    /* ---------------------------------------------------------------------
-    ------------------------------------------------------------------------
-    ------------------------------------------------------------------------
-    ------------------------------------------------------------------------
-    ------------------------------------------------------------------------
-    */
-
-    /**
      * @Route("/delete/{id}", requirements={"id"="\d+"}, methods={"GET","POST"}, name="deleteOperation")
      */
     public function delete($id)
@@ -150,31 +98,6 @@ class OperationController extends AbstractController
 
         return $this->redirect($this->generateUrl('listOperation'));
     }
-
-    /**
-     * @Route("/", requirements={"id"="\d+"}, methods={"GET","POST"})
-     */
-    /*public function deleteApi($id, SerializerInterface $serializer)
-    {
-        $json = $serializer->serialize(
-            $operation,
-            'json',
-            ['groups'=>["Light"]]
-        );
-
-        $response = new Response();
-        $response->setContent($json);
-        $response->headers->set('Content-type', 'application/JSON');
-
-        return $response;
-    }*/
-
-    /* ---------------------------------------------------------------------
-    ------------------------------------------------------------------------
-    ------------------------------------------------------------------------
-    ------------------------------------------------------------------------
-    ------------------------------------------------------------------------
-    */
 
     /**
      * @Route("/list", name="listOperation", methods={"GET"})
@@ -197,5 +120,3 @@ class OperationController extends AbstractController
         // On affecte notre tableau contenant la(les) valeur(s) de la variable à la vue
     }
 }
-
-?>

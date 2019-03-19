@@ -88,5 +88,8 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module" module-name="mini-projet-mangas" />
+    <orderEntry type="module" module-name="mini-projet-mangas" />
+    <orderEntry type="module" module-name="mini-projet-mangas" />
   </component>
 </module>

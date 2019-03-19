@@ -2,8 +2,8 @@
 
 namespace App\AdminBundle\Controller;
 
-use App\Entity\ContactJob;
-use App\Form\ContactJobType;
+use App\AdminBundle\Entity\ContactJob;
+use App\AdminBundle\Form\ContactJobType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;

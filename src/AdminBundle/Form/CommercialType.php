@@ -2,7 +2,7 @@
 
 namespace App\AdminBundle\Form;
 
-use App\Entity\Commercial;
+use App\AdminBundle\Entity\Commercial;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -10,6 +10,8 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
@@ -35,10 +37,16 @@ class CommercialType extends AbstractType
 			->add('commercialBirthday', DateTimeType::class, ['label' => 'Date de naissance du commercial'])
 			->add('commercialPhone', TelType::class, ['label' => 'Tel du commercial', 'required' => false])
 			->add('commercialMobilePhone', TelType::class, ['label' => 'Tel. portable du commercial', 'required' => false])
-			->add('commercialEmail', EmailType::class, ['label' => 'Email du commercial', 'required' => false])
 			->add('commercialLinkedinAddress', UrlType::class, ['label' => 'Lien LinkedIn du commercial', 'required' => false])
 			->add('commercialPhoto', TextType::class, ['label' => 'Photo du commercial', 'required' => false])
-			->add('save', SubmitType::class, ['label' => 'Valider'])
+			->add('email', EmailType::class, ['label' => 'Email du commercial*', 'required' => false])
+            ->add('plainPassword', RepeatedType::class, [
+            												'type' => PasswordType::class,
+            												'first_options' => ['label' => 'Mot de passe*'],
+            												'second_options' => ['label' => 'Confirmation du mot de passe*']
+            											]
+            	)
+            ->add('save', SubmitType::class, ['label'=>'Valider', 'attr'=>['class'=>'btn-primary btn-block']])
 			->getForm()
 		;
 	}
