@@ -3,46 +3,18 @@
   <component name="ChangeListManager">
     <list default="true" id="4cb3cb4e-723c-4025-b7c1-645328782794" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/packages/security.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/security.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config/routes.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/routes.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/routes/annotations.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/routes/annotations.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AdminBundle/Controller/AccueilController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AdminBundle/Controller/AccueilController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/AdminBundle/Controller/CommercialController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AdminBundle/Controller/CommercialController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AdminBundle/Controller/CompanyLastTurnOverController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AdminBundle/Controller/CompanyLastTurnOverController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AdminBundle/Controller/OperationController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AdminBundle/Controller/OperationController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AdminBundle/Controller/OperationTypeOperationController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AdminBundle/Controller/OperationTypeOperationController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AdminBundle/Repository/CommercialRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AdminBundle/Repository/CommercialRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AdminBundle/Repository/CompanyActivitySectorRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AdminBundle/Repository/CompanyActivitySectorRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AdminBundle/Repository/CompanyBusinessCategoryRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AdminBundle/Repository/CompanyBusinessCategoryRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AdminBundle/Repository/CompanyCountryRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AdminBundle/Repository/CompanyCountryRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AdminBundle/Repository/CompanyLastTurnoverRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AdminBundle/Repository/CompanyLastTurnoverRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AdminBundle/Repository/CompanyLegalStatusRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AdminBundle/Repository/CompanyLegalStatusRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AdminBundle/Repository/CompanyNbEmployeeRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AdminBundle/Repository/CompanyNbEmployeeRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AdminBundle/Repository/CompanyRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AdminBundle/Repository/CompanyRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AdminBundle/Repository/CompanyTurnoverRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AdminBundle/Repository/CompanyTurnoverRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AdminBundle/Repository/ContactJobRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AdminBundle/Repository/ContactJobRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AdminBundle/Repository/ContactRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AdminBundle/Repository/ContactRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AdminBundle/Repository/OperationRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AdminBundle/Repository/OperationRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AdminBundle/Repository/OperationTypeOperationRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AdminBundle/Repository/OperationTypeOperationRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AdminBundle/Repository/ParameterBehaviorRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AdminBundle/Repository/ParameterBehaviorRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AdminBundle/Repository/ParameterGraphicStyleRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AdminBundle/Repository/ParameterGraphicStyleRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AdminBundle/Repository/ParameterObjectRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AdminBundle/Repository/ParameterObjectRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AdminBundle/Repository/ParameterRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AdminBundle/Repository/ParameterRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AdminBundle/Repository/ParameterTargetRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AdminBundle/Repository/ParameterTargetRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AdminBundle/Repository/ParameterTypeSiteRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AdminBundle/Repository/ParameterTypeSiteRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ApiBundle/Controller/CommercialController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/ApiBundle/Controller/CommercialController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ApiBundle/Controller/CompanyActivitySectorController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/ApiBundle/Controller/CompanyActivitySectorController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ApiBundle/Controller/CompanyBusinessCategoryController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/ApiBundle/Controller/CompanyBusinessCategoryController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ApiBundle/Controller/CompanyController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/ApiBundle/Controller/CompanyController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ApiBundle/Controller/CompanyCountryController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/ApiBundle/Controller/CompanyCountryController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AdminBundle/Entity/Commercial.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AdminBundle/Entity/Commercial.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AdminBundle/Form/CommercialType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AdminBundle/Form/CommercialType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/SecurityController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Security/AppAdminAuthenticator.php" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/parameter/list.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/parameter/list.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../mini-projet-mangas/src/app/app.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/../mini-projet-mangas/src/app/app.component.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../mini-projet-mangas/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../mini-projet-mangas/src/app/app.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../mini-projet-mangas/src/app/contenu-article/contenu-article.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../mini-projet-mangas/src/app/contenu-article/contenu-article.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../mini-projet-mangas/src/app/liste-articles/liste-articles.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/../mini-projet-mangas/src/app/liste-articles/liste-articles.component.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../mini-projet-mangas/src/app/liste-articles/liste-articles.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../mini-projet-mangas/src/app/liste-articles/liste-articles.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../mini-projet-mangas/src/app/menu/menu.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../mini-projet-mangas/src/app/menu/menu.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../mini-projet-mangas/src/app/pagination/pagination.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/../mini-projet-mangas/src/app/pagination/pagination.component.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../mini-projet-mangas/src/app/pagination/pagination.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../mini-projet-mangas/src/app/pagination/pagination.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../mini-projet-mangas/src/model/ListVideos.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../mini-projet-mangas/src/model/ListVideos.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/security/login.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/security/login.html.twig" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -56,37 +28,61 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/AdminBundle/Controller/CommercialController.php">
+        <entry file="file://$PROJECT_DIR$/src/AdminBundle/Entity/Commercial.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="110">
-              <caret line="8" column="47" selection-start-line="8" selection-start-column="47" selection-end-line="8" selection-end-column="47" />
+            <state relative-caret-position="2023">
+              <caret line="124" column="22" selection-start-line="124" selection-start-column="22" selection-end-line="124" selection-end-column="22" />
+              <folding>
+                <element signature="e#42#90#0#PHP" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/config/packages/security.yaml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="476">
+              <caret line="28" column="42" selection-start-line="28" selection-start-column="42" selection-end-line="28" selection-end-column="42" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/AdminBundle/Repository/ParticipationRepository.php">
+        <entry file="file://$PROJECT_DIR$/src/AdminBundle/Controller/CommercialController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="4" column="19" selection-start-line="4" selection-start-column="19" selection-end-line="4" selection-end-column="19" />
+            <state relative-caret-position="255">
+              <caret line="15" column="24" lean-forward="true" selection-start-line="15" selection-start-column="24" selection-end-line="15" selection-end-column="24" />
+              <folding>
+                <element signature="e#46#111#0#PHP" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/AdminBundle/Controller/ParameterBehaviorController.php">
+        <entry file="file://$PROJECT_DIR$/templates/security/login.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="408">
-              <caret line="29" column="72" selection-start-line="29" selection-start-column="52" selection-end-line="29" selection-end-column="72" />
+            <state relative-caret-position="238">
+              <caret line="14" column="18" selection-start-line="14" selection-start-column="18" selection-end-line="14" selection-end-column="18" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/AdminBundle/Controller/OperationTypeOperationController.php">
+        <entry file="file://$PROJECT_DIR$/templates/base.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="18" column="77" selection-start-line="18" selection-start-column="52" selection-end-line="18" selection-end-column="77" />
+            <state relative-caret-position="1020">
+              <caret line="60" column="56" selection-start-line="60" selection-start-column="56" selection-end-line="60" selection-end-column="56" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/AdminBundle/Controller/SecurityController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="493">
+              <caret line="32" column="30" selection-start-line="32" selection-start-column="30" selection-end-line="32" selection-end-column="30" />
               <folding>
                 <element signature="e#46#111#0#PHP" expanded="true" />
               </folding>
@@ -116,10 +112,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/AdminBundle/Entity/Participation.php" />
-        <option value="$PROJECT_DIR$/../mini-projet-mangas/src/app/youtube-api.service.ts" />
-        <option value="$PROJECT_DIR$/../mini-projet-mangas/src/app/contenu-article/contenu-article.component.html" />
-        <option value="$PROJECT_DIR$/../mini-projet-mangas/src/app/app.component.html" />
         <option value="$PROJECT_DIR$/../mini-projet-mangas/src/app/app.module.ts" />
         <option value="$PROJECT_DIR$/../mini-projet-mangas/src/app/menu/menu.component.html" />
         <option value="$PROJECT_DIR$/../mini-projet-mangas/src/app/contenu-article/contenu-article.component.ts" />
@@ -130,10 +122,7 @@
         <option value="$PROJECT_DIR$/../mini-projet-mangas/src/app/liste-articles/liste-articles.component.html" />
         <option value="$PROJECT_DIR$/../mini-projet-mangas/src/app/pagination/pagination.component.html" />
         <option value="$PROJECT_DIR$/../mini-projet-mangas/src/app/pagination/pagination.component.css" />
-        <option value="$PROJECT_DIR$/src/AdminBundle/Controller/AccueilController.php" />
-        <option value="$PROJECT_DIR$/config/routes.yaml" />
         <option value="$PROJECT_DIR$/src/AdminBundle/Entity/Operation.php" />
-        <option value="$PROJECT_DIR$/src/AdminBundle/Entity/Commercial.php" />
         <option value="$PROJECT_DIR$/src/AdminBundle/Repository/CommercialRepository.php" />
         <option value="$PROJECT_DIR$/src/AdminBundle/Repository/OperationRepository.php" />
         <option value="$PROJECT_DIR$/src/AdminBundle/Repository/OperationTypeOperationRepository.php" />
@@ -142,7 +131,6 @@
         <option value="$PROJECT_DIR$/src/AdminBundle/Repository/CompanyCountryRepository.php" />
         <option value="$PROJECT_DIR$/src/AdminBundle/Repository/CompanyLastTurnoverRepository.php" />
         <option value="$PROJECT_DIR$/src/AdminBundle/Repository/CompanyLegalStatusRepository.php" />
-        <option value="$PROJECT_DIR$/src/AdminBundle/Controller/CommercialController.php" />
         <option value="$PROJECT_DIR$/src/AdminBundle/Controller/OperationController.php" />
         <option value="$PROJECT_DIR$/src/AdminBundle/Controller/OperationTypeOperationController.php" />
         <option value="$PROJECT_DIR$/src/ApiBundle/Controller/CommercialController.php" />
@@ -153,7 +141,6 @@
         <option value="$PROJECT_DIR$/src/ApiBundle/Controller/OperationController.php" />
         <option value="$PROJECT_DIR$/src/ApiBundle/Controller/OperationTypeOperationController.php" />
         <option value="$PROJECT_DIR$/src/AdminBundle/Controller/CompanyLastTurnOverController.php" />
-        <option value="$PROJECT_DIR$/templates/base.html.twig" />
         <option value="$PROJECT_DIR$/templates/parameter/list.html.twig" />
         <option value="$PROJECT_DIR$/src/AdminBundle/Repository/ParameterRepository.php" />
         <option value="$PROJECT_DIR$/src/AdminBundle/Repository/ParameterBehaviorRepository.php" />
@@ -167,6 +154,15 @@
         <option value="$PROJECT_DIR$/src/AdminBundle/Repository/ParameterTargetRepository.php" />
         <option value="$PROJECT_DIR$/src/AdminBundle/Repository/ParameterTypeSiteRepository.php" />
         <option value="$PROJECT_DIR$/src/AdminBundle/Repository/ParticipationRepository.php" />
+        <option value="$PROJECT_DIR$/src/Entity/User.php" />
+        <option value="$PROJECT_DIR$/config/routes.yaml" />
+        <option value="$PROJECT_DIR$/src/AdminBundle/Controller/SecurityController.php" />
+        <option value="$PROJECT_DIR$/templates/security/login.html.twig" />
+        <option value="$PROJECT_DIR$/src/AdminBundle/Entity/Commercial.php" />
+        <option value="$PROJECT_DIR$/src/AdminBundle/Controller/AccueilController.php" />
+        <option value="$PROJECT_DIR$/templates/base.html.twig" />
+        <option value="$PROJECT_DIR$/src/AdminBundle/Controller/CommercialController.php" />
+        <option value="$PROJECT_DIR$/config/packages/security.yaml" />
       </list>
     </option>
   </component>
@@ -254,10 +250,9 @@
     </include_path>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="15" />
-    <option name="y" value="30" />
-    <option name="width" value="1890" />
-    <option name="height" value="960" />
+    <option name="x" value="948" />
+    <option name="width" value="981" />
+    <option name="height" value="1032" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -265,7 +260,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -281,12 +275,6 @@
             <path>
               <item name="ProjetPrincipalPHP" type="b2602c69:ProjectViewProjectNode" />
               <item name="ProjetPrincipalPHP" type="462c0819:PsiDirectoryNode" />
-              <item name="config" type="462c0819:PsiDirectoryNode" />
-              <item name="routes" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ProjetPrincipalPHP" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ProjetPrincipalPHP" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -300,18 +288,36 @@
               <item name="ProjetPrincipalPHP" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="AdminBundle" type="462c0819:PsiDirectoryNode" />
-              <item name="Repository" type="462c0819:PsiDirectoryNode" />
+              <item name="Controller" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ProjetPrincipalPHP" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ProjetPrincipalPHP" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Entity" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ProjetPrincipalPHP" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ProjetPrincipalPHP" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ProjetPrincipalPHP" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ProjetPrincipalPHP" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+              <item name="security" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="editor.config.ad.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../my-project" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="ts.external.directory.path" value="C:\wamp64\www\mini-projet-mangas\node_modules\typescript\lib" />
@@ -355,18 +361,22 @@
       <workItem from="1549561857428" duration="4758000" />
       <workItem from="1551099117144" duration="9253000" />
       <workItem from="1551110256489" duration="1167000" />
-      <workItem from="1551115004009" duration="6493000" />
+      <workItem from="1551115004009" duration="6907000" />
+      <workItem from="1551202784019" duration="4880000" />
+      <workItem from="1551211724174" duration="3104000" />
+      <workItem from="1551289536085" duration="2549000" />
+      <workItem from="1552585296642" duration="8313000" />
+      <workItem from="1552897305861" duration="48000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="130231000" />
+    <option name="totallyTimeSpent" value="149539000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.32064778" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.34898785" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -425,71 +435,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/templates/commercial/list.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="58" lean-forward="true" selection-start-line="11" selection-start-column="58" selection-end-line="11" selection-end-column="58" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AdminBundle/Entity/Commercial.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" column="16" selection-start-line="12" selection-start-column="16" selection-end-line="12" selection-end-column="16" />
-          <folding>
-            <element signature="e#42#90#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AdminBundle/Repository/OperationRepository.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="26" lean-forward="true" selection-start-line="5" selection-start-column="26" selection-end-line="5" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AdminBundle/Repository/OperationTypeOperationRepository.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="19" selection-start-line="4" selection-start-column="19" selection-end-line="4" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AdminBundle/Repository/CompanyCountryRepository.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="19" selection-start-line="4" selection-start-column="19" selection-end-line="4" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AdminBundle/Repository/CompanyLastTurnoverRepository.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="19" selection-start-line="4" selection-start-column="19" selection-end-line="4" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AdminBundle/Repository/CompanyLegalStatusRepository.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="19" selection-start-line="4" selection-start-column="19" selection-end-line="4" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AdminBundle/AdminBundle.php">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AdminBundle/Form/CompanyActivitySectorType.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="4" lean-forward="true" selection-start-line="4" selection-start-column="4" selection-end-line="4" selection-end-column="4" />
-          <folding>
-            <element signature="e#40#89#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/AdminBundle/Form/CompanyBusinessCategoryType.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
@@ -554,16 +499,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
           <caret line="4" column="37" selection-start-line="4" selection-start-column="27" selection-end-line="4" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AdminBundle/Controller/AccueilController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" column="27" selection-start-line="12" selection-start-column="27" selection-end-line="12" selection-end-column="27" />
-          <folding>
-            <element signature="e#46#111#0#PHP" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -637,16 +572,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/AdminBundle/Controller/CompanyActivitySectorController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1471">
-          <caret line="4" column="4" lean-forward="true" selection-start-line="4" selection-start-column="4" selection-end-line="4" selection-end-column="4" />
-          <folding>
-            <element signature="e#46#95#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/AdminBundle/Controller/CompanyBusinessCategoryController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1454">
@@ -701,13 +626,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="408">
           <caret line="29" column="72" selection-start-line="29" selection-start-column="52" selection-end-line="29" selection-end-column="72" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/base.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="79" column="50" selection-start-line="79" selection-start-column="50" selection-end-line="79" selection-end-column="50" />
         </state>
       </provider>
     </entry>
@@ -833,17 +751,116 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/AdminBundle/Controller/CommercialController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="110">
-          <caret line="8" column="47" selection-start-line="8" selection-start-column="47" selection-end-line="8" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/AdminBundle/Repository/ParticipationRepository.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
           <caret line="4" column="19" selection-start-line="4" selection-start-column="19" selection-end-line="4" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Entity/User.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-476">
+          <caret line="23" column="7" lean-forward="true" selection-start-line="23" selection-start-column="7" selection-end-line="23" selection-end-column="7" />
+          <folding>
+            <element signature="e#30#62#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/routes/annotations.yaml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Repository/UserRepository.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="4" selection-start-line="4" selection-start-column="4" selection-end-line="4" selection-end-column="4" />
+          <folding>
+            <element signature="e#34#54#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AdminBundle/Controller/AccueilController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="14" column="47" selection-start-line="14" selection-start-column="47" selection-end-line="14" selection-end-column="47" />
+          <folding>
+            <element signature="e#46#111#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/services.yaml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-179" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/routes.yaml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="17" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AdminBundle/Controller/CompanyActivitySectorController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="4" column="4" lean-forward="true" selection-start-line="4" selection-start-column="4" selection-end-line="4" selection-end-column="4" />
+          <folding>
+            <element signature="e#46#95#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AdminBundle/Entity/Commercial.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2023">
+          <caret line="124" column="22" selection-start-line="124" selection-start-column="22" selection-end-line="124" selection-end-column="22" />
+          <folding>
+            <element signature="e#42#90#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/packages/security.yaml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="476">
+          <caret line="28" column="42" selection-start-line="28" selection-start-column="42" selection-end-line="28" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/security/login.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="14" column="18" selection-start-line="14" selection-start-column="18" selection-end-line="14" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/base.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1020">
+          <caret line="60" column="56" selection-start-line="60" selection-start-column="56" selection-end-line="60" selection-end-column="56" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AdminBundle/Controller/SecurityController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="493">
+          <caret line="32" column="30" selection-start-line="32" selection-start-column="30" selection-end-line="32" selection-end-column="30" />
+          <folding>
+            <element signature="e#46#111#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AdminBundle/Controller/CommercialController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="15" column="24" lean-forward="true" selection-start-line="15" selection-start-column="24" selection-end-line="15" selection-end-column="24" />
+          <folding>
+            <element signature="e#46#111#0#PHP" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
