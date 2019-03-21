@@ -1,16 +1,81 @@
-{% extends 'base.html.twig' %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="">
+        <meta name="author" content="">
 
-{% block title %}Log in!{% endblock %}
+        <title>Connexion</title>
+        <!-- Bootstrap -->
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-{% block body %}
-    {% if error %}
-        <div class="alert alert-danger">
-            <ul class="list-unstyled mb-0">
-                <li><span class="initialism form-error-icon badge badge-danger">Error</span>
-                    <span class="form-error-message">{{ error.messageKey|trans(error.messageData, 'security') }}</span>
-                </li>
-            </ul>
+        <!-- font Awesome -->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+        {{ encore_entry_link_tags('login') }}
+        <!-- <link rel="stylesheet" href="/build/login.css"> Autre façon d'appler le fichier css -->
+    </head>
+
+    <body>
+        <div class="container-fluid">
+            <div class="row no-gutter">
+                <div class="d-none d-md-flex col-md-4 col-lg-6 bg-image"></div>
+                <div class="col-md-8 col-lg-6">
+                    <div class="login d-flex align-items-center py-5">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-9 col-lg-8 mx-auto">
+                                    <!--<h3 class="login-heading mb-4">Welcome back!</h3>-->
+                                    {% if error %}
+                                        <div class="alert alert-danger">
+                                            <ul class="list-unstyled mb-0">
+                                                <li>
+                                                    <span class="initialism form-error-icon badge badge-danger">Error</span>
+                                                    <span class="form-error-message">{{ error.messageKey|trans(error.messageData, 'security') }}</span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    {% endif %}
+                                    {{ form_start(form) }}
+                                        <div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
+                                            {{ form_widget(form._username, {'attr': {'class': 'input100 form-control', 'placeholder': "E-mail"}}) }}
+                                            <span class="focus-input100"></span>
+                                            <span class="symbol-input100">
+                                                <i class="fas fa-user-alt" aria-hidden="true"></i>
+                                            </span>
+                                        </div>
+
+                                        {{ form_errors(form._username, {'attr': {'class': 'form-error-message'}}) }}
+                                        
+                                        <div class="wrap-input100 validate-input" data-validate = "Password is required">
+                                            {{ form_widget(form._password, {'attr': {'class': 'input100 form-control', 'placeholder': "Mot de passe"}}) }}
+                                            <span class="focus-input100"></span>
+                                            <span class="symbol-input100">
+                                                <i class="fa fa-lock" aria-hidden="true"></i>
+                                            </span>
+                                        </div>
+                                        
+                                        {{ form_errors(form._password, {'attr': {'class': 'form-error-message'}}) }}
+
+                                        {{ form_widget(form.ok, {'attr': {'class': 'btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2'}}) }}
+                                        {{ form_label(form.ok) }}
+
+                                        <div class="text-center">
+                                            <a class="small" href="#">Mot de passe oublié ?</a>
+                                        </div>
+                                    {{ form_end(form) }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    {% endif %}
-    {{form(form)}}
-{% endblock %}
+        <!-- Bootstrap core JavaScript-->
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+        <script src="/build/runtime.js"></script>
+    </body>
+</html>

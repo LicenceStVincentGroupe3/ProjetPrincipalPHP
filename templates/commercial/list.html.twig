@@ -1,8 +1,15 @@
-{# {% extends 'base.html.twig' %} #}
+{% extends 'layout.html.twig' %}
 
-{# {% block title %}Hello {{ controller_name }}!{% endblock %} #}
+{% block title %}
+	{{ parent()}}Equipe commerciale
+{% endblock %}
 
-{# {% block body %} #}
+{# {% block contentSearch %}
+{% endblock %} #}
+
+{% block h1 %}Equipe commerciale{% endblock %}
+
+{% block contentBody %}
 
 {% for commercial in listCom %}
 <tr>
@@ -19,4 +26,4 @@
 </tr>
 {% endfor %}
 
-{# {% endblock %} #}
+{% endblock %}

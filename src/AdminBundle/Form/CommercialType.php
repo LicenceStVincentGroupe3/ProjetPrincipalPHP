@@ -32,21 +32,16 @@ class CommercialType extends AbstractType
 													    			]
 													  ]
 				)
-			->add('commercialProfil', TextType::class, ['label' => 'Profil du commercial*'])
+			->add('commercialProfil', TextType::class, ['label' => 'Profil/Droit*'])
 			->add('commercialStatus', CheckboxType::class, ['label' => 'Actif', 'required' => false])
 			->add('commercialBirthday', DateTimeType::class, ['label' => 'Date de naissance du commercial'])
 			->add('commercialPhone', TelType::class, ['label' => 'Tel du commercial', 'required' => false])
 			->add('commercialMobilePhone', TelType::class, ['label' => 'Tel. portable du commercial', 'required' => false])
-			->add('commercialLinkedinAddress', UrlType::class, ['label' => 'Lien LinkedIn du commercial', 'required' => false])
+			->add('commercialLinkedinAddress', UrlType::class, ['label' => 'Profil LinckedIn', 'required' => false])
 			->add('commercialPhoto', TextType::class, ['label' => 'Photo du commercial', 'required' => false])
 			->add('email', EmailType::class, ['label' => 'Email du commercial*', 'required' => false])
-            ->add('plainPassword', RepeatedType::class, [
-            												'type' => PasswordType::class,
-            												'first_options' => ['label' => 'Mot de passe*'],
-            												'second_options' => ['label' => 'Confirmation du mot de passe*']
-            											]
-            	)
-            ->add('save', SubmitType::class, ['label'=>'Valider', 'attr'=>['class'=>'btn-primary btn-block']])
+            ->add('plainPassword', PasswordType::class, ['label' => 'Mot de passe*'])
+            ->add('save', SubmitType::class, ['label'=>'Valider'])
 			->getForm()
 		;
 	}

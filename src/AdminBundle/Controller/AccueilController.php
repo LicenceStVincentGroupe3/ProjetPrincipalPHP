@@ -8,10 +8,15 @@ use Symfony\Component\Routing\Annotation\Route;
 class AccueilController extends AbstractController
 {
     /**
-     * @Route("/")
+     * @Route("/", name="index")
      */
     public function index()
     {
-        return $this->render('base.html.twig', ['mainNavHome'=>true]);
+    	if ($this->isGranted('ROLE_COMMERCIAL')) {
+    		return $this->render('accueil/index.html.twig', ['dashBordLink' => true]);
+    	}
+    	else {
+    		return $this->redirect($this->generateUrl('login'));
+    	}
     }
 }
