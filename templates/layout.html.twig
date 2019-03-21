@@ -1,15 +1,39 @@
 {% extends "base.html.twig" %}
 
 {% block title %}
-	{{parent()}}
+	{{parent() -}}
 {% endblock %}
 
-{% block body %}
-	{% block soustitre %}
-		{# On définit un sous-titre commun à toutes les pages du bundle #}
-	{% endblock %}
-	<hr>
-	{% block gsbobjcom_body %}
-		{# On définit  un nouveau block, que les vues du bundle pourront remplir #}
-	{% endblock %}
+{% block stylesheet %}
+{{parent()}}
+{% endblock %}
+
+{% block contentPage %}
+	<!-- Page Heading -->
+	<div class="d-sm-flex align-items-center justify-content-between mb-4">
+		<h1 class="h3 mb-0 text-gray-800">{% block h1 %}{% endblock %}</h1>
+		<!-- Content Search -->
+		{% block contentSearch %}
+	        <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+	            <div class="input-group">
+	                <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+	                <div class="input-group-append">
+	                    <button class="btn btn-primary" type="button">
+	                        <i class="fas fa-search fa-sm"></i>
+	                    </button>
+	                </div>
+	            </div>
+	        </form>
+	    {% endblock %}
+	</div>
+	<div class="contentBody border-0 rounded">
+		<div class="contentBody-container">
+			{% block contentBody %}
+			{% endblock %}
+		</div>
+	</div>
+{% endblock %}
+
+{% block javascript %}
+{{parent()}}
 {% endblock %}

@@ -46,7 +46,7 @@ class CommercialController extends AbstractController
             return $this->redirect($this->generateUrl('listCommercial'));
         }
 
-        return $this->render('commercial/new.html.twig', ['form' => $form->createView(), 'mainNavRegistration' => true]);
+        return $this->render('commercial/new.html.twig', ['form' => $form->createView(), 'commercialTeamLink' => true]);
     }
 
     /**
@@ -82,7 +82,7 @@ class CommercialController extends AbstractController
         // ----------------------------------
         // On demande à la vue d'afficher la commande plus tous ses produits
         // ----------------------------------
-        return $this->render('commercial/edit.html.twig', ['editCom' => $edit, 'form' => $form->createView()]);
+        return $this->render('commercial/edit.html.twig', ['editCom' => $edit, 'form' => $form->createView(), 'commercialTeamLink' => true]);
     }
 
     /**
@@ -121,7 +121,7 @@ class CommercialController extends AbstractController
         // ----------------------------------
         // On demande à la vue d'afficher la liste des commandes
         // ----------------------------------
-        return $this->render('commercial/list.html.twig', ['listCom' => $list]);
+        return $this->render('commercial/list.html.twig', ['listCom' => $list, 'commercialTeamLink' => true]);
         // On affecte notre tableau contenant la(les) valeur(s) de la variable à la vue
     }
 }

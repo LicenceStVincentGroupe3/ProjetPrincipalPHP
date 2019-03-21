@@ -22,7 +22,7 @@ security:
                 check_path: login
             logout:
                 path:  /logout
-                target: /
+                target: /login
 
     role_hierarchy:
         ROLE_RESPONSABLE:      ROLE_COMMERCIAL

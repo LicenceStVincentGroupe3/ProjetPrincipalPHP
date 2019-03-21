@@ -1,121 +1,248 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>{% block title %}Hafa - Smartleads {% endblock %}</title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>{% block title %}Hafa - Smartleads{% endblock %}</title>
         {% block stylesheet %}
-        {# On charge le CSS de bootstrap depuis le site directement #}
-        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <!-- Bootstrap -->
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+        <!-- font Awesome -->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+        {{ encore_entry_link_tags('myTemplate') }}
+        <!-- <link rel="stylesheet" href="/build/myTemplate.css"> Autre façon d'appler le fichier css -->
         {% endblock %}
     </head>
-    <body>
-        <div class="container">
-            <div id="header" class="jumbotron">
-                <h2>Hafa - Smartleads</h2>
-                <p>
-                	<a class="btn btn-primary btn-lg" href="https://symfony.com/" target="_blank">Accéder au site de Symfony</a>
-                    <a class="btn btn-success btn-lg" href="{{ path('login') }}"><i class="glyphicon glyphicon-user"></i> Se connecter</a>
-                </p>
-            </div>
-            <div class="row">
-                <div id="menu" class="col-md-4">
-                    <a class="btn btn-primary btn-lg" href="/">Accueil du projet</a>
-                    <hr>
-                    <h3>Entreprises</h3>
-                    <ul class="nav nav-pills nav-stacked">
-                        <li><a href="/admin/company/list">Liste des entreprises</a></li>
-                        <li><a href="/admin/company/new">Ajouter une entreprise</a></li>
-                        <hr>
-                        <li><a href="/admin/company/country/list">Listes des pays</a></li>
-                        <li><a href="/admin/company/country/new">Ajouter un pays</a></li>
-                        <hr>
-                        <li><a href="/admin/company/activity/sector/list">Liste des secteurs d'activités</a></li>
-                        <li><a href="/admin/company/activity/sector/new">Ajouter un secteur d'activité</a></li>
-                        <hr>
-                        <li><a href="/admin/company/business/category/list">Liste des catégories d'affaires</a></li>
-                        <li><a href="/admin/company/business/category/new">Ajouter une catégorie d'affaires</a></li>
-                        <hr>
-                        <li><a href="/admin/company/legalStatus/list">Liste des status légaux</a></li>
-                        <li><a href="/admin/company/legalStatus/new">Ajouter un status légal</a></li>
-                        <hr>
-                        <li><a href="/admin/company/turnOver/list">Liste des chiffres d'affaires</a></li>
-                        <li><a href="/admin/company/turnOver/new">Ajouter un chiffre d'affaires</a></li>
-                        <hr>
-                        <li><a href="/admin/company/lastTurnOver/list">Liste des derniers chiffres d'affaires</a></li>
-                        <li><a href="/admin/company/lastTurnOver/new">Ajouter un chiffre d'affaires</a></li>
-                        <hr>
-                        <li><a href="/admin/company/NbEmployee/list">Liste de nombre d'employé</a></li>
-                        <li><a href="/admin/company/NbEmployee/new">Ajouter un nombre</a></li>
-                    </ul>
-                    <h3>Contacts</h3>
-                    <ul class="nav nav-pills nav-stacked">
-                        <li><a href="/admin/contact/list">Liste des contacts</a></li>
-                        <li><a href="/admin/contact/new">Ajouter un contact</a></li>
-                        <hr>
-                        <li><a href="/admin/contactJob/list">Liste des jobs</a></li>
-                        <li><a href="/admin/contactJob/new">Ajouter un job</a></li>
-                    </ul>
-                    <h3>Commerciaux</h3>
-                    <ul class="nav nav-pills nav-stacked">
-                        {% if is_granted('ROLE_RESPONSABLE') %}
-                            <li class="nav-item {% if commercialWindow is defined %}active{% endif %}">
-                                <li><a href="{{ path('listCommercial') }}">Liste des commerciaux</a></li>
-                                <li><a href="{{ path('newCommercial') }}">Ajouter un commercial</a></li>
+
+    <body id="page-top">
+        <!-- Page Wrapper -->
+        <div id="wrapper">
+            <!-- Sidebar -->
+            <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+                <!-- Sidebar - Brand -->
+                <a class="sidebar-brand d-flex align-items-center justify-content-center shadow" href="index.html">
+                <div class="sidebar-brand-icon rotate-n-15">
+                <i class="fas fa-laugh-wink"></i>
+                </div>
+                <div class="sidebar-brand-text mx-3">Hafa - Smartleads</div>
+                </a>
+
+                <!-- Sidebar Toggler (Sidebar) -->
+                <!--<div class="text-center d-none d-md-inline">
+                    <button class="rounded-circle border-0" id="sidebarToggle"></button>
+                </div>-->
+
+                <!-- Nav Item - Tableau de bord -->
+                <li class="nav-item {% if dashBordLink is defined %}active{% endif %}">
+                    <a class="nav-link" href="{{ path('index') }}">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Tableau de bord</span></a>
+                </li>
+
+                <!-- Divider -->
+                <hr class="sidebar-divider">
+
+                <!-- Nav Item - Contacts -->
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html">
+                    <i class="fas fa-user-friends"></i>
+                    <span>Contacts</span></a>
+                </li>
+
+                <!-- Divider -->
+                <hr class="sidebar-divider">
+
+                <!-- Nav Item - Entreprises -->
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html">
+                    <i class="fas fa-building"></i>
+                    <span>Entreprises</span></a>
+                </li>
+
+                <!-- Divider -->
+                <hr class="sidebar-divider">
+
+                {% if is_granted('ROLE_RESPONSABLE') %}
+                <!-- Nav Item - Equipe commerciale -->
+                <li class="nav-item {% if commercialTeamLink is defined %}active{% endif %}">
+                    <a class="nav-link" href="{{ path('listCommercial') }}">
+                    <i class="fas fa-user-circle"></i>
+                    <span>Equipe commerciale</span></a>
+                </li>
+
+                <!-- Divider -->
+                <hr class="sidebar-divider">
+                {% endif %}
+
+                <!-- Nav Item - Opération -->
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('listOperation') }}">
+                    <i class="fas fa-star"></i>
+                    <span>Opération</span></a>
+                </li>
+
+                <!-- Divider -->
+                <hr class="sidebar-divider">
+
+                <!-- Nav Item - Pages Collapse Menu -->
+                <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                    <i class="fas fa-cog"></i>
+                    <span>Paramètres</span>
+                </a>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Custom Components:</h6>
+                        <a class="collapse-item" href="buttons.html">Buttons</a>
+                        <a class="collapse-item" href="cards.html">Cards</a>
+                    </div>
+                </div>
+                </li>
+
+                <!-- Divider -->
+                <hr class="sidebar-divider d-none d-md-block">
+            </ul>
+            <!-- End of Sidebar -->
+
+            <!-- Content Wrapper -->
+            <div id="content-wrapper" class="d-flex flex-column">
+                <!-- Main Content -->
+                <div id="content">
+                    <!-- Topbar -->
+                    <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+                        <!-- Sidebar Toggle (Topbar) -->
+                        <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                            <i class="fa fa-bars"></i>
+                        </button>
+
+                        <!-- Topbar Search -->
+                        <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                            <div class="input-group">
+                                <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary" type="button">
+                                        <i class="fas fa-search fa-sm"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+
+                        <!-- Topbar Navbar -->
+                        <ul class="navbar-nav ml-auto">
+                            <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+                            <li class="nav-item dropdown no-arrow d-sm-none">
+                                <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fas fa-search fa-fw"></i>
+                                </a>
+                                <!-- Dropdown - Messages -->
+                                <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in" aria-labelledby="searchDropdown">
+                                    <form class="form-inline mr-auto w-100 navbar-search">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+                                            <div class="input-group-append">
+                                                <button class="btn btn-primary" type="button">
+                                                    <i class="fas fa-search fa-sm"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
                             </li>
-                        {% endif %}
-                    </ul>
-                    <h3>Opérations</h3>
-                    <ul class="nav nav-pills nav-stacked">
-                        <li><a href="{{ path('listOperation') }}">Liste des opérations</a></li>
-                        <li><a href="{{ path('newOperation') }}">Ajouter une opération</a></li>
-                        <hr>
-                        <li><a href="{{ path('listOperationTypeOperation') }}">Liste des types d'opérations</a></li>
-                        <li><a href="{{ path('newOperationTypeOperation') }}">Ajouter un type d'opération</a></li>
-                    </ul>
-                    <h3>Paramètres</h3>
-                    <ul class="nav nav-pills nav-stacked">
-                        <li><a href="{{ path('listParameter') }}">Liste des paramètres</a></li>
-                        <li><a href="{{ path('newParameter') }}">Ajouter un paramètre</a></li>
-                        <hr>
-                        <li><a href="{{ path('listParameterGraphicStyle') }}">Liste des styles graphiques</a></li>
-                        <li><a href="{{ path('newParameterGraphicStyle') }}">Ajouter un style graphique</a></li>
-                        <hr>
-                        <li><a href="{{ path('listParameterBehavior') }}">Liste des comportements</a></li>
-                        <li><a href="{{ path('newParameterBehavior') }}">Ajouter un comportement</a></li>
-                        <hr>
-                        <li><a href="{{ path('listParamTypeSite') }}">Liste des types de sites</a></li>
-                        <li><a href="{{ path('newParameterTypeSite') }}">Ajouter un type de site</a></li>
-                        <hr>
-                        <li><a href="{{ path('listParamObject') }}">Liste des objets</a></li>
-                        <li><a href="{{ path('newParameterObject') }}">Ajouter un objet</a></li>
-                        <hr>
-                        <li><a href="{{ path('ListParamTarget') }}">Liste des cibles</a></li>
-                        <li><a href="{{ path('newParameterTarget') }}">Ajouter une cible</a></li>
-                    </ul> 
+
+                            <div class="topbar-divider d-none d-sm-block"></div>
+
+                            <!-- Nav Item - User Information -->
+                            <li class="nav-item dropdown no-arrow">
+                                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <span class="mr-2 d-none d-lg-inline text-gray-600 small">Valerie Luna</span>
+                                    <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
+                                </a>
+                                <!-- Dropdown - User Information -->
+                                <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                                    <a class="dropdown-item" href="#">
+                                        <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                        Profile
+                                    </a>
+                                    <a class="dropdown-item" href="#">
+                                        <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                                        Settings
+                                    </a>
+                                    <a class="dropdown-item" href="#">
+                                        <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+                                        Activity Log
+                                    </a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                        <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                        Déconnexion
+                                    </a>
+                                </div>
+                            </li>
+                        </ul>
+                    </nav>
+                    <!-- End of Topbar -->
+
+                    <!-- Begin Page Content -->
+                    <div class="container-fluid">
+                        {% block contentPage %}
+                        {% endblock %}
+                    </div>
+                    <!-- End of Page Content -->
                 </div>
-                <ul class="navbar-nav ml-auto">
-                    {% if is_granted('ROLE_COMMERCIAL') %}
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{path('logout')}}">Déconnexion</a>
-                        </li>
-                    {% else %}
-                        <li class="nav-item {% if mainNavLogin is defined %}active{% endif %}">
-                            <a class="nav-link" href="{{path('login')}}">Connexion</a>
-                        </li>
-                    {% endif %}
-                </ul>
-                <div id="content" class="col-md-8">
-                    {% block body %} {% endblock %}
+                <!-- End of Main Content -->
+            </div>
+            <!-- End of Content Wrapper -->
+        </div>
+        <!-- End of Page Wrapper -->
+
+        <!-- Scroll to Top Button-->
+        <a class="scroll-to-top rounded" href="#page-top">
+            <i class="fas fa-angle-up"></i>
+        </a>
+
+        <!-- Logout Modal-->
+        <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Etes-vous sûr ?</h5>
+                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        Si oui, cliquez sur "Déconnexion" sinon, cliquez sur "Annuler"
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" type="button" data-dismiss="modal">
+                            Annuler
+                        </button>
+                        <a class="btn btn-primary" href="{{path('logout')}}">Déconnexion</a>
+                    </div>
                 </div>
             </div>
-            <hr>
-            <footer></footer>
         </div>
+
         {% block javascript %}
-            {# lignes JavaScript permettant d'utiliser des fonctionnalités du bootstrap Twitter #}
-            <script src="//ajax.gooleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-            <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+            <!-- Bootstrap core JavaScript-->
+            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+            <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+            
+            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o" crossorigin="anonymous"></script>
+
+            <!-- Core plugin JavaScript-->
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js"></script>
+            
+            {{ encore_entry_script_tags('myTemplate') }}
+            <script src="/build/runtime.js"></script>
+            <!-- Custom scripts for all pages-->
+            <!-- <script src="/build/myTemplate.js"></script> Autre façon d'appler le fichier css -->
         {% endblock %}
-    </body>
+        </body>
 </html>
