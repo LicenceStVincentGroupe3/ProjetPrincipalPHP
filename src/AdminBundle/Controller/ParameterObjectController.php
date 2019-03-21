@@ -16,7 +16,7 @@ use Symfony\Component\VarDumper\VarDumper;
 class ParameterObjectController extends AbstractController
 {
     /**
-     * @Route("/new")
+     * @Route("/new", methods={"GET","POST"}, name="newParameterObject")
      */
     public function new(Request $request)
     {
@@ -46,7 +46,7 @@ class ParameterObjectController extends AbstractController
 
 
     /**
-     * @Route("/edit/{id}", name="editParameterObject", requirements={"id"="\d+"})
+     * @Route("/edit/{id}", name="editParameterObject", requirements={"id"="\d+"}, methods={"GET","POST"})
      */
     public function edit($id, Request $request)
     {
@@ -75,7 +75,7 @@ class ParameterObjectController extends AbstractController
 
 
     /**
-     * @Route("/delete/{id}", requirements={"id"="\d+"})
+     * @Route("/delete/{id}", requirements={"id"="\d+"}, methods={"GET","POST"}, name="deleteParameterObject")
      */
     public function delete($id)
     {
@@ -91,7 +91,7 @@ class ParameterObjectController extends AbstractController
     } 
 
     /**
-     * @Route("/list", name="listParamObject")
+     * @Route("/list", name="listParamObject", methods={"GET"})
      */
     public function list()
     {

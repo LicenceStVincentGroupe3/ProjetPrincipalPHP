@@ -9,11 +9,11 @@
 		<ul>
 			{% for param in lesParamObjects %}
 			<li>
-				{% set id_paramObject='/parameterObject/edit/' ~ param.id %}
+				{% set id_paramObject='/admin/parameterObject/edit/' ~ param.id %}
 				<a href={{id_paramObject}}>{{param.parameterObjectObject}}</a>
 				
 				{# Déclaration de la variable id_suppress pour la passer d'URL #}
-				{% set id_suppress='/parameterObject/delete/' ~ param.id %}
+				{% set id_suppress='/admin/parameterObject/delete/' ~ param.id %}
 
 				<a href={{id_suppress}} class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i>Supprimer</a>				
 			</li>

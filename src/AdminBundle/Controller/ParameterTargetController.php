@@ -16,7 +16,7 @@ use Symfony\Component\VarDumper\VarDumper;
 class ParameterTargetController extends AbstractController
 {
     /**
-     * @Route("/new")
+     * @Route("/new", methods={"GET","POST"}, name="newParameterTarget")
      */
     public function new(Request $request)
     {
@@ -46,7 +46,7 @@ class ParameterTargetController extends AbstractController
 
 
     /**
-     * @Route("/edit/{id}", name="editParameterTarget", requirements={"id"="\d+"})
+     * @Route("/edit/{id}", name="editParameterTarget", requirements={"id"="\d+"}, methods={"GET","POST"})
      */
     public function edit($id, Request $request)
     {
@@ -75,7 +75,7 @@ class ParameterTargetController extends AbstractController
 
 
     /**
-     * @Route("/delete/{id}", requirements={"id"="\d+"})
+     * @Route("/delete/{id}", requirements={"id"="\d+"}, methods={"GET","POST"}, name="deleteParameterTarget")
      */
     public function delete($id)
     {
@@ -91,7 +91,7 @@ class ParameterTargetController extends AbstractController
     } 
 
     /**
-     * @Route("/list", name="ListParamTarget")
+     * @Route("/list", name="ListParamTarget", methods={"GET"})
      */
     public function list()
     {
