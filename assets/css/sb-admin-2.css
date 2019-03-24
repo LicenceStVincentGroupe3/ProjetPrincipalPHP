@@ -11281,10 +11281,10 @@ a:focus {
   .sidebar .sidebar-heading {
     text-align: left;
   }
-  .sidebar.toggled {
+  /*.sidebar.toggled {
     overflow: visible;
     width: 6.5rem !important;
-  }
+  }*/
   .sidebar.toggled .nav-item .collapse {
     position: absolute;
     left: calc(6.5rem + 1.5rem / 2);
@@ -11429,7 +11429,7 @@ a:focus {
 }
 
 .sidebar-dark #sidebarToggle {
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: rgba(0, 0, 0, 0.2);
 }
 
 .sidebar-dark #sidebarToggle::after {
@@ -11843,6 +11843,10 @@ form.user .btn-user {
   overflow: hidden;
   clip: rect(0, 900px, 0, 0);
   animation: noise-anim-2 3s infinite linear alternate-reverse;
+}
+
+body.sidebar-toggled {
+  width: 100%;
 }
 
 .sidebar-dark .nav-item.active .nav-link, .mandatory {

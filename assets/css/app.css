@@ -1,3 +1,48 @@
-body {
-    background-color: lightgray;
+.global-search-filter-logo, .search-filter-logo {
+	color: #d9d9d9;
+}
+
+.global-search-filter-container ::placeholder {
+	color: #999999;
+}
+
+.global-search-filter-logo {
+	position: absolute;  
+	left: 40px;
+	top: 35px;
+	text-align: center;
+}
+
+.global-search-filter {
+	height: 45px;
+    width: 220px;
+    background-color: #fff;
+    padding: 0 25% 0 25%;
+    border: 1px solid #d1d3e2;
+	border-width: .125rem;
+	border-radius: 9999px;
+	border-color: #f1f3f5;
+}
+
+.search-filter-container ::placeholder {
+  color: #d9d9d9;
+}
+
+.search-filter-logo {
+	position: absolute;  
+	right: 45px;
+	top: 120px;
+	text-align: center;
+}
+
+.search-filter {
+	height: 35px;
+    width: 135px;
+    background-color: #f6f7fa;
+    border: none;
+}
+
+.bold-blue {
+	font-weight: bold;
+	color: #0277BD;
 }
