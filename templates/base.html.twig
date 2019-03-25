@@ -15,8 +15,17 @@
         <!-- font Awesome -->
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 
+        <!-- Datatable -->
+        <!--<link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">-->
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.13.5/bootstrap-table.min.css">
+        <link rel="stylesheet" href="https://rawgit.com/vitalets/x-editable/master/dist/bootstrap3-editable/css/bootstrap-editable.css">
+
         {{ encore_entry_link_tags('myTemplate') }}
         <!-- <link rel="stylesheet" href="/build/myTemplate.css"> Autre façon d'appler le fichier css -->
+
+        {{ encore_entry_link_tags('app') }}
+        <!-- <link rel="stylesheet" href="/build/app.css"> Autre façon d'appler le fichier css -->
         {% endblock %}
     </head>
 
@@ -26,7 +35,7 @@
             <!-- Sidebar -->
             <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
                 <!-- Sidebar - Brand -->
-                <a class="sidebar-brand d-flex align-items-center justify-content-center shadow" href="index.html">
+                <a class="sidebar-brand d-flex align-items-center justify-content-center shadow" href="{{ path('index') }}">
                 <div class="sidebar-brand-icon rotate-n-15">
                 <i class="fas fa-laugh-wink"></i>
                 </div>
@@ -117,21 +126,14 @@
                     <!-- Topbar -->
                     <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
                         <!-- Sidebar Toggle (Topbar) -->
-                        <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-                            <i class="fa fa-bars"></i>
-                        </button>
+                        <!--<button id="sidebarToggleTop" class="rounded-circle border-0">
+                        </button>-->
 
                         <!-- Topbar Search -->
-                        <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                            <div class="input-group">
-                                <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
-                                <div class="input-group-append">
-                                    <button class="btn btn-primary" type="button">
-                                        <i class="fas fa-search fa-sm"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
+                        <div class="global-search-filter-container">
+                            <span class="global-search-filter-logo"><i class="fas fa-search"></i></span>
+                            <input class="global-search-filter" id="global-search-filter" type="text" placeholder="Rechercher...">
+                        </div>
 
                         <!-- Topbar Navbar -->
                         <ul class="navbar-nav ml-auto">
@@ -238,11 +240,18 @@
 
             <!-- Core plugin JavaScript-->
             <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js"></script>
-            
+
+            <!--<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>-->
+
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.13.5/bootstrap-table.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.13.5/extensions/export/bootstrap-table-export.js"></script>
+            <script src="https://rawgit.com/hhurz/tableExport.jquery.plugin/master/tableExport.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.13.5/extensions/filter-control/bootstrap-table-filter-control.js"></script>
+            {{ encore_entry_script_tags('app') }}
+            <!-- <script src="/build/app.js"></script> Autre façon d'appler le fichier css -->
             {{ encore_entry_script_tags('myTemplate') }}
-            <script src="/build/runtime.js"></script>
-            <!-- Custom scripts for all pages-->
             <!-- <script src="/build/myTemplate.js"></script> Autre façon d'appler le fichier css -->
+            <script src="/build/runtime.js"></script>
         {% endblock %}
         </body>
 </html>

@@ -277,18 +277,6 @@ class Commercial implements UserInterface, \Serializable
         return $this;
     }
 
-    public function getCommercialEmail(): ?string
-    {
-        return $this->commercialEmail;
-    }
-
-    public function setCommercialEmail(?string $commercialEmail): self
-    {
-        $this->commercialEmail = $commercialEmail;
-
-        return $this;
-    }
-
     public function getCommercialLinkedinAddress(): ?string
     {
         return $this->commercialLinkedinAddress;
