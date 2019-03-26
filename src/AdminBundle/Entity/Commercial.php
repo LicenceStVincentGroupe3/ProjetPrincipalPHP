@@ -46,10 +46,14 @@ class Commercial implements UserInterface, \Serializable
     private $commercialSexe;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank()
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $commercialProfil;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $commercialJob;
 
     /**
      * @ORM\Column(type="datetime")
@@ -64,7 +68,7 @@ class Commercial implements UserInterface, \Serializable
     private $commercialLastUpdate;
 
     /**
-     * @ORM\Column(type="boolean", nullable=true)
+     * @ORM\Column(type="boolean")
      */
     private $commercialStatus;
 
@@ -72,6 +76,16 @@ class Commercial implements UserInterface, \Serializable
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $commercialBirthday;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $arrivalDate;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $departureDate;
 
     /**
      * @ORM\Column(type="string", length=14, nullable=true)
@@ -91,7 +105,22 @@ class Commercial implements UserInterface, \Serializable
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
+    private $commercialFacebookAddress;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $commercialTwitterAddress;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
     private $commercialPhoto;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $remarks;
 
     /**
      * @ORM\OneToMany(targetEntity="App\AdminBundle\Entity\Contact", mappedBy="idUser")
@@ -99,14 +128,18 @@ class Commercial implements UserInterface, \Serializable
     private $contacts;
 
     /**
-     * @ORM\Column(type="string", length=255, unique=true)
-     * @Assert\NotBlank()
+     * @ORM\ManyToOne(targetEntity="App\AdminBundle\Entity\CompanyCountry", inversedBy="commercials")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $idCompanyCountry;
+
+    /**
+     * @ORM\Column(type="string", length=255, unique=true, nullable=true)
      * @Assert\Email()
      */
     private $email;
 
     /**
-     * @Assert\NotBlank()
      * @Assert\Length(max=250)
      */
     private $plainPassword;
@@ -115,7 +148,7 @@ class Commercial implements UserInterface, \Serializable
      * The below length depends on the "algorithm" you use for encoding
      * the password, but this works well with bcrypt.
      *
-     * @ORM\Column(type="string", length=64)
+     * @ORM\Column(type="string", length=64, nullable=true)
      */
     private $password;
 
@@ -125,9 +158,10 @@ class Commercial implements UserInterface, \Serializable
     private $roles = [];
 
     public function __construct()
-    {
-        // Par défaut, la date de création de la fiche commercial est la date d'aujourd'hui
-        $this->commercialPlugCreation = new \DateTime();
+    { 
+        $this->commercialPlugCreation = new \DateTime(); // Par défaut, la date de création de la fiche commercial est la date d'aujourd'hui
+
+        $this->arrivalDate = new \DateTime();
 
         $this->commercialStatus = true;
 
@@ -205,6 +239,18 @@ class Commercial implements UserInterface, \Serializable
         return $this;
     }
 
+    public function getCommercialJob(): ?string
+    {
+        return $this->commercialJob;
+    }
+
+    public function setCommercialJob(string $commercialJob): self
+    {
+        $this->commercialJob = $commercialJob;
+
+        return $this;
+    }
+
     public function getCommercialPlugCreation(): ?\DateTimeInterface
     {
         return $this->commercialPlugCreation;
@@ -253,6 +299,30 @@ class Commercial implements UserInterface, \Serializable
         return $this;
     }
 
+    public function getArrivalDate(): ?\DateTimeInterface
+    {
+        return $this->arrivalDate;
+    }
+
+    public function setArrivalDate(?\DateTimeInterface $arrivalDate): self
+    {
+        $this->arrivalDate = $arrivalDate;
+
+        return $this;
+    }
+
+    public function getDepartureDate(): ?\DateTimeInterface
+    {
+        return $this->departureDate;
+    }
+
+    public function setDepartureDate(?\DateTimeInterface $departureDate): self
+    {
+        $this->departureDate = $departureDate;
+
+        return $this;
+    }
+
     public function getCommercialPhone(): ?string
     {
         return $this->commercialPhone;
@@ -289,6 +359,30 @@ class Commercial implements UserInterface, \Serializable
         return $this;
     }
 
+    public function getCommercialFacebookAddress(): ?string
+    {
+        return $this->commercialFacebookAddress;
+    }
+
+    public function setCommercialFacebookAddress(?string $commercialFacebookAddress): self
+    {
+        $this->commercialFacebookAddress = $commercialFacebookAddress;
+
+        return $this;
+    }
+
+    public function getCommercialTwitterAddress(): ?string
+    {
+        return $this->commercialTwitterAddress;
+    }
+
+    public function setCommercialTwitterAddress(?string $commercialTwitterAddress): self
+    {
+        $this->commercialTwitterAddress = $commercialTwitterAddress;
+
+        return $this;
+    }
+
     public function getCommercialPhoto(): ?string
     {
         return $this->commercialPhoto;
@@ -297,6 +391,18 @@ class Commercial implements UserInterface, \Serializable
     public function setCommercialPhoto(?string $commercialPhoto): self
     {
         $this->commercialPhoto = $commercialPhoto;
+
+        return $this;
+    }
+
+    public function getRemarks(): ?string
+    {
+        return $this->remarks;
+    }
+
+    public function setRemarks(?string $remarks): self
+    {
+        $this->remarks = $remarks;
 
         return $this;
     }
@@ -393,6 +499,8 @@ class Commercial implements UserInterface, \Serializable
             $this->contacts[] = $contact;
             $contact->setIdUser($this);
         }
+        
+        return $this;
     }
   
     /**
@@ -422,6 +530,8 @@ class Commercial implements UserInterface, \Serializable
                 $contact->setIdUser(null);
             }
         }
+
+        return $this;
     }
   
     public function removeCompany(Company $company): self
@@ -433,6 +543,18 @@ class Commercial implements UserInterface, \Serializable
                 $company->setIdUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getIdCompanyCountry(): ?CompanyCountry
+    {
+        return $this->idCompanyCountry;
+    }
+
+    public function setIdCompanyCountry(?CompanyCountry $idCompanyCountry): self
+    {
+        $this->idCompanyCountry = $idCompanyCountry;
 
         return $this;
     }

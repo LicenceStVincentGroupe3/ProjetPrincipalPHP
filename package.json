@@ -1,6 +1,7 @@
 {
     "devDependencies": {
         "@symfony/webpack-encore": "^0.22.0",
+        "copy-webpack-plugin": "^5.0.2",
         "webpack-notifier": "^1.6.0"
     },
     "license": "UNLICENSED",

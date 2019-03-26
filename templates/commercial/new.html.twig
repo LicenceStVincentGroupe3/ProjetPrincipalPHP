@@ -40,24 +40,29 @@
 					{{ form_errors(form.commercialCode, {'attr': {'class': 'form-error-message'}}) }}
 
 					{{ form_label(form.commercialName) }}
-					{{ form_widget(form.commercialName, {'attr': {'class': 'form-control', 'placeholder': "Ex: DUCHEMIN"}}) }}
+					{{ form_widget(form.commercialName, {'attr': {'class': 'form-control'}}) }}
 
 					{{ form_errors(form.commercialName, {'attr': {'class': 'form-error-message'}}) }}
 
 					{{ form_label(form.commercialFirstname) }}
-					{{ form_widget(form.commercialFirstname, {'attr': {'class': 'form-control', 'placeholder': "Ex: Christophe"}}) }}
+					{{ form_widget(form.commercialFirstname, {'attr': {'class': 'form-control'}}) }}
 
 					{{ form_errors(form.commercialFirstname, {'attr': {'class': 'form-error-message'}}) }}
 
-					{{ form_label(form.commercialSexe) }}
+					{{ form_label(form.commercialSexe, 'Genre', {'label_attr': {'class': 'CUSTOM_LABEL_CLASS'}}) }}
 					{{ form_widget(form.commercialSexe, {'attr': {'class': 'form-control'}}) }}
 
 					{{ form_errors(form.commercialSexe, {'attr': {'class': 'form-error-message'}}) }}
 
-					{{ form_label(form.commercialProfil) }}
-					{{ form_widget(form.commercialProfil, {'attr': {'class': 'form-control', 'placeholder': "Ex: "}}) }}
+					{{ form_label(form.commercialProfil, 'Profil/droits', {'label_attr': {'class': 'CUSTOM_LABEL_CLASS'}}) }}
+					{{ form_widget(form.commercialProfil, {'attr': {'class': 'form-control'}}) }}
 
 					{{ form_errors(form.commercialProfil, {'attr': {'class': 'form-error-message'}}) }}
+
+					{{ form_label(form.commercialJob) }}
+					{{ form_widget(form.commercialJob, {'attr': {'class': 'form-control'}}) }}
+
+					{{ form_errors(form.commercialJob, {'attr': {'class': 'form-error-message'}}) }}
 
 					{{ form_label(form.commercialStatus) }}
 					{{ form_widget(form.commercialStatus, {'attr': {'class': 'form-control'}}) }}
@@ -69,33 +74,58 @@
 
 					{{ form_errors(form.commercialBirthday, {'attr': {'class': 'form-error-message'}}) }}
 
+					{{ form_label(form.arrivalDate) }}
+					{{ form_widget(form.arrivalDate, {'attr': {'class': 'form-control'}}) }}
+
+					{{ form_errors(form.arrivalDate, {'attr': {'class': 'form-error-message'}}) }}
+
+					{{ form_label(form.departureDate) }}
+					{{ form_widget(form.departureDate, {'attr': {'class': 'form-control'}}) }}
+
+					{{ form_errors(form.departureDate, {'attr': {'class': 'form-error-message'}}) }}
+
 					{{ form_label(form.commercialPhone) }}
-					{{ form_widget(form.commercialPhone, {'attr': {'class': 'form-control', 'placeholder': "Ex: 03 44 86 75 04"}}) }}
+					{{ form_widget(form.commercialPhone, {'attr': {'class': 'form-control'}}) }}
 
 					{{ form_errors(form.commercialPhone, {'attr': {'class': 'form-error-message'}}) }}
 
 					{{ form_label(form.commercialMobilePhone) }}
-					{{ form_widget(form.commercialMobilePhone, {'attr': {'class': 'form-control', 'placeholder': "Ex: 06 70 61 95 99"}}) }}
+					{{ form_widget(form.commercialMobilePhone, {'attr': {'class': 'form-control'}}) }}
 
 					{{ form_errors(form.commercialMobilePhone, {'attr': {'class': 'form-error-message'}}) }}
 
 					{{ form_label(form.commercialLinkedinAddress) }}
-					{{ form_widget(form.commercialLinkedinAddress, {'attr': {'class': 'form-control', 'placeholder': "Ex: https://fr.linkedin.com/company/jeff-martins"}}) }}
+					{{ form_widget(form.commercialLinkedinAddress, {'attr': {'class': 'form-control'}}) }}
 
 					{{ form_errors(form.commercialLinkedinAddress, {'attr': {'class': 'form-error-message'}}) }}
 
+					{{ form_label(form.commercialFacebookAddress) }}
+					{{ form_widget(form.commercialFacebookAddress, {'attr': {'class': 'form-control'}}) }}
+
+					{{ form_errors(form.commercialFacebookAddress, {'attr': {'class': 'form-error-message'}}) }}
+
+					{{ form_label(form.commercialTwitterAddress) }}
+					{{ form_widget(form.commercialTwitterAddress, {'attr': {'class': 'form-control'}}) }}
+
+					{{ form_errors(form.commercialTwitterAddress, {'attr': {'class': 'form-error-message'}}) }}
+
 					{{ form_label(form.commercialPhoto) }}
-					{{ form_widget(form.commercialPhoto, {'attr': {'class': 'form-control', 'placeholder': "Ex: "}}) }}
+					{{ form_widget(form.commercialPhoto, {'attr': {'class': 'form-control'}}) }}
 
 					{{ form_errors(form.commercialPhoto, {'attr': {'class': 'form-error-message'}}) }}
 
+					{{ form_label(form.remarks) }}
+					{{ form_widget(form.remarks, {'attr': {'class': 'form-control'}}) }}
+
+					{{ form_errors(form.remarks, {'attr': {'class': 'form-error-message'}}) }}
+
 					{{ form_label(form.email) }}
-					{{ form_widget(form.email, {'attr': {'class': 'form-control', 'placeholder': "Ex: marie-noelle.jullien@lyceestvincent.net"}}) }}
+					{{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
 
 					{{ form_errors(form.email, {'attr': {'class': 'form-error-message'}}) }}
 
 					{{ form_label(form.plainPassword) }}
-					{{ form_widget(form.plainPassword, {'attr': {'class': 'form-control', 'placeholder': "Ex: STVincent60"}}) }}
+					{{ form_widget(form.plainPassword, {'attr': {'class': 'form-control'}}) }}
 
 					{{ form_errors(form.plainPassword, {'attr': {'class': 'form-error-message'}}) }}
 

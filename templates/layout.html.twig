@@ -20,10 +20,12 @@
 	    {% endblock %}
 	</div>
 	<div class="contentBody border-0 rounded">
-		<div class="contentBody-container">
-			{% block contentBody %}
-			{% endblock %}
-		</div>
+		{% block contentBodyContainer %}
+			<div class="contentBody-container">
+				{% block contentBody %}
+				{% endblock %}
+			</div>
+		{% endblock %}
 	</div>
 {% endblock %}
 

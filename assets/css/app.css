@@ -1,3 +1,19 @@
+a:hover {
+	text-decoration: none;
+}
+
+.add-button {
+	width: 120px;
+	height: 40px;
+	background-color: #cf1740;
+}
+
+.add-button a {
+	font-size: 17px;
+	font-weight: 600;
+	color: #ffffff;
+}
+
 .global-search-filter-logo, .search-filter-logo {
 	color: #d9d9d9;
 }
@@ -44,5 +60,349 @@
 
 .bold-blue {
 	font-weight: bold;
-	color: #0277BD;
+	color: #0277bd;
+}
+
+/* ------- PAGINATION/ROWS PER PAGE ---------- */
+/* ------------------------------------------- */
+/* ------------------------------------------- */
+.bootstrap-table .fixed-table-pagination>.pagination-detail .pagination-info {
+    display: none;
+}
+
+.page-list .btn {
+	text-align: left;
+}
+
+.page-list .btn-secondary {
+	width: 80px;
+    height: 40px;
+	color: #b3b3b3;
+	background-color: #ffffff;
+	border-color: #f1f3f5;
+}
+
+.page-list .btn-secondary:hover {
+	background-color: #eeeeee;
+}
+
+.page-list .page-size {
+	text-align: left;
+	margin-right: 25px;
+}
+
+.dropup .dropdown-toggle::after {
+	border-top: .3em solid;
+	border-bottom: 0;
+	/*border: none!important;
+	font: normal normal normal 14px/1 FontAwesome;
+	content: "\f107"!important;  the desired FontAwesome icon
+	vertical-align: 0;  to center vertically */
+}
+
+.fixed-table-pagination .pagination {
+    width: 285px;
+	justify-content: space-around;
+}
+
+.fixed-table-pagination .pagination .page-item {
+	width: 40px;
+    height: 40px;
+    color: #b3b3b3;
+	background-color: #ffffff;
+    text-align: center;
+}
+
+.fixed-table-pagination .pagination .page-item .page-link {
+    color: #b3b3b3;
+    border-width: .125rem;
+    border-radius: 7.5px;
+    border-color: #f1f3f5;
+}
+
+.fixed-table-pagination .pagination .page-item .page-link:hover {
+	background-color: #eeeeee;
+}
+
+.fixed-table-pagination .pagination .page-item.active .page-link {
+    color: #ffffff;
+	background-color: #cecece;
+	border-radius: 7.5px;
+	border-width: .125rem;
+	border-color: #f1f3f5;
+}
+
+.fixed-table-pagination .pagination .page-pre, .fixed-table-pagination .pagination .page-next {
+	width: 40px;
+    height: 40px;
+}
+
+.fixed-table-pagination .pagination .page-pre .page-link, .fixed-table-pagination .pagination .page-next .page-link {
+    border-radius: 7.5px;
+    border-width: .125rem;
+    border-color: #f1f3f5;
+}
+
+.fixed-table-pagination {
+	padding: 0 2% 0 2%;
+}
+
+/* ------------------------------------------- */
+/* ------------------------------------------- */
+
+.bootstrap-table .fixed-table-container {
+	padding: 0;
+    position: unset;
+}
+
+.bootstrap-table .fixed-table-toolbar {
+	display: none;
+}
+
+.bootstrap-table .fixed-table-container .fixed-table-body .table-bordered {
+	border: unset;
+}
+
+.bootstrap-table .fixed-table-container .fixed-table-body .table>tbody>tr>td {
+    padding: 12px;
+}
+
+/*.bootstrap-table .fixed-table-container .table th, .bootstrap-table .fixed-table-container .table td {
+    vertical-align: unset;
+    box-sizing: unset;
+}*/
+
+.bootstrap-table .fixed-table-container .table thead th {
+	padding: 10px 0px 10px 0px;
+    /*vertical-align: unset;
+    padding: unset;
+    margin: unset;*/
+}
+
+.bootstrap-table .fixed-table-container .table-hover tbody tr:hover {
+	background-color: rgba(255,0,0,0.03);
+	cursor: pointer;
+}
+
+.bootstrap-table .fixed-table-container .table tbody tr.selected td {
+    background-color: rgba(255,0,0,0.06);
+}
+
+.bootstrap-table .fixed-table-container .table tbody tr td a {
+	font-weight: 600;
+	font-size: 15px;
+	color: #999999;
+}
+
+.bootstrap-table .fixed-table-container .table .bs-checkbox {
+    text-align: unset;
+}
+
+.table-bordered thead th, .table-bordered thead td {
+    border-bottom-width: unset;
+}
+
+.table thead th {
+    border-bottom: unset;
+}
+
+.table-bordered th, .table-bordered td {
+    border: unset;
+}
+
+.table td, .table th, table thead {
+    border-bottom: 1px solid #dee2e6;
+}
+
+.bootstrap-table .fixed-table-container .table thead th .sortable {
+	width: 145px;
+	font-weight: bold;
+	font-size: 16px;
+	color: #888888;
+}
+
+/* --------------------- */
+
+.table {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 16px;
+    background-color: transparent;
+}
+
+.table thead tr th {
+    font-size: 17px ;
+    font-weight: 300;
+}
+
+.table>thead>tr>th{
+    padding: 12px 8px;
+    vertical-align: middle;
+    border-color: #ddd;
+    font-weight: 300;
+}
+
+.table>tbody>tr>td{
+    padding: 12px 8px;
+    vertical-align: middle;
+    border-color: #ddd;
+    font-weight: 300;
+    font-size:14px;
+    color: #3c4858;
+}
+
+.table .td-actions .btn {
+    margin: 0;
+    padding: 5px;
+}
+
+.table .form-check {
+    margin: 0;
+    padding-left: 0;
+}
+
+.table .td-total {
+    font-weight: 500;
+    font-size: 17px;
+    padding-top: 20px;
+    text-align: right;
+}
+
+.table .td-price {
+    font-size: 26px;
+    font-weight: 300;
+    margin-top: 5px;
+    text-align: right;
+}
+.table-shopping>thead>tr>th {
+    font-size: 12px;
+    text-transform: uppercase;
+    color: #555;
+}
+.table-shopping .td-name {
+    min-width: 200px;
+    font-weight: 400;
+    font-size: 24px; 
+    line-height: 1.42857143;
+}
+
+.table-shopping .td-name small {
+    color: #999;
+    font-size: 18px; 
+    font-weight: 300;
+}
+
+.table-shopping .img-container {
+    width: 120px;
+    max-height: 160px;
+    overflow: hidden;
+    display: block;
+}
+
+.table-shopping .img-container img {
+    width: 100%;
+}
+
+.table-shopping>tbody>tr>td {
+    font-size: 14px;
+}
+
+.table-shopping .td-number {
+    text-align: right;
+    min-width: 150px;
+    font-size: 18px;
+}
+
+.table-shopping .td-number small {
+    margin-right: 3px;
+}
+.form-check{
+    padding-left:0;
+}
+.form-check .form-check-label {
+    cursor: pointer;
+    padding-left: 0px;
+    position: relative;
+    margin-bottom: 0;
+}
+
+.form-check .form-check-label span {
+    display: block;
+    left: -1px;
+    top: -1px;
+    transition-duration: .2s;
+}
+
+.form-check .form-check-input {
+    opacity: 0;
+    height: 0;
+    width: 0;
+    overflow: hidden;
+    position: absolute;
+    margin: 0;
+    z-index: -1;
+    left: 0;
+    pointer-events: none;
+}
+
+.form-check .form-check-sign:before {
+    display: block;
+    position: absolute;
+    left: 0;
+    content: "";
+    background-color: rgba(0,0,0,.84);
+    height: 20px;
+    width: 20px;
+    border-radius: 100%;
+    z-index: 1;
+    opacity: 0;
+    margin: 0;
+    top: 0;
+    transform: scale3d(2.3,2.3,1);
+}
+
+.form-check .form-check-sign .check {
+    position: relative;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 1px solid rgba(0,0,0,.54);
+    overflow: hidden;
+    z-index: 1;
+    border-radius: 3px;
+    top: 3px;
+}
+
+.form-check .form-check-sign .check:before {
+    position: absolute;
+    content: "";
+    transform: rotate(45deg);
+    display: block;
+    margin-top: -3px;
+    margin-left: 7px;
+    width: 0;
+    color: #fff;
+    height: 0;
+    box-shadow: 0 0 0 0, 0 0 0 0, 0 0 0 0, 0 0 0 0, 0 0 0 0, 0 0 0 0, inset 0 0 0 0;
+    animation: checkbox-off .3s forwards;
+}
+
+.form-check .form-check-input:checked+.form-check-sign .check:before {
+    color: #fff;
+    box-shadow: 0 0 0 10px, 10px -10px 0 10px, 32px 0 0 20px, 0 32px 0 20px, -5px 5px 0 10px, 20px -12px 0 11px;
+    animation: checkbox-on .3s forwards;
+}
+
+.form-check .form-check-input:checked+.form-check-sign .check {
+    background: #9c27b0;
+}
+
+.table .form-check .form-check-sign {
+    top: -13px;
+    left: 0;
+    padding-right: 0;
+}
+
+.table-striped>tbody>tr:nth-of-type(odd) {
+    background-color: #f9f9f9 !important;
 }
