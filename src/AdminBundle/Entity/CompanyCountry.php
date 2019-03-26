@@ -30,9 +30,15 @@ class CompanyCountry
      */
     private $companies;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\AdminBundle\Entity\Commercial", mappedBy="idCompanyCountry")
+     */
+    private $commercials;
+
     public function __construct()
     {
         $this->companies = new ArrayCollection();
+        $this->commercials = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -70,6 +76,24 @@ class CompanyCountry
         return $this;
     }
 
+    /**
+     * @return Collection|Commercial[]
+     */
+    public function getCommercials(): Collection
+    {
+        return $this->commercials;
+    }
+
+    public function addCommercial(Commercial $commercial): self
+    {
+        if (!$this->commercials->contains($commercial)) {
+            $this->commercials[] = $commercial;
+            $commercial->setIdCompanyCountry($this);
+        }
+
+        return $this;
+    }
+
     public function removeCompany(Company $company): self
     {
         if ($this->companies->contains($company)) {
@@ -80,6 +104,19 @@ class CompanyCountry
             }
         }
 
+        return $this;
+    }
+
+    public function removeCommercial(Commercial $commercial): self
+    {
+        if ($this->contacts->contains($commercial)) {
+            $this->contacts->removeElement($commercial);
+            // set the owning side to null (unless already changed)
+            if ($commercial->getIdCompanyCountry() === $this) {
+                $commercial->setIdCompanyCountry(null);
+            }
+        }
+        
         return $this;
     }
 }

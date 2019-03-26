@@ -8,7 +8,7 @@ use App\AdminBundle\Form\CommercialType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\VarDumper\VarDumper;
-use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 // Préfix url
@@ -23,33 +23,66 @@ class CommercialController extends AbstractController
     public function new(Request $request, UserPasswordEncoderInterface $passwordEncoder)
     {
         if ($this->isGranted('ROLE_COMMERCIAL')) {
-            $new = new Commercial();
 
-            $form = $this->createForm(CommercialType::class, $new);
-            $form->handleRequest($request);
+            if ($this->isGranted('ROLE_RESPONSABLE')) {
+                $new = new Commercial();
 
-            if ($form->isSubmitted() && $form->isValid() && $request->isMethod('POST'))
-            {
-                $new = $form->getData();
-                $password = $passwordEncoder->encodePassword($new, $new->getPlainPassword());
+                $form = $this->createForm(CommercialType::class, $new);
+
+                // Si c'est le Directeur
+                if ($this->isGranted('ROLE_DIRECTEUR')) {
+                    $form->add('commercialProfil', ChoiceType::class, [
+                        'choices'  => [
+                            'A définir' => null,
+                            'Directeur' => 'ROLE_DIRECTEUR',
+                            'Responsable' => 'ROLE_RESPONSABLE',
+                            'Commercial' => 'ROLE_COMMERCIAL'
+                        ]
+                    ]);
+                }
+                // Sinon
+                else {
+                    $form->add('commercialProfil', ChoiceType::class, [
+                        'choices'  => [
+                            'A définir' => null,
+                            'Commercial' => 'ROLE_COMMERCIAL'
+                        ]
+                    ]);
+                }
                 
-                $new->setPassword($password);
-                $new->addRole("ROLE_COMMERCIAL");
+                $form->handleRequest($request);
 
-                $entityManager = $this->getDoctrine()->getManager();
-                $entityManager->persist($new);
-                $entityManager->flush();
-                // ... do any other work - like sending them an email, etc
-                // maybe set a "flash" success message for the user
-                $this->addFlash('success', 'Votre compte à bien été enregistré.');
-                //return $this->redirectToRoute('login');
+                if ($form->isSubmitted() && $form->isValid() && $request->isMethod('POST'))
+                {
+                    $new = $form->getData();
 
-                return $this->redirect($this->generateUrl('listCommercial'));
+                    $password = $passwordEncoder->encodePassword($new, $new->getPlainPassword());
+                    $role = $new->getCommercialProfil();
+                    
+                    $new->setPassword($password);
+                    $new->addRole($role);
+
+                    $entityManager = $this->getDoctrine()->getManager();
+                    $entityManager->persist($new);
+                    $entityManager->flush();
+                    // ... do any other work - like sending them an email, etc
+                    // maybe set a "flash" success message for the user
+                    $this->addFlash('success', 'Votre compte à bien été enregistré.');
+                    //return $this->redirectToRoute('login');
+
+                    return $this->redirect($this->generateUrl('listCommercial'));
+                }
+
+                return $this->render('commercial/new.html.twig', ['form' => $form->createView(), 'commercialTeamLink' => true]);
             }
-
-            return $this->render('commercial/new.html.twig', ['form' => $form->createView(), 'commercialTeamLink' => true]);
+            
+            else {
+                return $this->redirect($this->generateUrl('index'));
+            }
         }
+
         else {
+
             return $this->redirect($this->generateUrl('login'));
         }
     }
@@ -60,39 +93,74 @@ class CommercialController extends AbstractController
     public function edit($id, Request $request)
     {
         if ($this->isGranted('ROLE_COMMERCIAL')) {
-            // Appel de Doctrine
-            $display = $this->getDoctrine()->getManager();
 
-            // Variable qui contient le Repository
-            $commercialRepository = $display->getRepository(Commercial::class);
+            if ($this->isGranted('ROLE_RESPONSABLE')) {
+                // Appel de Doctrine
+                $display = $this->getDoctrine()->getManager();
 
-            // Equivalent du SELECT * where id=(paramètre)
-            $edit = $commercialRepository->find($id);
+                // Variable qui contient le Repository
+                $commercialRepository = $display->getRepository(Commercial::class);
 
-            $form = $this->createForm(CommercialType::class, $edit);
-            $form->handleRequest($request);
+                // Equivalent du SELECT * where id=(paramètre)
+                $edit = $commercialRepository->find($id);
 
-            if ($form->isSubmitted() && $form->isValid() && $request->isMethod('POST'))
-            {
-                $edit = $form->getData();
+                $form = $this->createForm(CommercialType::class, $edit);
 
-                $entityManager = $this->getDoctrine()->getManager();
+                // Si c'est le Directeur
+                if ($this->isGranted('ROLE_DIRECTEUR')) {
+                    $form->add('commercialProfil', ChoiceType::class, [
+                        'choices'  => [
+                            'A définir' => null,
+                            'Directeur' => 'ROLE_DIRECTEUR',
+                            'Responsable' => 'ROLE_RESPONSABLE',
+                            'Commercial' => 'ROLE_COMMERCIAL'
+                        ]
+                    ]);
+                }
+                // Sinon
+                else {
+                    $form->add('commercialProfil', ChoiceType::class, [
+                        'choices'  => [
+                            'A définir' => null,
+                            'Commercial' => 'ROLE_COMMERCIAL'
+                        ]
+                    ]);
+                }
 
-                $edit->setCommercialLastUpdate(new \DateTime());
+                $form->handleRequest($request);
 
-                $entityManager->flush();
+                if ($form->isSubmitted() && $form->isValid() && $request->isMethod('POST'))
+                {
+                    $edit = $form->getData();
 
-                return $this->redirect($this->generateUrl('listCommercial'));
+                    $role = $edit->getCommercialProfil();
+
+                    $entityManager = $this->getDoctrine()->getManager();
+
+                    $edit->setCommercialLastUpdate(new \DateTime());
+                    $edit->addRole($role);
+
+                    $entityManager->flush();
+
+                    return $this->redirect($this->generateUrl('listCommercial'));
+                }
+
+                // ----------------------------------
+                // On demande à la vue d'afficher la commande plus tous ses produits
+                // ----------------------------------
+                return $this->render('commercial/edit.html.twig', ['editCom' => $edit, 'form' => $form->createView(), 'commercialTeamLink' => true]);
             }
 
-            // ----------------------------------
-            // On demande à la vue d'afficher la commande plus tous ses produits
-            // ----------------------------------
-            return $this->render('commercial/edit.html.twig', ['editCom' => $edit, 'form' => $form->createView(), 'commercialTeamLink' => true]);
+            else {
+                return $this->redirect($this->generateUrl('index'));
+            }
         }
+
         else {
+
             return $this->redirect($this->generateUrl('login'));
         }
+
     }
 
     /**
@@ -101,20 +169,44 @@ class CommercialController extends AbstractController
     public function delete($id)
     {
         if ($this->isGranted('ROLE_COMMERCIAL')) {
-            // Appel de Doctrine
-            $display = $this->getDoctrine()->getManager();
 
-            $commercialRepository = $display->getRepository(Commercial::class);
+            if ($this->isGranted('ROLE_DIRECTEUR')) {
+                // Appel de Doctrine
+                $display = $this->getDoctrine()->getManager();
 
-            $delete = $commercialRepository->find($id);
+                $commercialRepository = $display->getRepository(Commercial::class);
 
-            $display->remove($delete);
+                $delete = $commercialRepository->find($id);
 
-            $display->flush();
+                $display->remove($delete);
 
-            return $this->redirect($this->generateUrl('listCommercial'));
+                $display->flush();
+
+                return $this->redirect($this->generateUrl('listCommercial'));
+            }
+
+            elseif ($this->isGranted('ROLE_RESPONSABLE')) {
+                // Appel de Doctrine
+                $display = $this->getDoctrine()->getManager();
+
+                $commercialRepository = $display->getRepository(Commercial::class);
+
+                $delete = $commercialRepository->find($id);
+
+                $display->remove($delete);
+
+                $display->flush();
+
+                return $this->redirect($this->generateUrl('listCommercial'));
+                }
+            
+            else {
+                return $this->redirect($this->generateUrl('index'));
+            }
         }
+
         else {
+
             return $this->redirect($this->generateUrl('login'));
         }
     }
@@ -125,22 +217,39 @@ class CommercialController extends AbstractController
     public function list()
     {
         if ($this->isGranted('ROLE_COMMERCIAL')) {
-            // Appel de Doctrine
-            $display = $this->getDoctrine()->getManager();
+            
+            if ($this->isGranted('ROLE_RESPONSABLE')) {
+                // Appel de Doctrine
+                $display = $this->getDoctrine()->getManager();
 
-            // Variable qui contient le Repository
-            $commercialRepository = $display->getRepository(Commercial::class);
+                // Variable qui contient le Repository
+                $commercialRepository = $display->getRepository(Commercial::class);
 
-            // Equivalent du SELECT *
-            $list = $commercialRepository->findAll();
+                // Si c'est le Directeur
+                if ($this->isGranted('ROLE_DIRECTEUR')) {
+                    // Equivalent du SELECT *
+                    $list = $commercialRepository->findAll();
+                }
+                // Sinon
+                else {
+                    // Equivalent du SELECT xxx FROM xxx::class WHERE xxx
+                    $list = $commercialRepository->findBy(['commercialProfil' => 'ROLE_COMMERCIAL']);
+                }
 
-            // ----------------------------------
-            // On demande à la vue d'afficher la liste des commandes
-            // ----------------------------------
-            return $this->render('commercial/list.html.twig', ['listCom' => $list, 'commercialTeamLink' => true]);
-            // On affecte notre tableau contenant la(les) valeur(s) de la variable à la vue
+                // ----------------------------------
+                // On demande à la vue d'afficher la liste des commandes
+                // ----------------------------------
+                return $this->render('commercial/list.html.twig', ['listCom' => $list, 'commercialTeamLink' => true]);
+                // On affecte notre tableau contenant la(les) valeur(s) de la variable à la vue
+                }
+            
+            else {
+                return $this->redirect($this->generateUrl('index'));
+            }
         }
+
         else {
+
             return $this->redirect($this->generateUrl('login'));
         }
     }

@@ -18,6 +18,14 @@ $(document).ready( function () {
 
 	var trBoldBlue = $("table");
 
+
+
+	// Au clique d'une ligne d'un tableau cela nous redirige vers la page correspondante
+	$( "tbody tr" ).click(function() {
+		var UrlLink = $(this).find("a").attr('href');
+		$(location).attr('href', UrlLink);
+	})
+
 	/**$(trBoldBlue).on("click", "tr", function (){
 			$(this).toggleClass("bold-blue");
 	});
