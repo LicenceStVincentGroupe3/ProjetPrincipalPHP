@@ -34,7 +34,7 @@ a:hover {
     width: 220px;
     background-color: #fff;
     padding: 0 25% 0 25%;
-    border: 1px solid #d1d3e2;
+    border: 1px solid;
 	border-width: .125rem;
 	border-radius: 9999px;
 	border-color: #f1f3f5;
@@ -405,4 +405,153 @@ a:hover {
 
 .table-striped>tbody>tr:nth-of-type(odd) {
     background-color: #f9f9f9 !important;
+}
+
+/* ------------------ FORM ------------------- */
+/* ------------------------------------------- */
+/* ------------------------------------------- */
+
+.my-form-field {
+    height: 45px;
+    margin-bottom: 3%;
+}
+
+.my-form-field input, select, textarea {
+    border: 1px solid !important;
+    border-radius: 0.35rem !important;
+    border-color: #f1f3f5 !important;
+    color: #999999 !important;
+}
+
+.my-form-label {
+    color: #b3b3b3;
+}
+
+.my-form-input-little {
+    width: 60%;
+    height: 45px;
+}
+
+.my-form-input-big {
+    width: 90%;
+    height: 45px;
+}
+
+.my-form-input-tiny {
+    width: 55%;
+    height: 45px;
+    padding-top: 0.375rem;
+    padding-bottom: 0.375rem;
+    padding-left: 0.75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    background-color: #fff;
+    background-clip: padding-box;
+    -webkit-transition: border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+    transition: border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+}
+
+.my-form-input-fat {
+}
+
+.file-field {
+    position: relative;
+    width: 15%;
+    float: left;
+}
+
+.avatar-pic {
+    width: 100px;
+}
+
+.btn-file {
+}
+
+.btn-mdb-color {
+    background-color: #fff;
+    height: 40px;
+    width: 100px;
+    border: 2.5px solid #f5f5f5;
+}
+
+.waves-effect {
+    position: relative;
+    padding: 5px;
+    cursor: pointer;
+    overflow: hidden;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.file-field span {
+    cursor: pointer;
+    color: #b3b3b3;
+    font-weight: 600;
+    font-size: 10px;
+}
+
+.file-field span i {
+    margin-right: 10px;
+    cursor: pointer;
+    color: #d9d9d9;
+}
+
+.file-field input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    cursor: pointer;
+    opacity: 0;
+}
+
+[type="date"] {
+  background:#fff url(../../public/build/datepicker.png)  97% 50% no-repeat ;
+}
+[type="date"]::-webkit-inner-spin-button {
+  display: none;
+}
+[type="date"]::-webkit-calendar-picker-indicator {
+  opacity: 0;
+}
+
+select {
+  /* for Firefox */
+  -moz-appearance: none;
+  /* for Chrome */
+  -webkit-appearance: none;
+
+  background: url(../../public/build/select-caret.png) no-repeat right white;
+  cursor: pointer;
+}
+
+/* For IE10 */
+select::-ms-expand {
+  display: none;
+}
+
+.submit-button {
+    width: 140px;
+    height: 40px;
+    background-color: #cf1740;
+    color: #ffffff;
+    font-weight: 700;
+}
+
+/* ------------------ FIN FORM ------------------- */
+/* ---------------------------------------------- */
+/* --------------------------------------------- */
+
+.initial-height {
+    height: initial;
 }

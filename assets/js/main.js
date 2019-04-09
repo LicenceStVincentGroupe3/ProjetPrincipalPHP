@@ -44,4 +44,5 @@ $(document).ready( function () {
 	    trimWhitespace: false              // (Boolean), remove all leading/trailing newlines, spaces, and tabs from cell text in the exported file(s)
 	});
 	})**/
+
 } );

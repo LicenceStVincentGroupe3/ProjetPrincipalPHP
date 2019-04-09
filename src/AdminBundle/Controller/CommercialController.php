@@ -3,13 +3,16 @@
 namespace App\AdminBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use App\AdminBundle\Entity\Commercial;
-use App\AdminBundle\Form\CommercialType;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\VarDumper\VarDumper;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use App\AdminBundle\Form\CommercialType;
+use App\AdminBundle\Entity\Commercial;
 
 // Préfix url
 /**
@@ -58,7 +61,28 @@ class CommercialController extends AbstractController
 
                     $password = $passwordEncoder->encodePassword($new, $new->getPlainPassword());
                     $role = $new->getCommercialProfil();
+
+                    $commercialName = $form['commercialName']->getData();
+                    $commercialFirstName = $form['commercialFirstname']->getData();
+                    $commercialPhoto = $form['commercialPhoto']->getData();
                     
+                    $file = $commercialPhoto;
+
+                    if ($file !== null) 
+                    {
+                        $fileName = $file->getClientOriginalName();
+                        $newFileName = $commercialName.'_'.$commercialFirstName.'_'.$fileName;
+
+                        // On envoit le fichier dans le dossier images
+                        try {
+                            $file->move($this->getParameter('images_directory'), $newFileName);
+                        } catch (FileException $e) {
+                            // S'il y a un soucis pendant l'upload on catch
+                        }
+
+                        $new->setCommercialPhoto($newFileName);
+                    }
+ 
                     $new->setPassword($password);
                     $new->addRole($role);
 
@@ -135,7 +159,41 @@ class CommercialController extends AbstractController
 
                     $role = $edit->getCommercialProfil();
 
+                    $commercialName = $edit->getCommercialName();
+                    $commercialFirstName = $edit->getCommercialFirstname();
+                    $commercialPhoto = $form['commercialPhoto']->getData();
+
+                    $file = $commercialPhoto;
+
                     $entityManager = $this->getDoctrine()->getManager();
+
+                    if ($file !== null) 
+                    {
+                        // On vérifie si le fichier est en base
+                        if($edit->getCommercialPhoto() !== null) 
+                        {
+                            // Variable qui contient l'ancien fichier
+                            $oldFile = $this->getParameter('images_directory').'/'.
+                              $edit->getCommercialPhoto();
+
+                            // On supprime l'ancien fichier en local
+                            if (file_exists($oldFile)) {
+                                unlink($oldFile);
+                            }
+                        }
+
+                        $fileName = $file->getClientOriginalName();
+                        $newFileName = $commercialName.'_'.$commercialFirstName.'_'.$fileName;
+
+                        // On envoit le fichier dans le dossier images
+                        try {
+                            $file->move($this->getParameter('images_directory'), $newFileName);
+                        } catch (FileException $e) {
+                            // S'il y a un soucis pendant l'upload on catch
+                        }
+
+                        $edit->setCommercialPhoto($newFileName);
+                    }
 
                     $edit->setCommercialLastUpdate(new \DateTime());
                     $edit->addRole($role);
