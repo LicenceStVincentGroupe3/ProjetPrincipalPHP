@@ -19,6 +19,17 @@ class CompanyRepository extends ServiceEntityRepository
         parent::__construct($registry, Company::class);
     }
 
+    // Compte toutes les entreprise liées à un commercial passé en paramètre
+    public function countCompany($com)
+    {
+        $query = $this->createQueryBuilder('c');
+        $query->select('COUNT(c.id)');
+        $query->where('c.idUser = :com')->setParameter('com', $com);
+        $result = $query->getQuery()->getSingleResult();
+
+        return $result;
+    }
+
     // /**
     //  * @return Company[] Returns an array of Company objects
     //  */

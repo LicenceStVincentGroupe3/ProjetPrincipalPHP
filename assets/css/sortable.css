@@ -1,0 +1,68 @@
+@charset "UTF-8";
+
+/* Code CSS du trie des champs d'un tableau */
+.sortable-table thead th {
+    cursor: pointer;
+}
+
+.sortable-table thead th[data-sort-direction="0"] {
+  background-image: url("../../public/build/sortable-caret.png");
+  background-repeat: no-repeat;
+  background-position-x: 80%;
+  background-position-y: 50%;
+}
+
+.sortable-table thead th[data-sort-direction="1"] {
+  background-image: url("../../public/build/sortable-up-down-caret.png");
+  background-repeat: no-repeat;
+  background-position-x: 80%;
+  background-position-y: 50%;
+}
+
+.sortable-table thead th[data-sort-direction="-1"] {
+  background-image: url("../../public/build/sortable-up-down-caret.png");
+  background-repeat: no-repeat;
+  background-position-x: 80%;
+  background-position-y: 50%;
+}
+
+.sortable-table thead th:after {
+    padding-left: 7px;
+}
+
+/*.sortable-table thead th[data-sort-direction="0"]:after {
+    content: "⇕";
+}
+
+.sortable-table thead th[data-sort-direction="1"]:after {
+    background: url(../../public/build/sortable-up-down-caret.png) no-repeat right white;
+    content: "▴";
+}
+
+.sortable-table thead th[data-sort-direction="-1"]:after {
+    content: "▾";
+}*/
+
+.sortable-table.sortable-fa-icons thead th:after {
+    font-family: FontAwesome;
+}
+
+.sortable-table.sortable-fa-icons thead th[data-sort-direction="0"]:after {
+    content: "";
+}
+
+.sortable-table.sortable-fa-icons thead th[data-sort-direction="1"]:after {
+    content: "";
+}
+
+.sortable-table.sortable-fa-icons thead th[data-sort-direction="-1"]:after {
+    content: "";
+}
+
+.sortable-table .no-sortable:after {
+    padding-left: 0;
+}
+
+.sortable-table .no-sortable:after {
+    content: none;
+}
