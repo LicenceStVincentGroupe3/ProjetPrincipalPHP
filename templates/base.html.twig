@@ -48,9 +48,9 @@
                 </a>
 
                 <!-- Sidebar Toggler (Sidebar) -->
-                <!--<div class="text-center d-none d-md-inline">
+                <div class="text-center d-none d-md-inline">
                     <button class="rounded-circle border-0" id="sidebarToggle"></button>
-                </div>-->
+                </div>
 
                 <!-- Nav Item - Tableau de bord -->
                 <li class="nav-item {% if dashBordLink is defined %}active{% endif %}">
@@ -74,15 +74,17 @@
                 <hr class="sidebar-divider">
                 {% endif %}
 
+                {% if is_granted('ROLE_DIRECTEUR') %}
                 <!-- Nav Item - Entreprises -->
-                <li class="nav-item">
-                    <a class="nav-link" href="index.html">
-                    <i class="fas fa-building"></i>
-                    <span>Entreprises</span></a>
+                <li class="nav-item {% if companyLink is defined %}active{% endif %}">
+                    <a class="nav-link" href="{{ path('listCompany') }}">
+                        <i class="fas fa-user-circle"></i>
+                        <span>Entreprises</span></a>
                 </li>
 
                 <!-- Divider -->
                 <hr class="sidebar-divider">
+                {% endif %}
 
                 {% if is_granted('ROLE_RESPONSABLE') %}
                 <!-- Nav Item - Equipe commerciale -->
@@ -254,13 +256,16 @@
             <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.13.5/extensions/export/bootstrap-table-export.js"></script>
             <script src="https://rawgit.com/hhurz/tableExport.jquery.plugin/master/tableExport.js"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.13.5/extensions/filter-control/bootstrap-table-filter-control.js"></script>
+
             {{ encore_entry_script_tags('app') }}
             <!-- <script src="/build/app.js"></script> Autre façon d'appler le fichier js -->
             {{ encore_entry_script_tags('myTemplate') }}
+
             <!-- <script src="/build/myTemplate.js"></script> Autre façon d'appler le fichier js -->
             {{ encore_entry_script_tags('sortable') }}
             <!-- <link rel="stylesheet" href="/build/sortable.js"> Autre façon d'appler le fichier js -->
             <!--<script src="/build/runtime.js"></script>-->
+
         {% endblock %}
         </body>
 </html>

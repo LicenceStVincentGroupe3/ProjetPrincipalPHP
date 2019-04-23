@@ -4,9 +4,135 @@
 	{{parent()}} - Ajouter une entreprise
 {% endblock %}
 
-{% block gsbobjcom_body %}
-	<h2>Ajout d'une entreprise</h2>
-	{{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
-	{{ form_widget(form) }}
-	{{ form_end(form) }}
+{% block stylesheet %}
+	{{parent()}}
+	{{ encore_entry_link_tags('tabs') }}
+	<!-- <link rel="stylesheet" href="/build/tabs.css"> Autre façon d'appler le fichier css -->
+{% endblock %}
+
+{# {% block contentSearch %}
+{% endblock %} #}
+
+{% block h1 %}Entreprises{% endblock %}
+
+{% block contentBody %}
+
+	<div class="tabset">
+		<!-- Tab 1 -->
+		<input type="radio" name="tabset" id="tab1" aria-controls="identite" checked>
+		<label for="tab1">Identité</label>
+		<!-- Tab 2 -->
+		<input type="radio" name="tabset" id="tab2" aria-controls="contacts">
+		<label for="tab2">Contacts</label>
+		<!-- Tab 3 -->
+		<input type="radio" name="tabset" id="tab3" aria-controls="notes">
+		<label for="tab3">Notes</label>
+		<!-- Tab 4 -->
+		<input type="radio" name="tabset" id="tab4" aria-controls="historique">
+		<label for="tab4">Historique</label>
+
+		<div class="tab-panels">
+			<section id="identity" class="tab-panel">
+				{{ form_start(form, {'method': 'POST'}, {'attr': {'novalidate': 'novalidate'}}) }}
+				{{ form_label(form.CompanyLastName) }}
+				{{ form_widget(form.CompanyLastName, {'attr': {'class': 'form-control', 'placeholder': "Ex: MentalWorks"}}) }}
+				{{ form_errors(form.CompanyLastName, {'attr': {'class': 'form-error-message'}}) }}
+
+				{{ form_label(form.CompanyCode) }}
+				{{ form_widget(form.CompanyCode, {'attr': {'class': 'form-control', 'placeholder': "Ex: ABCD1234"}}) }}
+				{{ form_errors(form.CompanyCode, {'attr': {'class': 'form-error-message'}}) }}
+
+				{{ form_label(form.CompanyCodeCommercial) }}
+				{{ form_widget(form.CompanyCodeCommercial, {'attr': {'class': 'form-control', 'placeholder': "Ex: "}}) }}
+				{{ form_errors(form.CompanyCodeCommercial, {'attr': {'class': 'form-error-message'}}) }}
+
+				{{ form_label(form.CompanyStatus) }}
+				{{ form_widget(form.CompanyStatus, {'attr': {'class': 'form-control', 'placeholder': "Ex: "}}) }}
+				{{ form_errors(form.CompanyStatus, {'attr': {'class': 'form-error-message'}}) }}
+
+				{{ form_label(form.CompanyLogo) }}
+				{{ form_widget(form.CompanyLogo, {'attr': {'class': 'form-control', 'placeholder': "Ex: "}}) }}
+				{{ form_errors(form.CompanyLogo, {'attr': {'class': 'form-error-message'}}) }}
+
+				{{ form_label(form.CompanyComments) }}
+				{{ form_widget(form.CompanyComments, {'attr': {'class': 'form-control', 'placeholder': "Ex: "}}) }}
+				{{ form_errors(form.CompanyComments, {'attr': {'class': 'form-error-message'}}) }}
+
+				{{ form_label(form.CompanyAddress) }}
+				{{ form_widget(form.CompanyAddress, {'attr': {'class': 'form-control', 'placeholder': "Ex: "}}) }}
+				{{ form_errors(form.CompanyAddress, {'attr': {'class': 'form-error-message'}}) }}
+
+				{{ form_label(form.CompanyAddressSupplement) }}
+				{{ form_widget(form.CompanyAddressSupplement, {'attr': {'class': 'form-control', 'placeholder': "Ex: "}}) }}
+				{{ form_errors(form.CompanyAddressSupplement, {'attr': {'class': 'form-error-message'}}) }}
+
+				{{ form_label(form.CompanyPostalCode) }}
+				{{ form_widget(form.CompanyPostalCode, {'attr': {'class': 'form-control', 'placeholder': "Ex: "}}) }}
+				{{ form_errors(form.CompanyPostalCode, {'attr': {'class': 'form-error-message'}}) }}
+
+				{{ form_label(form.CompanyCity) }}
+				{{ form_widget(form.CompanyCity, {'attr': {'class': 'form-control', 'placeholder': "Ex: "}}) }}
+				{{ form_errors(form.CompanyCity, {'attr': {'class': 'form-error-message'}}) }}
+
+				{{ form_label(form.CompanyFax) }}
+				{{ form_widget(form.CompanyFax, {'attr': {'class': 'form-control', 'placeholder': "Ex: "}}) }}
+				{{ form_errors(form.CompanyFax, {'attr': {'class': 'form-error-message'}}) }}
+
+				{{ form_label(form.CompanyWebSite) }}
+				{{ form_widget(form.CompanyWebSite, {'attr': {'class': 'form-control', 'placeholder': "Ex: "}}) }}
+				{{ form_errors(form.CompanyWebSite, {'attr': {'class': 'form-error-message'}}) }}
+
+				{{ form_label(form.CompanyCreationDate) }}
+				{{ form_widget(form.CompanyCreationDate, {'attr': {'class': 'form-control', 'placeholder': "Ex: "}}) }}
+				{{ form_errors(form.CompanyCreationDate, {'attr': {'class': 'form-error-message'}}) }}
+
+				{{ form_label(form.CompanySiret) }}
+				{{ form_widget(form.CompanySiret, {'attr': {'class': 'form-control', 'placeholder': "Ex: "}}) }}
+				{{ form_errors(form.CompanySiret, {'attr': {'class': 'form-error-message'}}) }}
+
+				{{ form_label(form.CompanyCodeNAF) }}
+				{{ form_widget(form.CompanyCodeNAF, {'attr': {'class': 'form-control', 'placeholder': "Ex: "}}) }}
+				{{ form_errors(form.CompanyCodeNAF, {'attr': {'class': 'form-error-message'}}) }}
+
+				{{ form_label(form.CompanySource) }}
+				{{ form_widget(form.CompanySource, {'attr': {'class': 'form-control', 'placeholder': "Ex: "}}) }}
+				{{ form_errors(form.CompanySource, {'attr': {'class': 'form-error-message'}}) }}
+
+				{{ form_label(form.CompanyCodeCommercial) }}
+				{{ form_widget(form.CompanyCodeCommercial, {'attr': {'class': 'form-control', 'placeholder': "Ex: "}}) }}
+				{{ form_errors(form.CompanyCodeCommercial, {'attr': {'class': 'form-error-message'}}) }}
+
+				{{ form_label(form.CompanyStandardPhone) }}
+				{{ form_widget(form.CompanyStandardPhone, {'attr': {'class': 'form-control', 'placeholder': "Ex: "}}) }}
+				{{ form_errors(form.CompanyStandardPhone, {'attr': {'class': 'form-error-message'}}) }}
+
+				{{ form_label(form.CompanyStandardPhone) }}
+				{{ form_widget(form.CompanyStandardPhone, {'attr': {'class': 'form-control', 'placeholder': "Ex: "}}) }}
+				{{ form_errors(form.CompanyStandardPhone, {'attr': {'class': 'form-error-message'}}) }}
+
+
+				{{ form_label(form.save) }}
+				{{ form_widget(form.save, {'attr': {'class': 'form-control'}}) }}
+				{{ form_end(form) }}
+			</section>
+
+			<section id="contacts" class="tab-panel">
+				<h2>6B. Rauchbier</h2>
+				<p><strong>Overall Impression:</strong>  An elegant, malty German amber lager with a balanced, complementary beechwood smoke character. Toasty-rich malt in aroma and flavor, restrained bitterness, low to high smoke flavor, clean fermentation profile, and an attenuated finish are characteristic.</p>
+				<p><strong>History:</strong> A historical specialty of the city of Bamberg, in the Franconian region of Bavaria in Germany. Beechwood-smoked malt is used to make a Märzen-style amber lager. The smoke character of the malt varies by maltster; some breweries produce their own smoked malt (rauchmalz).</p>
+			</section>
+
+			<section id="notes" class="tab-panel">
+				<h2>6C. Dunkles Bock</h2>
+				<p><strong>Overall Impression:</strong> A dark, strong, malty German lager beer that emphasizes the malty-rich and somewhat toasty qualities of continental malts without being sweet in the finish.</p>
+				<p><strong>History:</strong> Originated in the Northern German city of Einbeck, which was a brewing center and popular exporter in the days of the Hanseatic League (14th to 17th century). Recreated in Munich starting in the 17th century. The name “bock” is based on a corruption of the name “Einbeck” in the Bavarian dialect, and was thus only used after the beer came to Munich. “Bock” also means “Ram” in German, and is often used in logos and advertisements.</p>
+			</section>
+
+			<section id="historique" class="tab-panel">
+				<h2>Historique</h2>
+			</section>
+		</div>
+	</div>
+
+	<a href="/company/list">Enregistrer</a>
 {% endblock %}

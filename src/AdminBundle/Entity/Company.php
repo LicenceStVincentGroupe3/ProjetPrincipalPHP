@@ -32,12 +32,12 @@ class Company
     private $CompanyLastName;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", nullable=true)
      */
     private $CompanyDateCreatedPlug;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", nullable=true)
      */
     private $CompanyDateUpdate;
 
@@ -93,7 +93,7 @@ class Company
     private $CompanyWebSite;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", nullable=true)
      */
     private $CompanyCreationDate;
 
