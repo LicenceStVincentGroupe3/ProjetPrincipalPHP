@@ -25,7 +25,7 @@ class CommercialType extends AbstractType
 	public function buildForm(FormBuilderInterface $builder, array $option)
 	{
 		$builder
-			->add('commercialCode', NumberType::class, ['label' => 'Code collaborateur'])
+			->add('commercialCode', TextType::class, ['label' => 'Code collaborateur'])
 			->add('commercialName', TextType::class, ['label' => 'Nom'])
 			->add('commercialFirstname', TextType::class, ['label' => 'Prénom'])
 			->add('commercialSexe', ChoiceType::class, [
