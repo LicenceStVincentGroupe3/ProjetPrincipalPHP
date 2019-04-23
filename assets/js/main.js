@@ -69,7 +69,7 @@ $(document).ready( function () {
 
 			//
 
-} );
+
 
 
 	// ---------- Tableau contenant la liste des données -------------
