@@ -59,15 +59,17 @@
                 <!-- Divider -->
                 <hr class="sidebar-divider">
 
+                {% if is_granted('ROLE_RESPONSABLE') %}
                 <!-- Nav Item - Contacts -->
-                <li class="nav-item">
-                    <a class="nav-link" href="index.html">
+                <li class="nav-item {% if contactTeamLink is defined %}active{% endif %}">
+                    <a class="nav-link" href="{{ path('listCont') }}">
                     <i class="fas fa-user-friends"></i>
                     <span>Contacts</span></a>
                 </li>
 
                 <!-- Divider -->
                 <hr class="sidebar-divider">
+                {% endif %}
 
                 <!-- Nav Item - Entreprises -->
                 <li class="nav-item">
