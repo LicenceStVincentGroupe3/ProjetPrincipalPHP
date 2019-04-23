@@ -99,18 +99,26 @@ class CompanyController extends AbstractController
      */
     public function list()
     {
-        // Appel de Doctrine
-        $display = $this->getDoctrine()->getManager();
+        if ($this->isGranted('ROLE_COMMERCIAL') || $this->isGranted('ROLE_RESPONSABLE') || $this->isGranted('ROLE_DIRECTEUR'))
+        {
+            // Appel de Doctrine
+            $display = $this->getDoctrine()->getManager();
 
-        // Variable qui contient le Repository
-        $companyRepository = $display->getRepository(Company::class);
+            // Variable qui contient le Repository
+            $companyRepository = $display->getRepository(Company::class);
 
-        // Equivalent du SELECT *
-        $list = $companyRepository->findAll();
+            // Equivalent du SELECT *
+            $list = $companyRepository->findAll();
 
-        // -------------------------------------------------------------
-        // On demande à la vue d'afficher la liste des entreprises
-        // -------------------------------------------------------------
-        return $this->render('company/list.html.twig', array('lesEntreprises' => $list)); // On affecte le tableau à la vue
+            // -------------------------------------------------------------
+            // On demande à la vue d'afficher la liste des entreprises
+            // -------------------------------------------------------------
+            return $this->render('company/list.html.twig', array('lesEntreprises' => $list, 'companyLink' => true)); // On affecte le tableau à la vue
+        }
+        else {
+            return $this->redirect($this->generateUrl('index'));
+        }
+
+
     }
 }

@@ -44,4 +44,30 @@ $(document).ready( function () {
 	    trimWhitespace: false              // (Boolean), remove all leading/trailing newlines, spaces, and tabs from cell text in the exported file(s)
 	});
 	})**/
+
+	$("#table").bootstrapTable({
+		formatNoMatches: function () {
+			return 'Aucun résultat trouvé';
+		}
+	});
+
+	var checkbox = $('input[name="btSelectAll"]')[0];
+
+	$(checkbox).on('click', function(event) {
+
+		if ($(event.target).prop('checked')) {
+			$(event.target).attr('id', 'checkAll');
+			$table.bootstrapTable('togglePagination').bootstrapTable('checkAll').bootstrapTable('togglePagination');
+		} else {
+
+			$(event.target).attr('id', 'uncheckAll');
+			$table.bootstrapTable('togglePagination').bootstrapTable('uncheckAll').bootstrapTable('togglePagination')
+
+		}
+	});
+
+			//
+
 } );
+
+
