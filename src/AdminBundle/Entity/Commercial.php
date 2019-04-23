@@ -23,7 +23,7 @@ class Commercial implements UserInterface, \Serializable
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="integer")
      * @Assert\NotBlank()
      */
     private $commercialCode;
@@ -163,6 +163,11 @@ class Commercial implements UserInterface, \Serializable
      * @ORM\Column(name="roles", type="array")
      */
     private $roles = [];
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $hierarchy;
 
     public function __construct()
     { 
@@ -410,6 +415,18 @@ class Commercial implements UserInterface, \Serializable
     public function setRemarks(?string $remarks): self
     {
         $this->remarks = $remarks;
+
+        return $this;
+    }
+
+    public function getHierarchy(): ?int
+    {
+        return $this->hierarchy;
+    }
+
+    public function setHierarchy(int $hierarchy): self
+    {
+        $this->hierarchy = $hierarchy;
 
         return $this;
     }

@@ -12,9 +12,9 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\VarDumper\VarDumper;
 use App\AdminBundle\Form\CommercialType;
-use App\AdminBundle\Entity\Commercial;
 use App\AdminBundle\Entity\Company;
 use App\AdminBundle\Entity\Contact;
+use App\AdminBundle\Entity\Commercial;
 use App\AdminBundle\Entity\CompanyCountry;
 use Symfony\Component\HttpFoundation\RequestStack;
 
@@ -40,6 +40,9 @@ class CommercialController extends AbstractController
                 // Variable qui contient le Repository
                 $companyCountry = $display->getRepository(CompanyCountry::class);
 
+                // Variable qui contient le Repository
+                $commercial = $display->getRepository(Commercial::class);
+
                 // Equivalent du SELECT *
                 $listCountry = $companyCountry->findAll();
 
@@ -61,6 +64,8 @@ class CommercialController extends AbstractController
                             'Commercial' => 'ROLE_COMMERCIAL'
                         ]
                     ]);
+
+                    $listHierarchy = $commercial->listHierarchyDirAndResp('ROLE_DIRECTEUR','ROLE_RESPONSABLE');
                 }
                 // Sinon
                 else {
@@ -70,7 +75,12 @@ class CommercialController extends AbstractController
                             'Commercial' => 'ROLE_COMMERCIAL'
                         ]
                     ]);
+
+                    $listHierarchy = $commercial->listHierarchyResp('ROLE_RESPONSABLE');
                 }
+
+                // On récupère le name de la <select>
+                $idHierarchy = $formData->request->get('hierarchy');
                 
                 $form->handleRequest($httpRequest);
 
@@ -117,6 +127,8 @@ class CommercialController extends AbstractController
                         // On l'attribut au commercial
                         $new->setIdCompanyCountry($companySelected);
                     }
+
+                    $new->setHierarchy($idHierarchy);
  
                     $new->setPassword($password);
                     $new->addRole($role);
@@ -131,7 +143,7 @@ class CommercialController extends AbstractController
                     return $this->redirect($this->generateUrl('listCommercial'));
                 }
 
-                return $this->render('commercial/new.html.twig', ['form' => $form->createView(), 'listCountry' => $listCountry, 'commercialTeamLink' => true]);
+                return $this->render('commercial/new.html.twig', ['form' => $form->createView(), 'listCountry' => $listCountry, 'listHierarchy' => $listHierarchy, 'commercialTeamLink' => true]);
             }
             
             else {
