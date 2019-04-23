@@ -13,7 +13,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -36,13 +36,13 @@ class ContactType extends AbstractType
 
     		->add('contactGender', ChoiceType::class, array('choices' => array('Homme'=>0, 'Femme'=>1)))
 
-    		->add('contactBirthDate', DateTimeType::class,  array('label' => 'Date de naissance'))
+    		->add('contactBirthDate', DateType::class,  array('label' => 'Date de naissance'))
     		->add('contactEmail', TextType::class, array('label' => 'Email'))
     		->add('contactMobilePhone', TextType::class, array('label' => 'Tel. Mobile'))
     		->add('contactDirectLandline', TextType::class, array('label' => 'Tel. Fixe direct'))
             ->add('contactLinkedinAddress', TextType::class, array('label' => 'Adresse Linkedin'))
 			->add('contactPhoto', FileType::class, ['label' => 'Photo', 'required' => false])
-            ->add('contactSourceOperation', TextType::class, array('label' => 'Opération source'))
+            ->add('contactSourceOperation', TextType::class, ['label' => 'Opération source'])
             ->add('contactComment', TextareaType::class, array('label' => 'Commentaire'))  
 
     		->add('idUser', EntityType::class, array('class' => Commercial::class,'choice_label' => 'CommercialName', 'label'=>'Commercial'))

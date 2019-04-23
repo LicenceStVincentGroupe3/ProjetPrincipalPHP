@@ -17,6 +17,9 @@
 
 {% block contentBody %}
 
+	<section>
+		<h5>Saisie d'un nouveau contact</h5>
+	</section>
 	<div class="tabset">
 		<!-- Tab 1 -->
 		<input type="radio" name="tabset" id="tab1" aria-controls="identity" checked>
@@ -25,79 +28,225 @@
 		<div class="tab-panels">
 			<section id="identity" class="tab-panel">
 				{{ form_start(form, {'method': 'POST'}, {'attr': {'novalidate': 'novalidate'}}) }}
-				{{ form_label(form.contactCode) }}
-				{{ form_widget(form.contactCode, {'attr': {'class': 'form-control', 'placeholder': "Ex: 1254789"}}) }}
+				<div class="file-field">
+					<div class="mb-4">
+						<img src="{{asset('build/Photo.png')}}" class="rounded-circle avatar-pic" title="Photo" alt="Photo de profil">
+					</div>
+					<div>
+						<div class="btn btn-mdb-color btn-file float-left waves-effect waves-light">
+							<span><i class="fas fa-sync-alt"></i>PHOTO</span>
+							{{ form_widget(form.contactPhoto) }}
+						</div>
+						{{ form_errors(form.contactPhoto, {'attr': {'class': 'form-error-message'}}) }}
+					</div>
+				</div>
 
-				{{ form_errors(form.contactCode, {'attr': {'class': 'form-error-message'}}) }}
+				<div class="row">
+					<div class="col-lg-7 mx-auto">
+						<div class="row my-form-field">
+							<div class="col-lg-4 mx-auto">
+								{{ form_label(form.contactCode, null, {'label_attr': {'class': 'my-form-label'}}) }}
+							</div>
+							<div class="col-lg-7 mx-auto">
+								{{ form_widget(form.contactCode, {'attr': {'class': 'form-control my-form-input-little', 'placeholder': "Ex: 1254789"}}) }}
 
-				{{ form_label(form.contactGender) }}
-				{{ form_widget(form.contactGender, {'attr': {'class': 'form-control'}}) }}
+								{{ form_errors(form.contactCode, {'attr': {'class': 'form-error-message'}}) }}
+							</div>
+						</div>
+						<div class="row my-form-field">
+							<div class="col-lg-4 mx-auto">
+								{{ form_label(form.contactGender, 'Genre', {'label_attr': {'class': 'my-form-label'}}) }}
+							</div>
+							<div class="col-lg-7 mx-auto">
+								{{ form_widget(form.contactGender, {'attr': {'class': 'form-control my-form-input-little'}}) }}
 
-				{{ form_errors(form.contactGender, {'attr': {'class': 'form-error-message'}}) }}
+								{{ form_errors(form.contactGender, {'attr': {'class': 'form-error-message'}}) }}
+							</div>
+						</div>
+						<div class="row my-form-field">
+							<div class="col-lg-4 mx-auto">
+								{{ form_label(form.contactFirstName, null, {'label_attr': {'class': 'my-form-label'}}) }}
+							</div>
+							<div class="col-lg-7 mx-auto">
+								{{ form_widget(form.contactFirstName, {'attr': {'class': 'form-control my-form-input-big'}}) }}
 
-				{{ form_label(form.contactFirstName) }}
-				{{ form_widget(form.contactFirstName, {'attr': {'class': 'form-control'}}) }}
+								{{ form_errors(form.contactFirstName, {'attr': {'class': 'form-error-message'}}) }}
+							</div>
+						</div>
+						<div class="row my-form-field">
+							<div class="col-lg-4 mx-auto">
+								{{ form_label(form.contactLastName, null, {'label_attr': {'class': 'my-form-label'}}) }}
+							</div>
+							<div class="col-lg-7 mx-auto">
+								{{ form_widget(form.contactLastName, {'attr': {'class': 'form-control my-form-input-big'}}) }}
 
-				{{ form_errors(form.contactFirstName, {'attr': {'class': 'form-error-message'}}) }}
+								{{ form_errors(form.contactLastName, {'attr': {'class': 'form-error-message'}}) }}
+							</div>
+						</div>
+						<div class="row my-form-field">
+							<div class="col-lg-4 mx-auto">
+								{{ form_label(form.contactBirthDate, null, {'label_attr': {'class': 'my-form-label'}}) }}
+							</div>
+							<div class="col-lg-7 mx-auto">
+								<div class="form-group">
+									<div class='input-group date' id='datetimepicker2'>
+										{{ form_widget(form.contactBirthDate, {'attr': {'class': 'my-form-input-tiny'}}) }}
 
-				{{ form_label(form.contactLastName) }}
-				{{ form_widget(form.contactLastName, {'attr': {'class': 'form-control'}}) }}
+										{{ form_errors(form.contactBirthDate, {'attr': {'class': 'form-error-message'}}) }}
+										<span class="input-group-addon">
+						                        <span class="glyphicon glyphicon-calendar"></span>
+						                    </span>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row my-form-field initial-height">
+							<div class="col-lg-4 mx-auto">
+								{{ form_label(form.idContactJob, null, {'label_attr': {'class': 'my-form-label'}}) }}
+							</div>
+							<div class="col-lg-7 mx-auto">
+								{{ form_widget(form.idContactJob, {'attr': {'class': ' my-form-input-tiny'}}) }}
 
-				{{ form_errors(form.contactLastName, {'attr': {'class': 'form-error-message'}}) }}
+								{{ form_errors(form.idContactJob, {'attr': {'class': 'form-error-message'}}) }}
+							</div>
+						</div>
+						<div class="row my-form-field">
+							<div class="col-lg-4 mx-auto">
+								{{ form_label(form.contactMobilePhone, null, {'label_attr': {'class': 'my-form-label'}}) }}
+							</div>
+							<div class="col-lg-7 mx-auto">
+								{{ form_widget(form.contactMobilePhone, {'attr': {'class': 'form-control my-form-input-big'}}) }}
 
-				{{ form_label(form.contactBirthDate, 'Date de Naissance', {'label_attr': {'class': 'CUSTOM_LABEL_CLASS'}}) }}
-				{{ form_widget(form.contactBirthDate, {'attr': {'class': 'form-control'}}) }}
+								{{ form_errors(form.contactMobilePhone, {'attr': {'class': 'form-error-message'}}) }}
+							</div>
+						</div>
+						<div class="row my-form-field">
+							<div class="col-lg-4 mx-auto">
+								{{ form_label(form.contactDirectLandline, null, {'label_attr': {'class': 'my-form-label'}}) }}
+							</div>
+							<div class="col-lg-7 mx-auto">
+								{{ form_widget(form.contactDirectLandline, {'attr': {'class': 'form-control my-form-input-big'}}) }}
 
-				{{ form_errors(form.contactBirthDate, {'attr': {'class': 'form-error-message'}}) }}
+								{{ form_errors(form.contactDirectLandline, {'attr': {'class': 'form-error-message'}}) }}
+							</div>
+						</div>
+						<div class="row my-form-field">
+							<div class="col-lg-4 mx-auto">
+								{{ form_label(form.contactComment, null, {'label_attr': {'class': 'my-form-label'}}) }}
+							</div>
+							<div class="col-lg-7 mx-auto">
+								{{ form_widget(form.contactComment, {'attr': {'class': 'form-control my-form-input-big'}}) }}
 
-				{{ form_label(form.idContactJob) }}
-				{{ form_widget(form.idContactJob, {'attr': {'class': 'form-control'}}) }}
+								{{ form_errors(form.contactComment, {'attr': {'class': 'form-error-message'}}) }}
+							</div>
+						</div>
+						<div class="row my-form-field">
+							<div class="col-lg-4 mx-auto">
+								{{ form_label(form.contactLinkedinAddress, null, {'label_attr': {'class': 'my-form-label'}}) }}
+							</div>
+							<div class="col-lg-7 mx-auto">
+								{{ form_widget(form.contactLinkedinAddress, {'attr': {'class': 'form-control my-form-input-big'}}) }}
 
-				{{ form_errors(form.idContactJob, {'attr': {'class': 'form-error-message'}}) }}
+								{{ form_errors(form.contactLinkedinAddress, {'attr': {'class': 'form-error-message'}}) }}
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-5 mx-auto">
+						<div class="row my-form-field initial-height">
+							<div class="col-lg-5 mx-auto">
+								{{ form_label(form.contactEmail, null, {'label_attr': {'class': 'my-form-label'}}) }}
+							</div>
+							<div class="col-lg-7 mx-auto">
+								{{ form_widget(form.contactEmail, {'attr': {'class': 'form-control my-form-input-big'}}) }}
 
-				{{ form_label(form.contactMobilePhone) }}
-				{{ form_widget(form.contactMobilePhone, {'attr': {'class': 'form-control'}}) }}
+								{{ form_errors(form.contactEmail, {'attr': {'class': 'form-error-message'}}) }}
 
-				{{ form_errors(form.contactMobilePhone, {'attr': {'class': 'form-error-message'}}) }}
+								{{ form_widget(form.contactStatus, {'attr': {'class': 'form-control my-form-input-big'}}) }}
 
-				{{ form_label(form.contactLinkedinAddress) }}
-				{{ form_widget(form.contactLinkedinAddress, {'attr': {'class': 'form-control'}}) }}
+								{{ form_errors(form.contactStatus, {'attr': {'class': 'form-error-message'}}) }}
+							</div>
+						</div>
+						<div class="row my-form-field">
+							<div class="col-lg-5 mx-auto">
+								{{ form_label(form.contactSourceOperation, null, {'label_attr': {'class': 'my-form-label'}}) }}
+							</div>
+							<div class="col-lg-7 mx-auto">
+								{{ form_widget(form.contactSourceOperation, {'attr': {'class': 'form-control my-form-input-big'}}) }}
 
-				{{ form_errors(form.contactLinkedinAddress, {'attr': {'class': 'form-error-message'}}) }}
+								{{ form_errors(form.contactSourceOperation, {'attr': {'class': 'form-error-message'}}) }}
+							</div>
+						</div>
+						<div class="row my-form-field">
+							<div class="col-lg-5 mx-auto">
+								{{ form_label(form.idCompany, null, {'label_attr': {'class': 'my-form-label'}}) }}
+							</div>
+							<div class="col-lg-7 mx-auto">
+								{{ form_widget(form.idCompany, {'attr': {'class': 'form-control my-form-input-big'}}) }}
 
-				{{ form_label(form.contactEmail) }}
-				{{ form_widget(form.contactEmail, {'attr': {'class': 'form-control'}}) }}
+								{{ form_errors(form.idCompany, {'attr': {'class': 'form-error-message'}}) }}
+							</div>
+						</div>
+						<div class="row my-form-field">
+							<div class="col-lg-5 mx-auto">
+								{{ form_label(form.idUser, 'Responsable N+1', {'label_attr': {'class': 'my-form-label'}}) }}
+							</div>
+							<div class="col-lg-7 mx-auto">
+								{{ form_widget(form.idUser, {'attr': {'class': 'form-control my-form-input-big'}}) }}
 
-				{{ form_errors(form.contactEmail, {'attr': {'class': 'form-error-message'}}) }}
+								{{ form_errors(form.idUser, {'attr': {'class': 'form-error-message'}}) }}
+							</div>
+						</div>
+						<div class="row my-form-field">
+							<div class="col-lg-5 mx-auto">
+								{{ form_label(form.contactDecisionLevel, 'Pouvoir décisionnel', {'label_attr': {'class': 'my-form-label'}}) }}
+							</div>
+							<div class="col-lg-7 mx-auto">
+								{{ form_widget(form.contactDecisionLevel, {'attr': {'class': 'form-control my-form-input-big'}}) }}
 
-				{{ form_label(form.idCompany) }}
-				{{ form_widget(form.idCompany, {'attr': {'class': 'form-control'}}) }}
+								{{ form_errors(form.contactDecisionLevel, {'attr': {'class': 'form-error-message'}}) }}
+							</div>
+						</div>
+						<div class="row my-form-field">
+							<div class="col-lg-5 mx-auto">
+								{{ form_label(form.contactOptInNewsletterCustomers, null, {'label_attr': {'class': 'my-form-label'}}) }}
+							</div>
+							<div class="col-lg-7 mx-auto">
+								{{ form_widget(form.contactOptInNewsletterCustomers, {'attr': {'class': 'form-control my-form-input-big'}}) }}
 
-				{{ form_errors(form.idCompany, {'attr': {'class': 'form-error-message'}}) }}
+								{{ form_errors(form.contactOptInNewsletterCustomers, {'attr': {'class': 'form-error-message'}}) }}
+							</div>
+						</div><br><br><br>
+						<div class="row my-form-field">
+							<div class="col-lg-5 mx-auto">
+								{{ form_label(form.contactOptInCommercialOffers, null, {'label_attr': {'class': 'my-form-label'}}) }}
+							</div>
+							<div class="col-lg-7 mx-auto">
+								{{ form_widget(form.contactOptInCommercialOffers, {'attr': {'class': 'form-control my-form-input-big'}}) }}
 
-				{{ form_label(form.contactDecisionLevel) }}
-				{{ form_widget(form.contactDecisionLevel, {'attr': {'class': 'form-control'}}) }}
+								{{ form_errors(form.contactOptInCommercialOffers, {'attr': {'class': 'form-error-message'}}) }}
+							</div>
+						</div>
+					</div>
+				</div>
 
-				{{ form_errors(form.contactDecisionLevel, {'attr': {'class': 'form-error-message'}}) }}
-
-				{{ form_label(form.contactDirectLandline) }}
-				{{ form_widget(form.contactDirectLandline, {'attr': {'class': 'form-control'}}) }}
-
-				{{ form_errors(form.contactDirectLandline, {'attr': {'class': 'form-error-message'}}) }}
-
-				{{ form_label(form.contactComment) }}
-				{{ form_widget(form.contactComment, {'attr': {'class': 'form-control'}}) }}
-
-				{{ form_errors(form.contactComment, {'attr': {'class': 'form-error-message'}}) }}
-
-				{{ form_label(form.contactPhoto) }}
-				{{ form_widget(form.contactPhoto, {'attr': {'class': 'form-control'}}) }}
-
-				{{ form_errors(form.contactPhoto, {'attr': {'class': 'form-error-message'}}) }}
-
-				{{ form_label(form.save) }}
-				{{ form_widget(form.save, {'attr': {'class': 'form-control'}}) }}
+				{{ form_widget(form.save, {'attr': {'class': 'btn submit-button'}}) }}
 				{{ form_end(form) }}
+			</section>
+
+			<section id="company" class="tab-panel">
+				<h2>6B. Rauchbier</h2>
+				<p><strong>Overall Impression:</strong>  An elegant, malty German amber lager with a balanced, complementary beechwood smoke character. Toasty-rich malt in aroma and flavor, restrained bitterness, low to high smoke flavor, clean fermentation profile, and an attenuated finish are characteristic.</p>
+				<p><strong>History:</strong> A historical specialty of the city of Bamberg, in the Franconian region of Bavaria in Germany. Beechwood-smoked malt is used to make a Märzen-style amber lager. The smoke character of the malt varies by maltster; some breweries produce their own smoked malt (rauchmalz).</p>
+			</section>
+
+			<section id="contact" class="tab-panel">
+				<h2>6C. Dunkles Bock</h2>
+				<p><strong>Overall Impression:</strong> A dark, strong, malty German lager beer that emphasizes the malty-rich and somewhat toasty qualities of continental malts without being sweet in the finish.</p>
+				<p><strong>History:</strong> Originated in the Northern German city of Einbeck, which was a brewing center and popular exporter in the days of the Hanseatic League (14th to 17th century). Recreated in Munich starting in the 17th century. The name “bock” is based on a corruption of the name “Einbeck” in the Bavarian dialect, and was thus only used after the beer came to Munich. “Bock” also means “Ram” in German, and is often used in logos and advertisements.</p>
+			</section>
+
+			<section id="historic" class="tab-panel">
+				<h2>Historique</h2>
 			</section>
 		</div>
 	</div>

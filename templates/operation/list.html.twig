@@ -1,22 +1,170 @@
-{# {% extends 'base.html.twig' %} #}
+{% extends 'layout.html.twig' %}
 
-{# {% block title %}Hello {{ controller_name }}!{% endblock %} #}
+{% block title %}
+    {{ parent()}}Equipe commerciale
+{% endblock %}
 
-{# {% block body %} #}
+{# {% block contentSearch %}
+{% endblock %} #}
 
-{% for operation in listOp %}
-<tr>
-  <td><a href="{{ path('editOperation', {'id':operation.Id}) }}">{{operation.OperationName}}</a></td>
-  <td>
-  	<a class="btn btn-danger" href="{{ path('deleteOperation', {'id':operation.Id}) }}">
-  		<i class="glyphicon glyphicon-trash"></i>Supprimer
-  	</a>
-  </td>
-</tr>
-{% else %}
-<tr>
-  <td>Aucune opération de campagne marketing</td>
-</tr>
-{% endfor %}
+{% block h1 %}Equipe commerciale{% endblock %}
 
-{# {% endblock %} #}
+{% block contentBodyContainer %}
+<div>
+    {% block contentBody %}
+
+    <!--<button id="export" class="btn btn-success pull-right"><i class="glyphicon glyphicon-export"></i>&nbsp;Exporter</button>-->
+
+
+    <!-- <div id="toolbar">
+            <select class="form-control">
+                    <option value="">Exporter cette page</option>
+                    <option value="all">Exporter tous</option>
+                    <option value="selected">Exporter les lignes cochées</option>
+            </select>
+    </div> -->
+
+    <form method="post">
+        <div class="table-responsive">
+            <table id="table" class="table sortable-table">
+                <thead>
+                <tr>
+                    <th class="text-center" data-field="state" data-checkbox="true"></th>
+                    <th data-field="prenom" data-sortable="true">Nom de l'opération</th>
+                    <th data-field="nom" data-sortable="true">Date de création</th>
+                    <th data-field="entreprise" data-sortable="true">Entreprises ciblées</th>
+                    <th data-field="fonction" data-sortable="true">Contacts ciblées</th>
+                    <th data-field="email" data-sortable="true">Auteur</th>
+                    <th data-field="telfix" data-sortable="true">Statut</th>
+                    <th data-field="telfix" data-sortable="true">Mise à jour</th>
+                    <th class="table-field-other no-sortable" data-field="autre">&bull;&bull;&bull;</th>
+                    <th data-field="supprimer">Supprimer</th>
+                </tr>
+                </thead>
+                <tbody id="myTableBody">
+                {% for operation in listOp %}
+                    <tr>
+                        <td>
+                            <input type="checkbox" class="checkthis" name="deleteData[]" value="{{ operation.Id }}">
+                        </td>
+                        <td>
+                            <a href="{{ path('editOperation', {'id':operation.Id}) }}">	{{operation.operationName}}
+                            </a>
+                        </td>
+                        <td>
+                            <a href="{{ path('editOperation', {'id':operation.Id}) }}">	{{operation.operationDisplayed}}
+                            </a>
+                        </td>
+                        <td>
+                            <a href="{{ path('editOperation', {'id':operation.Id}) }}">	{{operation.operationName}}
+                            </a>
+                        </td>
+                        <td>
+                            <a href="{{ path('editOperation', {'id':operation.Id}) }}">	{{operation.operationName}}
+                            </a>
+                        </td>
+
+                        <td>
+                            <a href="{{ path('editOperation', {'id':operation.Id}) }}">	{{operation.operationName}}
+                            </a>
+                        </td>
+
+                        <td>
+                            <a href="{{ path('editOperation', {'id':operation.Id}) }}">	{{operation.operationName}}
+                            </a>
+                        </td>
+
+                        <td>
+                            <a href="{{ path('editOperation', {'id':operation.Id}) }}">	{{operation.operationName}}
+                            </a>
+                        </td>
+
+                        <td>
+                            <a href="{{ path('editOperation', {'id':operation.Id}) }}">	{{operation.operationName}}
+                            </a>
+                        </td>
+                        <td>
+                            <a class="btn btn-danger" href="{{ path('deleteOperation', {'id':operation.Id}) }}">
+                                <i class="glyphicon glyphicon-trash"></i>
+                                X
+                            </a>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td>Aucune Opération</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <!-- modal-dialog -->
+        <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+            <!-- modal-content -->
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                        </button>
+                        <h4 class="modal-title custom_align" id="Heading">Delete this entry</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="alert alert-danger">
+                            <span class="glyphicon glyphicon-warning-sign"></span>
+                            Are you sure you want to delete this Record?
+                        </div>
+                    </div>
+                    <div class="modal-footer ">
+                        <button type="button" class="btn btn-success">
+                            <span class="glyphicon glyphicon-ok-sign"></span>
+                            <input type="submit" name="delete" id="delete" value="Oui">
+                        </button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">
+                            <span class="glyphicon glyphicon-remove"></span>
+                            No
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <div class="table-after">
+        <div class="row">
+            <div class="table-after-entry">
+                <select id="table-nb-entry" class="table-nb-entry unset-outline">
+                    <option value="15">15</option>
+                    <option value="20">20</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                    <option value="200">200</option>
+                </select>
+            </div>
+            <div class="table-nb-functions">
+                <!-- <button class="btn btn-danger pull-right"  data-title="Delete" data-toggle="modal" data-target="#delete">
+                    <span class="glyphicon glyphicon-trash"></span>
+                    Supprimer
+                </button> -->
+                <span class="table-after-delete" data-title="Delete" data-toggle="modal" data-target="#delete">
+					<i class="fas fa-trash"></i>
+				</span>
+                <span class="table-after-add">
+					<i class="fas fa-user-plus"></i>
+				</span>
+            </div>
+            <div class="table-after-pagination">
+                <ul class="pagination pagination-lg pager" id="myPager"></ul>
+            </div>
+            <div class="table-after-btn-add">
+                <button class="btn add-button">
+                    <a href="{{ path('newOperation') }}">Ajouter</a>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    {% endblock %}
+</div>
+{% endblock %}
