@@ -1,0 +1,20 @@
+/*commercial-nbCompanya:hover {
+    text-decoration: none;
+}
+
+.commercial-nbCompany, .commercial-nbContact {
+    width: 20%;
+    border-radius: 100px;
+    text-align: center;
+}
+
+.commercial-nbCompany a, .commercial-nbContact a {
+    color: #ffffff!important;
+}
+
+.commercial-nbCompany {
+    background-color: #6fb4c9;
+}*/
+#table tbody td a:hover {
+    text-decoration: none;
+}
