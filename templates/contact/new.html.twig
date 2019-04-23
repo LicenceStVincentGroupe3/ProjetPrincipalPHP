@@ -95,6 +95,26 @@
 
 				{{ form_errors(form.contactPhoto, {'attr': {'class': 'form-error-message'}}) }}
 
+				{{ form_label(form.contactStatus) }}
+				{{ form_widget(form.contactStatus, {'attr': {'class': 'form-control my-form-input-big'}}) }}
+				{{ form_errors(form.contactStatus, {'attr': {'class': 'form-error-message'}}) }}
+
+				{{ form_label(form.contactSourceOperation) }}
+				{{ form_widget(form.contactSourceOperation, {'attr': {'class': 'form-control my-form-input-big'}}) }}
+				{{ form_errors(form.contactSourceOperation, {'attr': {'class': 'form-error-message'}}) }}
+
+				{{ form_label(form.idUser) }}
+				{{ form_widget(form.idUser, {'attr': {'class': 'form-control my-form-input-big'}}) }}
+				{{ form_errors(form.idUser, {'attr': {'class': 'form-error-message'}}) }}
+
+				{{ form_label(form.contactOptInCommercialOffers) }}
+				{{ form_widget(form.contactOptInCommercialOffers, {'attr': {'class': 'form-control my-form-input-big'}}) }}
+				{{ form_errors(form.contactOptInCommercialOffers, {'attr': {'class': 'form-error-message'}}) }}
+
+				{{ form_label(form.contactOptInNewsletterCustomers) }}
+				{{ form_widget(form.contactOptInNewsletterCustomers, {'attr': {'class': 'form-control my-form-input-big'}}) }}
+				{{ form_errors(form.contactOptInNewsletterCustomers, {'attr': {'class': 'form-error-message'}}) }}
+
 				{{ form_label(form.save) }}
 				{{ form_widget(form.save, {'attr': {'class': 'form-control'}}) }}
 				{{ form_end(form) }}

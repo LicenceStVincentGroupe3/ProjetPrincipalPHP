@@ -42,7 +42,7 @@ class ContactType extends AbstractType
     		->add('contactDirectLandline', TextType::class, array('label' => 'Tel. Fixe direct'))
             ->add('contactLinkedinAddress', TextType::class, array('label' => 'Adresse Linkedin'))
 			->add('contactPhoto', FileType::class, ['label' => 'Photo', 'required' => false])
-            ->add('contactSourceOperation', TextType::class, array('label' => 'Opération source'))
+            ->add('contactSourceOperation', TextType::class, ['label' => 'Opération source'])
             ->add('contactComment', TextareaType::class, array('label' => 'Commentaire'))  
 
     		->add('idUser', EntityType::class, array('class' => Commercial::class,'choice_label' => 'CommercialName', 'label'=>'Commercial'))
