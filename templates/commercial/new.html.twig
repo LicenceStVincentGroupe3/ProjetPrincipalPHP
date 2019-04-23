@@ -224,6 +224,29 @@
 									{{ form_errors(form.commercialProfil, {'attr': {'class': 'form-error-message'}}) }}
 								</div>
 							</div>
+							{% if listHierarchy is defined %}
+							<div class="row my-form-field">
+								<div class="col-lg-5 mx-auto">
+									<label class="my-form-label" for="hierarchy">Responsable N+1</label>
+								</div>
+								<div class="col-lg-7 mx-auto">
+									<select id="hierarchy" name="hierarchy" class="form-control my-form-input-big">
+										<option value="0">A définir</option>
+										{% for hierarchy in listHierarchy %}
+										<option value="{{hierarchy.Id}}">
+											{% if hierarchy.CommercialProfil == 'ROLE_DIRECTEUR' %}
+												{% set hierarchyName = 'Directeur' %}
+											{% elseif hierarchy.CommercialProfil == 'ROLE_RESPONSABLE' %}
+												{% set hierarchyName = 'Responsable' %}
+											{% endif %}
+											{{hierarchyName}}
+											{{hierarchy.CommercialFirstName}} {{hierarchy.CommercialName}}
+										</option>
+										{% endfor %}
+									</select>
+								</div>
+							</div>
+							{% endif %}
 							<div class="row my-form-field">
 								<div class="col-lg-5 mx-auto">
 									{{ form_label(form.commercialPhone, null, {'label_attr': {'class': 'my-form-label'}}) }}
