@@ -34,6 +34,7 @@ Encore
     .addEntry('myTemplate', './assets/js/mytemplate.js')
     .addEntry('login', './assets/js/login.js')
     .addEntry('tabs', './assets/js/tabs.js')
+    .addEntry('sortable', './assets/js/sortable-table.js')
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()

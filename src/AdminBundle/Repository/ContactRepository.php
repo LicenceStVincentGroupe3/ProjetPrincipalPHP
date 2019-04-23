@@ -19,6 +19,17 @@ class ContactRepository extends ServiceEntityRepository
         parent::__construct($registry, Contact::class);
     }
 
+    // Compte tous les contacts liés à un commercial passé en paramètre
+    public function countContact($com)
+    {
+        $query = $this->createQueryBuilder('c');
+        $query->select('COUNT(c.id)');
+        $query->where('c.idUser = :com')->setParameter('com', $com);
+        $result = $query->getQuery()->getSingleResult();
+
+        return $result;
+    }
+
     // /**
     //  * @return Contact[] Returns an array of Contact objects
     //  */

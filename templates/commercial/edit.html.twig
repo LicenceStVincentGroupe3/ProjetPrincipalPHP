@@ -37,16 +37,14 @@
 				<p>La dernière modification a été effectuée le {{ editCom.CommercialLastUpdate|date("d/m/Y", "Europe/Paris") }} à {{ editCom.CommercialLastUpdate|date("H", "Europe/Paris") }}h{{ editCom.CommercialLastUpdate|date("i", "Europe/Paris") }}</p>
 				{% endif %}
 
-				{% if editCom.CommercialPhoto is not null %}
-				<img src="{{asset('build/images/' ~ editCom.CommercialPhoto)}}" class="rounded-circle avatar-pic" title="Photo" alt="Photo de profil">
-				{% else %}
-				<img src="{{asset('build/Photo.png')}}" class="rounded-circle avatar-pic" title="Photo" alt="Photo de profil">
-				{% endif %}
-
 				{{ form_start(form, {'method': 'POST'}, {'attr': {'novalidate': 'novalidate'}}) }}
 					<div class="file-field">
 					    <div class="mb-4">
-					      <img src="{{asset('build/Photo.png')}}" class="rounded-circle avatar-pic" title="Photo" alt="Photo de profil">
+					      	{% if editCom.CommercialPhoto is not null %}
+							<img src="{{asset('build/images/' ~ editCom.CommercialPhoto)}}" class="rounded-circle avatar-pic" title="Photo" alt="Photo de profil">
+							{% else %}
+							<img src="{{asset('build/Photo.png')}}" class="rounded-circle avatar-pic" title="Photo" alt="Photo de profil">
+							{% endif %}
 					    </div>
 					    <div>
 					      <div class="btn btn-mdb-color btn-file float-left waves-effect waves-light">
@@ -198,6 +196,23 @@
 								</div>
 							</div>
 							<div class="row space"></div>
+							<div class="row my-form-field">
+								<div class="col-lg-5 mx-auto">
+									<label class="my-form-label" for="country">Zone affectée</label>
+								</div>
+								<div class="col-lg-7 mx-auto">
+									<select id="country" name="country" class="form-control my-form-input-big">
+										{% if editCom.IdCompanyCountry is null %}
+											<option value="0">A définir</option>
+										{% else %}
+											<option value="{{editCom.IdCompanyCountry.Id}}">{{editCom.IdCompanyCountry.Label}}</option>
+										{% endif %}
+										{% for country in listCountry %}
+											<option value="{{country.Id}}">{{country.Label}}</option>
+										{% endfor %}
+									</select>
+								</div>
+							</div>
 							<div class="row my-form-field">
 								<div class="col-lg-5 mx-auto">
 									{{ form_label(form.commercialJob, null, {'label_attr': {'class': 'my-form-label'}}) }}
