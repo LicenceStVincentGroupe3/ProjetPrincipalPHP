@@ -19,6 +19,18 @@ class CommercialRepository extends ServiceEntityRepository
         parent::__construct($registry, Commercial::class);
     }
 
+    // Suppression un ou plusieurs commercial(commerciaux) selectionné(s)
+    public function deleteCommercial($listCom)
+    {
+        $em = $this->getEntityManager();
+        $query = $em->createQueryBuilder();
+        $query->delete(Commercial::class, 'c');
+        $query->where('c.id IN (:listCom)')->setParameter('listCom', array_values($listCom));
+        $rowDeleted = $query->getQuery()->execute();
+
+        return $rowDeleted;
+    }
+
     // /**
     //  * @return Commercial[] Returns an array of Commercial objects
     //  */

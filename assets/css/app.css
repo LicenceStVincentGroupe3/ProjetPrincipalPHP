@@ -2,6 +2,10 @@ a:hover {
 	text-decoration: none;
 }
 
+.unset-outline {
+    outline: none;
+}
+
 .add-button {
 	width: 120px;
 	height: 40px;
@@ -34,7 +38,7 @@ a:hover {
     width: 220px;
     background-color: #fff;
     padding: 0 25% 0 25%;
-    border: 1px solid #d1d3e2;
+    border: 1px solid;
 	border-width: .125rem;
 	border-radius: 9999px;
 	border-color: #f1f3f5;
@@ -63,104 +67,29 @@ a:hover {
 	color: #0277bd;
 }
 
-/* ------- PAGINATION/ROWS PER PAGE ---------- */
+/* ------------------ TABLE  ----------------- */
 /* ------------------------------------------- */
 /* ------------------------------------------- */
-.bootstrap-table .fixed-table-pagination>.pagination-detail .pagination-info {
-    display: none;
+.sortable {
+    /*width: 145px;*/
+    font-weight: bold;
+    font-size: 16px;
+    color: #888888;
 }
 
-.page-list .btn {
-	text-align: left;
-}
 
-.page-list .btn-secondary {
-	width: 80px;
-    height: 40px;
-	color: #b3b3b3;
-	background-color: #ffffff;
-	border-color: #f1f3f5;
-}
-
-.page-list .btn-secondary:hover {
-	background-color: #eeeeee;
-}
-
-.page-list .page-size {
-	text-align: left;
-	margin-right: 25px;
-}
-
-.dropup .dropdown-toggle::after {
-	border-top: .3em solid;
-	border-bottom: 0;
-	/*border: none!important;
-	font: normal normal normal 14px/1 FontAwesome;
-	content: "\f107"!important;  the desired FontAwesome icon
-	vertical-align: 0;  to center vertically */
-}
-
-.fixed-table-pagination .pagination {
-    width: 285px;
-	justify-content: space-around;
-}
-
-.fixed-table-pagination .pagination .page-item {
-	width: 40px;
-    height: 40px;
-    color: #b3b3b3;
-	background-color: #ffffff;
-    text-align: center;
-}
-
-.fixed-table-pagination .pagination .page-item .page-link {
-    color: #b3b3b3;
-    border-width: .125rem;
-    border-radius: 7.5px;
-    border-color: #f1f3f5;
-}
-
-.fixed-table-pagination .pagination .page-item .page-link:hover {
-	background-color: #eeeeee;
-}
-
-.fixed-table-pagination .pagination .page-item.active .page-link {
-    color: #ffffff;
-	background-color: #cecece;
-	border-radius: 7.5px;
-	border-width: .125rem;
-	border-color: #f1f3f5;
-}
-
-.fixed-table-pagination .pagination .page-pre, .fixed-table-pagination .pagination .page-next {
-	width: 40px;
-    height: 40px;
-}
-
-.fixed-table-pagination .pagination .page-pre .page-link, .fixed-table-pagination .pagination .page-next .page-link {
-    border-radius: 7.5px;
-    border-width: .125rem;
-    border-color: #f1f3f5;
-}
-
-.fixed-table-pagination {
-	padding: 0 2% 0 2%;
-}
-
-/* ------------------------------------------- */
-/* ------------------------------------------- */
 
 .bootstrap-table .fixed-table-container {
-	padding: 0;
+    padding: 0;
     position: unset;
 }
 
 .bootstrap-table .fixed-table-toolbar {
-	display: none;
+    display: none;
 }
 
 .bootstrap-table .fixed-table-container .fixed-table-body .table-bordered {
-	border: unset;
+    border: unset;
 }
 
 .bootstrap-table .fixed-table-container .fixed-table-body .table>tbody>tr>td {
@@ -173,15 +102,15 @@ a:hover {
 }*/
 
 .bootstrap-table .fixed-table-container .table thead th {
-	padding: 10px 0px 10px 0px;
+    padding: 10px 0px 10px 0px;
     /*vertical-align: unset;
     padding: unset;
     margin: unset;*/
 }
 
 .bootstrap-table .fixed-table-container .table-hover tbody tr:hover {
-	background-color: rgba(255,0,0,0.03);
-	cursor: pointer;
+    background-color: rgba(255,0,0,0.03);
+    cursor: pointer;
 }
 
 .bootstrap-table .fixed-table-container .table tbody tr.selected td {
@@ -189,9 +118,9 @@ a:hover {
 }
 
 .bootstrap-table .fixed-table-container .table tbody tr td a {
-	font-weight: 600;
-	font-size: 15px;
-	color: #999999;
+    font-weight: 600;
+    font-size: 15px;
+    color: #999999;
 }
 
 .bootstrap-table .fixed-table-container .table .bs-checkbox {
@@ -203,6 +132,7 @@ a:hover {
 }
 
 .table thead th {
+    border-top: unset;
     border-bottom: unset;
 }
 
@@ -215,10 +145,10 @@ a:hover {
 }
 
 .bootstrap-table .fixed-table-container .table thead th .sortable {
-	width: 145px;
-	font-weight: bold;
-	font-size: 16px;
-	color: #888888;
+    width: 145px;
+    font-weight: bold;
+    font-size: 16px;
+    color: #888888;
 }
 
 /* --------------------- */
@@ -230,30 +160,24 @@ a:hover {
     background-color: transparent;
 }
 
-.table thead tr th {
-    font-size: 17px ;
-    font-weight: 300;
-}
-
-.table>thead>tr>th{
-    padding: 12px 8px;
-    vertical-align: middle;
-    border-color: #ddd;
-    font-weight: 300;
-}
-
 .table>tbody>tr>td{
-    padding: 12px 8px;
+    padding: 12px;
     vertical-align: middle;
+    box-sizing: border-box;
     border-color: #ddd;
     font-weight: 300;
     font-size:14px;
-    color: #3c4858;
 }
 
-.table .td-actions .btn {
-    margin: 0;
-    padding: 5px;
+.table tbody tr:hover {
+    background-color: rgba(255,0,0,0.03);
+    cursor: pointer;
+}
+
+.table tbody tr td a {
+    font-weight: 600;
+    font-size: 15px;
+    color: #999999;
 }
 
 .table .form-check {
@@ -261,60 +185,8 @@ a:hover {
     padding-left: 0;
 }
 
-.table .td-total {
-    font-weight: 500;
-    font-size: 17px;
-    padding-top: 20px;
-    text-align: right;
-}
-
-.table .td-price {
-    font-size: 26px;
-    font-weight: 300;
-    margin-top: 5px;
-    text-align: right;
-}
-.table-shopping>thead>tr>th {
-    font-size: 12px;
-    text-transform: uppercase;
-    color: #555;
-}
-.table-shopping .td-name {
-    min-width: 200px;
-    font-weight: 400;
-    font-size: 24px; 
-    line-height: 1.42857143;
-}
-
-.table-shopping .td-name small {
-    color: #999;
-    font-size: 18px; 
-    font-weight: 300;
-}
-
-.table-shopping .img-container {
-    width: 120px;
-    max-height: 160px;
-    overflow: hidden;
-    display: block;
-}
-
-.table-shopping .img-container img {
-    width: 100%;
-}
-
-.table-shopping>tbody>tr>td {
-    font-size: 14px;
-}
-
-.table-shopping .td-number {
-    text-align: right;
-    min-width: 150px;
-    font-size: 18px;
-}
-
-.table-shopping .td-number small {
-    margin-right: 3px;
+.table-field-other {
+    color: #d9d9d9;
 }
 .form-check{
     padding-left:0;
@@ -405,4 +277,427 @@ a:hover {
 
 .table-striped>tbody>tr:nth-of-type(odd) {
     background-color: #f9f9f9 !important;
+}
+
+.commercial-nbCompany, .commercial-nbContact {
+    width: 20%;
+    border-radius: 100px;
+    text-align: center;
+}
+
+.commercial-nbCompany a, .commercial-nbContact a {
+    color: #ffffff!important;
+}
+
+.commercial-nbCompany {
+    background-color: #6fb4c9;
+}
+
+.commercial-nbContact {
+    background-color: #cf1740;
+}
+
+/* ------- AFTER TABLE'S FUNCTIONS / PAGINATION / ROWS PER PAGE --------- */
+/* -------------------------------------------------------------------- */
+/* -------------------------------------------------------------------- */
+
+.table-after {
+    padding: 0 2% 0 2%;
+}
+
+.table-after-entry, .table-nb-entry {
+    width: 70px;
+    height: 40px;
+    color: #b3b3b3;
+}
+
+.table-nb-entry {
+    padding-left: 20%;
+    padding-right: 20%;
+}
+
+.table-nb-functions {
+    width: 80px;
+    height: 40px;
+    margin-left: 5%;
+    margin-right: 5%;
+    text-align: center;
+}
+
+.table-nb-functions span {
+    margin-left: 6%;
+    margin-right: 6%;
+    color: #d9d9d9;
+}
+
+.table-nb-functions span:hover {
+    cursor: pointer;
+}
+
+.table-after-pagination {
+    width: 140px;
+    margin-left: 5%;
+    margin-right: 42%;
+}
+
+.table-after-pagination-2-width {
+    width: 200px;
+}
+
+.table-after-pagination-3-width {
+    width: 240px;
+    margin-right: 32%;
+}
+
+.table-after-pagination-4-width {
+    width: 285px;
+}
+
+.table-after-pagination-5-width {
+    width: 290px;
+}
+
+.pagination {
+	justify-content: space-around;
+}
+
+.pagination .page-item {
+	width: 40px;
+    height: 40px;
+    color: #b3b3b3;
+	background-color: #ffffff;
+    text-align: center;
+}
+
+.prev-link, .next-link, .prev-link-diseable, .next-link-diseable {
+    position: relative;
+    display: block;
+    padding: 0.5rem 0.75rem;
+    margin-left: -1px;
+    line-height: 1.25;
+    color: #4e73df;
+    background-color: #fff;
+    border: 1px solid #dddfeb;
+}
+
+.pagination .page-item .link-page {
+    position: relative;
+    display: block;
+    padding: 0.5rem 0.75rem;
+    margin-left: -1px;
+    line-height: 1.25;
+    color: #4e73df;
+    background-color: #fff;
+    border: 1px solid #dddfeb;
+}
+
+.link-page, .prev-link, .next-link, .prev-link-diseable, .next-link-diseable {
+    width: 40px;
+    height: 40px;
+}
+
+.prev-link-diseable, .next-link-diseable {
+    cursor: not-allowed;
+}
+
+.pagination .page-item .link-page, .prev-link, .next-link, .prev-link-diseable, .next-link-diseable {
+    color: #b3b3b3;
+    border-width: .125rem;
+    border-radius: 7.5px;
+    border-color: #f1f3f5;
+}
+
+.pagination .page-item .link-page:hover {
+	background-color: #eeeeee;
+}
+
+.prev-link:hover, .next-link:hover, .prev-link-diseable:hover, .next-link-diseable:hover {
+    color: #b3b3b3;
+}
+
+.pagination .page-item.active .link-page {
+    color: #ffffff;
+	background-color: #cecece;
+	border-radius: 7.5px;
+	border-width: .125rem;
+	border-color: #f1f3f5;
+}
+
+.pagination .prev-page, .pagination .next-page {
+	width: 40px;
+    height: 40px;
+}
+
+.pagination .prev-page .prev-link, .pagination .next-page .next-link, .prev-link-diseable, .next-link-diseable {
+    border-radius: 7.5px;
+    border-width: .125rem;
+    border-color: #f1f3f5;
+    color: #b3b3b3;
+    background-color: #f5f5f5;
+}
+
+.table-after-btn-add {
+    /*margin-left: 16%;*/
+}
+
+/* ------------------ FORM ------------------- */
+/* ------------------------------------------- */
+/* ------------------------------------------- */
+
+.my-form-field {
+    height: 45px;
+    margin-bottom: 3%;
+}
+
+.my-form-field input, textarea {
+    border: 2px solid;
+    border-radius: 0.35rem;
+    border-color: #f1f3f5;
+    color: #999999;
+}
+
+.my-form-label {
+    color: #b3b3b3;
+}
+
+.my-form-input-little {
+    width: 60%;
+    height: 45px;
+}
+
+.my-form-input-big {
+    width: 90%;
+    height: 45px;
+}
+
+.my-form-input-tiny {
+    width: 55%;
+    height: 45px;
+    padding-top: 0.375rem;
+    padding-bottom: 0.375rem;
+    padding-left: 0.75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    background-color: #fff;
+    background-clip: padding-box;
+    -webkit-transition: border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+    transition: border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+}
+
+.my-form-field .my-form-input-fat {
+    width: 90%;
+    height: 100px;
+}
+
+.file-field {
+    position: relative;
+    width: 15%;
+    float: left;
+}
+
+.avatar-pic {
+    width: 100px;
+}
+
+.btn-file {
+}
+
+.btn-mdb-color {
+    background-color: #fff;
+    height: 40px;
+    width: 100px;
+    border: 2.5px solid #f5f5f5;
+}
+
+.waves-effect {
+    position: relative;
+    padding: 5px;
+    cursor: pointer;
+    overflow: hidden;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.file-field span {
+    cursor: pointer;
+    color: #b3b3b3;
+    font-weight: 600;
+    font-size: 10px;
+}
+
+.file-field span i {
+    margin-right: 10px;
+    cursor: pointer;
+    color: #d9d9d9;
+}
+
+.file-field input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    cursor: pointer;
+    opacity: 0;
+}
+
+[type="date"] {
+  background:#fff url(../../public/build/datepicker.png)  97% 50% no-repeat ;
+}
+[type="date"]::-webkit-inner-spin-button {
+  display: none;
+}
+[type="date"]::-webkit-calendar-picker-indicator {
+  opacity: 0;
+}
+
+/**
+/* The container 
+.checkbox-container {
+  display: block;
+  position: relative;
+  float: right;
+  margin-top: 3%;
+  margin-bottom: 25px;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  font-size: 1px;
+}
+
+/* Hide the browser's default checkbox 
+.checkbox-container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox 
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  border: 2px solid;
+  border-radius: 0.35rem;
+  border-color: #f1f3f5;
+  color: #999999;
+}
+
+/* On mouse-over, add a grey background color 
+.checkbox-container:hover input ~ .checkmark {
+  background-color: #cccccc54;
+}
+
+/* When the checkbox is checked, add a red background 
+.checkbox-container input:checked ~ .checkmark {
+  background-color: #cf1740;
+  border-color: #f1f3f500;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) 
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked 
+.checkbox-container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator 
+.checkbox-container .checkmark:after {
+  left: 9px;
+  top: 5px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}**/
+
+input[type=checkbox] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+}
+
+input[type=checkbox] {
+    /*float: right;
+    margin-top: 3%;*/
+    height: 25px;
+    width: 25px;
+    border: 2px solid;
+    border-radius: 0.35rem;
+    border-color: #f1f3f5;
+    color: #999999;
+}
+
+input[type="checkbox"]:checked {
+  background-color: #cf1740;
+  border-color: #f1f3f500;
+  position: relative;
+}
+
+/*input[type="checkbox"]:before {
+    font-family: FontAwesome;
+    content: '\f00c';
+    display: block;
+    color: grey;
+    font-size: 13px;
+    position: absolute;
+}*/
+
+select {
+    /* for Firefox */
+    -moz-appearance: none;
+    /* for Chrome */
+    -webkit-appearance: none;
+    border: 2px solid;
+    border-radius: 0.35rem;
+    border-color: #f1f3f5!important;
+    background-image: url("../../public/build/select-caret.png");
+    background-repeat: no-repeat;
+    background-position-x: 88%;
+    background-position-y: 50%;
+    cursor: pointer;
+}
+
+/* For IE10 */
+select::-ms-expand {
+  display: none;
+}
+
+.submit-button {
+    width: 140px;
+    height: 40px;
+    background-color: #cf1740;
+    color: #ffffff;
+    font-weight: 700;
+}
+
+/* ------------------ FIN FORM ------------------- */
+/* ---------------------------------------------- */
+/* --------------------------------------------- */
+
+.initial-height {
+    height: initial;
 }

@@ -1,17 +1,135 @@
-{% extends 'base.html.twig' %}
+{% extends 'layout.html.twig' %}
 
 {% block title %}
-	{{parent()}} - Modification d'un contact
+	{{ parent()}}Contacts
 {% endblock %}
 
-{% block body %}
-	<h2>Modifier le contact {{editContact.contactLastName}} {{editContact.contactFirstName}}</h2>
-	{% if editContact.contactDateUpdatePlug is not null %}
-	<p>La dernière modification a été effectuée le {{ editContact.contactDateUpdatePlug|date("d/m/Y") }} à {{ editContact.contactDateUpdatePlug|date("H") }}h{{ editContact.contactDateUpdatePlug|date("i") }}</p>
-	{% endif %}
-
-{# {'method' : 'POST'}, #}
-	{{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
-	{{ form_widget(form) }}
-	{{ form_end(form) }}
+{% block stylesheet %}
+	{{parent()}}
+	{{ encore_entry_link_tags('tabs') }}
+	<!-- <link rel="stylesheet" href="/build/tabs.css"> Autre façon d'appler le fichier css -->
 {% endblock %}
+
+{# {% block contentSearch %}
+{% endblock %} #}
+
+{% block h1 %}Contacts{% endblock %}
+
+{% block contentBody %}
+
+	<div class="tabset">
+		<!-- Tab 1 -->
+		<input type="radio" name="tabset" id="tab1" aria-controls="identity" checked>
+		<label for="tab1">Identité</label>
+		<!-- Tab 2 -->
+		<input type="radio" name="tabset" id="tab2" aria-controls="notes">
+		<label for="tab2">Notes</label>
+		<!-- Tab 3 -->
+		<input type="radio" name="tabset" id="tab3" aria-controls="postes">
+		<label for="tab3">Postes</label>
+		<!-- Tab 4 -->
+		<input type="radio" name="tabset" id="tab4" aria-controls="historic">
+		<label for="tab4">Historique</label>
+
+		<div class="tab-panels">
+			<section id="identity" class="tab-panel">
+				{% if editContact.contactDateUpdatePlug is not null %}
+					<p>La dernière modification a été effectuée le {{ editContact.contactDateUpdatePlug|date("d/m/Y") }} à {{ editContact.contactDateUpdatePlug|date("H") }}h{{ editContact.contactDateUpdatePlug|date("i") }}</p>
+				{% endif %}
+
+				{{ form_start(form, {'method': 'POST'}, {'attr': {'novalidate': 'novalidate'}}) }}
+				{{ form_label(form.contactCode) }}
+				{{ form_widget(form.contactCode, {'attr': {'class': 'form-control', 'placeholder': "Ex: 1254789"}}) }}
+
+				{{ form_errors(form.contactCode, {'attr': {'class': 'form-error-message'}}) }}
+
+				{{ form_label(form.contactGender) }}
+				{{ form_widget(form.contactGender, {'attr': {'class': 'form-control'}}) }}
+
+				{{ form_errors(form.contactGender, {'attr': {'class': 'form-error-message'}}) }}
+
+				{{ form_label(form.contactFirstName) }}
+				{{ form_widget(form.contactFirstName, {'attr': {'class': 'form-control'}}) }}
+
+				{{ form_errors(form.contactFirstName, {'attr': {'class': 'form-error-message'}}) }}
+
+				{{ form_label(form.contactLastName) }}
+				{{ form_widget(form.contactLastName, {'attr': {'class': 'form-control'}}) }}
+
+				{{ form_errors(form.contactLastName, {'attr': {'class': 'form-error-message'}}) }}
+
+				{{ form_label(form.contactBirthDate, 'Date de naissance', {'label_attr': {'class': 'CUSTOM_LABEL_CLASS'}}) }}
+				{{ form_widget(form.contactBirthDate, {'attr': {'class': 'form-control'}}) }}
+
+				{{ form_errors(form.contactBirthDate, {'attr': {'class': 'form-error-message'}}) }}
+
+				{{ form_label(form.idContactJob) }}
+				{{ form_widget(form.idContactJob, {'attr': {'class': 'form-control'}}) }}
+
+				{{ form_errors(form.idContactJob, {'attr': {'class': 'form-error-message'}}) }}
+
+				{{ form_label(form.contactMobilePhone) }}
+				{{ form_widget(form.contactMobilePhone, {'attr': {'class': 'form-control'}}) }}
+
+				{{ form_errors(form.contactMobilePhone, {'attr': {'class': 'form-error-message'}}) }}
+
+				{{ form_label(form.contactLinkedinAddress) }}
+				{{ form_widget(form.contactLinkedinAddress, {'attr': {'class': 'form-control'}}) }}
+
+				{{ form_errors(form.contactLinkedinAddress, {'attr': {'class': 'form-error-message'}}) }}
+
+				{{ form_label(form.contactEmail) }}
+				{{ form_widget(form.contactEmail, {'attr': {'class': 'form-control'}}) }}
+
+				{{ form_errors(form.contactEmail, {'attr': {'class': 'form-error-message'}}) }}
+
+				{{ form_label(form.idCompany) }}
+				{{ form_widget(form.idCompany, {'attr': {'class': 'form-control'}}) }}
+
+				{{ form_errors(form.idCompany, {'attr': {'class': 'form-error-message'}}) }}
+
+				{{ form_label(form.contactDecisionLevel) }}
+				{{ form_widget(form.contactDecisionLevel, {'attr': {'class': 'form-control'}}) }}
+
+				{{ form_errors(form.contactDecisionLevel, {'attr': {'class': 'form-error-message'}}) }}
+
+				{{ form_label(form.contactDirectLandline) }}
+				{{ form_widget(form.contactDirectLandline, {'attr': {'class': 'form-control'}}) }}
+
+				{{ form_errors(form.contactDirectLandline, {'attr': {'class': 'form-error-message'}}) }}
+
+				{{ form_label(form.contactComment) }}
+				{{ form_widget(form.contactComment, {'attr': {'class': 'form-control'}}) }}
+
+				{{ form_errors(form.contactComment, {'attr': {'class': 'form-error-message'}}) }}
+
+				{{ form_label(form.contactPhoto) }}
+				{{ form_widget(form.contactPhoto, {'attr': {'class': 'form-control'}}) }}
+
+				{{ form_errors(form.contactPhoto, {'attr': {'class': 'form-error-message'}}) }}
+
+				{{ form_label(form.save) }}
+				{{ form_widget(form.save, {'attr': {'class': 'form-control'}}) }}
+				{{ form_end(form) }}
+			</section>
+
+			<section id="notes" class="tab-panel">
+				<h2>6B. Rauchbier</h2>
+				<p><strong>Overall Impression:</strong>  An elegant, malty German amber lager with a balanced, complementary beechwood smoke character. Toasty-rich malt in aroma and flavor, restrained bitterness, low to high smoke flavor, clean fermentation profile, and an attenuated finish are characteristic.</p>
+				<p><strong>History:</strong> A historical specialty of the city of Bamberg, in the Franconian region of Bavaria in Germany. Beechwood-smoked malt is used to make a Märzen-style amber lager. The smoke character of the malt varies by maltster; some breweries produce their own smoked malt (rauchmalz).</p>
+			</section>
+
+			<section id="postes" class="tab-panel">
+				<h2>6C. Dunkles Bock</h2>
+				<p><strong>Overall Impression:</strong> A dark, strong, malty German lager beer that emphasizes the malty-rich and somewhat toasty qualities of continental malts without being sweet in the finish.</p>
+				<p><strong>History:</strong> Originated in the Northern German city of Einbeck, which was a brewing center and popular exporter in the days of the Hanseatic League (14th to 17th century). Recreated in Munich starting in the 17th century. The name “bock” is based on a corruption of the name “Einbeck” in the Bavarian dialect, and was thus only used after the beer came to Munich. “Bock” also means “Ram” in German, and is often used in logos and advertisements.</p>
+			</section>
+
+			<section id="historic" class="tab-panel">
+				<h2>Historique</h2>
+			</section>
+		</div>
+	</div>
+
+{% endblock %}
+

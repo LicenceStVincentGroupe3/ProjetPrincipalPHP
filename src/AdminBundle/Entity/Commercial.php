@@ -74,16 +74,19 @@ class Commercial implements UserInterface, \Serializable
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     * @Assert\DateTime
      */
     private $commercialBirthday;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     * @Assert\DateTime
      */
     private $arrivalDate;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     * @Assert\DateTime
      */
     private $departureDate;
 
@@ -99,21 +102,25 @@ class Commercial implements UserInterface, \Serializable
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Url
      */
     private $commercialLinkedinAddress;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Url
      */
     private $commercialFacebookAddress;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Url
      */
     private $commercialTwitterAddress;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\File(mimeTypes={ "image/jpeg", "image/png" })
      */
     private $commercialPhoto;
 
