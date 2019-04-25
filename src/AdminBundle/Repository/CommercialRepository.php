@@ -32,11 +32,11 @@ class CommercialRepository extends ServiceEntityRepository
     }
 
     // Liste les responsables N+1 lorsque c'est le directeur qui est connécté
-    public function listHierarchyCom($director, $responsable)
+    public function listHierarchyDirAndResp($director, $responsable)
     {
         return $this->createQueryBuilder('c')
             ->andWhere('c.roles LIKE :director')
-            ->andWhere('c.roles LIKE :responsable')
+            ->orWhere('c.roles LIKE :responsable')
             ->setParameter('director', '%'.$director.'%')
             ->setParameter('responsable', '%'.$responsable.'%')
             ->orderBy('c.commercialProfil', 'ASC')
@@ -54,6 +54,17 @@ class CommercialRepository extends ServiceEntityRepository
             ->orderBy('c.commercialProfil', 'ASC')
             ->getQuery()
             ->getResult()
+        ;
+    }
+
+    // Récupère le responsable N+1 du commercial séléctionné
+    public function hierarchyN1($idCom)
+    {
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.id = :idCom')
+            ->setParameter('idCom', $idCom)
+            ->getQuery()
+            ->getOneOrNullResult()
         ;
     }
 
