@@ -94,8 +94,6 @@ class Commercial implements UserInterface, \Serializable
 
     /**
      * @ORM\Column(type="string", length=14, nullable=true)
-     * @Assert\Length(min = 8, max = 20, minMessage = "Trop court ; Format : 01 01 01 01 01", maxMessage = "Trop long ; Format : 01 01 01 01 01")
-     * @Assert\Regex(pattern="/^\(0\)[0-9]*$/", message="Aucun caractère autre qu'un chiffre")
      */
     private $commercialPhone;
 
