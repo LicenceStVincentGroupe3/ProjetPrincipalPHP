@@ -42,11 +42,13 @@ class Commercial implements UserInterface, \Serializable
 
     /**
      * @ORM\Column(type="boolean")
+     * @Assert\NotBlank()
      */
     private $commercialSexe;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank()
      */
     private $commercialProfil;
 
@@ -56,7 +58,7 @@ class Commercial implements UserInterface, \Serializable
     private $commercialJob;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", nullable=true)
      * @Assert\DateTime
      */
     private $commercialPlugCreation;
@@ -424,7 +426,7 @@ class Commercial implements UserInterface, \Serializable
         return $this->hierarchy;
     }
 
-    public function setHierarchy(int $hierarchy): self
+    public function setHierarchy(?int $hierarchy): self
     {
         $this->hierarchy = $hierarchy;
 

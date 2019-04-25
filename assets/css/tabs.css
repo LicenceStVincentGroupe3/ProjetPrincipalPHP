@@ -40,7 +40,8 @@
 }
 
 .tabset > input:checked + label {
-  border-bottom: 1px solid #06c;
+  color: #cf1740;
+  border-bottom: 1px solid #cf1740;
   margin-bottom: -1px;
 }
 

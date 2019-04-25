@@ -33,9 +33,33 @@
 
 		<div class="tab-panels">
 			<section id="identity" class="tab-panel">
-				{% if editCom.CommercialLastUpdate is not null %}
-				<p>La dernière modification a été effectuée le {{ editCom.CommercialLastUpdate|date("d/m/Y", "Europe/Paris") }} à {{ editCom.CommercialLastUpdate|date("H", "Europe/Paris") }}h{{ editCom.CommercialLastUpdate|date("i", "Europe/Paris") }}</p>
-				{% endif %}
+				<div class="row">
+					<div class="">
+						{% if editCom.CommercialSexe == 1 %}
+							{% set sexe = 'M.'%}
+						{% else %}
+							{% set sexe = 'Mme.'%}
+						{% endif %}
+
+						{% if editCom.CommercialProfil == 'ROLE_DIRECTEUR' %}
+							{% set profil = 'Directeur commercial' %}
+						{% elseif editCom.CommercialProfil == 'ROLE_RESPONSABLE' %}
+							{% set profil = 'Responsable commercial' %}
+						{% else %}
+							{% set profil = 'Commercial' %}
+						{% endif %}
+
+						{% set differenceDate = date("now").diff(date(editCom.CommercialBirthday)) %}
+						{% set commercialYears = differenceDate.y %}
+						
+						<h6><b>{{sexe}} {{editCom.commercialFirstname}} {{editCom.commercialName}}</b>, {{profil}}, {{commercialYears}} ans</h6>
+					</div>
+					<div class="">
+						{% if editCom.CommercialLastUpdate is not null %}
+						<p>Dernière mise à jour le {{ editCom.CommercialLastUpdate|date("d/m/Y", "Europe/Paris") }}</p>
+						{% endif %}
+					</div>
+				</div>
 
 				{{ form_start(form, {'method': 'POST'}, {'attr': {'novalidate': 'novalidate'}}) }}
 					<div class="file-field">
@@ -61,7 +85,7 @@
 								<div class="col-lg-4 mx-auto">
 									{{ form_label(form.commercialCode, null, {'label_attr': {'class': 'my-form-label'}}) }}
 								</div>
-								<div class="col-lg-7 mx-auto">
+								<div class="col-lg-7 mx-auto mandatory">
 									{{ form_widget(form.commercialCode, {'attr': {'class': 'form-control my-form-input-little', 'placeholder': "Ex: 1254789"}}) }}
 
 									{{ form_errors(form.commercialCode, {'attr': {'class': 'form-error-message'}}) }}
@@ -71,7 +95,7 @@
 								<div class="col-lg-4 mx-auto">
 									{{ form_label(form.commercialSexe, 'Genre', {'label_attr': {'class': 'my-form-label'}}) }}
 								</div>
-								<div class="col-lg-7 mx-auto">
+								<div class="col-lg-7 mx-auto mandatory">
 									{{ form_widget(form.commercialSexe, {'attr': {'class': 'form-control my-form-input-little'}}) }}
 
 									{{ form_errors(form.commercialSexe, {'attr': {'class': 'form-error-message'}}) }}
@@ -81,7 +105,7 @@
 								<div class="col-lg-4 mx-auto">
 									{{ form_label(form.commercialFirstname, null, {'label_attr': {'class': 'my-form-label'}}) }}
 								</div>
-								<div class="col-lg-7 mx-auto">
+								<div class="col-lg-7 mx-auto mandatory">
 									{{ form_widget(form.commercialFirstname, {'attr': {'class': 'form-control my-form-input-big'}}) }}
 
 									{{ form_errors(form.commercialFirstname, {'attr': {'class': 'form-error-message'}}) }}
@@ -91,10 +115,20 @@
 								<div class="col-lg-4 mx-auto">
 									{{ form_label(form.commercialName, null, {'label_attr': {'class': 'my-form-label'}}) }}
 								</div>
-								<div class="col-lg-7 mx-auto">
+								<div class="col-lg-7 mx-auto mandatory">
 									{{ form_widget(form.commercialName, {'attr': {'class': 'form-control my-form-input-big'}}) }}
 
 									{{ form_errors(form.commercialName, {'attr': {'class': 'form-error-message'}}) }}
+								</div>
+							</div>
+							<div class="row my-form-field">
+								<div class="col-lg-4 mx-auto">
+									{{ form_label(form.commercialProfil, 'Profil/droits', {'label_attr': {'class': 'my-form-label'}}) }}
+								</div>
+								<div class="col-lg-7 mx-auto mandatory">
+									{{ form_widget(form.commercialProfil, {'attr': {'class': 'form-control my-form-input-big'}}) }}
+
+									{{ form_errors(form.commercialProfil, {'attr': {'class': 'form-error-message'}}) }}
 								</div>
 							</div>
 							<div class="row my-form-field">
@@ -118,7 +152,7 @@
 								<div class="col-lg-4 mx-auto">
 									{{ form_label(form.arrivalDate, null, {'label_attr': {'class': 'my-form-label'}}) }}
 								</div>
-								<div class="col-lg-7 mx-auto">
+								<div class="col-lg-7 mx-auto arrival-departure">
 									{{ form_widget(form.arrivalDate, {'attr': {'class': ' my-form-input-tiny'}}) }}
 
 									{{ form_errors(form.arrivalDate, {'attr': {'class': 'form-error-message'}}) }}
@@ -131,20 +165,10 @@
 							</div>
 							<div class="row my-form-field">
 								<div class="col-lg-4 mx-auto">
-									{{ form_label(form.commercialMobilePhone, null, {'label_attr': {'class': 'my-form-label'}}) }}
-								</div>
-								<div class="col-lg-7 mx-auto">
-									{{ form_widget(form.commercialMobilePhone, {'attr': {'class': 'form-control my-form-input-big'}}) }}
-
-									{{ form_errors(form.commercialMobilePhone, {'attr': {'class': 'form-error-message'}}) }}
-								</div>
-							</div>
-							<div class="row my-form-field">
-								<div class="col-lg-4 mx-auto">
 									{{ form_label(form.commercialLinkedinAddress, null, {'label_attr': {'class': 'my-form-label'}}) }}
 								</div>
 								<div class="col-lg-7 mx-auto">
-									{{ form_widget(form.commercialLinkedinAddress, {'attr': {'class': 'form-control my-form-input-big'}}) }}
+									{{ form_widget(form.commercialLinkedinAddress, {'attr': {'class': 'form-control my-form-input-big input-linkedin'}}) }}
 
 									{{ form_errors(form.commercialLinkedinAddress, {'attr': {'class': 'form-error-message'}}) }}
 								</div>
@@ -154,7 +178,7 @@
 									{{ form_label(form.commercialFacebookAddress, null, {'label_attr': {'class': 'my-form-label'}}) }}
 								</div>
 								<div class="col-lg-7 mx-auto">
-									{{ form_widget(form.commercialFacebookAddress, {'attr': {'class': 'form-control my-form-input-big'}}) }}
+									{{ form_widget(form.commercialFacebookAddress, {'attr': {'class': 'form-control my-form-input-big input-facebook'}}) }}
 
 									{{ form_errors(form.commercialFacebookAddress, {'attr': {'class': 'form-error-message'}}) }}
 								</div>
@@ -164,7 +188,7 @@
 									{{ form_label(form.commercialTwitterAddress, null, {'label_attr': {'class': 'my-form-label'}}) }}
 								</div>
 								<div class="col-lg-7 mx-auto">
-									{{ form_widget(form.commercialTwitterAddress, {'attr': {'class': 'form-control my-form-input-big'}}) }}
+									{{ form_widget(form.commercialTwitterAddress, {'attr': {'class': 'form-control my-form-input-big input-twitter'}}) }}
 
 									{{ form_errors(form.commercialTwitterAddress, {'attr': {'class': 'form-error-message'}}) }}
 								</div>
@@ -172,10 +196,10 @@
 						</div>
 						<div class="col-lg-5 mx-auto">
 							<div class="row my-form-field initial-height">
-								<div class="col-lg-5 mx-auto">
+								<div class="col-lg-5 mx-aut email-status">
 									{{ form_label(form.email, null, {'label_attr': {'class': 'my-form-label'}}) }}
 								</div>
-								<div class="col-lg-7 mx-auto">
+								<div class="col-lg-7 mx-auto email-status">
 									{{ form_widget(form.email, {'attr': {'class': 'form-control my-form-input-big'}}) }}
 
 									{{ form_errors(form.email, {'attr': {'class': 'form-error-message'}}) }}
@@ -190,7 +214,7 @@
 									{{ form_label(form.plainPassword, null, {'label_attr': {'class': 'my-form-label'}}) }}
 								</div>
 								<div class="col-lg-7 mx-auto">
-									{{ form_widget(form.plainPassword, {'attr': {'class': 'form-control my-form-input-big'}}) }}
+									{{ form_widget(form.plainPassword, {'attr': {'class': 'form-control my-form-input-big input-password'}}) }}
 
 									{{ form_errors(form.plainPassword, {'attr': {'class': 'form-error-message'}}) }}
 								</div>
@@ -223,14 +247,48 @@
 									{{ form_errors(form.commercialJob, {'attr': {'class': 'form-error-message'}}) }}
 								</div>
 							</div>
+							{% if listHierarchy is defined %}
 							<div class="row my-form-field">
 								<div class="col-lg-5 mx-auto">
-									{{ form_label(form.commercialProfil, 'Profil/droits', {'label_attr': {'class': 'my-form-label'}}) }}
+									<label class="my-form-label" for="hierarchy">Responsable N+1</label>
 								</div>
 								<div class="col-lg-7 mx-auto">
-									{{ form_widget(form.commercialProfil, {'attr': {'class': 'form-control my-form-input-big'}}) }}
+									<select id="hierarchy" name="hierarchy" class="form-control my-form-input-big">
+										{% if editCom.Hierarchy is null %}
+											<option value="0">A définir</option>
+										{% else %}
+											<option value="{{editCom.Hierarchy}}">
+											{% if responsableN1.CommercialProfil == 'ROLE_DIRECTEUR' %}
+												{% set hierarchyName = 'Directeur' %}
+											{% elseif responsableN1.CommercialProfil == 'ROLE_RESPONSABLE' %}
+												{% set hierarchyName = 'Responsable' %}
+											{% endif %}
+											{{hierarchyName}}
+											{{responsableN1.CommercialFirstName}} {{responsableN1.CommercialName}}</option>
+										{% endif %}
+										{% for hierarchy in listHierarchy %}
+										<option value="{{hierarchy.Id}}">
+											{% if hierarchy.CommercialProfil == 'ROLE_DIRECTEUR' %}
+												{% set hierarchyName = 'Directeur' %}
+											{% elseif hierarchy.CommercialProfil == 'ROLE_RESPONSABLE' %}
+												{% set hierarchyName = 'Responsable' %}
+											{% endif %}
+											{{hierarchyName}}
+											{{hierarchy.CommercialFirstName}} {{hierarchy.CommercialName}}
+										</option>
+										{% endfor %}
+									</select>
+								</div>
+							</div>
+							{% endif %}
+							<div class="row my-form-field">
+								<div class="col-lg-5 mx-auto">
+									{{ form_label(form.commercialMobilePhone, null, {'label_attr': {'class': 'my-form-label'}}) }}
+								</div>
+								<div class="col-lg-7 mx-auto">
+									{{ form_widget(form.commercialMobilePhone, {'attr': {'class': 'form-control my-form-input-big input-telmobile'}}) }}
 
-									{{ form_errors(form.commercialProfil, {'attr': {'class': 'form-error-message'}}) }}
+									{{ form_errors(form.commercialMobilePhone, {'attr': {'class': 'form-error-message'}}) }}
 								</div>
 							</div>
 							<div class="row my-form-field">
@@ -238,7 +296,7 @@
 									{{ form_label(form.commercialPhone, null, {'label_attr': {'class': 'my-form-label'}}) }}
 								</div>
 								<div class="col-lg-7 mx-auto">
-									{{ form_widget(form.commercialPhone, {'attr': {'class': 'form-control my-form-input-big'}}) }}
+									{{ form_widget(form.commercialPhone, {'attr': {'class': 'form-control my-form-input-big input-tel'}}) }}
 
 									{{ form_errors(form.commercialPhone, {'attr': {'class': 'form-error-message'}}) }}
 								</div>
@@ -255,8 +313,12 @@
 							</div>
 						</div>
 					</div>
-					
-					{{ form_widget(form.save, {'attr': {'class': 'btn submit-button'}}) }}
+					<div class="row form-buttons">
+                        <button class="btn btn-white-red return-button" type="button">
+                           <a href="{{ path('listCommercial') }}">Annuler</a>
+                        </button>
+						{{ form_widget(form.save, {'attr': {'class': 'btn btn-red submit-button'}}) }}
+					</div>
 				{{ form_end(form) }}
 			</section>
 

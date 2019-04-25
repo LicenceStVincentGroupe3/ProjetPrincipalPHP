@@ -1,4 +1,4 @@
-company-nbCompany a:hover {
+.company-nbCompany a:hover {
     text-decoration: none;
 }
 
@@ -17,11 +17,4 @@ company-nbCompany a:hover {
 
 .company-nbContact {
     background-color: #cf1740;
-}
-
-
-
-
-#table tbody td a:hover {
-    text-decoration: none;
 }
