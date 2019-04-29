@@ -32,11 +32,11 @@ class CommercialRepository extends ServiceEntityRepository
     }
 
     // Liste les responsables N+1 lorsque c'est le directeur qui est connécté
-    public function listHierarchyCom($director, $responsable)
+    public function listHierarchyDirAndResp($director, $responsable)
     {
         return $this->createQueryBuilder('c')
             ->andWhere('c.roles LIKE :director')
-            ->andWhere('c.roles LIKE :responsable')
+            ->orWhere('c.roles LIKE :responsable')
             ->setParameter('director', '%'.$director.'%')
             ->setParameter('responsable', '%'.$responsable.'%')
             ->orderBy('c.commercialProfil', 'ASC')

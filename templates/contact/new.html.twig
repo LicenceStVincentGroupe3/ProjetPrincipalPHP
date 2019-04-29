@@ -132,16 +132,6 @@
 						</div>
 						<div class="row my-form-field">
 							<div class="col-lg-4 mx-auto">
-								{{ form_label(form.contactComment, null, {'label_attr': {'class': 'my-form-label'}}) }}
-							</div>
-							<div class="col-lg-7 mx-auto">
-								{{ form_widget(form.contactComment, {'attr': {'class': 'form-control my-form-input-big'}}) }}
-
-								{{ form_errors(form.contactComment, {'attr': {'class': 'form-error-message'}}) }}
-							</div>
-						</div>
-						<div class="row my-form-field">
-							<div class="col-lg-4 mx-auto">
 								{{ form_label(form.contactLinkedinAddress, null, {'label_attr': {'class': 'my-form-label'}}) }}
 							</div>
 							<div class="col-lg-7 mx-auto">
@@ -225,11 +215,21 @@
 
 								{{ form_errors(form.contactOptInCommercialOffers, {'attr': {'class': 'form-error-message'}}) }}
 							</div>
+						</div><br>
+						<div class="row my-form-field">
+							<div class="col-lg-5 mx-auto">
+								{{ form_label(form.contactComment, null, {'label_attr': {'class': 'my-form-label'}}) }}
+							</div>
+							<div class="col-lg-7 mx-auto">
+								{{ form_widget(form.contactComment, {'attr': {'class': 'form-control my-form-input-big'}}) }}
+
+								{{ form_errors(form.contactComment, {'attr': {'class': 'form-error-message'}}) }}
+							</div>
 						</div>
 					</div>
 				</div>
 
-				{{ form_widget(form.save, {'attr': {'class': 'btn submit-button'}}) }}
+				{{ form_widget(form.save, { 'label': 'Ajouter', 'attr': {'class': 'btn submit-button'}}) }}
 				{{ form_end(form) }}
 			</section>
 

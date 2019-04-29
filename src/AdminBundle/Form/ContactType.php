@@ -36,14 +36,15 @@ class ContactType extends AbstractType
 
     		->add('contactGender', ChoiceType::class, array('choices' => array('Homme'=>0, 'Femme'=>1)))
 
-    		->add('contactBirthDate', DateType::class,  array('label' => 'Date de naissance'))
-    		->add('contactEmail', TextType::class, array('label' => 'Email'))
-    		->add('contactMobilePhone', TextType::class, array('label' => 'Tel. Mobile'))
-    		->add('contactDirectLandline', TextType::class, array('label' => 'Tel. Fixe direct'))
-            ->add('contactLinkedinAddress', TextType::class, array('label' => 'Adresse Linkedin'))
-			->add('contactPhoto', FileType::class, ['label' => 'Photo', 'required' => false])
-            ->add('contactSourceOperation', TextType::class, ['label' => 'Opération source'])
-            ->add('contactComment', TextareaType::class, array('label' => 'Commentaire'))  
+    		->add('contactBirthDate', DateType::class,  array('label' => 'Date de naissance', 'widget' => 'single_text', 'required' => false))
+    		->add('contactEmail', TextType::class, array('label' => 'Email', 'required' => false))
+    		->add('contactMobilePhone', TextType::class, array('label' => 'Tel. Mobile', 'required' => false))
+    		->add('contactDirectLandline', TextType::class, array('label' => 'Tel. Fixe direct', 'required' => false))
+            ->add('contactLinkedinAddress', TextType::class, array('label' => 'Adresse Linkedin', 'required' => false))
+			->add('contactPhoto', FileType::class, ['label' => 'Photo', 'required' => false,
+				'data_class' => null])
+            ->add('contactSourceOperation', TextType::class, ['label' => 'Opération source', 'required' => false])
+            ->add('contactComment', TextareaType::class, array('label' => 'Commentaire', 'required' => false))
 
     		->add('idUser', EntityType::class, array('class' => Commercial::class,'choice_label' => 'CommercialName', 'label'=>'Commercial'))
 

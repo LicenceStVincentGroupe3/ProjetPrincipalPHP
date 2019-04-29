@@ -30,6 +30,17 @@ class ContactRepository extends ServiceEntityRepository
         return $result;
     }
 
+    public function deleteContact($listCont)
+    {
+        $em = $this->getEntityManager();
+        $query = $em->createQueryBuilder();
+        $query->delete(Contact::class, 'c');
+        $query->where('c.id IN (:lesContacts)')->setParameter('lesContacts', array_values($listCont));
+        $rowDeleted = $query->getQuery()->execute();
+
+        return $rowDeleted;
+    }
+
     // /**
     //  * @return Contact[] Returns an array of Contact objects
     //  */

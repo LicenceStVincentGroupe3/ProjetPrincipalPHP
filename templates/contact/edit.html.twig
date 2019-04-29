@@ -202,7 +202,7 @@
 						</div>
 						<div class="row my-form-field">
 							<div class="col-lg-5 mx-auto">
-								{{ form_label(form.contactDecisionLevel, null, {'label_attr': {'class': 'my-form-label'}}) }}
+								{{ form_label(form.contactDecisionLevel, 'Pouvoir décisionnel', {'label_attr': {'class': 'my-form-label'}}) }}
 							</div>
 							<div class="col-lg-7 mx-auto">
 								{{ form_widget(form.contactDecisionLevel, {'attr': {'class': 'form-control my-form-input-big'}}) }}
@@ -210,16 +210,6 @@
 								{{ form_errors(form.contactDecisionLevel, {'attr': {'class': 'form-error-message'}}) }}
 							</div>
 						</div>
-						<div class="row my-form-field">
-							<div class="col-lg-5 mx-auto">
-								{{ form_label(form.contactComment, null, {'label_attr': {'class': 'my-form-label'}}) }}
-							</div>
-							<div class="col-lg-7 mx-auto">
-								{{ form_widget(form.contactComment, {'attr': {'class': 'form-control my-form-input-big'}}) }}
-
-								{{ form_errors(form.contactComment, {'attr': {'class': 'form-error-message'}}) }}
-							</div>
-						</div><br>
 						<div class="row my-form-field">
 							<div class="col-lg-5 mx-auto">
 								{{ form_label(form.contactOptInNewsletterCustomers, null, {'label_attr': {'class': 'my-form-label'}}) }}
@@ -239,7 +229,17 @@
 
 								{{ form_errors(form.contactOptInCommercialOffers, {'attr': {'class': 'form-error-message'}}) }}
 							</div>
-						</div>
+						</div><br>
+                        <div class="row my-form-field">
+                            <div class="col-lg-5 mx-auto">
+                                {{ form_label(form.contactComment, null, {'label_attr': {'class': 'my-form-label'}}) }}
+                            </div>
+                            <div class="col-lg-7 mx-auto">
+                                {{ form_widget(form.contactComment, {'attr': {'class': 'form-control my-form-input-big'}}) }}
+
+                                {{ form_errors(form.contactComment, {'attr': {'class': 'form-error-message'}}) }}
+                            </div>
+                        </div>
 					</div>
 				</div>
 
