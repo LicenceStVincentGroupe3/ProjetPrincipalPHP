@@ -82,6 +82,10 @@ class CommercialController extends AbstractController
                 
                 $form->handleRequest($httpRequest);
 
+                if ($form->isSubmitted())
+                {
+                    $commercialPhoto = $form['commercialSexe']->getData();
+                }
 
                 if ($form->isSubmitted() && $form->isValid() && $httpRequest->isMethod('POST'))
                 {

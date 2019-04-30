@@ -42,7 +42,6 @@ class Commercial implements UserInterface, \Serializable
 
     /**
      * @ORM\Column(type="boolean")
-     * @Assert\NotBlank()
      */
     private $commercialSexe;
 
@@ -94,6 +93,8 @@ class Commercial implements UserInterface, \Serializable
 
     /**
      * @ORM\Column(type="string", length=14, nullable=true)
+     * @Assert\Length(min = 0, max = 10, maxMessage = "Trop long !")
+     * @Assert\Regex(pattern="/^(\(0\))?[0-9]+$/", message="Format : 0601010101")
      */
     private $commercialPhone;
 

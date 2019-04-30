@@ -253,9 +253,17 @@
 								</div>
 								<div class="col-lg-7 mx-auto">
 									{{ form_widget(form.commercialPhone, {'attr': {'class': 'form-control my-form-input-big input-tel'}}) }}
-
-									{{ form_errors(form.commercialPhone, {'attr': {'class': 'form-error-message'}}) }}
 								</div>
+								{% if not form.vars.valid %}
+								<div class="alert alert-danger">
+                                    <ul class="list-unstyled mb-0">
+                                        <li>
+                                            <i class="fas fa-exclamation-circle"></i>
+                                            {{ form_errors(form.commercialPhone, {'attr': {'class': 'form-error-message'}}) }}
+                                        </li>
+                                    </ul>
+                                </div>
+                                {% endif %}
 							</div>
 							<div class="row my-form-field">
 								<div class="col-lg-5 mx-auto">
@@ -273,7 +281,7 @@
                         <button class="btn btn-white-red return-button" type="button">
                            <a href="{{ path('listCommercial') }}">Annuler</a>
                         </button>
-						{{ form_widget(form.save, {'attr': {'class': 'btn btn-red submit-button'}}) }}
+						{{ form_widget(form.save, { 'label': 'Ajouter', 'attr': {'class': 'btn btn-red submit-button'}}) }}
 					</div>
 				{{ form_end(form) }}
 			</section>
