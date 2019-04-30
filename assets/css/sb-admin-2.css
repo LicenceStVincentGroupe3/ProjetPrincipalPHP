@@ -10916,6 +10916,14 @@ a:focus {
   width: 2rem;
 }
 
+.profile {
+  width: 100px;
+  background-image: url(/build/images/select-caret.f0ca67e4.png);
+  background-repeat: no-repeat;
+  background-position-x: 60%;
+  background-position-y: 50%;
+}
+
 .topbar {
   height: 90px;
 }
