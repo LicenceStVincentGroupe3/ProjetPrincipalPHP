@@ -64,6 +64,16 @@ class Contact
     private $contactDecisionLevel;
 
     /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $contactCP;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $contactVille;
+
+    /**
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $contactBirthDate;
@@ -74,7 +84,7 @@ class Contact
     private $contactMobilePhone;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255,  nullable=true)
      */
     private $contactDirectLandline;
 
@@ -244,6 +254,30 @@ class Contact
     public function setContactDecisionLevel(?int $contactDecisionLevel): self
     {
         $this->contactDecisionLevel = $contactDecisionLevel;
+
+        return $this;
+    }
+
+    public function getContactCP(): ?string
+    {
+        return $this->contactCP;
+    }
+
+    public function setContactCP(?string $contactCP): self
+    {
+        $this->contactCP = $contactCP;
+
+        return $this;
+    }
+
+    public function getContactVille(): ?string
+    {
+        return $this->contactVille;
+    }
+
+    public function setContactVille(?string $contactVille): self
+    {
+        $this->contactVille = $contactVille;
 
         return $this;
     }

@@ -4,6 +4,9 @@ use App\AdminBundle\Entity\Contact;
 use App\AdminBundle\Form\ContactType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -25,16 +28,37 @@ class ContactController extends AbstractController
                 // La méthode handleRequest de la class form permet de récupérer les valeurs des champs dans les imputs du formulaire //
                 $form->handleRequest($request);
 
-                if ($form->isSubmitted() && $form->isValid()) {
+                if ($form->isSubmitted() && $form->isValid() && $request->isMethod('POST')) {
                     $contact = $form->getData();
+                    $contactPhoto = $form['contactPhoto']->getData();
+                    $contactLastName = $form['contactLastName']->getData();
+                    $contactFirstName = $form['contactFirstName']->getData();
                     VarDumper::dump($contact);
-                    $entityManager = $this->getDoctrine()->getManager();
-                    // Persist prépare l'entité "contact" pour la création //
-                    $entityManager->persist($contact);
-                    // Flush envoie les infos en base (ajout) //
-                    $entityManager->flush();
-                    return $this->redirect($this->generateUrl('listCont'));
-                    //return $this->render('contact/new.html.twig', array('form' => $form->createView(),));
+
+                $file = $contactPhoto;
+
+                if ($file !== null)
+                {
+                    $fileName = $file->getClientOriginalName();
+                    $newFileName = $contactLastName.'_'.$contactFirstName.'_'.$fileName;
+
+                    // On envoit le fichier dans le dossier images
+                    try {
+                        $file->move($this->getParameter('images_directory'), $newFileName);
+                    } catch (FileException $e) {
+                        // S'il y a un soucis pendant l'upload on catch
+                    }
+
+                    $contact->setContactPhoto($newFileName);
+                }
+
+                $entityManager = $this->getDoctrine()->getManager();
+                // Persist prépare l'entité "contact" pour la création //
+                $entityManager->persist($contact);
+                // Flush envoie les infos en base (ajout) //
+                $entityManager->flush();
+                return $this->redirect($this->generateUrl('listCont'));
+                //return $this->render('contact/new.html.twig', array('form' => $form->createView(),));
                 }
                 return $this->render('contact/new.html.twig', array('form' => $form->createView(),));
     }
@@ -53,7 +77,41 @@ class ContactController extends AbstractController
                 $form->handleRequest($request);
                 if ($form->isSubmitted() && $form->isValid() && $request->isMethod('POST')) {
                     $editContact = $form->getData();
+                    $contactPhoto = $form['contactPhoto']->getData();
+                    $contactLastName = $form['contactLastName']->getData();
+                    $contactFirstName = $form['contactFirstName']->getData();
+
+                    $file = $contactPhoto;
+
                     $entityManager = $this->getDoctrine()->getManager();
+
+                    if ($file !== null)
+                    {
+                        // On vérifie si le fichier est en base
+                        if($editContact->getContactPhoto() !== null)
+                        {
+                            // Variable qui contient l'ancien fichier
+                            $oldFile = $this->getParameter('images_directory').'/'.
+                                $editContact->getContactPhoto();
+
+                            // On supprime l'ancien fichier en local
+                            if (file_exists($oldFile)) {
+                                unlink($oldFile);
+                            }
+                        }
+
+                        $fileName = $file->getClientOriginalName();
+                        $newFileName = $contactLastName.'_'.$contactFirstName.'_'.$fileName;
+
+                        // On envoit le fichier dans le dossier images
+                        try {
+                            $file->move($this->getParameter('images_directory'), $newFileName);
+                        } catch (FileException $e) {
+                            // S'il y a un soucis pendant l'upload on catch
+                        }
+
+                        $editContact->setContactPhoto($newFileName);
+                    }
                     $editContact->setContactDateUpdatePlug(new \DateTime());
                     $entityManager->flush();
 
@@ -62,35 +120,11 @@ class ContactController extends AbstractController
                 return $this->render('contact/edit.html.twig', ['editContact' => $editContact, 'form' => $form->createView()]);
     }
 
-    /**
-     * @Route("/delete/{id}", requirements={"id"="\d+"}, methods={"GET","POST"}, name="deleteContact")
-     */
-    public function delete($id)
-    {
-        if ($this->isGranted('ROLE_COMMERCIAL')) {
-
-            if ($this->isGranted('ROLE_DIRECTEUR')) {
-                $suppBD = $this->getDoctrine()->getManager();
-                // On créer un objet instance de contact
-                $suppContact = $suppBD->getRepository(Contact::class)->find($id);
-                // Suppression du contact
-                $suppBD->remove($suppContact);
-                // Execution
-                $suppBD->flush();
-                return $this->redirectToRoute('listCont');
-            } else {
-                return $this->redirect($this->generateUrl('index'));
-            }
-        } else {
-
-            return $this->redirect($this->generateUrl('login'));
-        }
-    }
 
     /**
-     * @Route("/list", name="listCont", methods={"GET"})
+     * @Route("/list", name="listCont", methods={"GET","POST"})
      */
-    public function list()
+    public function list(Request $httpRequest)
     {
         if ($this->isGranted('ROLE_COMMERCIAL')) {
 
@@ -101,6 +135,28 @@ class ContactController extends AbstractController
                 //$repository = $this->getDoctrine()->getManager()->getRepository(Contact::class);
                 $repository = $display->getRepository(Contact::class);
                 $listContact = $repository->findAll();
+
+                if ($httpRequest->isMethod('POST'))
+                {
+                    // Appel de Doctrine
+                    $display = $this->getDoctrine()->getManager();
+
+                    $contactRepository = $display->getRepository(Contact::class);
+
+                    // Contient les name des <input>
+                    $formData = Request::createFromGlobals();
+
+                    // On récupère le name de la checkbox
+                    $listData = $formData->request->get('deleteData');
+
+                    // Si l'utilisateur a coché une checkbox
+                    if ($listData != null) {
+                        // Appel de la fonction deleteCommercial()
+                        $contactRepository->deleteContact($listData);
+                    }
+
+                    return $this->redirect($this->generateUrl('listCont'));
+                }
                 // --------------------------
                 // on demande à la vue d'afficher la liste des contacts
                 // --------------------------

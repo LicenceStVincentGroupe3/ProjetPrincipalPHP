@@ -34,9 +34,10 @@
 							<th data-field="nom" data-sortable="true">Nom</th>
 							<th data-field="entreprise" data-sortable="true">Entreprise</th>
 							<th data-field="fonction" data-sortable="true">Fonction</th>
-							<th data-field="email" data-sortable="true">Email</th>
-							<th data-field="telfix" data-sortable="true">Tel fix</th>
-							<th data-field="supprimer">Supprimer</th>
+							<th data-field="CP" data-sortable="true">CP</th>
+							<th data-field="ville" data-sortable="true">Ville</th>
+							<th data-field="statut" data-sortable="true">Statut</th>
+							<th class="table-field-other no-sortable" data-field="autre">&bull;&bull;&bull;</th>
 						</tr>
 						</thead>
 						<tbody id="myTableBody">
@@ -54,33 +55,41 @@
 									</a>
 								</td>
 								<td>
-									<a href="{{ path('editContact', {'id':cont.Id}) }}">	{{cont.contactBirthDate|date("d/m/Y")}}
+									<a href="{{ path('editContact', {'id':cont.Id}) }}">	{{cont.idCompany.CompanyLastName}}
 									</a>
 								</td>
 								<td>
-									<a href="{{ path('editContact', {'id':cont.Id}) }}">	{{cont.contactDecisionLevel}}
-									</a>
-								</td>
-
-								<td>
-									<a href="{{ path('editContact', {'id':cont.Id}) }}">	{{cont.contactEmail}}
+									<a href="{{ path('editContact', {'id':cont.Id}) }}">	{{cont.idContactJob.contactJobName}}
 									</a>
 								</td>
 
 								<td>
-									<a href="{{ path('editContact', {'id':cont.Id}) }}">	{{cont.contactMobilePhone}}
+									<a href="{{ path('editContact', {'id':cont.Id}) }}">	{{cont.idCompany.CompanyPostalCode}}
 									</a>
 								</td>
+
+                                <td>
+                                    <a href="{{ path('editContact', {'id':cont.Id}) }}">	{{cont.idCompany.CompanyCity}}
+                                    </a>
+                                </td>
+
+                                <td>
+                                    <a href="{{ path('editContact', {'id':cont.Id}) }}">	{{cont.contactDecisionLevel}}
+                                    </a>
+                                </td>
+
 								<td>
-									<a class="btn btn-danger" href="{{ path('deleteContact', {'id':cont.Id}) }}">
-										<i class="glyphicon glyphicon-trash"></i>
-										X
-									</a>
+									{% if cont.contactEmail is not null %}
+										<img src="{{asset('build/mail.png')}}" class="commercial-mail" title="{{cont.contactEmail}}" alt="Email du contact">
+									{% endif %}
+                                    {% if cont.contactMobilePhone is not null %}
+                                        <img src="{{asset('build/tel.png')}}" class="commercial-tel" title="{{cont.contactMobilePhone}}" alt="Tél. fixe direct du contact">
+                                    {% endif %}
 								</td>
 							</tr>
 						{% else %}
 							<tr>
-								<td>Aucun Contact</td>
+								<td COLSPAN="8" class="text-center">Aucun Contact</td>
 							</tr>
 						{% endfor %}
 						</tbody>
