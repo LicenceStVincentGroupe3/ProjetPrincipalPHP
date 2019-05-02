@@ -52,15 +52,18 @@
 
 					<div class="row">
 						<div class="col-lg-7 mx-auto">
-							<div class="row my-form-field">
+							<div class="row my-form-field {% if form.commercialCode.vars.errors|length %}my-form-error-container{% endif %}">
 								<div class="col-lg-4 mx-auto">
 									{{ form_label(form.commercialCode, null, {'label_attr': {'class': 'my-form-label'}}) }}
 								</div>
 								<div class="col-lg-7 mx-auto mandatory">
 									{{ form_widget(form.commercialCode, {'attr': {'class': 'form-control my-form-input-little', 'placeholder': "Ex: 1254789"}}) }}
-
-									{{ form_errors(form.commercialCode, {'attr': {'class': 'form-error-message'}}) }}
 								</div>
+								{% if form.commercialCode.vars.errors|length %}
+								<div class="alert alert-danger my-form-error">
+                                    {{ form_errors(form.commercialCode, {'attr': {'class': 'list-unstyled mb-0'}}) }}
+                                </div>
+                                {% endif %}
 							</div>
 							<div class="row my-form-field">
 								<div class="col-lg-4 mx-auto">
@@ -68,29 +71,33 @@
 								</div>
 								<div class="col-lg-7 mx-auto mandatory">
 									{{ form_widget(form.commercialSexe, {'attr': {'class': 'form-control my-form-input-little'}}) }}
-
-									{{ form_errors(form.commercialSexe, {'attr': {'class': 'form-error-message'}}) }}
 								</div>
 							</div>
-							<div class="row my-form-field">
+							<div class="row my-form-field {% if form.commercialFirstname.vars.errors|length %}my-form-error-container{% endif %}">
 								<div class="col-lg-4 mx-auto">
 									{{ form_label(form.commercialFirstname, null, {'label_attr': {'class': 'my-form-label'}}) }}
 								</div>
 								<div class="col-lg-7 mx-auto mandatory">
 									{{ form_widget(form.commercialFirstname, {'attr': {'class': 'form-control my-form-input-big'}}) }}
-
-									{{ form_errors(form.commercialFirstname, {'attr': {'class': 'form-error-message'}}) }}
 								</div>
+								{% if form.commercialFirstname.vars.errors|length %}
+								<div class="alert alert-danger my-form-error">
+                                    {{ form_errors(form.commercialFirstname, {'attr': {'class': 'list-unstyled mb-0'}}) }}
+                                </div>
+                                {% endif %}
 							</div>
-							<div class="row my-form-field">
+							<div class="row my-form-field {% if form.commercialName.vars.errors|length %}my-form-error-container{% endif %}">
 								<div class="col-lg-4 mx-auto">
 									{{ form_label(form.commercialName, null, {'label_attr': {'class': 'my-form-label'}}) }}
 								</div>
 								<div class="col-lg-7 mx-auto mandatory">
 									{{ form_widget(form.commercialName, {'attr': {'class': 'form-control my-form-input-big'}}) }}
-
-									{{ form_errors(form.commercialName, {'attr': {'class': 'form-error-message'}}) }}
 								</div>
+								{% if form.commercialName.vars.errors|length %}
+								<div class="alert alert-danger my-form-error">
+                                    {{ form_errors(form.commercialName, {'attr': {'class': 'list-unstyled mb-0'}}) }}
+                                </div>
+                                {% endif %}
 							</div>
 							<div class="row my-form-field">
 								<div class="col-lg-4 mx-auto">
@@ -98,11 +105,9 @@
 								</div>
 								<div class="col-lg-7 mx-auto mandatory">
 									{{ form_widget(form.commercialProfil, {'attr': {'class': 'form-control my-form-input-big'}}) }}
-
-									{{ form_errors(form.commercialProfil, {'attr': {'class': 'form-error-message'}}) }}
 								</div>
 							</div>
-							<div class="row my-form-field">
+							<div class="row my-form-field {% if form.commercialBirthday.vars.errors|length %}my-form-error-container{% endif %}">
 								<div class="col-lg-4 mx-auto">
 									{{ form_label(form.commercialBirthday, null, {'label_attr': {'class': 'my-form-label'}}) }}
 								</div>
@@ -110,14 +115,17 @@
 							        <div class="form-group">
 						                <div class='input-group date' id='datetimepicker2'>
 						                    {{ form_widget(form.commercialBirthday, {'attr': {'class': 'my-form-input-tiny'}}) }}
-
-											{{ form_errors(form.commercialBirthday, {'attr': {'class': 'form-error-message'}}) }}
 						                    <span class="input-group-addon">
 						                        <span class="glyphicon glyphicon-calendar"></span>
 						                    </span>
 						                </div>
 						            </div>
 								</div>
+								{% if form.commercialBirthday.vars.errors|length %}
+								<div class="alert alert-danger my-form-error">
+                                    {{ form_errors(form.commercialBirthday, {'attr': {'class': 'list-unstyled mb-0'}}) }}
+                                </div>
+                                {% endif %}
 							</div>
 							<div class="row my-form-field initial-height">
 								<div class="col-lg-4 mx-auto">
@@ -126,59 +134,65 @@
 								<div class="col-lg-7 mx-auto arrival-departure">
 									{{ form_widget(form.arrivalDate, {'attr': {'class': ' my-form-input-tiny'}}) }}
 
-									{{ form_errors(form.arrivalDate, {'attr': {'class': 'form-error-message'}}) }}
-
 									{# {{ form_label(form.departureDate) }} #}
 									{{ form_widget(form.departureDate, {'attr': {'class': 'my-form-input-tiny'}}) }}
-
-									{{ form_errors(form.departureDate, {'attr': {'class': 'form-error-message'}}) }}
 								</div>
 							</div>
-							<div class="row my-form-field">
+							<div class="row my-form-field {% if not form.commercialLinkedinAddress.vars.errors|length %}my-form-error-container{% endif %}">
 								<div class="col-lg-4 mx-auto">
 									{{ form_label(form.commercialLinkedinAddress, null, {'label_attr': {'class': 'my-form-label'}}) }}
 								</div>
 								<div class="col-lg-7 mx-auto">
 									{{ form_widget(form.commercialLinkedinAddress, {'attr': {'class': 'form-control my-form-input-big input-linkedin'}}) }}
-
-									{{ form_errors(form.commercialLinkedinAddress, {'attr': {'class': 'form-error-message'}}) }}
 								</div>
+								{% if form.commercialLinkedinAddress.vars.errors|length %}
+								<div class="alert alert-danger my-form-error">
+                                    {{ form_errors(form.commercialLinkedinAddress, {'attr': {'class': 'list-unstyled mb-0'}}) }}
+                                </div>
+                                {% endif %}
 							</div>
-							<div class="row my-form-field">
+							<div class="row my-form-field {% if form.commercialFacebookAddress.vars.errors|length %}my-form-error-container{% endif %}">
 								<div class="col-lg-4 mx-auto">
 									{{ form_label(form.commercialFacebookAddress, null, {'label_attr': {'class': 'my-form-label'}}) }}
 								</div>
 								<div class="col-lg-7 mx-auto">
 									{{ form_widget(form.commercialFacebookAddress, {'attr': {'class': 'form-control my-form-input-big input-facebook'}}) }}
-
-									{{ form_errors(form.commercialFacebookAddress, {'attr': {'class': 'form-error-message'}}) }}
 								</div>
+								{% if form.commercialFacebookAddress.vars.errors|length %}
+								<div class="alert alert-danger my-form-error">
+                                    {{ form_errors(form.commercialFacebookAddress, {'attr': {'class': 'list-unstyled mb-0'}}) }}
+                                </div>
+                                {% endif %}
 							</div>
-							<div class="row my-form-field">
+							<div class="row my-form-field {% if form.commercialTwitterAddress.vars.errors|length > 0 %}my-form-error-container{% endif %}">
 								<div class="col-lg-4 mx-auto">
 									{{ form_label(form.commercialTwitterAddress, null, {'label_attr': {'class': 'my-form-label'}}) }}
 								</div>
 								<div class="col-lg-7 mx-auto">
 									{{ form_widget(form.commercialTwitterAddress, {'attr': {'class': 'form-control my-form-input-big input-twitter'}}) }}
-
-									{{ form_errors(form.commercialTwitterAddress, {'attr': {'class': 'form-error-message'}}) }}
 								</div>
+								{% if form.commercialTwitterAddress.vars.errors|length > 0 %}
+								<div class="alert alert-danger my-form-error">
+                                    {{ form_errors(form.commercialTwitterAddress, {'attr': {'class': 'list-unstyled mb-0'}}) }}
+                                </div>
+                                {% endif %}
 							</div>
 						</div>
 						<div class="col-lg-5 mx-auto">
-							<div class="row my-form-field initial-height">
+							<div class="row my-form-field initial-height {% if form.email.vars.errors|length > 0 %}my-form-error-container{% endif %}">
 								<div class="col-lg-5 mx-aut email-status">
 									{{ form_label(form.email, null, {'label_attr': {'class': 'my-form-label'}}) }}
 								</div>
 								<div class="col-lg-7 mx-auto email-status">
 									{{ form_widget(form.email, {'attr': {'class': 'form-control my-form-input-big'}}) }}
 
-									{{ form_errors(form.email, {'attr': {'class': 'form-error-message'}}) }}
-
 									{{ form_widget(form.commercialStatus, {'attr': {'class': 'form-control my-form-input-big'}}) }}
-
-									{{ form_errors(form.commercialStatus, {'attr': {'class': 'form-error-message'}}) }}
 								</div>
+								{% if form.email.vars.errors|length > 0 %}
+								<div class="alert alert-danger my-form-error">
+                                	{{ form_errors(form.email, {'attr': {'class': 'list-unstyled mb-0'}}) }}
+                                </div>
+                                {% endif %}
 							</div>
 							<div class="row my-form-field">
 								<div class="col-lg-5 mx-auto">
@@ -186,8 +200,6 @@
 								</div>
 								<div class="col-lg-7 mx-auto">
 									{{ form_widget(form.plainPassword, {'attr': {'class': 'form-control my-form-input-big input-password'}}) }}
-
-									{{ form_errors(form.plainPassword, {'attr': {'class': 'form-error-message'}}) }}
 								</div>
 							</div>
 							<div class="row space"></div>
@@ -204,15 +216,18 @@
 									</select>
 								</div>
 							</div>
-							<div class="row my-form-field">
+							<div class="row my-form-field {% if form.commercialJob.vars.errors|length > 0 %}my-form-error-container{% endif %}">
 								<div class="col-lg-5 mx-auto">
 									{{ form_label(form.commercialJob, null, {'label_attr': {'class': 'my-form-label'}}) }}
 								</div>
 								<div class="col-lg-7 mx-auto">
 									{{ form_widget(form.commercialJob, {'attr': {'class': 'form-control my-form-input-big'}}) }}
-
-									{{ form_errors(form.commercialJob, {'attr': {'class': 'form-error-message'}}) }}
 								</div>
+								{% if form.commercialJob.vars.errors|length > 0 %}
+								<div class="alert alert-danger my-form-error">
+                                    {{ form_errors(form.commercialJob, {'attr': {'class': 'list-unstyled mb-0'}}) }}
+                                </div>
+                                {% endif %}
 							</div>
 							{% if listHierarchy is defined %}
 							<div class="row my-form-field">
@@ -237,43 +252,44 @@
 								</div>
 							</div>
 							{% endif %}
-							<div class="row my-form-field">
+							<div class="row my-form-field {% if form.commercialMobilePhone.vars.errors|length > 0 %}my-form-error-container{% endif %}">
 								<div class="col-lg-5 mx-auto">
 									{{ form_label(form.commercialMobilePhone, null, {'label_attr': {'class': 'my-form-label'}}) }}
 								</div>
 								<div class="col-lg-7 mx-auto">
 									{{ form_widget(form.commercialMobilePhone, {'attr': {'class': 'form-control my-form-input-big input-telmobile'}}) }}
-
-									{{ form_errors(form.commercialMobilePhone, {'attr': {'class': 'form-error-message'}}) }}
 								</div>
+								{% if form.commercialMobilePhone.vars.errors|length > 0 %}
+								<div class="alert alert-danger my-form-error">
+                                    {{ form_errors(form.commercialMobilePhone, {'attr': {'class': 'list-unstyled mb-0'}}) }}
+                                </div>
+                                {% endif %}
 							</div>
-							<div class="row my-form-field">
+							<div class="row my-form-field {% if form.commercialPhone.vars.errors|length > 0 %}my-form-error-container{% endif %}">
 								<div class="col-lg-5 mx-auto">
 									{{ form_label(form.commercialPhone, null, {'label_attr': {'class': 'my-form-label'}}) }}
 								</div>
 								<div class="col-lg-7 mx-auto">
 									{{ form_widget(form.commercialPhone, {'attr': {'class': 'form-control my-form-input-big input-tel'}}) }}
 								</div>
-								{% if not form.vars.valid %}
-								<div class="alert alert-danger">
-                                    <ul class="list-unstyled mb-0">
-                                        <li>
-                                            <i class="fas fa-exclamation-circle"></i>
-                                            {{ form_errors(form.commercialPhone, {'attr': {'class': 'form-error-message'}}) }}
-                                        </li>
-                                    </ul>
+								{% if form.commercialPhone.vars.errors|length > 0 %}
+								<div class="alert alert-danger my-form-error">
+                                    {{ form_errors(form.commercialPhone, {'attr': {'class': 'list-unstyled mb-0'}}) }}
                                 </div>
                                 {% endif %}
 							</div>
-							<div class="row my-form-field">
+							<div class="row my-form-field my-form-input-fat-container {% if form.remarks.vars.errors|length > 0 %}my-form-error-container{% endif %}">
 								<div class="col-lg-5 mx-auto">
 									{{ form_label(form.remarks, null, {'label_attr': {'class': 'my-form-label'}}) }}
 								</div>
 								<div class="col-lg-7 mx-auto">
 									{{ form_widget(form.remarks, {'attr': {'class': 'form-control my-form-input-fat'}}) }}
-
-									{{ form_errors(form.remarks, {'attr': {'class': 'form-error-message'}}) }}
 								</div>
+								{% if form.remarks.vars.errors|length > 0 %}
+								<div class="alert alert-danger my-form-error">
+                                    {{ form_errors(form.remarks, {'attr': {'class': 'list-unstyled mb-0'}}) }}
+                                </div>
+                                {% endif %}
 							</div>
 						</div>
 					</div>

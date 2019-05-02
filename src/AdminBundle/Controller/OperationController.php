@@ -37,7 +37,7 @@ class OperationController extends AbstractController
                 return $this->redirect($this->generateUrl('listOperation'));
             }
 
-            return $this->render('operation/new.html.twig', ['form' => $form->createView()]);
+            return $this->render('operation/new.html.twig', ['form' => $form->createView(), 'operationLink' => true]);
         }
         else {
             return $this->redirect($this->generateUrl('login'));
@@ -76,7 +76,7 @@ class OperationController extends AbstractController
             // ----------------------------------
             // On demande à la vue d'afficher la commande plus tous ses produits
             // ----------------------------------
-            return $this->render('operation/edit.html.twig', ['form' => $form->createView()]); // On affecte notre tableau contenant la(les) valeur(s) de la variable à la vue
+            return $this->render('operation/edit.html.twig', ['form' => $form->createView(), 'operationLink' => true]); // On affecte notre tableau contenant la(les) valeur(s) de la variable à la vue
         }
         else {
             return $this->redirect($this->generateUrl('login'));
@@ -125,7 +125,7 @@ class OperationController extends AbstractController
             // ----------------------------------
             // On demande à la vue d'afficher la liste des commandes
             // ----------------------------------
-            return $this->render('operation/list.html.twig', ['listOp' => $list]);
+            return $this->render('operation/list.html.twig', ['listOp' => $list, 'operationLink' => true]);
             // On affecte notre tableau contenant la(les) valeur(s) de la variable à la vue
         }
         else {

@@ -23,7 +23,52 @@ class Operation
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank
      */
+    private $operationCode;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
+     */
     private $operationName;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     * @Assert\NotBlank()
+     */
+    private $nbAutoRelaunching;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     * @Assert\DateTime
+     */
+    private $sendingDate;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     * @Assert\DateTime
+     */
+    private $closingDate;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $infos;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $commercialOffer;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $remarks;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\AdminBundle\Entity\Commercial", inversedBy="operations")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $idCommercial;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -74,6 +119,18 @@ class Operation
         return $this->id;
     }
 
+    public function getOperationCode(): ?string
+    {
+        return $this->operationCode;
+    }
+
+    public function setOperationCode(string $operationCode): self
+    {
+        $this->operationCode = $operationCode;
+
+        return $this;
+    }
+
     public function getOperationName(): ?string
     {
         return $this->operationName;
@@ -82,6 +139,90 @@ class Operation
     public function setOperationName(string $operationName): self
     {
         $this->operationName = $operationName;
+
+        return $this;
+    }
+
+    public function getNbAutoRelaunching(): ?int
+    {
+        return $this->nbAutoRelaunching;
+    }
+
+    public function setNbAutoRelaunching(int $nbAutoRelaunching): self
+    {
+        $this->nbAutoRelaunching = $nbAutoRelaunching;
+
+        return $this;
+    }
+
+    public function getSendingDate(): ?\DateTimeInterface
+    {
+        return $this->sendingDate;
+    }
+
+    public function setSendingDate(\DateTimeInterface $sendingDate): self
+    {
+        $this->sendingDate = $sendingDate;
+
+        return $this;
+    }
+
+    public function getClosingDate(): ?\DateTimeInterface
+    {
+        return $this->closingDate;
+    }
+
+    public function setClosingDate(\DateTimeInterface $closingDate): self
+    {
+        $this->closingDate = $closingDate;
+
+        return $this;
+    }
+
+    public function getInfos(): ?bool
+    {
+        return $this->infos;
+    }
+
+    public function setInfos(?bool $infos): self
+    {
+        $this->infos = $infos;
+
+        return $this;
+    }
+
+    public function getCommercialOffer(): ?bool
+    {
+        return $this->commercialOffer;
+    }
+
+    public function setCommercialOffer(?bool $commercialOffer): self
+    {
+        $this->commercialOffer = $commercialOffer;
+
+        return $this;
+    }
+
+    public function getRemarks(): ?string
+    {
+        return $this->remarks;
+    }
+
+    public function setRemarks(?string $remarks): self
+    {
+        $this->remarks = $remarks;
+
+        return $this;
+    }
+
+    public function getIdCommercial(): ?Commercial
+    {
+        return $this->idCommercial;
+    }
+
+    public function setIdCommercial(?Commercial $idCommercial): self
+    {
+        $this->idCommercial = $idCommercial;
 
         return $this;
     }
