@@ -57,6 +57,17 @@ class CommercialRepository extends ServiceEntityRepository
         ;
     }
 
+    // Récupère le responsable N+1 du commercial séléctionné
+    public function hierarchyN1($idCom)
+    {
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.id = :idCom')
+            ->setParameter('idCom', $idCom)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
+
     // /**
     //  * @return Commercial[] Returns an array of Commercial objects
     //  */

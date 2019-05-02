@@ -2,6 +2,34 @@ a:hover {
 	text-decoration: none;
 }
 
+.btn-red {
+    background-color: #cf1740;
+    color: #ffffff;
+}
+
+.btn-white-red {
+    background-color: #ffffff;
+    color: #cf1740;
+    border-width: medium;
+    border-color: #cf1740;
+}
+
+.btn-white-red a {
+    color: #cf1740;
+}
+
+.btn-red:hover {
+    color: #ffffff;
+}
+
+.btn-white-red:hover {
+    color: #cf1740;
+}
+
+.btn-white-red a:hover {
+    color: #cf1740;
+}
+
 .unset-outline {
     outline: none;
 }
@@ -188,6 +216,12 @@ a:hover {
 .table-field-other {
     color: #d9d9d9;
 }
+
+.table-img-profile {
+    width: 30%;
+    margin-right: 5%;
+}
+
 .form-check{
     padding-left:0;
 }
@@ -321,6 +355,8 @@ a:hover {
     height: 40px;
     margin-left: 5%;
     margin-right: 5%;
+    margin-top: auto;
+    margin-bottom: auto;
     text-align: center;
 }
 
@@ -449,10 +485,18 @@ a:hover {
     margin-bottom: 3%;
 }
 
-.my-form-field input, textarea {
+.my-form-field > div{
+    height: 45px;
+}
+
+.my-form-field input, .my-form-field textarea {
     border: 2px solid;
     border-radius: 0.35rem;
     border-color: #f1f3f5;
+    color: #999999;
+}
+
+.my-form-field select {
     color: #999999;
 }
 
@@ -503,6 +547,14 @@ a:hover {
 }
 
 .btn-file {
+}
+
+.arrival-departure {
+    height: 90px!important;
+}
+
+.email-status {
+    width: 70px;
 }
 
 .btn-mdb-color {
@@ -686,12 +738,53 @@ select::-ms-expand {
   display: none;
 }
 
-.submit-button {
+.input-telmobile {
+    background: #fff url(/build/telmobile.png) 97% 50% no-repeat;
+}
+
+.input-linkedin {
+    background: #fff url(/build/linkedin.png) 97% 50% no-repeat;
+}
+
+.input-facebook {
+    background: #fff url(/build/facebook.png) 97% 50% no-repeat;
+}
+
+.input-twitter {
+    background: #fff url(/build/twitter.png) 97% 50% no-repeat;
+}
+
+.input-password {
+    background: #fff url(/build/password.png) 97% 50% no-repeat;
+}
+
+.input-tel {
+    background: #fff url(/build/tel.png) 97% 50% no-repeat;
+}
+
+.form-buttons {
+    margin-bottom: 5%;
+    padding-left: 70%;
+}
+
+.submit-button, .return-button {
     width: 140px;
     height: 40px;
-    background-color: #cf1740;
-    color: #ffffff;
     font-weight: 700;
+}
+
+.submit-button {
+    margin-left: 1.5%;
+}
+
+.return-button {
+    margin-right: 1.5%;
+}
+
+.space {
+    width: 100%;
+    height: 10px;
+    margin-bottom: 10%;
 }
 
 /* ------------------ FIN FORM ------------------- */
@@ -700,4 +793,8 @@ select::-ms-expand {
 
 .initial-height {
     height: initial;
+}
+
+.initial-height > div {
+    height: 70px;
 }

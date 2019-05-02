@@ -1,21 +1,22 @@
 $(document).ready( function () {
 	$("#search-filter").on("keyup", function() {
-		var value = $(this).val().toLowerCase();
-		$("#myTableBody tr").filter(function() {
-			$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-		});
-	});
 
-	/*//exporte les données sélectionnées
-    var $table = $('#table');
-    $(function () {
-        $('#toolbar').find('select').change(function () {
-            $table.bootstrapTable('refreshOptions', {
-                exportDataType: $(this).val(),
-            });
-        });
-    })
-    var trBoldBlue = $("table");*/
+	    var value = $(this).val().toLowerCase();
+	    $("#myTableBody tr").filter(function() {
+	      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+	    });
+	  });
+
+    /*//exporte les données sélectionnées
+	var $table = $('#table');
+	$(function () {
+	    $('#toolbar').find('select').change(function () {
+	        $table.bootstrapTable('refreshOptions', {
+	            exportDataType: $(this).val(),
+	        });
+	    });
+	})
+	var trBoldBlue = $("table");*/
 
 
 

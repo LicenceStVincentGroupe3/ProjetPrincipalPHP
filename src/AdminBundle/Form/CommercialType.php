@@ -36,7 +36,7 @@ class CommercialType extends AbstractType
 			])
 			->add('commercialJob', TextType::class, ['label' => 'Fonction/poste', 'required' => false])
 			->add('commercialStatus', CheckboxType::class, ['label' => 'Actif', 'required' => false])
-			->add('commercialBirthday', DateType::class, ['label' => 'Date de naissance',
+			->add('commercialBirthday', DateType::class, ['label' => 'Date de naissance', 'required' => false,
 				'widget' => 'single_text'
 			])
 			->add('arrivalDate', DateType::class, ['label' => 'Date d\'arrivée/départ', 'required' => false,

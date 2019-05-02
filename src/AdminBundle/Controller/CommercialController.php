@@ -58,7 +58,6 @@ class CommercialController extends AbstractController
                 if ($this->isGranted('ROLE_DIRECTEUR')) {
                     $form->add('commercialProfil', ChoiceType::class, [
                         'choices'  => [
-                            'A définir' => null,
                             'Directeur' => 'ROLE_DIRECTEUR',
                             'Responsable' => 'ROLE_RESPONSABLE',
                             'Commercial' => 'ROLE_COMMERCIAL'
@@ -71,7 +70,6 @@ class CommercialController extends AbstractController
                 else {
                     $form->add('commercialProfil', ChoiceType::class, [
                         'choices'  => [
-                            'A définir' => null,
                             'Commercial' => 'ROLE_COMMERCIAL'
                         ]
                     ]);
@@ -84,6 +82,10 @@ class CommercialController extends AbstractController
                 
                 $form->handleRequest($httpRequest);
 
+                if ($form->isSubmitted())
+                {
+                    $commercialPhoto = $form['commercialSexe']->getData();
+                }
 
                 if ($form->isSubmitted() && $form->isValid() && $httpRequest->isMethod('POST'))
                 {
@@ -128,7 +130,16 @@ class CommercialController extends AbstractController
                         $new->setIdCompanyCountry($companySelected);
                     }
 
-                    $new->setHierarchy($idHierarchy);
+                    // Si l'utilisateur n'a séléctioné aucun responsable N+1
+                    if ($idHierarchy == "0")
+                    {
+                       $new->setHierarchy(null);
+                    }
+                    // Sinon
+                    else
+                    {
+                        $new->setHierarchy($idHierarchy);
+                    }
  
                     $new->setPassword($password);
                     $new->addRole($role);
@@ -174,6 +185,9 @@ class CommercialController extends AbstractController
                 // Variable qui contient le Repository
                 $companyCountry = $display->getRepository(CompanyCountry::class);
 
+                // Variable qui contient le Repository
+                $commercial = $display->getRepository(Commercial::class);
+
                 // Equivalent du SELECT * where id=(paramètre)
                 $edit = $commercialRepository->find($id);
 
@@ -198,6 +212,8 @@ class CommercialController extends AbstractController
                             'Commercial' => 'ROLE_COMMERCIAL'
                         ]
                     ]);
+
+                    $listHierarchy = $commercial->listHierarchyDirAndResp('ROLE_DIRECTEUR','ROLE_RESPONSABLE');
                 }
                 // Sinon
                 else {
@@ -207,7 +223,14 @@ class CommercialController extends AbstractController
                             'Commercial' => 'ROLE_COMMERCIAL'
                         ]
                     ]);
+
+                    $listHierarchy = $commercial->listHierarchyResp('ROLE_RESPONSABLE');
                 }
+
+                // On récupère le name de la <select>
+                $idHierarchy = $formData->request->get('hierarchy');
+
+                $responsableN1 = $commercial->hierarchyN1($edit->getHierarchy());
 
                 $form->handleRequest($httpRequest);
 
@@ -268,6 +291,17 @@ class CommercialController extends AbstractController
                         $edit->setIdCompanyCountry($companySelected);
                     }
 
+                    // Si l'utilisateur n'a séléctioné aucun responsable N+1
+                    if ($idHierarchy == "0")
+                    {
+                       $edit->setHierarchy(null);
+                    }
+                    // Sinon
+                    else
+                    {
+                        $edit->setHierarchy($idHierarchy);
+                    }
+
                     $edit->setCommercialLastUpdate(new \DateTime());
                     $edit->addRole($role);
 
@@ -279,7 +313,7 @@ class CommercialController extends AbstractController
                 // ----------------------------------
                 // On demande à la vue d'afficher la commande plus tous ses produits
                 // ----------------------------------
-                return $this->render('commercial/edit.html.twig', ['editCom' => $edit, 'form' => $form->createView(), 'listCountry' => $listCountry, 'commercialTeamLink' => true]);
+                return $this->render('commercial/edit.html.twig', ['editCom' => $edit, 'form' => $form->createView(), 'listCountry' => $listCountry, 'listHierarchy' => $listHierarchy, 'responsableN1' => $responsableN1, 'commercialTeamLink' => true]);
             }
 
             else {

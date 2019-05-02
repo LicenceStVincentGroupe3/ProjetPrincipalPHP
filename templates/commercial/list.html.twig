@@ -29,13 +29,13 @@
 			<table id="table" class="table sortable-table">
 				<thead>
 					<tr>
-						<th class="no-sortable"><input type="checkbox" id="checkall"></th>
-						<th class="sortable" data-field="prenom">Prénom</th>
-						<th class="sortable" data-field="nom">Nom</th>
-						<th class="sortable" data-field="fonction">Fonction</th>
-						<th class="sortable" data-field="zone">Zone affectée</th>
-						<th class="sortable" data-field="entreprise">Entreprises</th>
-						<th class="sortable" data-field="contact">Contacts</th>
+						<th style="width: 50px;padding-bottom: 0.5%;" class="no-sortable"><input type="checkbox" id="checkall"></th>
+						<th style="width: 130px;" class="sortable" data-field="prenom">Prénom</th>
+						<th style="width: 80px;" class="sortable" data-field="nom">Nom</th>
+						<th style="width: 125px;" class="sortable" data-field="fonction">Fonction</th>
+						<th style="width: 175px;" class="sortable" data-field="zone">Zone affectée</th>
+						<th style="width: 150px;" class="sortable" data-field="entreprise">Entreprises</th>
+						<th style="width: 125px;" class="sortable" data-field="contact">Contacts</th>
 						<th class="table-field-other no-sortable" data-field="autre">&bull;&bull;&bull;</th>
 					</tr>
 				</thead>
@@ -46,6 +46,11 @@
 							<input type="checkbox" class="checkthis" name="deleteData[]" value="{{ commercial.Id }}">
 						</td>
 						<td>
+							{% if commercial.CommercialPhoto is not null %}
+                            <img src="{{asset('build/images/' ~ commercial.CommercialPhoto)}}" class="table-img-profile rounded-circle" title="Photo" alt="Photo de profil">
+                            {% else %}
+                            <img src="{{asset('build/Photo.png')}}" class="table-img-profile rounded-circle" title="Photo" alt="Photo de profil">
+                            {% endif %}
 							<a href="{{ path('editCommercial', {'id':commercial.Id}) }}">	{{commercial.CommercialFirstname}}
 							</a>
 						</td>
@@ -143,17 +148,13 @@
 					<option value="200">200</option>
 				</select>
 			</div>
-			<div class="table-nb-functions">								
-				<!-- <button class="btn btn-danger pull-right"  data-title="Delete" data-toggle="modal" data-target="#delete">
-					<span class="glyphicon glyphicon-trash"></span>
-					Supprimer
-				</button> -->
+			<div class="table-nb-functions">
 				<span class="table-after-delete" data-title="Delete" data-toggle="modal" data-target="#delete">
 					<i class="fas fa-trash"></i>
 				</span>
-				<span class="table-after-add">
+				<!-- <span class="table-after-add">
 					<i class="fas fa-user-plus"></i>
-				</span>
+				</span> -->
 			</div>
 			<div class="table-after-pagination">
 	           <ul class="pagination pagination-lg pager" id="myPager"></ul>
