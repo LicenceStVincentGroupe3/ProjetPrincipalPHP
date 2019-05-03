@@ -32,8 +32,12 @@ class Operation
     private $operationName;
 
     /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $emailSubject;
+
+    /**
      * @ORM\Column(type="integer", nullable=true)
-     * @Assert\NotBlank()
      */
     private $nbAutoRelaunching;
 
@@ -71,36 +75,33 @@ class Operation
     private $idCommercial;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank
+     * @ORM\Column(type="string", length=255, nullable=true)
      * @Assert\Url
      */
     private $operationUrlPage;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $operationHeadBandVisual;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $operationLateralVisual;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", nullable=true)
      */
     private $operationDisplayed;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", nullable=true)
      */
     private $operationModified;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", nullable=true)
      */
     private $operationBinding;
 
@@ -143,6 +144,18 @@ class Operation
         return $this;
     }
 
+    public function getEmailSubject(): ?string
+    {
+        return $this->emailSubject;
+    }
+
+    public function setEmailSubject(string $emailSubject): self
+    {
+        $this->emailSubject = $emailSubject;
+
+        return $this;
+    }
+
     public function getNbAutoRelaunching(): ?int
     {
         return $this->nbAutoRelaunching;
@@ -160,7 +173,7 @@ class Operation
         return $this->sendingDate;
     }
 
-    public function setSendingDate(\DateTimeInterface $sendingDate): self
+    public function setSendingDate(?\DateTimeInterface $sendingDate): self
     {
         $this->sendingDate = $sendingDate;
 
@@ -172,7 +185,7 @@ class Operation
         return $this->closingDate;
     }
 
-    public function setClosingDate(\DateTimeInterface $closingDate): self
+    public function setClosingDate(?\DateTimeInterface $closingDate): self
     {
         $this->closingDate = $closingDate;
 

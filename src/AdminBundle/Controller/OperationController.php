@@ -3,11 +3,12 @@
 namespace App\AdminBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use App\AdminBundle\Entity\Operation;
-use App\AdminBundle\Form\OperationType;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\VarDumper\VarDumper;
+use App\AdminBundle\Form\OperationType;
+use App\AdminBundle\Entity\Operation;
+use App\AdminBundle\Entity\Commercial;
 
 // Préfix url
 /**
@@ -21,23 +22,43 @@ class OperationController extends AbstractController
     public function new(Request $request)
     {
         if ($this->isGranted('ROLE_COMMERCIAL')) {
-            $newOperation = new Operation();
+            // Appel de Doctrine
+            $display = $this->getDoctrine()->getManager();
 
-            $form = $this->createForm(OperationType::class, $newOperation);
+            $new = new Operation();
+
+            // Variable qui contient le Repository
+            $commmercialCountry = $display->getRepository(Commercial::class);
+
+            $listCommercial = $commmercialCountry->findAll();
+
+            $form = $this->createForm(OperationType::class, $new);
+
+            // Contient les name des <input>
+            $formData = Request::createFromGlobals();
+
+            // On récupère le name de la <select>
+            $idAuthorSelected = $formData->request->get('author');
+            
             $form->handleRequest($request);
 
             if ($form->isSubmitted() && $form->isValid() && $request->isMethod('POST'))
             {
-                $newOperation = $form->getData();
+                $new = $form->getData();
 
-                $entityManager = $this->getDoctrine()->getManager();
-                $entityManager->persist($newOperation);
-                $entityManager->flush();
+                // On récupère le commercial séléctionné
+                $authorSelected = $commmercialCountry->find($idAuthorSelected);
+
+                // On l'attribut à l'opération
+                $new->setIdCommercial($authorSelected);
+                
+                $display->persist($new);
+                $display->flush();
 
                 return $this->redirect($this->generateUrl('listOperation'));
             }
 
-            return $this->render('operation/new.html.twig', ['form' => $form->createView(), 'operationLink' => true]);
+            return $this->render('operation/new.html.twig', ['form' => $form->createView(), 'listCommercial' => $listCommercial, 'operationLink' => true]);
         }
         else {
             return $this->redirect($this->generateUrl('login'));
@@ -77,30 +98,6 @@ class OperationController extends AbstractController
             // On demande à la vue d'afficher la commande plus tous ses produits
             // ----------------------------------
             return $this->render('operation/edit.html.twig', ['form' => $form->createView(), 'operationLink' => true]); // On affecte notre tableau contenant la(les) valeur(s) de la variable à la vue
-        }
-        else {
-            return $this->redirect($this->generateUrl('login'));
-        }
-    }
-
-    /**
-     * @Route("/delete/{id}", requirements={"id"="\d+"}, methods={"GET","POST"}, name="deleteOperation")
-     */
-    public function delete($id)
-    {
-        if ($this->isGranted('ROLE_COMMERCIAL')) {
-            // Appel de Doctrine
-            $display = $this->getDoctrine()->getManager();
-
-            $operationRepository = $display->getRepository(Operation::class);
-
-            $delete = $operationRepository->find($id);
-
-            $display->remove($delete);
-
-            $display->flush();
-
-            return $this->redirect($this->generateUrl('listOperation'));
         }
         else {
             return $this->redirect($this->generateUrl('login'));

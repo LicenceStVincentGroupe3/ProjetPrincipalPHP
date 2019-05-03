@@ -55,7 +55,7 @@
 							</a>
 						</td>
 						<td>
-							<a href="{{ path('editCommercial', {'id':commercial.Id}) }}">	{{commercial.CommercialName}}
+							<a href="{{ path('editCommercial', {'id':commercial.Id}) }}">	{{commercial.CommercialName|upper}}
 							</a>
 						</td>
 						<td>
@@ -90,10 +90,6 @@
 							{% if commercial.CommercialPhone is not null %}
 								<img src="{{asset('build/tel.png')}}" class="commercial-tel" title="{{commercial.CommercialPhone}}" alt="Tél. fixe direct du commercial">
 							{% endif %}
-							<!--<a class="btn btn-danger" href="{{ path('deleteCommercial', {'id':commercial.Id}) }}">
-								<i class="glyphicon glyphicon-trash"></i>
-								X
-							</a>-->
 						</td>
 					</tr>
 					{% else %}
@@ -161,7 +157,7 @@
 	        </div>
 	        <div class="table-after-btn-add">
 		       <button class="btn add-button">
-					<a href="{{ path('newCommercial') }}">Ajouter</a>
+					<a href="{{ path('newCommercial') }}">AJOUTER</a>
 				</button>
 			</div>
 		</div>
@@ -244,10 +240,6 @@
 							{% if commercial.CommercialPhone is not null %}
 								<img src="{{asset('build/tel.png')}}" class="commercial-tel" title="{{commercial.CommercialPhone}}" alt="Tél. fixe direct du commercial">
 							{% endif %}
-							<a class="btn btn-danger" href="{{ path('deleteCommercial', {'id':commercial.Id}) }}">
-								<i class="glyphicon glyphicon-trash"></i>
-								X
-							</a>
 						</td>
 					</tr>
 					{% else %}

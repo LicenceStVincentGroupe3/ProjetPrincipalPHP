@@ -21,303 +21,300 @@
 	<h5>Saisie d'un nouveau collaborateur</h5>
 </section>
 <div class="tabset">
-		<!-- Tab 1 -->
-		<input type="radio" name="tabset" id="tab1" aria-controls="identity" checked>
-		<label for="tab1">Identité</label>
-		<!-- Tab 2 -->
-		<input type="radio" name="tabset" id="tab2" aria-controls="company">
-		<label for="tab2">Entreprise</label>
-		<!-- Tab 3 -->
-		<input type="radio" name="tabset" id="tab3" aria-controls="contact">
-		<label for="tab3">Contacts</label>
-		<!-- Tab 4 -->
-		<input type="radio" name="tabset" id="tab4" aria-controls="historic">
-		<label for="tab4">Historique</label>
+	<!-- Tab 1 -->
+	<input type="radio" name="tabset" id="tab1" aria-controls="identity" checked>
+	<label for="tab1">Identité</label>
+	<!-- Tab 2 -->
+	<input type="radio" name="tabset" id="tab2" aria-controls="company">
+	<label for="tab2">Entreprise</label>
+	<!-- Tab 3 -->
+	<input type="radio" name="tabset" id="tab3" aria-controls="contact">
+	<label for="tab3">Contacts</label>
+	<!-- Tab 4 -->
+	<input type="radio" name="tabset" id="tab4" aria-controls="historic">
+	<label for="tab4">Historique</label>
 
-		<div class="tab-panels">
-			<section id="identity" class="tab-panel">
-				{{ form_start(form, {'method': 'POST'}, {'attr': {'novalidate': 'novalidate'}}) }}
-					<div class="file-field">
-					    <div class="mb-4">
-					      <img src="{{asset('build/Photo.png')}}" class="rounded-circle avatar-pic" title="Photo" alt="Photo de profil">
-					    </div>
-					    <div>
-					      <div class="btn btn-mdb-color btn-file float-left waves-effect waves-light">
-					        <span><i class="fas fa-sync-alt"></i>PHOTO</span>
-					        {{ form_widget(form.commercialPhoto) }}
-					      </div>
-					      {{ form_errors(form.commercialPhoto, {'attr': {'class': 'form-error-message'}}) }}
-					    </div>
-					</div>
+	<div class="tab-panels">
+		<section id="identity" class="tab-panel">
+			{{ form_start(form, {'method': 'POST'}, {'attr': {'novalidate': 'novalidate'}}) }}
+				<div class="file-field">
+				    <div class="mb-4">
+				      <img src="{{asset('build/Photo.png')}}" class="rounded-circle avatar-pic" title="Photo" alt="Photo de profil">
+				    </div>
+				    <div>
+				      <div class="btn btn-mdb-color btn-file float-left waves-effect waves-light">
+				        <span><i class="fas fa-sync-alt"></i>PHOTO</span>
+				        {{ form_widget(form.commercialPhoto) }}
+				      </div>
+				      {{ form_errors(form.commercialPhoto, {'attr': {'class': 'form-error-message'}}) }}
+				    </div>
+				</div>
 
-					<div class="row">
-						<div class="col-lg-7 mx-auto">
-							<div class="row my-form-field {% if form.commercialCode.vars.errors|length %}my-form-error-container{% endif %}">
-								<div class="col-lg-4 mx-auto">
-									{{ form_label(form.commercialCode, null, {'label_attr': {'class': 'my-form-label'}}) }}
-								</div>
-								<div class="col-lg-7 mx-auto mandatory">
-									{{ form_widget(form.commercialCode, {'attr': {'class': 'form-control my-form-input-little', 'placeholder': "Ex: 1254789"}}) }}
-								</div>
-								{% if form.commercialCode.vars.errors|length %}
-								<div class="alert alert-danger my-form-error">
-                                    {{ form_errors(form.commercialCode, {'attr': {'class': 'list-unstyled mb-0'}}) }}
-                                </div>
-                                {% endif %}
+				<div class="row">
+					<div class="col-lg-7 mx-auto">
+						<div class="row my-form-field {% if form.commercialCode.vars.errors|length %}my-form-error-container{% endif %}">
+							<div class="col-lg-4 mx-auto">
+								{{ form_label(form.commercialCode, null, {'label_attr': {'class': 'my-form-label'}}) }}
 							</div>
-							<div class="row my-form-field">
-								<div class="col-lg-4 mx-auto">
-									{{ form_label(form.commercialSexe, 'Genre', {'label_attr': {'class': 'my-form-label'}}) }}
-								</div>
-								<div class="col-lg-7 mx-auto mandatory">
-									{{ form_widget(form.commercialSexe, {'attr': {'class': 'form-control my-form-input-little'}}) }}
-								</div>
+							<div class="col-lg-7 mx-auto mandatory">
+								{{ form_widget(form.commercialCode, {'attr': {'class': 'form-control my-form-input-little', 'placeholder': "Ex: 1254789"}}) }}
 							</div>
-							<div class="row my-form-field {% if form.commercialFirstname.vars.errors|length %}my-form-error-container{% endif %}">
-								<div class="col-lg-4 mx-auto">
-									{{ form_label(form.commercialFirstname, null, {'label_attr': {'class': 'my-form-label'}}) }}
-								</div>
-								<div class="col-lg-7 mx-auto mandatory">
-									{{ form_widget(form.commercialFirstname, {'attr': {'class': 'form-control my-form-input-big'}}) }}
-								</div>
-								{% if form.commercialFirstname.vars.errors|length %}
-								<div class="alert alert-danger my-form-error">
-                                    {{ form_errors(form.commercialFirstname, {'attr': {'class': 'list-unstyled mb-0'}}) }}
-                                </div>
-                                {% endif %}
+							{% if form.commercialCode.vars.errors|length %}
+							<div class="alert alert-danger my-form-error">
+                                {{ form_errors(form.commercialCode, {'attr': {'class': 'list-unstyled mb-0'}}) }}
+                            </div>
+                            {% endif %}
+						</div>
+						<div class="row my-form-field">
+							<div class="col-lg-4 mx-auto">
+								{{ form_label(form.commercialSexe, 'Genre', {'label_attr': {'class': 'my-form-label'}}) }}
 							</div>
-							<div class="row my-form-field {% if form.commercialName.vars.errors|length %}my-form-error-container{% endif %}">
-								<div class="col-lg-4 mx-auto">
-									{{ form_label(form.commercialName, null, {'label_attr': {'class': 'my-form-label'}}) }}
-								</div>
-								<div class="col-lg-7 mx-auto mandatory">
-									{{ form_widget(form.commercialName, {'attr': {'class': 'form-control my-form-input-big'}}) }}
-								</div>
-								{% if form.commercialName.vars.errors|length %}
-								<div class="alert alert-danger my-form-error">
-                                    {{ form_errors(form.commercialName, {'attr': {'class': 'list-unstyled mb-0'}}) }}
-                                </div>
-                                {% endif %}
-							</div>
-							<div class="row my-form-field">
-								<div class="col-lg-4 mx-auto">
-									{{ form_label(form.commercialProfil, 'Profil/droits', {'label_attr': {'class': 'my-form-label'}}) }}
-								</div>
-								<div class="col-lg-7 mx-auto mandatory">
-									{{ form_widget(form.commercialProfil, {'attr': {'class': 'form-control my-form-input-big'}}) }}
-								</div>
-							</div>
-							<div class="row my-form-field {% if form.commercialBirthday.vars.errors|length %}my-form-error-container{% endif %}">
-								<div class="col-lg-4 mx-auto">
-									{{ form_label(form.commercialBirthday, null, {'label_attr': {'class': 'my-form-label'}}) }}
-								</div>
-								<div class="col-lg-7 mx-auto">
-							        <div class="form-group">
-						                <div class='input-group date' id='datetimepicker2'>
-						                    {{ form_widget(form.commercialBirthday, {'attr': {'class': 'my-form-input-tiny'}}) }}
-						                    <span class="input-group-addon">
-						                        <span class="glyphicon glyphicon-calendar"></span>
-						                    </span>
-						                </div>
-						            </div>
-								</div>
-								{% if form.commercialBirthday.vars.errors|length %}
-								<div class="alert alert-danger my-form-error">
-                                    {{ form_errors(form.commercialBirthday, {'attr': {'class': 'list-unstyled mb-0'}}) }}
-                                </div>
-                                {% endif %}
-							</div>
-							<div class="row my-form-field initial-height">
-								<div class="col-lg-4 mx-auto">
-									{{ form_label(form.arrivalDate, null, {'label_attr': {'class': 'my-form-label'}}) }}
-								</div>
-								<div class="col-lg-7 mx-auto arrival-departure">
-									{{ form_widget(form.arrivalDate, {'attr': {'class': ' my-form-input-tiny'}}) }}
-
-									{# {{ form_label(form.departureDate) }} #}
-									{{ form_widget(form.departureDate, {'attr': {'class': 'my-form-input-tiny'}}) }}
-								</div>
-							</div>
-							<div class="row my-form-field {% if not form.commercialLinkedinAddress.vars.errors|length %}my-form-error-container{% endif %}">
-								<div class="col-lg-4 mx-auto">
-									{{ form_label(form.commercialLinkedinAddress, null, {'label_attr': {'class': 'my-form-label'}}) }}
-								</div>
-								<div class="col-lg-7 mx-auto">
-									{{ form_widget(form.commercialLinkedinAddress, {'attr': {'class': 'form-control my-form-input-big input-linkedin'}}) }}
-								</div>
-								{% if form.commercialLinkedinAddress.vars.errors|length %}
-								<div class="alert alert-danger my-form-error">
-                                    {{ form_errors(form.commercialLinkedinAddress, {'attr': {'class': 'list-unstyled mb-0'}}) }}
-                                </div>
-                                {% endif %}
-							</div>
-							<div class="row my-form-field {% if form.commercialFacebookAddress.vars.errors|length %}my-form-error-container{% endif %}">
-								<div class="col-lg-4 mx-auto">
-									{{ form_label(form.commercialFacebookAddress, null, {'label_attr': {'class': 'my-form-label'}}) }}
-								</div>
-								<div class="col-lg-7 mx-auto">
-									{{ form_widget(form.commercialFacebookAddress, {'attr': {'class': 'form-control my-form-input-big input-facebook'}}) }}
-								</div>
-								{% if form.commercialFacebookAddress.vars.errors|length %}
-								<div class="alert alert-danger my-form-error">
-                                    {{ form_errors(form.commercialFacebookAddress, {'attr': {'class': 'list-unstyled mb-0'}}) }}
-                                </div>
-                                {% endif %}
-							</div>
-							<div class="row my-form-field {% if form.commercialTwitterAddress.vars.errors|length > 0 %}my-form-error-container{% endif %}">
-								<div class="col-lg-4 mx-auto">
-									{{ form_label(form.commercialTwitterAddress, null, {'label_attr': {'class': 'my-form-label'}}) }}
-								</div>
-								<div class="col-lg-7 mx-auto">
-									{{ form_widget(form.commercialTwitterAddress, {'attr': {'class': 'form-control my-form-input-big input-twitter'}}) }}
-								</div>
-								{% if form.commercialTwitterAddress.vars.errors|length > 0 %}
-								<div class="alert alert-danger my-form-error">
-                                    {{ form_errors(form.commercialTwitterAddress, {'attr': {'class': 'list-unstyled mb-0'}}) }}
-                                </div>
-                                {% endif %}
+							<div class="col-lg-7 mx-auto mandatory">
+								{{ form_widget(form.commercialSexe, {'attr': {'class': 'form-control my-form-input-little'}}) }}
 							</div>
 						</div>
-						<div class="col-lg-5 mx-auto">
-							<div class="row my-form-field initial-height {% if form.email.vars.errors|length > 0 %}my-form-error-container{% endif %}">
-								<div class="col-lg-5 mx-aut email-status">
-									{{ form_label(form.email, null, {'label_attr': {'class': 'my-form-label'}}) }}
-								</div>
-								<div class="col-lg-7 mx-auto email-status">
-									{{ form_widget(form.email, {'attr': {'class': 'form-control my-form-input-big'}}) }}
-
-									{{ form_widget(form.commercialStatus, {'attr': {'class': 'form-control my-form-input-big'}}) }}
-								</div>
-								{% if form.email.vars.errors|length > 0 %}
-								<div class="alert alert-danger my-form-error">
-                                	{{ form_errors(form.email, {'attr': {'class': 'list-unstyled mb-0'}}) }}
-                                </div>
-                                {% endif %}
+						<div class="row my-form-field {% if form.commercialFirstname.vars.errors|length %}my-form-error-container{% endif %}">
+							<div class="col-lg-4 mx-auto">
+								{{ form_label(form.commercialFirstname, null, {'label_attr': {'class': 'my-form-label'}}) }}
 							</div>
-							<div class="row my-form-field">
-								<div class="col-lg-5 mx-auto">
-									{{ form_label(form.plainPassword, null, {'label_attr': {'class': 'my-form-label'}}) }}
-								</div>
-								<div class="col-lg-7 mx-auto">
-									{{ form_widget(form.plainPassword, {'attr': {'class': 'form-control my-form-input-big input-password'}}) }}
-								</div>
+							<div class="col-lg-7 mx-auto mandatory">
+								{{ form_widget(form.commercialFirstname, {'attr': {'class': 'form-control my-form-input-big'}}) }}
 							</div>
-							<div class="row space"></div>
-							<div class="row my-form-field">
-								<div class="col-lg-5 mx-auto">
-									<label class="my-form-label" for="country">Zone affectée</label>
-								</div>
-								<div class="col-lg-7 mx-auto">
-									<select id="country" name="country" class="form-control my-form-input-big">
-										<option value="0">A définir</option>
-										{% for country in listCountry %}
-										<option value="{{country.Id}}">{{country.Label}}</option>
-										{% endfor %}
-									</select>
-								</div>
+							{% if form.commercialFirstname.vars.errors|length %}
+							<div class="alert alert-danger my-form-error">
+                                {{ form_errors(form.commercialFirstname, {'attr': {'class': 'list-unstyled mb-0'}}) }}
+                            </div>
+                            {% endif %}
+						</div>
+						<div class="row my-form-field {% if form.commercialName.vars.errors|length %}my-form-error-container{% endif %}">
+							<div class="col-lg-4 mx-auto">
+								{{ form_label(form.commercialName, null, {'label_attr': {'class': 'my-form-label'}}) }}
 							</div>
-							<div class="row my-form-field {% if form.commercialJob.vars.errors|length > 0 %}my-form-error-container{% endif %}">
-								<div class="col-lg-5 mx-auto">
-									{{ form_label(form.commercialJob, null, {'label_attr': {'class': 'my-form-label'}}) }}
-								</div>
-								<div class="col-lg-7 mx-auto">
-									{{ form_widget(form.commercialJob, {'attr': {'class': 'form-control my-form-input-big'}}) }}
-								</div>
-								{% if form.commercialJob.vars.errors|length > 0 %}
-								<div class="alert alert-danger my-form-error">
-                                    {{ form_errors(form.commercialJob, {'attr': {'class': 'list-unstyled mb-0'}}) }}
-                                </div>
-                                {% endif %}
+							<div class="col-lg-7 mx-auto mandatory">
+								{{ form_widget(form.commercialName, {'attr': {'class': 'form-control my-form-input-big'}}) }}
 							</div>
-							{% if listHierarchy is defined %}
-							<div class="row my-form-field">
-								<div class="col-lg-5 mx-auto">
-									<label class="my-form-label" for="hierarchy">Responsable N+1</label>
-								</div>
-								<div class="col-lg-7 mx-auto">
-									<select id="hierarchy" name="hierarchy" class="form-control my-form-input-big">
-										<option value="0">A définir</option>
-										{% for hierarchy in listHierarchy %}
-										<option value="{{hierarchy.Id}}">
-											{% if hierarchy.CommercialProfil == 'ROLE_DIRECTEUR' %}
-												{% set hierarchyName = 'Directeur' %}
-											{% elseif hierarchy.CommercialProfil == 'ROLE_RESPONSABLE' %}
-												{% set hierarchyName = 'Responsable' %}
-											{% endif %}
-											{{hierarchyName}}
-											{{hierarchy.CommercialFirstName}} {{hierarchy.CommercialName}}
-										</option>
-										{% endfor %}
-									</select>
-								</div>
+							{% if form.commercialName.vars.errors|length %}
+							<div class="alert alert-danger my-form-error">
+                                {{ form_errors(form.commercialName, {'attr': {'class': 'list-unstyled mb-0'}}) }}
+                            </div>
+                            {% endif %}
+						</div>
+						<div class="row my-form-field">
+							<div class="col-lg-4 mx-auto">
+								{{ form_label(form.commercialProfil, 'Profil/droits', {'label_attr': {'class': 'my-form-label'}}) }}
 							</div>
-							{% endif %}
-							<div class="row my-form-field {% if form.commercialMobilePhone.vars.errors|length > 0 %}my-form-error-container{% endif %}">
-								<div class="col-lg-5 mx-auto">
-									{{ form_label(form.commercialMobilePhone, null, {'label_attr': {'class': 'my-form-label'}}) }}
-								</div>
-								<div class="col-lg-7 mx-auto">
-									{{ form_widget(form.commercialMobilePhone, {'attr': {'class': 'form-control my-form-input-big input-telmobile'}}) }}
-								</div>
-								{% if form.commercialMobilePhone.vars.errors|length > 0 %}
-								<div class="alert alert-danger my-form-error">
-                                    {{ form_errors(form.commercialMobilePhone, {'attr': {'class': 'list-unstyled mb-0'}}) }}
-                                </div>
-                                {% endif %}
-							</div>
-							<div class="row my-form-field {% if form.commercialPhone.vars.errors|length > 0 %}my-form-error-container{% endif %}">
-								<div class="col-lg-5 mx-auto">
-									{{ form_label(form.commercialPhone, null, {'label_attr': {'class': 'my-form-label'}}) }}
-								</div>
-								<div class="col-lg-7 mx-auto">
-									{{ form_widget(form.commercialPhone, {'attr': {'class': 'form-control my-form-input-big input-tel'}}) }}
-								</div>
-								{% if form.commercialPhone.vars.errors|length > 0 %}
-								<div class="alert alert-danger my-form-error">
-                                    {{ form_errors(form.commercialPhone, {'attr': {'class': 'list-unstyled mb-0'}}) }}
-                                </div>
-                                {% endif %}
-							</div>
-							<div class="row my-form-field my-form-input-fat-container {% if form.remarks.vars.errors|length > 0 %}my-form-error-container{% endif %}">
-								<div class="col-lg-5 mx-auto">
-									{{ form_label(form.remarks, null, {'label_attr': {'class': 'my-form-label'}}) }}
-								</div>
-								<div class="col-lg-7 mx-auto">
-									{{ form_widget(form.remarks, {'attr': {'class': 'form-control my-form-input-fat'}}) }}
-								</div>
-								{% if form.remarks.vars.errors|length > 0 %}
-								<div class="alert alert-danger my-form-error">
-                                    {{ form_errors(form.remarks, {'attr': {'class': 'list-unstyled mb-0'}}) }}
-                                </div>
-                                {% endif %}
+							<div class="col-lg-7 mx-auto mandatory">
+								{{ form_widget(form.commercialProfil, {'attr': {'class': 'form-control my-form-input-big'}}) }}
 							</div>
 						</div>
+						<div class="row my-form-field {% if form.commercialBirthday.vars.errors|length %}my-form-error-container{% endif %}">
+							<div class="col-lg-4 mx-auto">
+								{{ form_label(form.commercialBirthday, null, {'label_attr': {'class': 'my-form-label'}}) }}
+							</div>
+							<div class="col-lg-7 mx-auto">
+						        <div class="form-group">
+					                <div class='input-group date'>
+					                    {{ form_widget(form.commercialBirthday, {'attr': {'class': 'my-form-input-tiny'}}) }}
+					                </div>
+					            </div>
+							</div>
+							{% if form.commercialBirthday.vars.errors|length %}
+							<div class="alert alert-danger my-form-error">
+                                {{ form_errors(form.commercialBirthday, {'attr': {'class': 'list-unstyled mb-0'}}) }}
+                            </div>
+                            {% endif %}
+						</div>
+						<div class="row my-form-field initial-height">
+							<div class="col-lg-4 mx-auto">
+								{{ form_label(form.arrivalDate, null, {'label_attr': {'class': 'my-form-label'}}) }}
+							</div>
+							<div class="col-lg-7 mx-auto arrival-departure">
+								{{ form_widget(form.arrivalDate, {'attr': {'class': ' my-form-input-tiny'}}) }}
+
+								{# {{ form_label(form.departureDate) }} #}
+								{{ form_widget(form.departureDate, {'attr': {'class': 'my-form-input-tiny'}}) }}
+							</div>
+						</div>
+						<div class="row my-form-field {% if form.commercialLinkedinAddress.vars.errors|length > 0 %}my-form-error-container{% endif %}">
+							<div class="col-lg-4 mx-auto">
+								{{ form_label(form.commercialLinkedinAddress, null, {'label_attr': {'class': 'my-form-label'}}) }}
+							</div>
+							<div class="col-lg-7 mx-auto">
+								{{ form_widget(form.commercialLinkedinAddress, {'attr': {'class': 'form-control my-form-input-big input-linkedin'}}) }}
+							</div>
+							{% if form.commercialLinkedinAddress.vars.errors|length > 0 %}
+							<div class="alert alert-danger my-form-error">
+                                {{ form_errors(form.commercialLinkedinAddress, {'attr': {'class': 'list-unstyled mb-0'}}) }}
+                            </div>
+                            {% endif %}
+						</div>
+						<div class="row my-form-field {% if form.commercialFacebookAddress.vars.errors|length > 0 %}my-form-error-container{% endif %}">
+							<div class="col-lg-4 mx-auto">
+								{{ form_label(form.commercialFacebookAddress, null, {'label_attr': {'class': 'my-form-label'}}) }}
+							</div>
+							<div class="col-lg-7 mx-auto">
+								{{ form_widget(form.commercialFacebookAddress, {'attr': {'class': 'form-control my-form-input-big input-facebook'}}) }}
+							</div>
+							{% if form.commercialFacebookAddress.vars.errors|length > 0 %}
+							<div class="alert alert-danger my-form-error">
+                                {{ form_errors(form.commercialFacebookAddress, {'attr': {'class': 'list-unstyled mb-0'}}) }}
+                            </div>
+                            {% endif %}
+						</div>
+						<div class="row my-form-field {% if form.commercialTwitterAddress.vars.errors|length > 0 %}my-form-error-container{% endif %}">
+							<div class="col-lg-4 mx-auto">
+								{{ form_label(form.commercialTwitterAddress, null, {'label_attr': {'class': 'my-form-label'}}) }}
+							</div>
+							<div class="col-lg-7 mx-auto">
+								{{ form_widget(form.commercialTwitterAddress, {'attr': {'class': 'form-control my-form-input-big input-twitter'}}) }}
+							</div>
+							{% if form.commercialTwitterAddress.vars.errors|length > 0 %}
+							<div class="alert alert-danger my-form-error">
+                                {{ form_errors(form.commercialTwitterAddress, {'attr': {'class': 'list-unstyled mb-0'}}) }}
+                            </div>
+                            {% endif %}
+						</div>
 					</div>
-					<div class="row form-buttons">
-                        <button class="btn btn-white-red return-button" type="button">
-                           <a href="{{ path('listCommercial') }}">Annuler</a>
-                        </button>
-						{{ form_widget(form.save, { 'label': 'Ajouter', 'attr': {'class': 'btn btn-red submit-button'}}) }}
+					<div class="col-lg-5 mx-auto">
+						<div class="row my-form-field initial-height {% if form.email.vars.errors|length > 0 %}my-form-error-container{% endif %}">
+							<div class="col-lg-5 mx-aut email-status">
+								{{ form_label(form.email, null, {'label_attr': {'class': 'my-form-label'}}) }}
+							</div>
+							<div class="col-lg-7 mx-auto email-status">
+								{{ form_widget(form.email, {'attr': {'class': 'form-control my-form-input-big'}}) }}
+
+								{{ form_widget(form.commercialStatus, {'attr': {'class': 'form-control my-form-input-big'}}) }}
+							</div>
+							{% if form.email.vars.errors|length > 0 %}
+							<div class="alert alert-danger my-form-error">
+                            	{{ form_errors(form.email, {'attr': {'class': 'list-unstyled mb-0'}}) }}
+                            </div>
+                            {% endif %}
+						</div>
+						<div class="row my-form-field">
+							<div class="col-lg-5 mx-auto">
+								{{ form_label(form.plainPassword, null, {'label_attr': {'class': 'my-form-label'}}) }}
+							</div>
+							<div class="col-lg-7 mx-auto">
+								{{ form_widget(form.plainPassword, {'attr': {'class': 'form-control my-form-input-big input-password'}}) }}
+							</div>
+						</div>
+						<div class="row space"></div>
+						<div class="row my-form-field">
+							<div class="col-lg-5 mx-auto">
+								<label class="my-form-label" for="country">Zone affectée</label>
+							</div>
+							<div class="col-lg-7 mx-auto">
+								<select id="country" name="country" class="form-control my-form-input-big">
+									<option value="0">A définir</option>
+									{% for country in listCountry %}
+									<option value="{{country.Id}}">{{country.Label}}</option>
+									{% endfor %}
+								</select>
+							</div>
+						</div>
+						<div class="row my-form-field {% if form.commercialJob.vars.errors|length > 0 %}my-form-error-container{% endif %}">
+							<div class="col-lg-5 mx-auto">
+								{{ form_label(form.commercialJob, null, {'label_attr': {'class': 'my-form-label'}}) }}
+							</div>
+							<div class="col-lg-7 mx-auto">
+								{{ form_widget(form.commercialJob, {'attr': {'class': 'form-control my-form-input-big'}}) }}
+							</div>
+							{% if form.commercialJob.vars.errors|length > 0 %}
+							<div class="alert alert-danger my-form-error">
+                                {{ form_errors(form.commercialJob, {'attr': {'class': 'list-unstyled mb-0'}}) }}
+                            </div>
+                            {% endif %}
+						</div>
+						{% if listHierarchy is defined %}
+						<div class="row my-form-field">
+							<div class="col-lg-5 mx-auto">
+								<label class="my-form-label" for="hierarchy">Responsable N+1</label>
+							</div>
+							<div class="col-lg-7 mx-auto">
+								<select id="hierarchy" name="hierarchy" class="form-control my-form-input-big">
+									<option value="0">A définir</option>
+									{% for hierarchy in listHierarchy %}
+									<option value="{{hierarchy.Id}}">
+										{% if hierarchy.CommercialProfil == 'ROLE_DIRECTEUR' %}
+											{% set hierarchyName = 'Directeur' %}
+										{% elseif hierarchy.CommercialProfil == 'ROLE_RESPONSABLE' %}
+											{% set hierarchyName = 'Responsable' %}
+										{% endif %}
+										{{hierarchyName}}
+										{{hierarchy.CommercialFirstName}} {{hierarchy.CommercialName}}
+									</option>
+									{% endfor %}
+								</select>
+							</div>
+						</div>
+						{% endif %}
+						<div class="row my-form-field {% if form.commercialMobilePhone.vars.errors|length > 0 %}my-form-error-container{% endif %}">
+							<div class="col-lg-5 mx-auto">
+								{{ form_label(form.commercialMobilePhone, null, {'label_attr': {'class': 'my-form-label'}}) }}
+							</div>
+							<div class="col-lg-7 mx-auto">
+								{{ form_widget(form.commercialMobilePhone, {'attr': {'class': 'form-control my-form-input-big input-telmobile'}}) }}
+							</div>
+							{% if form.commercialMobilePhone.vars.errors|length > 0 %}
+							<div class="alert alert-danger my-form-error">
+                                {{ form_errors(form.commercialMobilePhone, {'attr': {'class': 'list-unstyled mb-0'}}) }}
+                            </div>
+                            {% endif %}
+						</div>
+						<div class="row my-form-field {% if form.commercialPhone.vars.errors|length > 0 %}my-form-error-container{% endif %}">
+							<div class="col-lg-5 mx-auto">
+								{{ form_label(form.commercialPhone, null, {'label_attr': {'class': 'my-form-label'}}) }}
+							</div>
+							<div class="col-lg-7 mx-auto">
+								{{ form_widget(form.commercialPhone, {'attr': {'class': 'form-control my-form-input-big input-tel'}}) }}
+							</div>
+							{% if form.commercialPhone.vars.errors|length > 0 %}
+							<div class="alert alert-danger my-form-error">
+                                {{ form_errors(form.commercialPhone, {'attr': {'class': 'list-unstyled mb-0'}}) }}
+                            </div>
+                            {% endif %}
+						</div>
+						<div class="row my-form-field my-form-input-fat-container {% if form.remarks.vars.errors|length > 0 %}my-form-error-container{% endif %}">
+							<div class="col-lg-5 mx-auto">
+								{{ form_label(form.remarks, null, {'label_attr': {'class': 'my-form-label'}}) }}
+							</div>
+							<div class="col-lg-7 mx-auto">
+								{{ form_widget(form.remarks, {'attr': {'class': 'form-control my-form-input-fat'}}) }}
+							</div>
+							{% if form.remarks.vars.errors|length > 0 %}
+							<div class="alert alert-danger my-form-error">
+                                {{ form_errors(form.remarks, {'attr': {'class': 'list-unstyled mb-0'}}) }}
+                            </div>
+                            {% endif %}
+						</div>
 					</div>
-				{{ form_end(form) }}
-			</section>
+				</div>
+				<div class="row form-buttons">
+                    <button class="btn btn-white-red return-button" type="button">
+                       <a href="{{ path('listCommercial') }}">ANNULER</a>
+                    </button>
+					{{ form_widget(form.save, { 'label': 'AJOUTER', 'attr': {'class': 'btn btn-red submit-button'}}) }}
+				</div>
+			{{ form_end(form) }}
+		</section>
 
-			<section id="company" class="tab-panel">
-				<h2>6B. Rauchbier</h2>
-				<p><strong>Overall Impression:</strong>  An elegant, malty German amber lager with a balanced, complementary beechwood smoke character. Toasty-rich malt in aroma and flavor, restrained bitterness, low to high smoke flavor, clean fermentation profile, and an attenuated finish are characteristic.</p>
-				<p><strong>History:</strong> A historical specialty of the city of Bamberg, in the Franconian region of Bavaria in Germany. Beechwood-smoked malt is used to make a Märzen-style amber lager. The smoke character of the malt varies by maltster; some breweries produce their own smoked malt (rauchmalz).</p>
-			</section>
+		<section id="company" class="tab-panel">
+			<h2>6B. Rauchbier</h2>
+			<p><strong>Overall Impression:</strong>  An elegant, malty German amber lager with a balanced, complementary beechwood smoke character. Toasty-rich malt in aroma and flavor, restrained bitterness, low to high smoke flavor, clean fermentation profile, and an attenuated finish are characteristic.</p>
+			<p><strong>History:</strong> A historical specialty of the city of Bamberg, in the Franconian region of Bavaria in Germany. Beechwood-smoked malt is used to make a Märzen-style amber lager. The smoke character of the malt varies by maltster; some breweries produce their own smoked malt (rauchmalz).</p>
+		</section>
 
-			<section id="contact" class="tab-panel">
-				<h2>6C. Dunkles Bock</h2>
-				<p><strong>Overall Impression:</strong> A dark, strong, malty German lager beer that emphasizes the malty-rich and somewhat toasty qualities of continental malts without being sweet in the finish.</p>
-				<p><strong>History:</strong> Originated in the Northern German city of Einbeck, which was a brewing center and popular exporter in the days of the Hanseatic League (14th to 17th century). Recreated in Munich starting in the 17th century. The name “bock” is based on a corruption of the name “Einbeck” in the Bavarian dialect, and was thus only used after the beer came to Munich. “Bock” also means “Ram” in German, and is often used in logos and advertisements.</p>
-			</section>
+		<section id="contact" class="tab-panel">
+			<h2>6C. Dunkles Bock</h2>
+			<p><strong>Overall Impression:</strong> A dark, strong, malty German lager beer that emphasizes the malty-rich and somewhat toasty qualities of continental malts without being sweet in the finish.</p>
+			<p><strong>History:</strong> Originated in the Northern German city of Einbeck, which was a brewing center and popular exporter in the days of the Hanseatic League (14th to 17th century). Recreated in Munich starting in the 17th century. The name “bock” is based on a corruption of the name “Einbeck” in the Bavarian dialect, and was thus only used after the beer came to Munich. “Bock” also means “Ram” in German, and is often used in logos and advertisements.</p>
+		</section>
 
-			<section id="historic" class="tab-panel">
-				<h2>Historique</h2>
-			</section>
-		</div>
+		<section id="historic" class="tab-panel">
+			<h2>Historique</h2>
+		</section>
 	</div>
+</div>
 
 {% endblock %}
