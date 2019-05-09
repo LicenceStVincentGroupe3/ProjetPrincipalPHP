@@ -99,7 +99,7 @@
                 {% endif %}
 
                 <!-- Nav Item - Opération -->
-                <li class="nav-item">
+                <li class="nav-item {% if operationLink is defined %}active{% endif %}">
                     <a class="nav-link" href="{{ path('listOperation') }}">
                     <i class="fas fa-star"></i>
                     <span>Opération</span></a>

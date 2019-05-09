@@ -329,54 +329,6 @@ class CommercialController extends AbstractController
     }
 
     /**
-     * @Route("/delete/{id}", requirements={"id"="\d+"}, methods={"GET","POST"}, name="deleteCommercial")
-     */
-    public function delete($id, Request $request)
-    {
-        if ($this->isGranted('ROLE_COMMERCIAL')) {
-
-            if ($this->isGranted('ROLE_DIRECTEUR')) {
-                // Appel de Doctrine
-                $display = $this->getDoctrine()->getManager();
-
-                $commercialRepository = $display->getRepository(Commercial::class);
-
-                $delete = $commercialRepository->find($id);
-
-                $display->remove($delete);
-
-                $display->flush();
-
-                return $this->redirect($this->generateUrl('listCommercial'));
-            }
-
-            elseif ($this->isGranted('ROLE_RESPONSABLE')) {
-                // Appel de Doctrine
-                $display = $this->getDoctrine()->getManager();
-
-                $commercialRepository = $display->getRepository(Commercial::class);
-
-                $delete = $commercialRepository->find($id);
-
-                $display->remove($delete);
-
-                $display->flush();
-
-                return $this->redirect($this->generateUrl('listCommercial'));
-            }
-            
-            else {
-                return $this->redirect($this->generateUrl('index'));
-            }
-        }
-
-        else {
-
-            return $this->redirect($this->generateUrl('login'));
-        }
-    }
-
-    /**
      * @Route("/list", name="listCommercial", methods={"GET","POST"})
      */
     public function list(Request $httpRequest)

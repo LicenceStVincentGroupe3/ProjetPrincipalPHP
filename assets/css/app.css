@@ -531,7 +531,11 @@ a:hover {
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
 }
 
-.my-form-field .my-form-input-fat {
+.my-form-input-fat-container {
+    height: 110px;
+}
+
+.my-form-input-fat {
     width: 90%;
     height: 100px;
 }
@@ -779,6 +783,16 @@ select::-ms-expand {
 
 .return-button {
     margin-right: 1.5%;
+}
+
+.my-form-error-container {
+    height: 122px;
+}
+
+.my-form-error {
+    width: 100%;
+    height: 50px!important;
+    margin-top: 16px;
 }
 
 .space {

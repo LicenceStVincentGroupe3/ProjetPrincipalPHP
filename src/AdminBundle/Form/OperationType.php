@@ -6,26 +6,40 @@ use App\AdminBundle\Entity\Operation;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;//FileType
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class OperationType extends AbstractType
 {
 	public function buildForm(FormBuilderInterface $builder, array $option)
 	{
 		$builder
-			->add('operationName', TextType::class, ['label' => 'Nom de l\'opération*'])
-			->add('operationUrlPage', UrlType::class, ['label' => 'URL de la page*'])
-			->add('operationHeadBandVisual', TextType::class, ['label' => 'Bandeau visuel (upload)*'])
-			->add('operationLateralVisual', TextType::class, ['label' => 'Bandeau lateral (upload)*'])
-			->add('operationDisplayed', CheckboxType::class, ['label' => 'Afficher l\'opération', 'required' => false])
-			->add('operationModified', CheckboxType::class, ['label' => 'Opération modifiable par le contact', 
-																								'required' => false
-															 ]
-				 )
-			->add('operationBinding', CheckboxType::class, ['label' => 'Rendre l\'opération obligatoire', 'required' => false])
+			->add('operationCode', TextType::class, ['label' => 'Code opération'])
+			->add('operationName', TextType::class, ['label' => 'Nom de l\'opération'])
+			->add('emailSubject', TextType::class, ['label' => 'Objet du email', 'required' => false])
+			/*->add('nbAutoRelaunching', ChoiceType::class, [
+				'choices'  => [
+					'5' => 5,
+					'10' => 10,
+					'15' => 15
+				]
+			])*/
+			->add('nbAutoRelaunching', IntegerType::class, ['label' => 'Nb de relance auto', 'required' => false])
+			->add('sendingDate', DateType::class, ['label' => 'Date d\'envoi', 'required' => false,
+				'widget' => 'single_text'
+			])
+			->add('closingDate', DateType::class, ['label' => 'Date de clôture', 'required' => false,
+				'widget' => 'single_text'
+			])
+			->add('infos', CheckboxType::class, ['label' => 'Informations', 'required' => false])
+			->add('commercialOffer', CheckboxType::class, ['label' => 'Offre commerciale', 'required' => false])
+			->add('remarks', TextareaType::class, ['label' => 'Remarques', 'required' => false])
 			->add('save', SubmitType::class, ['label' => 'Valider'])
 			->getForm()
 		;

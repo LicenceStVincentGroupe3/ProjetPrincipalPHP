@@ -144,6 +144,11 @@ class Commercial implements UserInterface, \Serializable
     private $idCompanyCountry;
 
     /**
+     * @ORM\OneToMany(targetEntity="App\AdminBundle\Entity\Operation", mappedBy="idCommercial")
+     */
+    private $operations;
+
+    /**
      * @ORM\Column(type="string", length=255, unique=true, nullable=true)
      * @Assert\Email()
      */
@@ -182,6 +187,7 @@ class Commercial implements UserInterface, \Serializable
 
         $this->contacts = new ArrayCollection();
         $this->companies = new ArrayCollection();
+        $this->operations = new ArrayCollection();
     }
   
     /** 
@@ -194,12 +200,12 @@ class Commercial implements UserInterface, \Serializable
         return $this->id;
     }
 
-    public function getCommercialCode(): ?string
+    public function getCommercialCode(): ?int
     {
         return $this->commercialCode;
     }
 
-    public function setCommercialCode(string $commercialCode): self
+    public function setCommercialCode(int $commercialCode): self
     {
         $this->commercialCode = $commercialCode;
 
@@ -582,6 +588,24 @@ class Commercial implements UserInterface, \Serializable
     public function setIdCompanyCountry(?CompanyCountry $idCompanyCountry): self
     {
         $this->idCompanyCountry = $idCompanyCountry;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Operation[]
+     */
+    public function getOperations(): Collection
+    {
+        return $this->operations;
+    }
+
+    public function addOperation(Operation $operation): self
+    {
+        if (!$this->operations->contains($operation)) {
+            $this->operations[] = $operation;
+            $operation->setidCommercial($this);
+        }
 
         return $this;
     }
