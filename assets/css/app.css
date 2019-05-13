@@ -1,4 +1,4 @@
-commercial-nbCompany a:hover {
+a:hover {
 	text-decoration: none;
 }
 
@@ -700,4 +700,56 @@ select::-ms-expand {
 
 .initial-height {
     height: initial;
+}
+
+
+
+/* DASHBOARD CSS */
+.box-gray {
+    -moz-box-shadow:    inset 0 0 10px #000000;
+    -webkit-box-shadow: inset 0 0 10px #0000001a;
+    box-shadow: inset 0 0 1px #0000001a;
+}
+
+.btn-dognut {
+    border: 1px solid;
+    border-color: #a9a9a92b;
+}
+
+.btn-green {
+    color: #fff;
+    background-color: #1fbc43;
+    border-color: #1cc88a;
+}
+
+.btn-green:hover {
+    color: #fff;
+    background-color: #1e943d;
+    text-decoration: none;
+}
+
+.bord-arrondis {
+    border-radius: 1rem;
+}
+
+.bord-arrondis-gauche {
+    border-radius: 75px 0px 0px 75px;
+}
+
+.bord-arrondis-droit {
+    border-radius: 0px 75px 75px 0px;
+}
+
+.no-border {
+    border-radius: 0px;
+}
+
+.stats-vert {
+    color: #1fbc43;
+    font-weight: bold;
+}
+
+.stats-rouge {
+    color: #f80802;
+    font-weight: bold;
 }

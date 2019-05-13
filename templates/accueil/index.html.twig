@@ -1,13 +1,144 @@
-{% extends 'layout.html.twig' %}
+{% extends 'dashboard.html.twig' %}
 
 {% block title %}
-	{{ parent()}}Tableau de bord
+	{{ parent()}} - Tableau de bord
+{% endblock %}
+
+{% block stylesheet %}
+	{{ parent() }}
+	{{ encore_entry_link_tags('tabs') }}
 {% endblock %}
 
 {% block contentSearch %}
 {% endblock %}
 
-{% block h1 %}Tableau de bord{% endblock %}
-
 {% block contentBody %}
+	<div class="container pb-5">
+		<div class="row justify-content-left mt-5">
+			<div class="col-lg-6 col-sm-6 mb-5">
+				<h2 class="h2 text-gray-900">Tableau de bord</h2>
+			</div>
+			<div class="col-lg-6 col-sm-6 mb-5">
+				<ul class="nav justify-content-center">
+					<button type="button" class="text-uppercase btn btn-green btn-sm bord-arrondis mr-5">Afficher sur TV</button>
+					<li class="nav-item"><button type="button" class="btn btn-light bord-arrondis-gauche btn-dognut text-gray-700">Aujourd'hui</button></li>
+					<li class="nav-item"><button type="button" class="btn btn-light no-border btn-dognut text-gray-700">Semaine</button></li>
+					<li class="nav-item"><button type="button" class="btn btn-light no-border btn-dognut text-gray-700">Mois</button></li>
+					<li class="nav-item"><button type="button" class="btn btn-light btn-dognut bord-arrondis-droit text-gray-700">Année</button></li>
+				</ul>
+			</div>
+			<!-- Première ligne -->
+			<div class="col-lg-3 col-sm-6">
+				<div class="card bg-white mb-3" style="max-width: 18rem;">
+					<div class="card-header bg-white"><i class="fas fa-user-friends"></i><span class="float-right stats-vert">+12 %</span></div>
+					<div class="card-body ">
+						<h1 class="card-title text-center font-weight-bold">32</h1>
+						<p class="card-text text-center">Nouveaux contacts</p>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-3 col-sm-6">
+				<div class="card bg-white mb-3" style="max-width: 18rem;">
+					<div class="card-header bg-white"><i class="fas fa-user-circle"></i><span class="float-right stats-vert">+5 %</span></div>
+					<div class="card-body">
+						<h1 class="card-title text-center font-weight-bold">18</h1>
+						<p class="card-text text-center">Nouvelles entreprises</p>
+					</div>
+				</div>
+			</div>
+            <div class="col-lg-3 col-sm-6">
+				<div class="card bg-white mb-3" style="max-width: 18rem;">
+					<div class="card-header bg-white"><i class="fas fa-envelope"></i><span class="float-right stats-vert">+11 %</span></div>
+					<div class="card-body">
+						<h1 class="card-title text-center font-weight-bold">25</h1>
+						<p class="card-text text-center">Nouveaux emails</p>
+					</div>
+				</div>
+			</div>
+            <div class="col-lg-3 col-sm-6">
+				<div class="card bg-white mb-3" style="max-width: 18rem;">
+					<div class="card-header bg-white"><i class="fas fa-star"></i><span class="float-right stats-rouge">-6 %</span></div>
+					<div class="card-body">
+						<h1 class="card-title text-center font-weight-bold">9</h1>
+						<p class="card-text text-center">Opérations actives</p>
+					</div>
+				</div>
+			</div>
+
+			<!-- Seconde ligne -->
+			<div class="col-lg-3 col-sm-6">
+				<div class="card bg-white mb-3" style="max-width: 18rem;">
+					<div class="card-header bg-white"><span class="text-uppercase text-center">Total</span><a class="text-decoration-none text-gray-800" href="{{ path('newContact') }}"><i class="fas fa-plus-circle float-right"></i></a></div>
+					<div class="card-body">
+						<h1 class="card-title text-center">4583</h1>
+						<p class="card-text text-center">Contacts actifs</p>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-3 col-sm-6">
+				<div class="card bg-white mb-3" style="max-width: 18rem;">
+					<div class="card-header bg-white"><span class="text-uppercase text-center">Total</span><a class="text-decoration-none text-gray-800" href="{{ path('newCompany') }}"><i class="fas fa-plus-circle float-right"></i></a></div>
+					<div class="card-body">
+						<h1 class="card-title text-center">1879</h1>
+						<p class="card-text text-center">Entreprises actives</p>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-3 col-sm-6">
+				<div class="card bg-white mb-3" style="max-width: 18rem;">
+					<div class="card-header bg-white"><span class="text-uppercase text-center">Total</span></div>
+					<div class="card-body">
+						<h1 class="card-title text-center">2687</h1>
+						<p class="card-text text-center">Emails</p>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-3 col-sm-6">
+				<div class="card bg-white mb-3" style="max-width: 18rem;">
+					<div class="card-header bg-white"><span class="text-uppercase text-center">Total</span><a class="text-decoration-none text-gray-800" href="{{ path('newOperation') }}"><i class="fas fa-plus-circle float-right"></i></a></div>
+					<div class="card-body">
+						<h1 class="card-title text-center">254</h1>
+						<p class="card-text text-center">Opérations réalisées</p>
+					</div>
+				</div>
+			</div>
+
+			<!-- Fin Seconde ligne -->
+			<div class="col-lg-12 col-sm-12 pt-4">
+				<div class="card bg-light mb-3">
+					<div class="card-header bg-white"><span class="text-center">Suivi des indicateurs de performance</span></div>
+					<div class="card-body bg-white p-0">
+						<div class="col-3 p-0">
+							<button type="button" class="btn btn-light no-border btn-dognut bg-white text-left text-gray-700 w-100 p-3">Opérations</button><br>
+							<button type="button" class="btn btn-light no-border btn-dognut bg-white text-left text-gray-700 w-100 p-3">Nouveaux contacts</button><br>
+							<button type="button" class="btn btn-light no-border btn-dognut bg-white text-left text-gray-700 w-100 p-3">Contacts mis à jour</button><br>
+							<button type="button" class="btn btn-light no-border btn-dognut bg-white text-left text-gray-700 w-100 p-3">Contacts perdus</button><br>
+							<button type="button" class="btn btn-light no-border btn-dognut bg-white text-left text-gray-700 w-100 p-3">Nouvelles entreprises</button><br>
+							<button type="button" class="btn btn-light no-border btn-dognut bg-white text-left text-gray-700 w-100 p-3">Nouveaux mails</button>
+						</div>
+						<div class="col-9 p-0">
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-6 col-sm-6 pt-4">
+				<div class="card bg-light mb-3">
+					<div class="card-header bg-white"><span class="text-center">Performance par départements</span></div>
+					<div class="card-body bg-white p-5"></div>
+				</div>
+			</div>
+			<div class="col-lg-6 col-sm-6 pt-4">
+				<div class="card bg-light mb-3">
+					<div class="card-header bg-white"><span class="text-center">Top commerciaux</span></div>
+					<div class="card-body bg-white p-5">
+					</div>
+				</div>
+			</div>
+
+			<div class="col-lg-12 col-sm-6 pt-4">
+				<div class="card-body bg-white p-0"></div>
+			</div>
+
+		</div>
+	</div>
 {% endblock %}

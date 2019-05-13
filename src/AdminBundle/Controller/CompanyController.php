@@ -95,9 +95,9 @@ class CompanyController extends AbstractController
     }
 
     /**
-     * @Route("/list", name="listCompany", methods={"GET"})
+     * @Route("/list", name="listCompany", methods={"GET", "POST"})
      */
-    public function list()
+    public function list(Request $httpRequest)
     {
         if ($this->isGranted('ROLE_COMMERCIAL') || $this->isGranted('ROLE_RESPONSABLE') || $this->isGranted('ROLE_DIRECTEUR'))
         {
@@ -113,6 +113,29 @@ class CompanyController extends AbstractController
             // -------------------------------------------------------------
             // On demande à la vue d'afficher la liste des entreprises
             // -------------------------------------------------------------
+
+            // Dans le cas d'une suppression d'un(ou plusieurs) commercial(commerciaux)
+            if ($httpRequest->isMethod('POST'))
+            {
+                // Appel de Doctrine
+                $display = $this->getDoctrine()->getManager();
+
+                $companyRepository = $display->getRepository(Company::class);
+
+                // Contient les name des <input>
+                $formData = Request::createFromGlobals();
+
+                // On récupère le name de la checkbox
+                $listData = $formData->request->get('deleteData');
+
+                // Si l'utilisateur a coché une checkbox
+                if ($listData != null) {
+                    // Appel de la fonction deleteCommercial()
+                    $companyRepository->deleteCompany($listData);
+                }
+
+                return $this->redirect($this->generateUrl('listCompany'));
+            }
             return $this->render('company/list.html.twig', array('lesEntreprises' => $list, 'companyLink' => true)); // On affecte le tableau à la vue
         }
         else {

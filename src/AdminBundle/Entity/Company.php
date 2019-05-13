@@ -46,8 +46,10 @@ class Company
      */
     private $CompanyStatus;
 
+
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\File(mimeTypes={ "image/jpeg", "image/png" })
      */
     private $CompanyLogo;
 
@@ -61,11 +63,6 @@ class Company
      * @Assert\NotBlank
      */
     private $CompanyAddress;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $CompanyAddressSupplement;
 
     /**
      * @ORM\Column(type="string", length=10)
@@ -439,18 +436,6 @@ class Company
     public function setCompanyAddress(string $CompanyAddress): self
     {
         $this->CompanyAddress = $CompanyAddress;
-
-        return $this;
-    }
-
-    public function getCompanyAddressSupplement(): ?string
-    {
-        return $this->CompanyAddressSupplement;
-    }
-
-    public function setCompanyAddressSupplement(string $CompanyAddressSupplement): self
-    {
-        $this->CompanyAddressSupplement = $CompanyAddressSupplement;
 
         return $this;
     }

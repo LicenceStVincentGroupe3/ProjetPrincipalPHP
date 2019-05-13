@@ -30,6 +30,18 @@ class CompanyRepository extends ServiceEntityRepository
         return $result;
     }
 
+    // Suppression un ou plusieurs commercial(commerciaux) selectionné(s)
+    public function deleteCompany($listCompany)
+    {
+        $em = $this->getEntityManager();
+        $query = $em->createQueryBuilder();
+        $query->delete(Company::class, 'c');
+        $query->where('c.id IN (:listCompany)')->setParameter('listCompany', array_values($listCompany));
+        $rowDeleted = $query->getQuery()->execute();
+
+        return $rowDeleted;
+    }
+
     // /**
     //  * @return Company[] Returns an array of Company objects
     //  */

@@ -45,33 +45,6 @@ $(document).ready( function () {
 	});
 	})**/
 
-
-	$("#table").bootstrapTable({
-		formatNoMatches: function () {
-			return 'Aucun résultat trouvé';
-		}
-	});
-
-	var checkbox = $('input[name="btSelectAll"]')[0];
-
-	$(checkbox).on('click', function(event) {
-
-		if ($(event.target).prop('checked')) {
-			$(event.target).attr('id', 'checkAll');
-			$table.bootstrapTable('togglePagination').bootstrapTable('checkAll').bootstrapTable('togglePagination');
-		} else {
-
-			$(event.target).attr('id', 'uncheckAll');
-			$table.bootstrapTable('togglePagination').bootstrapTable('uncheckAll').bootstrapTable('togglePagination')
-
-		}
-	});
-
-			//
-
-
-
-
 	// ---------- Tableau contenant la liste des données -------------
 	// Au clique de la checkbox principal, cela sélectionne toutes les checkbox
 	// Plus possiblité de séléctionner plusieurs checkbox

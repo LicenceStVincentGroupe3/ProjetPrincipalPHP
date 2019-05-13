@@ -67,7 +67,7 @@
 							</td>
 							<td>
 								<div class="company-nbContact">
-									<a href="{{ path('editCompany', {'id':uneEntreprise.Id}) }}">Dylan Noally</a>
+									<a href="{{ path('editCompany', {'id':uneEntreprise.Id}) }}">2</a>
 								</div>
 							</td>
 							<td>
@@ -81,7 +81,7 @@
 						</tr>
 					{% else %}
 						<tr>
-							<td>Aucun résultat</td>
+							<td colspan="10" class="text-center">Aucun résultat</td>
 						</tr>
 					{% endfor %}
 					</tbody>
@@ -106,10 +106,7 @@
 							</div>
 						</div>
 						<div class="modal-footer ">
-							<button type="button" class="btn btn-success">
-								<span class="glyphicon glyphicon-ok-sign">Oui</span>
-								<!--<input class="btn btn-success" type="submit" name="delete" id="delete" value="Oui">-->
-							</button>
+							<input class="btn btn-success" type="submit" name="delete" id="delete" value="Oui">
 							<button type="button" class="btn btn-primary" data-dismiss="modal">
 								<span class="glyphicon glyphicon-remove">Annuler</span>
 							</button>
