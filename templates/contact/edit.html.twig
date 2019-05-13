@@ -17,6 +17,31 @@
 
 {% block contentBody %}
 
+	<div class="float-left">
+		{% if editContact.contactGender == 0 %}
+			{% set sexe = 'M.'%}
+		{% else %}
+			{% set sexe = 'Mme.'%}
+		{% endif %}
+
+		{% set differenceDate = date("now").diff(date(editContact.contactBirthDate)) %}
+		{% set contactYears = differenceDate.y %}
+
+		<h6><b>{{sexe}} {{ editContact.contactFirstName }} {{ editContact.contactLastName }}</b>, {{ editContact.idContactJob.contactJobName }}, {{contactYears}} ans</h6>
+	</div>
+
+	<div class="rightContact">
+		{% if editContact.contactDateUpdatePlug is not null %}
+			{% if editContact.contactStatus == "0" %}
+					<img src="{{asset('build/rouge.png')}}" class="table-img-profile4 rounded-circle" title="Rouge" alt="Statut rouge"><b>Obsolète&nbsp;</b>
+				{% elseif editContact.contactStatus == "1" %}
+					<img src="{{asset('build/vert.png')}}" class="table-img-profile4 rounded-circle" title="Vert" alt="Statut vert"><b>à jour&nbsp;</b>
+				{% else %}
+					<img src="{{asset('build/orange.png')}}" class="table-img-profile4 rounded-circle" title="Orange" alt="Statut orange"><b>à vérifier&nbsp;</b>
+					{% endif %} Dernière mise à jour le {{ editContact.contactDateUpdatePlug|date("d/m/Y", "Europe/Paris") }} à {{ editContact.contactDateUpdatePlug|date("H", "Europe/Paris") }}h{{ editContact.contactDateUpdatePlug|date("i", "Europe/Paris") }}</p>
+		{% endif %}
+	</div>
+
 	<div class="tabset">
 		<!-- Tab 1 -->
 		<input type="radio" name="tabset" id="tab1" aria-controls="identity" checked>
@@ -33,9 +58,6 @@
 
 		<div class="tab-panels">
 			<section id="identity" class="tab-panel">
-				{% if editContact.contactDateUpdatePlug is not null %}
-					<p>La dernière modification a été effectuée le {{ editContact.contactDateUpdatePlug|date("d/m/Y", "Europe/Paris") }} à {{ editContact.contactDateUpdatePlug|date("H", "Europe/Paris") }}h{{ editContact.contactDateUpdatePlug|date("i", "Europe/Paris") }}</p>
-				{% endif %}
 
 				{{ form_start(form, {'method': 'POST'}, {'attr': {'novalidate': 'novalidate'}}) }}
 				<div class="file-field">
@@ -61,7 +83,7 @@
 							<div class="col-lg-4 mx-auto">
 								{{ form_label(form.contactCode, 'Code client', {'label_attr': {'class': 'my-form-label'}}) }}
 							</div>
-							<div class="col-lg-7 mx-auto">
+							<div class="col-lg-7 mx-auto mandatory">
 								{{ form_widget(form.contactCode, {'attr': {'class': 'form-control my-form-input-little', 'placeholder': "Ex: 1254789"}}) }}
 
 								{{ form_errors(form.contactCode, {'attr': {'class': 'form-error-message'}}) }}
@@ -71,7 +93,7 @@
 							<div class="col-lg-4 mx-auto">
 								{{ form_label(form.contactGender, 'Genre', {'label_attr': {'class': 'my-form-label'}}) }}
 							</div>
-							<div class="col-lg-7 mx-auto">
+							<div class="col-lg-7 mx-auto mandatory">
 								{{ form_widget(form.contactGender, {'attr': {'class': 'form-control my-form-input-little'}}) }}
 
 								{{ form_errors(form.contactGender, {'attr': {'class': 'form-error-message'}}) }}
@@ -81,7 +103,7 @@
 							<div class="col-lg-4 mx-auto">
 								{{ form_label(form.contactFirstName, null, {'label_attr': {'class': 'my-form-label'}}) }}
 							</div>
-							<div class="col-lg-7 mx-auto">
+							<div class="col-lg-7 mx-auto mandatory">
 								{{ form_widget(form.contactFirstName, {'attr': {'class': 'form-control my-form-input-big'}}) }}
 
 								{{ form_errors(form.contactFirstName, {'attr': {'class': 'form-error-message'}}) }}
@@ -91,7 +113,7 @@
 							<div class="col-lg-4 mx-auto">
 								{{ form_label(form.contactLastName, null, {'label_attr': {'class': 'my-form-label'}}) }}
 							</div>
-							<div class="col-lg-7 mx-auto">
+							<div class="col-lg-7 mx-auto mandatory">
 								{{ form_widget(form.contactLastName, {'attr': {'class': 'form-control my-form-input-big'}}) }}
 
 								{{ form_errors(form.contactLastName, {'attr': {'class': 'form-error-message'}}) }}
@@ -160,14 +182,10 @@
 							<div class="col-lg-5 mx-auto">
 								{{ form_label(form.contactEmail, null, {'label_attr': {'class': 'my-form-label'}}) }}
 							</div>
-							<div class="col-lg-7 mx-auto">
+							<div class="col-lg-7 mx-auto email-status">
 								{{ form_widget(form.contactEmail, {'attr': {'class': 'form-control my-form-input-big'}}) }}
 
 								{{ form_errors(form.contactEmail, {'attr': {'class': 'form-error-message'}}) }}
-
-								{{ form_widget(form.contactStatus, {'attr': {'class': 'form-control my-form-input-big'}}) }}
-
-								{{ form_errors(form.contactStatus, {'attr': {'class': 'form-error-message'}}) }}
 							</div>
 						</div>
 						<div class="row my-form-field">
@@ -219,7 +237,7 @@
 
 								{{ form_errors(form.contactOptInNewsletterCustomers, {'attr': {'class': 'form-error-message'}}) }}
 							</div>
-						</div><br><br><br>
+						</div>
 						<div class="row my-form-field">
 							<div class="col-lg-5 mx-auto">
 								{{ form_label(form.contactOptInCommercialOffers, null, {'label_attr': {'class': 'my-form-label'}}) }}
@@ -229,7 +247,7 @@
 
 								{{ form_errors(form.contactOptInCommercialOffers, {'attr': {'class': 'form-error-message'}}) }}
 							</div>
-						</div><br>
+						</div>
                         <div class="row my-form-field">
                             <div class="col-lg-5 mx-auto">
                                 {{ form_label(form.contactComment, null, {'label_attr': {'class': 'my-form-label'}}) }}
@@ -242,8 +260,14 @@
                         </div>
 					</div>
 				</div>
+				<br><br>
 
-				{{ form_widget(form.save, {'attr': {'class': 'btn submit-button'}}) }}
+				<div class="row form-buttons">
+					<button class="btn btn-white-red return-button" type="button">
+						<a href="{{ path('listCont') }}">Annuler</a>
+					</button>
+					{{ form_widget(form.save, {'attr': {'class': 'btn btn-red submit-button'}}) }}
+				</div>
 				{{ form_end(form) }}
 			</section>
 

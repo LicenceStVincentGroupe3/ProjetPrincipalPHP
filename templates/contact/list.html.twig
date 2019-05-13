@@ -7,7 +7,14 @@
 {# {% block contentSearch %}
 {% endblock %} #}
 
-{% block h1 %}Contact{% endblock %}
+{% set nombre = 0 %}
+{% for cont in lesContacts %}
+	{% set nombre = nombre + 1 %}
+{% endfor %}
+
+{% block h1 %}
+	Contact <span class="text-danger h5">({{ nombre }})</span>
+{% endblock %}
 
 {% block contentBodyContainer %}
 	<div>
@@ -47,6 +54,11 @@
 									<input type="checkbox" class="checkthis" name="deleteData[]" value="{{ cont.Id }}">
 								</td>
 								<td>
+									{% if cont.ContactPhoto is not null %}
+										<img src="{{asset('build/images/' ~ cont.ContactPhoto)}}" class="table-img-profile2 rounded-circle" title="Photo" alt="Photo de profil">
+									{% else %}
+										<img src="{{asset('build/Photo.png')}}" class="table-img-profile rounded-circle" title="Photo" alt="Photo de profil">
+									{% endif %}
 									<a href="{{ path('editContact', {'id':cont.Id}) }}">	{{cont.ContactFirstName}}
 									</a>
 								</td>
@@ -74,8 +86,19 @@
                                 </td>
 
                                 <td>
-                                    <a href="{{ path('editContact', {'id':cont.Id}) }}">	{{cont.contactDecisionLevel}}
-                                    </a>
+									{% if cont.contactStatus == "0" %}
+										<img src="{{asset('build/rouge.png')}}" class="table-img-profile3 rounded-circle" title="Rouge" alt="Statut rouge">
+										<a href="{{ path('editContact', {'id':cont.Id}) }}">Obsolète
+										</a>
+									{% elseif cont.contactStatus == "1" %}
+										<img src="{{asset('build/vert.png')}}" class="table-img-profile3 rounded-circle" title="Vert" alt="Statut vert">
+										<a href="{{ path('editContact', {'id':cont.Id}) }}">à jour
+										</a>
+									{% else %}
+										<img src="{{asset('build/orange.png')}}" class="table-img-profile3 rounded-circle" title="Orange" alt="Statut orange">
+										<a href="{{ path('editContact', {'id':cont.Id}) }}">à vérifier
+										</a>
+									{% endif %}
                                 </td>
 
 								<td>
