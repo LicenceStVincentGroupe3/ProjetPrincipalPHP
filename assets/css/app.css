@@ -328,6 +328,7 @@ a:hover {
 }
 
 .commercial-nbContact {
+    width: 25%;
     background-color: #cf1740;
 }
 
@@ -479,13 +480,43 @@ a:hover {
 /* ------------------ FORM ------------------- */
 /* ------------------------------------------- */
 /* ------------------------------------------- */
+.tab-company, .tab-contact {
+    width: 15%;
+}
 
-.my-form-field {
+.tabset .commercial-nbCompany, .tabset .commercial-nbContact {
+    display: inline-block;
+    width: 25%;
+    color: #ffffff;
+}
+
+.last-update {
+
+}
+
+.status {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.status h6 {
+    margin-right: 10%;
+}
+
+
+.my-form-field, .space {
     height: 45px;
+}
+
+.my-form-left-side .my-form-field {
     margin-bottom: 3%;
 }
 
-.my-form-field > div{
+.my-form-right-side .my-form-field, .space {
+    margin-bottom: 4%;
+}
+
+.my-form-field > div {
     height: 45px;
 }
 
@@ -722,6 +753,52 @@ input[type="checkbox"]:checked {
     position: absolute;
 }*/
 
+
+
+/* Switch 1 Specific Styles Start */
+
+
+input[type="checkbox"].switch_1{
+    -webkit-appearance: none;
+       -moz-appearance: none;
+            appearance: none;
+    width: 3.5em;
+    background: #e3111a;
+    border-radius: 3em;
+    position: relative;
+    cursor: pointer;
+    outline: none;
+    -webkit-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+  }
+  
+  input[type="checkbox"].switch_1:checked{
+    background: #00b900;
+  }
+  
+  input[type="checkbox"].switch_1:after{
+    position: absolute;
+    content: "";
+    width: 1.5em;
+    height: 1.5em;
+    border-radius: 50%;
+    background: #fff;
+    -webkit-box-shadow: 0 0 .25em rgba(0,0,0,.3);
+            box-shadow: 0 0 .25em rgba(0,0,0,.3);
+    -webkit-transform: scale(.7);
+            transform: scale(.7);
+    left: 0;
+    -webkit-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+  }
+  
+  input[type="checkbox"].switch_1:checked:after{
+    left: calc(100% - 1.5em);
+  }
+
+
+
+
 select {
     /* for Firefox */
     -moz-appearance: none;
@@ -793,12 +870,6 @@ select::-ms-expand {
     width: 100%;
     height: 50px!important;
     margin-top: 16px;
-}
-
-.space {
-    width: 100%;
-    height: 10px;
-    margin-bottom: 10%;
 }
 
 /* ------------------ FIN FORM ------------------- */

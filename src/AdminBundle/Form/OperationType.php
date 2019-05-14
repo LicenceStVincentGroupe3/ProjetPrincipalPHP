@@ -37,7 +37,7 @@ class OperationType extends AbstractType
 			->add('closingDate', DateType::class, ['label' => 'Date de clôture', 'required' => false,
 				'widget' => 'single_text'
 			])
-			->add('infos', CheckboxType::class, ['label' => 'Informations', 'required' => false])
+			->add('infos', CheckboxType::class, ['label' => 'Information', 'required' => false])
 			->add('commercialOffer', CheckboxType::class, ['label' => 'Offre commerciale', 'required' => false])
 			->add('remarks', TextareaType::class, ['label' => 'Remarques', 'required' => false])
 			->add('save', SubmitType::class, ['label' => 'Valider'])

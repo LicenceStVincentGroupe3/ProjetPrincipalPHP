@@ -30,6 +30,16 @@ class ContactRepository extends ServiceEntityRepository
         return $result;
     }
 
+    // Retourne tous les contacts d'un commercial séléctioné
+    public function listContactOfCommercial($com)
+    {
+        $query = $this->createQueryBuilder('c');
+        $query->where('c.idUser = :com')->setParameter('com', $com);
+        $result = $query->getQuery()->getResult();
+
+        return $result;
+    }
+
     public function deleteContact($listCont)
     {
         $em = $this->getEntityManager();

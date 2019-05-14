@@ -68,6 +68,16 @@ class CommercialRepository extends ServiceEntityRepository
         ;
     }
 
+    // Retourne toutes les commerciaux qui sont rattachés à l'utilisateur connecté
+    public function listCommercialsOfUser($com)
+    {
+        $query = $this->createQueryBuilder('c');
+        $query->where('c.hierarchy = :com')->setParameter('com', $com);
+        $result = $query->getQuery()->getResult();
+
+        return $result;
+    }
+
     // /**
     //  * @return Commercial[] Returns an array of Commercial objects
     //  */
