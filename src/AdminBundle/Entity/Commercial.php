@@ -10,7 +10,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
- * @UniqueEntity(fields="email")
+ * @UniqueEntity(fields="email", message="Cette email existe déjà")
  * @ORM\Entity(repositoryClass="App\AdminBundle\Repository\CommercialRepository")
  */
 class Commercial implements UserInterface, \Serializable
@@ -23,7 +23,7 @@ class Commercial implements UserInterface, \Serializable
     private $id;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank()
      */
     private $commercialCode;
@@ -93,7 +93,8 @@ class Commercial implements UserInterface, \Serializable
 
     /**
      * @ORM\Column(type="string", length=14, nullable=true)
-     * @Assert\Length(min = 0, max = 10, maxMessage = "Trop long !")
+     * @Assert\Length(min = 10, minMessage = "Tel. 10 caractères minimun !")
+     * @Assert\Length(max = 10, maxMessage = "Tel. 10 caractères maxnimun !")
      * @Assert\Regex(pattern="/^(\(0\))?[0-9]+$/", message="Format : 0601010101")
      */
     private $commercialPhone;
@@ -200,12 +201,12 @@ class Commercial implements UserInterface, \Serializable
         return $this->id;
     }
 
-    public function getCommercialCode(): ?int
+    public function getCommercialCode(): ?string
     {
         return $this->commercialCode;
     }
 
-    public function setCommercialCode(int $commercialCode): self
+    public function setCommercialCode(string $commercialCode): self
     {
         $this->commercialCode = $commercialCode;
 
@@ -265,7 +266,7 @@ class Commercial implements UserInterface, \Serializable
         return $this->commercialJob;
     }
 
-    public function setCommercialJob(string $commercialJob): self
+    public function setCommercialJob(?string $commercialJob): self
     {
         $this->commercialJob = $commercialJob;
 
@@ -468,7 +469,12 @@ class Commercial implements UserInterface, \Serializable
     }
 
     function addRole($role) {
-        $this->roles[] = $role;
+        if (!empty($this->getRoles())) { // Dans le cas de la modification d'un role
+            $this->roles = array_replace($this->getRoles(), $role);
+        }
+        else {
+            $this->roles[] = $role;
+        }
     }
 
     public function eraseCredentials() {

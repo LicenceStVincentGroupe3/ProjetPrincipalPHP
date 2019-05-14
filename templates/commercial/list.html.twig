@@ -7,7 +7,7 @@
 {# {% block contentSearch %}
 {% endblock %} #}
 
-{% block h1 %}Equipe commerciale{% endblock %}
+{% block h1 %}Equipe commerciale <span class="text-danger h5">({{listCom|length}})</span>{% endblock %}
 
 {% block contentBodyContainer %}
 <div>
@@ -47,7 +47,7 @@
 						</td>
 						<td>
 							{% if commercial.CommercialPhoto is not null %}
-                            <img src="{{asset('build/images/' ~ commercial.CommercialPhoto)}}" class="table-img-profile rounded-circle" title="Photo" alt="Photo de profil">
+                            <img src="{{asset('build/images/' ~ commercial.CommercialPhoto)}}" class="table-img-profile rounded-circle" title="Photo" alt="Aucune photo">
                             {% else %}
                             <img src="{{asset('build/Photo.png')}}" class="table-img-profile rounded-circle" title="Photo" alt="Photo de profil">
                             {% endif %}
@@ -94,7 +94,7 @@
 					</tr>
 					{% else %}
 					<tr>
-					  <td>Aucun Commercial</td>
+					  <td colspan="8" class="text-center">Aucun Commercial</td>
 					</tr>
 					{% endfor %}
 				</tbody>
