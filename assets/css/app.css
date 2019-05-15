@@ -753,3 +753,11 @@ select::-ms-expand {
     color: #f80802;
     font-weight: bold;
 }
+
+.dashboard-score-commerciaux {
+    background-color: #6fb4c9;
+}
+
+.dashboard-stats-text {
+    font-size: 0.85rem;
+}

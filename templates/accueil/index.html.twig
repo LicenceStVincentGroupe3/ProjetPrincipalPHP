@@ -28,95 +28,117 @@
 				</ul>
 			</div>
 			<!-- Première ligne -->
-			<div class="col-lg-3 col-sm-6">
-				<div class="card bg-white mb-3" style="max-width: 18rem;">
-					<div class="card-header bg-white"><i class="fas fa-user-friends"></i><span class="float-right stats-vert">+12 %</span></div>
-					<div class="card-body ">
-						<h1 class="card-title text-center font-weight-bold">32</h1>
-						<p class="card-text text-center">Nouveaux contacts</p>
-					</div>
-				</div>
-			</div>
-			<div class="col-lg-3 col-sm-6">
-				<div class="card bg-white mb-3" style="max-width: 18rem;">
-					<div class="card-header bg-white"><i class="fas fa-user-circle"></i><span class="float-right stats-vert">+5 %</span></div>
-					<div class="card-body">
-						<h1 class="card-title text-center font-weight-bold">18</h1>
-						<p class="card-text text-center">Nouvelles entreprises</p>
-					</div>
-				</div>
-			</div>
-            <div class="col-lg-3 col-sm-6">
-				<div class="card bg-white mb-3" style="max-width: 18rem;">
-					<div class="card-header bg-white"><i class="fas fa-envelope"></i><span class="float-right stats-vert">+11 %</span></div>
-					<div class="card-body">
-						<h1 class="card-title text-center font-weight-bold">25</h1>
-						<p class="card-text text-center">Nouveaux emails</p>
-					</div>
-				</div>
-			</div>
-            <div class="col-lg-3 col-sm-6">
-				<div class="card bg-white mb-3" style="max-width: 18rem;">
-					<div class="card-header bg-white"><i class="fas fa-star"></i><span class="float-right stats-rouge">-6 %</span></div>
-					<div class="card-body">
-						<h1 class="card-title text-center font-weight-bold">9</h1>
-						<p class="card-text text-center">Opérations actives</p>
-					</div>
-				</div>
-			</div>
 
-			<!-- Seconde ligne -->
-			<div class="col-lg-3 col-sm-6">
-				<div class="card bg-white mb-3" style="max-width: 18rem;">
-					<div class="card-header bg-white"><span class="text-uppercase text-center">Total</span><a class="text-decoration-none text-gray-800" href="{{ path('newContact') }}"><i class="fas fa-plus-circle float-right"></i></a></div>
-					<div class="card-body">
-						<h1 class="card-title text-center">4583</h1>
-						<p class="card-text text-center">Contacts actifs</p>
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="row">
+                        <div class="col-lg-3 col-sm-6">
+                            <div class="card bg-white mb-3" style="max-width: 18rem;">
+                                <div class="card-header bg-white"><i class="fas fa-user-friends"></i><span class="float-right stats-vert">+12 %</span></div>
+                                <div class="card-body ">
+                                    <h1 class="card-title text-center font-weight-bold">32</h1>
+                                    <p class="card-text text-center dashboard-stats-text">Nouveaux contacts</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-6">
+                            <div class="card bg-white mb-3" style="max-width: 18rem;">
+                                <div class="card-header bg-white"><i class="fas fa-user-circle"></i><span class="float-right stats-vert">+5 %</span></div>
+                                <div class="card-body">
+                                    <h1 class="card-title text-center font-weight-bold">18</h1>
+                                    <p class="card-text text-center dashboard-stats-text">Nouvelles entreprises</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-6">
+                            <div class="card bg-white mb-3" style="max-width: 18rem;">
+                                <div class="card-header bg-white"><i class="fas fa-envelope"></i><span class="float-right stats-vert">+11 %</span></div>
+                                <div class="card-body">
+                                    <h1 class="card-title text-center font-weight-bold">25</h1>
+                                    <p class="card-text text-center dashboard-stats-text">Nouveaux emails</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-6">
+                            <div class="card bg-white mb-3" style="max-width: 18rem;">
+                                <div class="card-header bg-white"><i class="fas fa-star"></i><span class="float-right stats-rouge">-6 %</span></div>
+                                <div class="card-body">
+                                    <h1 class="card-title text-center font-weight-bold">9</h1>
+                                    <p class="card-text text-center dashboard-stats-text">Opérations actives</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Seconde ligne -->
+                        <div class="col-lg-3 col-sm-6">
+                            <div class="card bg-white mb-3" style="max-width: 18rem;">
+                                <div class="card-header bg-white"><span class="text-uppercase text-center">Total</span><a class="text-gray-800" href="{{ path('newContact') }}"><i class="fas fa-plus-circle float-right"></i></a></div>
+                                <div class="card-body">
+                                    <h1 class="card-title text-center">4583</h1>
+                                    <p class="card-text text-center dashboard-stats-text">Contacts actifs</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-6">
+                            <div class="card bg-white mb-3" style="max-width: 18rem;">
+                                <div class="card-header bg-white"><span class="text-uppercase text-center">Total</span><a class="text-gray-800" href="{{ path('newCompany') }}"><i class="fas fa-plus-circle float-right"></i></a></div>
+                                <div class="card-body">
+                                    <h1 class="card-title text-center">1879</h1>
+                                    <p class="card-text text-center dashboard-stats-text">Entreprises actives</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-6">
+                            <div class="card bg-white mb-3" style="max-width: 18rem;">
+                                <div class="card-header bg-white"><span class="text-uppercase text-center">Total</span></div>
+                                <div class="card-body">
+                                    <h1 class="card-title text-center">2687</h1>
+                                    <p class="card-text text-center dashboard-stats-text">Emails</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-6">
+                            <div class="card bg-white mb-3" style="max-width: 18rem;">
+                                <div class="card-header bg-white"><span class="text-uppercase text-center">Total</span><a class="text-gray-800" href="{{ path('newOperation') }}"><i class="fas fa-plus-circle float-right"></i></a></div>
+                                <div class="card-body">
+                                    <h1 class="card-title text-center">254</h1>
+                                    <p class="card-text text-center dashboard-stats-text">Opérations réalisées</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+					<div class="col-lg-12 col-sm-12">
+						<div class="card bg-white mb-3">
+                            <div class="card-header bg-white"><span class="text-center">Performance des opérations</span></div>
+							<div class="card-body">
+								<!-- Chart Donut ; Doghnut -->
+                                <canvas id="myPieChart"></canvas>
+							</div>
+						</div>
 					</div>
-				</div>
-			</div>
-			<div class="col-lg-3 col-sm-6">
-				<div class="card bg-white mb-3" style="max-width: 18rem;">
-					<div class="card-header bg-white"><span class="text-uppercase text-center">Total</span><a class="text-decoration-none text-gray-800" href="{{ path('newCompany') }}"><i class="fas fa-plus-circle float-right"></i></a></div>
-					<div class="card-body">
-						<h1 class="card-title text-center">1879</h1>
-						<p class="card-text text-center">Entreprises actives</p>
-					</div>
-				</div>
-			</div>
-			<div class="col-lg-3 col-sm-6">
-				<div class="card bg-white mb-3" style="max-width: 18rem;">
-					<div class="card-header bg-white"><span class="text-uppercase text-center">Total</span></div>
-					<div class="card-body">
-						<h1 class="card-title text-center">2687</h1>
-						<p class="card-text text-center">Emails</p>
-					</div>
-				</div>
-			</div>
-			<div class="col-lg-3 col-sm-6">
-				<div class="card bg-white mb-3" style="max-width: 18rem;">
-					<div class="card-header bg-white"><span class="text-uppercase text-center">Total</span><a class="text-decoration-none text-gray-800" href="{{ path('newOperation') }}"><i class="fas fa-plus-circle float-right"></i></a></div>
-					<div class="card-body">
-						<h1 class="card-title text-center">254</h1>
-						<p class="card-text text-center">Opérations réalisées</p>
-					</div>
-				</div>
-			</div>
+                </div>
+            </div>
+
 
 			<!-- Fin Seconde ligne -->
 			<div class="col-lg-12 col-sm-12 pt-4">
 				<div class="card bg-light mb-3">
 					<div class="card-header bg-white"><span class="text-center">Suivi des indicateurs de performance</span></div>
 					<div class="card-body bg-white p-0">
-						<div class="col-3 p-0">
-							<button type="button" class="btn btn-light no-border btn-dognut bg-white text-left text-gray-700 w-100 p-3">Opérations</button><br>
-							<button type="button" class="btn btn-light no-border btn-dognut bg-white text-left text-gray-700 w-100 p-3">Nouveaux contacts</button><br>
-							<button type="button" class="btn btn-light no-border btn-dognut bg-white text-left text-gray-700 w-100 p-3">Contacts mis à jour</button><br>
-							<button type="button" class="btn btn-light no-border btn-dognut bg-white text-left text-gray-700 w-100 p-3">Contacts perdus</button><br>
-							<button type="button" class="btn btn-light no-border btn-dognut bg-white text-left text-gray-700 w-100 p-3">Nouvelles entreprises</button><br>
-							<button type="button" class="btn btn-light no-border btn-dognut bg-white text-left text-gray-700 w-100 p-3">Nouveaux mails</button>
-						</div>
-						<div class="col-9 p-0">
+						<div class="row">
+							<div class="col-3 p-0">
+								<button type="button" class="btn btn-light no-border btn-dognut bg-white text-left text-gray-700 w-100 p-3">Opérations</button><br>
+								<button type="button" class="btn btn-light no-border btn-dognut bg-white text-left text-gray-700 w-100 p-3">Nouveaux contacts</button><br>
+								<button type="button" class="btn btn-light no-border btn-dognut bg-white text-left text-gray-700 w-100 p-3">Contacts mis à jour</button><br>
+								<button type="button" class="btn btn-light no-border btn-dognut bg-white text-left text-gray-700 w-100 p-3">Contacts perdus</button><br>
+								<button type="button" class="btn btn-light no-border btn-dognut bg-white text-left text-gray-700 w-100 p-3">Nouvelles entreprises</button><br>
+								<button type="button" class="btn btn-light no-border btn-dognut bg-white text-left text-gray-700 w-100 p-3">Nouveaux mails</button>
+							</div>
+							<div class="col-9 p-0">
+								<div id="line-operation-chart"></div>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -130,15 +152,62 @@
 			<div class="col-lg-6 col-sm-6 pt-4">
 				<div class="card bg-light mb-3">
 					<div class="card-header bg-white"><span class="text-center">Top commerciaux</span></div>
-					<div class="card-body bg-white p-5">
+					<div class="card-body bg-white p-0">
+						<table class="table">
+							<thead>
+							<tr>
+								<th scope="col" class="h6">Nom</th>
+								<th scope="col" class="h6"></th>
+								<th scope="col" class="h6"></th>
+								<th scope="col" class="h6">Score</th>
+								<th scope="col" class="h6">Gagnés</th>
+								<th scope="col" class="h6">Mis à jour</th>
+								<th scope="col" class="h6">Perdus</th>
+							</tr>
+							</thead>
+							<tbody>
+							<tr>
+								<th scope="row" class="h6">logo.png</th>
+								<td><i class="fas fa-arrow-up stats-vert"></i></td>
+								<td>Vincent DUMONT</td>
+								<td class="dashboard-score-commerciaux">26</td>
+								<td>5</td>
+								<td>24</td>
+								<td>3</td>
+							</tr>
+							<tr>
+								<th scope="row" class="h6">2</th>
+								<td><i class="fas fa-arrow-down stats-rouge"></i></td>
+								<td>Léa MARTIN</td>
+								<td>3</td>
+								<td>1</td>
+								<td>4</td>
+								<td>2</td>
+							</tr>
+							<tr>
+								<th scope="row" class="h6">logo.png</th>
+								<td><i class="fas fa-arrow-up stats-vert"></i></td>
+								<td>Claire MATTHIEU</td>
+								<td>18</td>
+								<td>4</td>
+								<td>21</td>
+								<td>7</td>
+							</tr>
+							</tbody>
+						</table>
 					</div>
 				</div>
 			</div>
 
 			<div class="col-lg-12 col-sm-6 pt-4">
-				<div class="card-body bg-white p-0"></div>
+				<div class="card-body bg-white p-0">
+					<div id="chart-circle"></div>
+				</div>
 			</div>
 
 		</div>
 	</div>
+{% endblock %}
+{% block javascript %}
+{{parent()}}
 {% endblock %}
