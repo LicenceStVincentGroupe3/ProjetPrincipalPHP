@@ -10,7 +10,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
- * @UniqueEntity(fields="email", message="Cette email existe déjà")
+ * @UniqueEntity(fields="email", message="Adresse mail déjà existant")
  * @ORM\Entity(repositoryClass="App\AdminBundle\Repository\CommercialRepository")
  */
 class Commercial implements UserInterface, \Serializable
@@ -24,19 +24,19 @@ class Commercial implements UserInterface, \Serializable
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(message = "Cette champ ne peut être vide.")
      */
     private $commercialCode;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(message = "Cette champ ne peut être vide.")
      */
     private $commercialName;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(message = "Cette champ ne peut être vide.")
      */
     private $commercialFirstname;
 
@@ -47,7 +47,7 @@ class Commercial implements UserInterface, \Serializable
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(message = "Cette champ ne peut être vide.")
      */
     private $commercialProfil;
 
@@ -95,41 +95,50 @@ class Commercial implements UserInterface, \Serializable
      * @ORM\Column(type="string", length=14, nullable=true)
      * @Assert\Length(min = 10, minMessage = "Tel. 10 caractères minimun !")
      * @Assert\Length(max = 10, maxMessage = "Tel. 10 caractères maxnimun !")
-     * @Assert\Regex(pattern="/^(\(0\))?[0-9]+$/", message="Format : 0601010101")
+     * @Assert\Regex(pattern="/^(\(0\))?[0-9]+$/", message="Format : 0301010101")
      */
     private $commercialPhone;
 
     /**
      * @ORM\Column(type="string", length=14, nullable=true)
+     * @Assert\Length(min = 10, minMessage = "Tel. 10 caractères minimun !")
+     * @Assert\Length(max = 10, maxMessage = "Tel. 10 caractères maxnimun !")
+     * @Assert\Regex(pattern="/^(\(0\))?[0-9]+$/", message="Format : 0601010101")
      */
     private $commercialMobilePhone;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Assert\Url
+     * @Assert\Url(message = "Veuillez insérer une URL valide")
      */
     private $commercialLinkedinAddress;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Assert\Url
+     * @Assert\Url(message = "Veuillez insérer une URL valide")
      */
     private $commercialFacebookAddress;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Assert\Url
+     * @Assert\Url(message = "Veuillez insérer une URL valide")
      */
     private $commercialTwitterAddress;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Assert\File(mimeTypes={ "image/jpeg", "image/png" })
+     * @Assert\File(
+     *      maxSize = "1024k",
+     *      mimeTypes={ "image/jpeg", "image/png" },
+     *      maxSizeMessage = "La photo ne peut dépasser les 1024 Ko soit 1,024 Mo !",
+     *      mimeTypesMessage = "Format JPEG ou PNG uniquement"
+     * )
      */
     private $commercialPhoto;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Assert\Length(max = 255, maxMessage = "Vous ne pouvez pas dépasser 255 caractères")
      */
     private $remarks;
 
@@ -151,7 +160,7 @@ class Commercial implements UserInterface, \Serializable
 
     /**
      * @ORM\Column(type="string", length=255, unique=true, nullable=true)
-     * @Assert\Email()
+     * @Assert\Email(message = "Veuillez insérer un email valide")
      */
     private $email;
 
