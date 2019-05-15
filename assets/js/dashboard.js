@@ -1,49 +1,56 @@
-// Set new default font family and font color to mimic Bootstrap's default styling
-Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
-Chart.defaults.global.defaultFontColor = '#858796';
-
-// Pie Chart Example
-var ctx = document.getElementById("myPieChart");
-var myPieChart = new Chart(ctx, {
-    type: 'doughnut',
-    data: {
-        labels: ["Ouvert", "Non ouvert", "Non délivré", "Ajout/mise à jour des données"],
-        datasets: [{
-            data: [30, 30, 15, 35],
-            backgroundColor: ['#3a5cff', '#fcb414', '#ea110d','#17cc20'],
-            hoverBackgroundColor: ['#2c4fb9', '#c48e14', '#a4110d','#17991f'],
-            hoverBorderColor: "rgba(234, 236, 244, 1)",
-            pointStyle: 'rect',
-        }],
+var options = {
+    chart: {
+        type: 'donut',
+        height: 400
     },
-    options: {
-        maintainAspectRatio: false,
-        tooltips: {
-            backgroundColor: "rgb(255,255,255)",
-            bodyFontColor: "#858796",
-            borderColor: '#dddfeb',
-            borderWidth: 10,
-            xPadding: 15,
-            yPadding: 15,
-            displayColors: true,
-            caretPadding: 10,
+    dataLabels: {
+        enabled: false,
+    },
+    labels: ['Ouvert', 'Non ouvert', 'Délivré', 'Ajout/Mise à jour des données'],
+    plotOptions: {
+        pie: {
+            size: 85,
+            donut: {
+                size: '85%'
+            }
+        }
+    },
+    legend: {
+        show: true,
+        showForSingleSeries: false,
+        showForNullSeries: true,
+        showForZeroSeries: true,
+        position: 'bottom',
+        horizontalAlign: 'left',
+        offsetY: 30,
+        itemMargin: {
+            horizontal: 0,
+            vertical: 20
         },
-        legend: {
-            display: true,
-            position: "bottom",
-            fontStyle: "normal",
-            labels: {
-                usePointStyle: true
+        labels: {
+            colors: ['#B3B3B3']
+        },
+    },
+    series: [69, 55, 41, 10],
+    responsive: [{
+        breakpoint: 480,
+        options: {
+            chart: {
+                width: 200
             },
-        },
-        rotation: 2,
-        cutoutPercentage: 85,
-    },
-});
+            legend: {
+                position: 'bottom'
+            }
+        }
+    }]
+}
 
-// Set new default font family and font color to mimic Bootstrap's default styling
-Chart.defaults.global.defaultFontFamily = '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
-Chart.defaults.global.defaultFontColor = '#292b2c';
+var chart = new ApexCharts(
+    document.querySelector("#chart"),
+    options
+);
+
+chart.render();
 
 
 // Chart Component Dashboard

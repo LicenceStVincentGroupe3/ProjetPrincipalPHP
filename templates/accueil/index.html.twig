@@ -21,10 +21,10 @@
 			<div class="col-lg-6 col-sm-6 mb-5">
 				<ul class="nav justify-content-center">
 					<button type="button" class="text-uppercase btn btn-green btn-sm bord-arrondis mr-5">Afficher sur TV</button>
-					<li class="nav-item"><button type="button" class="btn btn-light bord-arrondis-gauche btn-dognut text-gray-700">Aujourd'hui</button></li>
-					<li class="nav-item"><button type="button" class="btn btn-light no-border btn-dognut text-gray-700">Semaine</button></li>
-					<li class="nav-item"><button type="button" class="btn btn-light no-border btn-dognut text-gray-700">Mois</button></li>
-					<li class="nav-item"><button type="button" class="btn btn-light btn-dognut bord-arrondis-droit text-gray-700">Année</button></li>
+					<li class="nav-item"><button type="button" class="btn btn-light bord-arrondis-gauche btn-dognut-week text-gray-700">Aujourd'hui</button></li>
+					<li class="nav-item"><button type="button" class="btn btn-light no-border btn-dognut-week text-gray-700">Semaine</button></li>
+					<li class="nav-item"><button type="button" class="btn btn-light no-border btn-dognut-week text-gray-700">Mois</button></li>
+					<li class="nav-item"><button type="button" class="btn btn-light btn-dognut-week bord-arrondis-droit text-gray-700">Année</button></li>
 				</ul>
 			</div>
 			<!-- Première ligne -->
@@ -111,10 +111,10 @@
                 <div class="col-md-4">
 					<div class="col-lg-12 col-sm-12">
 						<div class="card bg-white mb-3">
-                            <div class="card-header bg-white"><span class="text-center">Performance des opérations</span></div>
+                            <div class="card-header bg-white"><span class="text-center">Performance des opérations</span><button type="button" class="btn float-right p-0"><i class="fas fa-ellipsis-h fa-opacity"></i></button></div>
 							<div class="card-body">
 								<!-- Chart Donut ; Doghnut -->
-                                <canvas id="myPieChart"></canvas>
+								<div id="chart"></div>
 							</div>
 						</div>
 					</div>
@@ -125,9 +125,9 @@
 			<!-- Fin Seconde ligne -->
 			<div class="col-lg-12 col-sm-12 pt-4">
 				<div class="card bg-light mb-3">
-					<div class="card-header bg-white"><span class="text-center">Suivi des indicateurs de performance</span></div>
+					<div class="card-header bg-white"><span class="text-center">Suivi des indicateurs de performance</span><button type="button" class="btn float-right p-0"><i class="fas fa-ellipsis-h fa-opacity"></i></button></div>
 					<div class="card-body bg-white p-0">
-						<div class="row">
+						<div class="row ml-0">
 							<div class="col-3 p-0">
 								<button type="button" class="btn btn-light no-border btn-dognut bg-white text-left text-gray-700 w-100 p-3">Opérations</button><br>
 								<button type="button" class="btn btn-light no-border btn-dognut bg-white text-left text-gray-700 w-100 p-3">Nouveaux contacts</button><br>
@@ -145,13 +145,13 @@
 			</div>
 			<div class="col-lg-6 col-sm-6 pt-4">
 				<div class="card bg-light mb-3">
-					<div class="card-header bg-white"><span class="text-center">Performance par départements</span></div>
+					<div class="card-header bg-white"><span class="text-center">Performance par départements</span><button type="button" class="btn float-right p-0"><i class="fas fa-ellipsis-h fa-opacity"></i></button></div>
 					<div class="card-body bg-white p-5"></div>
 				</div>
 			</div>
 			<div class="col-lg-6 col-sm-6 pt-4">
 				<div class="card bg-light mb-3">
-					<div class="card-header bg-white"><span class="text-center">Top commerciaux</span></div>
+					<div class="card-header bg-white"><span class="text-center">Top commerciaux</span><button type="button" class="btn float-right p-0"><i class="fas fa-ellipsis-h fa-opacity"></i></button></div>
 					<div class="card-body bg-white p-0">
 						<table class="table">
 							<thead>

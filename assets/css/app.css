@@ -759,5 +759,9 @@ select::-ms-expand {
 }
 
 .dashboard-stats-text {
-    font-size: 0.85rem;
+    font-size: 0.80rem;
+}
+
+.fa-opacity {
+    opacity: 0.5;
 }
