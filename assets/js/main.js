@@ -214,6 +214,6 @@ $(document).ready( function () {
 		console.log(nbPerPage);
 	});*/
 
-	$('#myTableBody').pageMe({pagerSelector:'#myPager',showPrevNext:true,hidePageNumbers:false,perPage:15});
+	$('#myTableBody').pageMe({pagerSelector:'#myPager',showPrevNext:true,hidePageNumbers:false,perPage:5});
 
 } );

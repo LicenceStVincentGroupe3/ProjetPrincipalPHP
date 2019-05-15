@@ -86,9 +86,13 @@
 						<td>
 							{% if commercial.Email is not null %}
 								<img src="{{asset('build/mail.png')}}" class="commercial-mail" title="{{commercial.Email}}" alt="Email du commercial">
+							{% else %}
+								<img src="{{asset('build/mail.png')}}" class="commercial-mail" title="Aucun mail" alt="Email du commercial">
 							{% endif %}
 							{% if commercial.CommercialPhone is not null %}
 								<img src="{{asset('build/tel.png')}}" class="commercial-tel" title="{{commercial.CommercialPhone}}" alt="Tél. fixe direct du commercial">
+							{% else %}
+								<img src="{{asset('build/tel.png')}}" class="commercial-tel" title="Aucun numéro" alt="Tél. fixe direct du commercial">
 							{% endif %}
 						</td>
 					</tr>
@@ -137,11 +141,11 @@
 		<div class="row">
 			<div class="table-after-entry">
 				<select id="table-nb-entry" class="table-nb-entry unset-outline">
+					<option value="5">5</option>
+					<option value="10">10</option>
 					<option value="15">15</option>
 					<option value="20">20</option>
-					<option value="50">50</option>
-					<option value="100">100</option>
-					<option value="200">200</option>
+					<option value="25">25</option>
 				</select>
 			</div>
 			<div class="table-nb-functions">
