@@ -1,8 +1,9 @@
 var options = {
     chart: {
         type: 'donut',
-        height: 400
+        height: 320
     },
+    colors:['#4f6fff', '#ffa331', '#ff1711', '#1bc600'],
     dataLabels: {
         enabled: false,
     },
@@ -31,7 +32,7 @@ var options = {
             colors: ['#B3B3B3']
         },
     },
-    series: [69, 55, 41, 10],
+    series: [30, 30, 15, 60],
     responsive: [{
         breakpoint: 480,
         options: {
