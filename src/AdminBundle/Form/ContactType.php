@@ -27,9 +27,9 @@ class ContactType extends AbstractType
 	public function buildForm(FormBuilderInterface $builder, array $options)
 	{
 		$builder
-            ->add('contactStatus', CheckboxType::class, array(
+           /* ->add('contactStatus', CheckboxType::class, array(
                 'label'    => 'Statut Actif',
-                'required' => false))       
+                'required' => false))    */
 			->add('contactCode', TextType::class, array('label' => 'Code'))
     		->add('contactLastName', TextType::class, array('label' => 'Nom'))
     		->add('contactFirstName', TextType::class,  array('label' => 'Prénom'))
@@ -54,9 +54,9 @@ class ContactType extends AbstractType
 
     		->add('idContactJob', EntityType::class, array('class' => ContactJob::class, 'choice_label' => 'contactJobName', 'label'=>'Poste' ))
 
-    		->add('contactOptInCommercialOffers', CheckboxType::class, array('label'    => 'Autoriser HAFA à envoyer des informations','required' => false))
+    		->add('contactOptInCommercialOffers', CheckboxType::class, array('label'    => 'Informations','required' => false))
 
-    		->add('contactOptInNewsletterCustomers', CheckboxType::class, array( 'label'    => 'Autoriser le contact à recevoir un bulletin d\'information client', 'required' => false))
+    		->add('contactOptInNewsletterCustomers', CheckboxType::class, array( 'label'    => 'Offres commerciales', 'required' => false))
 
             // Bouton Submit //
             ->add('save', SubmitType::class, array('label' => 'Enregistrer'))->getForm();

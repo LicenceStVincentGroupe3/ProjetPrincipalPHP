@@ -47,7 +47,7 @@
 							<div class="col-lg-4 mx-auto">
 								{{ form_label(form.contactCode, null, {'label_attr': {'class': 'my-form-label'}}) }}
 							</div>
-							<div class="col-lg-7 mx-auto">
+							<div class="col-lg-7 mx-auto mandatory">
 								{{ form_widget(form.contactCode, {'attr': {'class': 'form-control my-form-input-little', 'placeholder': "Ex: 1254789"}}) }}
 
 								{{ form_errors(form.contactCode, {'attr': {'class': 'form-error-message'}}) }}
@@ -57,7 +57,7 @@
 							<div class="col-lg-4 mx-auto">
 								{{ form_label(form.contactGender, 'Genre', {'label_attr': {'class': 'my-form-label'}}) }}
 							</div>
-							<div class="col-lg-7 mx-auto">
+							<div class="col-lg-7 mx-auto mandatory">
 								{{ form_widget(form.contactGender, {'attr': {'class': 'form-control my-form-input-little'}}) }}
 
 								{{ form_errors(form.contactGender, {'attr': {'class': 'form-error-message'}}) }}
@@ -67,7 +67,7 @@
 							<div class="col-lg-4 mx-auto">
 								{{ form_label(form.contactFirstName, null, {'label_attr': {'class': 'my-form-label'}}) }}
 							</div>
-							<div class="col-lg-7 mx-auto">
+							<div class="col-lg-7 mx-auto mandatory">
 								{{ form_widget(form.contactFirstName, {'attr': {'class': 'form-control my-form-input-big'}}) }}
 
 								{{ form_errors(form.contactFirstName, {'attr': {'class': 'form-error-message'}}) }}
@@ -77,7 +77,7 @@
 							<div class="col-lg-4 mx-auto">
 								{{ form_label(form.contactLastName, null, {'label_attr': {'class': 'my-form-label'}}) }}
 							</div>
-							<div class="col-lg-7 mx-auto">
+							<div class="col-lg-7 mx-auto mandatory">
 								{{ form_widget(form.contactLastName, {'attr': {'class': 'form-control my-form-input-big'}}) }}
 
 								{{ form_errors(form.contactLastName, {'attr': {'class': 'form-error-message'}}) }}
@@ -150,10 +150,6 @@
 								{{ form_widget(form.contactEmail, {'attr': {'class': 'form-control my-form-input-big'}}) }}
 
 								{{ form_errors(form.contactEmail, {'attr': {'class': 'form-error-message'}}) }}
-
-								{{ form_widget(form.contactStatus, {'attr': {'class': 'form-control my-form-input-big'}}) }}
-
-								{{ form_errors(form.contactStatus, {'attr': {'class': 'form-error-message'}}) }}
 							</div>
 						</div>
 						<div class="row my-form-field">
@@ -228,9 +224,15 @@
 						</div>
 					</div>
 				</div>
+                <br><br>
 
-				{{ form_widget(form.save, { 'label': 'Ajouter', 'attr': {'class': 'btn submit-button'}}) }}
+				<div class="row form-buttons">
+					<button class="btn btn-white-red return-button" type="button">
+						<a href="{{ path('listCont') }}">ANNULER</a>
+					</button>
+				{{ form_widget(form.save, { 'label': 'Ajouter', 'attr': {'class': 'btn btn-red submit-button'}}) }}
 				{{ form_end(form) }}
+				</div>
 			</section>
 
 			<section id="company" class="tab-panel">
