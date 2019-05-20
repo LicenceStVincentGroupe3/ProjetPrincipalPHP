@@ -42,6 +42,16 @@ class CompanyRepository extends ServiceEntityRepository
         return $rowDeleted;
     }
 
+    // Retourne toutes les entreprises d'un commercial séléctioné
+    public function listCompanyOfCommercial($com)
+    {
+        $query = $this->createQueryBuilder('c');
+        $query->where('c.idUser = :com')->setParameter('com', $com);
+        $result = $query->getQuery()->getResult();
+
+        return $result;
+    }
+
     // /**
     //  * @return Company[] Returns an array of Company objects
     //  */

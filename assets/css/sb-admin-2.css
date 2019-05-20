@@ -10916,6 +10916,14 @@ a:focus {
   width: 2rem;
 }
 
+.profile {
+  width: 100px;
+  background-image: url(/build/images/select-caret.f0ca67e4.png);
+  background-repeat: no-repeat;
+  background-position-x: 60%;
+  background-position-y: 50%;
+}
+
 .topbar {
   height: 90px;
 }
@@ -11281,10 +11289,10 @@ a:focus {
   .sidebar .sidebar-heading {
     text-align: left;
   }
-  /*.sidebar.toggled {
+  .sidebar.toggled { /* ========= */
     overflow: visible;
     width: 6.5rem !important;
-  }*/
+  } /* ========= */
   .sidebar.toggled .nav-item .collapse {
     position: absolute;
     left: calc(6.5rem + 1.5rem / 2);
@@ -11428,20 +11436,20 @@ a:focus {
   color: #d9d9d9;
 }
 
-.sidebar-dark #sidebarToggle {
+/*.sidebar-dark #sidebarToggle {
   background-color: rgba(0, 0, 0, 0.2);
-}
+}*/
 
 .sidebar-dark #sidebarToggle::after {
-  color: rgba(255, 255, 255, 0.5);
+  color: #d9d9d9;
 }
 
-.sidebar-dark #sidebarToggle:hover {
+/*.sidebar-dark #sidebarToggle:hover {
   background-color: rgba(255, 255, 255, 0.25);
-}
+}*/
 
 .sidebar-dark.toggled #sidebarToggle::after {
-  color: rgba(255, 255, 255, 0.5);
+  color: #d9d9d9;
 }
 
 .btn-circle {
@@ -11850,7 +11858,11 @@ body.sidebar-toggled {
 }
 
 .sidebar-dark .nav-item.active .nav-link, .mandatory {
-    border-left: 0.25em solid #b3d7ff;
+    border-left: 0.25em solid #cf1740;
+}
+
+.mandatory {
+  border-color: #e3111a;
 }
 
 .contentBody {

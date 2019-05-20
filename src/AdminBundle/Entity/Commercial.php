@@ -10,7 +10,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
- * @UniqueEntity(fields="email")
+ * @UniqueEntity(fields="email", message="Adresse mail déjà existant")
  * @ORM\Entity(repositoryClass="App\AdminBundle\Repository\CommercialRepository")
  */
 class Commercial implements UserInterface, \Serializable
@@ -23,20 +23,20 @@ class Commercial implements UserInterface, \Serializable
     private $id;
 
     /**
-     * @ORM\Column(type="integer")
-     * @Assert\NotBlank()
+     * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message = "Cette champ ne peut être vide.")
      */
     private $commercialCode;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(message = "Cette champ ne peut être vide.")
      */
     private $commercialName;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(message = "Cette champ ne peut être vide.")
      */
     private $commercialFirstname;
 
@@ -46,7 +46,8 @@ class Commercial implements UserInterface, \Serializable
     private $commercialSexe;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message = "Cette champ ne peut être vide.")
      */
     private $commercialProfil;
 
@@ -56,7 +57,7 @@ class Commercial implements UserInterface, \Serializable
     private $commercialJob;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", nullable=true)
      * @Assert\DateTime
      */
     private $commercialPlugCreation;
@@ -92,40 +93,52 @@ class Commercial implements UserInterface, \Serializable
 
     /**
      * @ORM\Column(type="string", length=14, nullable=true)
+     * @Assert\Length(min = 10, minMessage = "Tel. 10 caractères minimun !")
+     * @Assert\Length(max = 10, maxMessage = "Tel. 10 caractères maxnimun !")
+     * @Assert\Regex(pattern="/^(\(0\))?[0-9]+$/", message="Format : 0301010101")
      */
     private $commercialPhone;
 
     /**
      * @ORM\Column(type="string", length=14, nullable=true)
+     * @Assert\Length(min = 10, minMessage = "Tel. 10 caractères minimun !")
+     * @Assert\Length(max = 10, maxMessage = "Tel. 10 caractères maxnimun !")
+     * @Assert\Regex(pattern="/^(\(0\))?[0-9]+$/", message="Format : 0601010101")
      */
     private $commercialMobilePhone;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Assert\Url
+     * @Assert\Url(message = "Veuillez insérer une URL valide")
      */
     private $commercialLinkedinAddress;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Assert\Url
+     * @Assert\Url(message = "Veuillez insérer une URL valide")
      */
     private $commercialFacebookAddress;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Assert\Url
+     * @Assert\Url(message = "Veuillez insérer une URL valide")
      */
     private $commercialTwitterAddress;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Assert\File(mimeTypes={ "image/jpeg", "image/png" })
+     * @Assert\File(
+     *      maxSize = "1024k",
+     *      mimeTypes={ "image/jpeg", "image/png" },
+     *      maxSizeMessage = "La photo ne peut dépasser les 1024 Ko soit 1,024 Mo !",
+     *      mimeTypesMessage = "Format JPEG ou PNG uniquement"
+     * )
      */
     private $commercialPhoto;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Assert\Length(max = 255, maxMessage = "Vous ne pouvez pas dépasser 255 caractères")
      */
     private $remarks;
 
@@ -141,8 +154,13 @@ class Commercial implements UserInterface, \Serializable
     private $idCompanyCountry;
 
     /**
+     * @ORM\OneToMany(targetEntity="App\AdminBundle\Entity\Operation", mappedBy="idCommercial")
+     */
+    private $operations;
+
+    /**
      * @ORM\Column(type="string", length=255, unique=true, nullable=true)
-     * @Assert\Email()
+     * @Assert\Email(message = "Veuillez insérer un email valide")
      */
     private $email;
 
@@ -179,6 +197,7 @@ class Commercial implements UserInterface, \Serializable
 
         $this->contacts = new ArrayCollection();
         $this->companies = new ArrayCollection();
+        $this->operations = new ArrayCollection();
     }
   
     /** 
@@ -256,7 +275,7 @@ class Commercial implements UserInterface, \Serializable
         return $this->commercialJob;
     }
 
-    public function setCommercialJob(string $commercialJob): self
+    public function setCommercialJob(?string $commercialJob): self
     {
         $this->commercialJob = $commercialJob;
 
@@ -424,7 +443,7 @@ class Commercial implements UserInterface, \Serializable
         return $this->hierarchy;
     }
 
-    public function setHierarchy(int $hierarchy): self
+    public function setHierarchy(?int $hierarchy): self
     {
         $this->hierarchy = $hierarchy;
 
@@ -459,7 +478,12 @@ class Commercial implements UserInterface, \Serializable
     }
 
     function addRole($role) {
-        $this->roles[] = $role;
+        if (!empty($this->getRoles())) { // Dans le cas de la modification d'un role
+            $this->roles = array_replace($this->getRoles(), $role);
+        }
+        else {
+            $this->roles[] = $role;
+        }
     }
 
     public function eraseCredentials() {
@@ -579,6 +603,24 @@ class Commercial implements UserInterface, \Serializable
     public function setIdCompanyCountry(?CompanyCountry $idCompanyCountry): self
     {
         $this->idCompanyCountry = $idCompanyCountry;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Operation[]
+     */
+    public function getOperations(): Collection
+    {
+        return $this->operations;
+    }
+
+    public function addOperation(Operation $operation): self
+    {
+        if (!$this->operations->contains($operation)) {
+            $this->operations[] = $operation;
+            $operation->setidCommercial($this);
+        }
 
         return $this;
     }

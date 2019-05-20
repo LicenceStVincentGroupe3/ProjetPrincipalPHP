@@ -10,7 +10,7 @@
         <title>{% block title %}Hafa - Smartleads{% endblock %}</title>
         {% block stylesheet %}
         <!-- Bootstrap -->
-        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link href="https://stackpath.b<<ootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
         <!-- font Awesome -->
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
@@ -37,18 +37,19 @@
             <!-- Sidebar -->
             <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
                 <!-- Sidebar - Brand -->
-                <a class="sidebar-brand d-flex align-items-center justify-content-center shadow" href="{{ path('index') }}">
-                    <!-- <div class="sidebar-brand-icon rotate-n-15">
-                        <i class="fas fa-laugh-wink"></i>
-                    </div> -->
-                    <div class="sidebar-brand-text mx-3">
-                        <img src="{{asset('build/logo.png')}}" title="my image" alt="My image">
+                <div class="sidebar-brand d-flex align-items-center justify-content-center shadow">
+                    <a href="{{ path('index') }}">
+                        <!-- <div class="sidebar-brand-icon rotate-n-15">
+                            <i class="fas fa-laugh-wink"></i>
+                        </div> -->
+                        <div class="sidebar-brand-text mx-3">
+                            <img src="{{asset('build/logo.png')}}" title="my image" alt="My image">
+                        </div>
+                    </a>
+                    <!-- Sidebar Toggler (Sidebar) -->
+                    <div class="text-center d-none d-md-inline">
+                        <span id="sidebarToggle"></span>
                     </div>
-                </a>
-
-                <!-- Sidebar Toggler (Sidebar) -->
-                <div class="text-center d-none d-md-inline">
-                    <button class="rounded-circle border-0" id="sidebarToggle"></button>
                 </div>
 
                 <!-- Nav Item - Tableau de bord -->
@@ -98,7 +99,7 @@
                 {% endif %}
 
                 <!-- Nav Item - Opération -->
-                <li class="nav-item">
+                <li class="nav-item {% if operationLink is defined %}active{% endif %}">
                     <a class="nav-link" href="{{ path('listOperation') }}">
                     <i class="fas fa-star"></i>
                     <span>Opération</span></a>
@@ -134,8 +135,9 @@
                     <!-- Topbar -->
                     <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
                         <!-- Sidebar Toggle (Topbar) -->
-                        <!--<button id="sidebarToggleTop" class="rounded-circle border-0">
-                        </button>-->
+                        <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                            <i class="fa fa-bars"></i>
+                        </button>
 
                         <!-- Topbar Search -->
                         <div class="global-search-filter-container">
@@ -165,13 +167,17 @@
                                 </div>
                             </li>
 
-                            <div class="topbar-divider d-none d-sm-block"></div>
+                            <!-- <div class="topbar-divider d-none d-sm-block"></div> -->
 
                             <!-- Nav Item - User Information -->
-                            <li class="nav-item dropdown no-arrow">
+                            <li class="nav-item dropdown no-arrow profile">
                                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <span class="mr-2 d-none d-lg-inline text-gray-600 small">Valerie Luna</span>
-                                    <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
+                                    <!-- <span class="mr-2 d-none d-lg-inline text-gray-600 small">Valerie Luna</span> -->
+                                    {% if app.user.CommercialPhoto is not null %}
+                                    <img src="{{asset('build/images/' ~ app.user.CommercialPhoto)}}" class="img-profile rounded-circle" title="Photo" alt="Photo de profil">
+                                    {% else %}
+                                    <img src="{{asset('build/Photo.png')}}" class="img-profile rounded-circle" title="Photo" alt="Photo de profil">
+                                    {% endif %}
                                 </a>
                                 <!-- Dropdown - User Information -->
                                 <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
@@ -233,7 +239,7 @@
                         <button class="btn btn-secondary" type="button" data-dismiss="modal">
                             Annuler
                         </button>
-                        <a class="btn btn-primary" href="{{path('logout')}}">Déconnexion</a>
+                        <a class="btn btn-red" href="{{path('logout')}}">Déconnexion</a>
                     </div>
                 </div>
             </div>
@@ -253,8 +259,9 @@
 
             <script src="https://rawgit.com/hhurz/tableExport.jquery.plugin/master/tableExport.js"></script>
 
-                <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
-                <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+                
             {{ encore_entry_script_tags('app') }}
             <!-- <script src="/build/app.js"></script> Autre façon d'appler le fichier js -->
             {{ encore_entry_script_tags('myTemplate') }}

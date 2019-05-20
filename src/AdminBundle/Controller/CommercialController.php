@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\VarDumper\VarDumper;
 use App\AdminBundle\Form\CommercialType;
@@ -58,7 +59,6 @@ class CommercialController extends AbstractController
                 if ($this->isGranted('ROLE_DIRECTEUR')) {
                     $form->add('commercialProfil', ChoiceType::class, [
                         'choices'  => [
-                            'A définir' => null,
                             'Directeur' => 'ROLE_DIRECTEUR',
                             'Responsable' => 'ROLE_RESPONSABLE',
                             'Commercial' => 'ROLE_COMMERCIAL'
@@ -71,7 +71,6 @@ class CommercialController extends AbstractController
                 else {
                     $form->add('commercialProfil', ChoiceType::class, [
                         'choices'  => [
-                            'A définir' => null,
                             'Commercial' => 'ROLE_COMMERCIAL'
                         ]
                     ]);
@@ -84,6 +83,10 @@ class CommercialController extends AbstractController
                 
                 $form->handleRequest($httpRequest);
 
+                if ($form->isSubmitted())
+                {
+                    $commercialPhoto = $form['commercialSexe']->getData();
+                }
 
                 if ($form->isSubmitted() && $form->isValid() && $httpRequest->isMethod('POST'))
                 {
@@ -128,7 +131,16 @@ class CommercialController extends AbstractController
                         $new->setIdCompanyCountry($companySelected);
                     }
 
-                    $new->setHierarchy($idHierarchy);
+                    // Si l'utilisateur n'a séléctioné aucun responsable N+1
+                    if ($idHierarchy == "0")
+                    {
+                       $new->setHierarchy(null);
+                    }
+                    // Sinon
+                    else
+                    {
+                        $new->setHierarchy($idHierarchy);
+                    }
  
                     $new->setPassword($password);
                     $new->addRole($role);
@@ -168,11 +180,10 @@ class CommercialController extends AbstractController
                 // Appel de Doctrine
                 $display = $this->getDoctrine()->getManager();
 
-                // Variable qui contient le Repository
                 $commercialRepository = $display->getRepository(Commercial::class);
-
-                // Variable qui contient le Repository
                 $companyCountry = $display->getRepository(CompanyCountry::class);
+                $companyRepository = $display->getRepository(Company::class);
+                $contactRepository = $display->getRepository(Contact::class);
 
                 // Equivalent du SELECT * where id=(paramètre)
                 $edit = $commercialRepository->find($id);
@@ -180,13 +191,28 @@ class CommercialController extends AbstractController
                 // Equivalent du SELECT *
                 $listCountry = $companyCountry->findAll();
 
+                // Appel de la fonction countCompany() du repository de la classe Company
+                $nbCompany = $companyRepository->countCompany($id);
+
+                // Appel de la fonction listCompanyOfCommercial() du repository de la classe Company
+                $listCompany = $companyRepository->listCompanyOfCommercial($id);
+
+                // Appel de la fonction countContact() du repository de la classe Contact
+                $nbContact = $contactRepository->countContact($id);
+
+                // Appel de la fonction listContactOfCommercial() du repository de la classe Contact
+                $listContact = $contactRepository->listContactOfCommercial($id);
+
                 $form = $this->createForm(CommercialType::class, $edit);
 
                 // Contient les name des <input>
                 $formData = Request::createFromGlobals();
 
                 // On récupère le name de la <select>
-                $idCountrySelected = $formData->request->get('country'); 
+                $idCountrySelected = $formData->request->get('country');
+
+
+                $form->add('commercialStatus', CheckboxType::class, ['label' => 'Actif', 'required' => false]);
 
                 // Si c'est le Directeur
                 if ($this->isGranted('ROLE_DIRECTEUR')) {
@@ -198,6 +224,8 @@ class CommercialController extends AbstractController
                             'Commercial' => 'ROLE_COMMERCIAL'
                         ]
                     ]);
+
+                    $listHierarchy = $commercialRepository->listHierarchyDirAndResp('ROLE_DIRECTEUR','ROLE_RESPONSABLE');
                 }
                 // Sinon
                 else {
@@ -207,7 +235,15 @@ class CommercialController extends AbstractController
                             'Commercial' => 'ROLE_COMMERCIAL'
                         ]
                     ]);
+
+                    $listHierarchy = $commercialRepository->listHierarchyResp('ROLE_RESPONSABLE');
                 }
+
+                // On récupère le name de la <select>
+                $idHierarchy = $formData->request->get('hierarchy');
+
+                $responsableN1 = $commercialRepository->hierarchyN1($edit->getHierarchy());
+
 
                 $form->handleRequest($httpRequest);
 
@@ -268,8 +304,23 @@ class CommercialController extends AbstractController
                         $edit->setIdCompanyCountry($companySelected);
                     }
 
+                    // Si l'utilisateur n'a séléctioné aucun responsable N+1
+                    if ($idHierarchy == "0")
+                    {
+                       $edit->setHierarchy(null);
+                    }
+                    // Sinon
+                    else
+                    {
+                        $edit->setHierarchy($idHierarchy);
+                    }
+
+                    // Si le profil du commercial change
+                    if ($edit->getRoles()[0] !== $role) {
+                        $edit->addRole([0 => $role]);
+                    }
+
                     $edit->setCommercialLastUpdate(new \DateTime());
-                    $edit->addRole($role);
 
                     $entityManager->flush();
 
@@ -279,7 +330,7 @@ class CommercialController extends AbstractController
                 // ----------------------------------
                 // On demande à la vue d'afficher la commande plus tous ses produits
                 // ----------------------------------
-                return $this->render('commercial/edit.html.twig', ['editCom' => $edit, 'form' => $form->createView(), 'listCountry' => $listCountry, 'commercialTeamLink' => true]);
+                return $this->render('commercial/edit.html.twig', ['editCom' => $edit, 'form' => $form->createView(), 'listCountry' => $listCountry, 'listHierarchy' => $listHierarchy, 'responsableN1' => $responsableN1, 'listCompany' => $listCompany, 'nbCompany' => $nbCompany, 'listContact' => $listContact, 'nbContact' => $nbContact, 'commercialTeamLink' => true]);
             }
 
             else {
@@ -292,54 +343,6 @@ class CommercialController extends AbstractController
             return $this->redirect($this->generateUrl('login'));
         }
 
-    }
-
-    /**
-     * @Route("/delete/{id}", requirements={"id"="\d+"}, methods={"GET","POST"}, name="deleteCommercial")
-     */
-    public function delete($id, Request $request)
-    {
-        if ($this->isGranted('ROLE_COMMERCIAL')) {
-
-            if ($this->isGranted('ROLE_DIRECTEUR')) {
-                // Appel de Doctrine
-                $display = $this->getDoctrine()->getManager();
-
-                $commercialRepository = $display->getRepository(Commercial::class);
-
-                $delete = $commercialRepository->find($id);
-
-                $display->remove($delete);
-
-                $display->flush();
-
-                return $this->redirect($this->generateUrl('listCommercial'));
-            }
-
-            elseif ($this->isGranted('ROLE_RESPONSABLE')) {
-                // Appel de Doctrine
-                $display = $this->getDoctrine()->getManager();
-
-                $commercialRepository = $display->getRepository(Commercial::class);
-
-                $delete = $commercialRepository->find($id);
-
-                $display->remove($delete);
-
-                $display->flush();
-
-                return $this->redirect($this->generateUrl('listCommercial'));
-            }
-            
-            else {
-                return $this->redirect($this->generateUrl('index'));
-            }
-        }
-
-        else {
-
-            return $this->redirect($this->generateUrl('login'));
-        }
     }
 
     /**
@@ -370,7 +373,7 @@ class CommercialController extends AbstractController
                 // Sinon
                 else {
                     // Equivalent du SELECT xxx FROM xxx::class WHERE xxx
-                    $list = $commercialRepository->findBy(['commercialProfil' => 'ROLE_COMMERCIAL']);
+                    $list = $commercialRepository->listCommercialsOfUser($this->getUser()->getId());
                 }
 
                 // Pour récupérer le nombre d'entreprise et contact géré par un commercial

@@ -2,14 +2,14 @@
   "use strict"; // Start of use strict
 
   // Toggle the side navigation
-  $( "#sidebarToggle, #sidebarToggleTop" ).click(function() {
+  $("#sidebarToggle, #sidebarToggleTop").on('click', function(e) {
     $("body").toggleClass("sidebar-toggled");
     $(".sidebar").toggleClass("toggled");
     if ($(".sidebar").hasClass("toggled")) {
       $('.sidebar .collapse').collapse('hide');
     };
-  });/*
-  $("#sidebarToggle, #sidebarToggleTop").on('click', function(e) {
+  });
+  /*$( "#sidebarToggle, #sidebarToggleTop" ).click(function() {
     $("body").toggleClass("sidebar-toggled");
     $(".sidebar").toggleClass("toggled");
     if ($(".sidebar").hasClass("toggled")) {

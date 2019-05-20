@@ -7,7 +7,7 @@
 {# {% block contentSearch %}
 {% endblock %} #}
 
-{% block h1 %}Equipe commerciale{% endblock %}
+{% block h1 %}Opération <span class="text-danger h5">({{listOp|length}})</span>{% endblock %}
 
 {% block contentBodyContainer %}
 <div>
@@ -29,7 +29,7 @@
             <table id="table" class="table sortable-table">
                 <thead>
                 <tr>
-                    <th class="no-sortable"><input type="checkbox" id="checkall"></th>
+                    <th style="width: 50px;" class="no-sortable"><input type="checkbox" id="checkall"></th>
                     <th data-field="prenom" data-sortable="true">Nom de l'opération</th>
                     <th data-field="nom" data-sortable="true">Date de création</th>
                     <th data-field="entreprise" data-sortable="true">Entreprises ciblées</th>
@@ -37,8 +37,7 @@
                     <th data-field="email" data-sortable="true">Auteur</th>
                     <th data-field="telfix" data-sortable="true">Statut</th>
                     <th data-field="telfix" data-sortable="true">Mise à jour</th>
-                    <th class="table-field-other no-sortable" data-field="autre">&bull;&bull;&bull;</th>
-                    <th data-field="supprimer">Supprimer</th>
+                    <th style="width: 50px" class="table-field-other no-sortable" data-field="autre">&bull;&bull;&bull;</th>
                 </tr>
                 </thead>
                 <tbody id="myTableBody">
@@ -48,20 +47,28 @@
                             <input type="checkbox" class="checkthis" name="deleteData[]" value="{{ operation.Id }}">
                         </td>
                         <td>
-                            <a href="{{ path('editOperation', {'id':operation.Id}) }}">	{{operation.operationName}}
+                            <a href="{{ path('editOperation', {'id':operation.Id}) }}">	{{operation.OperationName}}
                             </a>
                         </td>
                         <td>
-                            <a href="{{ path('editOperation', {'id':operation.Id}) }}">	{{operation.operationDisplayed}}
-                            </a>
-                        </td>
-                        <td>
-                            <a href="{{ path('editOperation', {'id':operation.Id}) }}">	{{operation.operationName}}
+                            <a href="{{ path('editOperation', {'id':operation.Id}) }}">	{{operation.SendingDate|date("d/m/Y", "Europe/Paris")}}
                             </a>
                         </td>
                         <td>
                             <a href="{{ path('editOperation', {'id':operation.Id}) }}">	{{operation.operationName}}
                             </a>
+                        </td>
+                        <td>
+                            <a href="{{ path('editOperation', {'id':operation.Id}) }}">	{{operation.operationName}}
+                            </a>
+                        </td>
+
+                        <td>
+                            {% if operation.IdCommercial is not null %}
+                            <a href="{{ path('editOperation', {'id':operation.Id}) }}">
+                                {{operation.IdCommercial.commercialFirstname}} {{operation.IdCommercial.commercialName|upper}}
+                            </a>
+                            {% endif %}
                         </td>
 
                         <td>
@@ -76,23 +83,12 @@
 
                         <td>
                             <a href="{{ path('editOperation', {'id':operation.Id}) }}">	{{operation.operationName}}
-                            </a>
-                        </td>
-
-                        <td>
-                            <a href="{{ path('editOperation', {'id':operation.Id}) }}">	{{operation.operationName}}
-                            </a>
-                        </td>
-                        <td>
-                            <a class="btn btn-danger" href="{{ path('deleteOperation', {'id':operation.Id}) }}">
-                                <i class="glyphicon glyphicon-trash"></i>
-                                X
                             </a>
                         </td>
                     </tr>
                 {% else %}
                     <tr>
-                        <td>Aucune Opération</td>
+                        <td colspan="8" class="text-center">Aucune Opération</td>
                     </tr>
                 {% endfor %}
                 </tbody>
@@ -143,23 +139,19 @@
                 </select>
             </div>
             <div class="table-nb-functions">
-                <!-- <button class="btn btn-danger pull-right"  data-title="Delete" data-toggle="modal" data-target="#delete">
-                    <span class="glyphicon glyphicon-trash"></span>
-                    Supprimer
-                </button> -->
                 <span class="table-after-delete" data-title="Delete" data-toggle="modal" data-target="#delete">
-					<i class="fas fa-trash"></i>
-				</span>
-                <span class="table-after-add">
-					<i class="fas fa-user-plus"></i>
-				</span>
+                    <i class="fas fa-trash"></i>
+                </span>
+                <!-- <span class="table-after-add">
+                    <i class="fas fa-user-plus"></i>
+                </span> -->
             </div>
             <div class="table-after-pagination">
-                <ul class="pagination pagination-lg pager" id="myPager"></ul>
+               <ul class="pagination pagination-lg pager" id="myPager"></ul>
             </div>
             <div class="table-after-btn-add">
-                <button class="btn add-button">
-                    <a href="{{ path('newOperation') }}">Ajouter</a>
+               <button class="btn add-button">
+                    <a href="{{ path('newOperation') }}">AJOUTER</a>
                 </button>
             </div>
         </div>

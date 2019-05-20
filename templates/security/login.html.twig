@@ -25,6 +25,12 @@
                 <div class="col-md-8 col-lg-6">
                     <div class="login d-flex align-items-center py-5">
                         <div class="container">
+                            <div class="login-logo">
+                                <img class="login-logo-img" src="{{asset('build/logo.png')}}" title="my image" alt="My image">
+                            </div>
+                            <div class="login-title">
+                                <h6>Veuillez vous indentifier</h6>
+                            </div>
                             <div class="row">
                                 <div class="col-md-9 col-lg-8 mx-auto">
                                     <!--<h3 class="login-heading mb-4">Welcome back!</h3>-->
@@ -59,7 +65,7 @@
                                         
                                         {{ form_errors(form._password, {'attr': {'class': 'form-error-message'}}) }}
 
-                                        {{ form_widget(form.ok, {'attr': {'class': 'btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2'}}) }}
+                                        {{ form_widget(form.ok, {'attr': {'class': 'btn btn-lg btn-block btn-login text-uppercase font-weight-bold mb-2'}}) }}
                                         {{ form_label(form.ok) }}
 
                                         <div class="text-center">

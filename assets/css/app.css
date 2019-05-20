@@ -2,6 +2,34 @@ a:hover {
 	text-decoration: none;
 }
 
+.btn-red {
+    background-color: #cf1740;
+    color: #ffffff;
+}
+
+.btn-white-red {
+    background-color: #ffffff;
+    color: #cf1740;
+    border-width: medium;
+    border-color: #cf1740;
+}
+
+.btn-white-red a {
+    color: #cf1740;
+}
+
+.btn-red:hover {
+    color: #ffffff;
+}
+
+.btn-white-red:hover {
+    color: #cf1740;
+}
+
+.btn-white-red a:hover {
+    color: #cf1740;
+}
+
 .unset-outline {
     outline: none;
 }
@@ -188,6 +216,12 @@ a:hover {
 .table-field-other {
     color: #d9d9d9;
 }
+
+.table-img-profile {
+    width: 30%;
+    margin-right: 5%;
+}
+
 .form-check{
     padding-left:0;
 }
@@ -294,6 +328,7 @@ a:hover {
 }
 
 .commercial-nbContact {
+    width: 25%;
     background-color: #cf1740;
 }
 
@@ -321,6 +356,8 @@ a:hover {
     height: 40px;
     margin-left: 5%;
     margin-right: 5%;
+    margin-top: auto;
+    margin-bottom: auto;
     text-align: center;
 }
 
@@ -443,16 +480,54 @@ a:hover {
 /* ------------------ FORM ------------------- */
 /* ------------------------------------------- */
 /* ------------------------------------------- */
+.tab-company, .tab-contact {
+    width: 15%;
+}
 
-.my-form-field {
+.tabset .commercial-nbCompany, .tabset .commercial-nbContact {
+    display: inline-block;
+    width: 25%;
+    color: #ffffff;
+}
+
+.last-update {
+
+}
+
+.status {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.status h6 {
+    margin-right: 10%;
+}
+
+
+.my-form-field, .space {
     height: 45px;
+}
+
+.my-form-left-side .my-form-field {
     margin-bottom: 3%;
 }
 
-.my-form-field input, textarea {
+.my-form-right-side .my-form-field, .space {
+    margin-bottom: 4%;
+}
+
+.my-form-field > div {
+    height: 45px;
+}
+
+.my-form-field input, .my-form-field textarea {
     border: 2px solid;
     border-radius: 0.35rem;
     border-color: #f1f3f5;
+    color: #999999;
+}
+
+.my-form-field select {
     color: #999999;
 }
 
@@ -487,7 +562,11 @@ a:hover {
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
 }
 
-.my-form-field .my-form-input-fat {
+.my-form-input-fat-container {
+    height: 110px;
+}
+
+.my-form-input-fat {
     width: 90%;
     height: 100px;
 }
@@ -503,6 +582,14 @@ a:hover {
 }
 
 .btn-file {
+}
+
+.arrival-departure {
+    height: 90px!important;
+}
+
+.email-status {
+    width: 70px;
 }
 
 .btn-mdb-color {
@@ -666,6 +753,52 @@ input[type="checkbox"]:checked {
     position: absolute;
 }*/
 
+
+
+/* Switch 1 Specific Styles Start */
+
+
+input[type="checkbox"].switch_1{
+    -webkit-appearance: none;
+       -moz-appearance: none;
+            appearance: none;
+    width: 3.5em;
+    background: #e3111a;
+    border-radius: 3em;
+    position: relative;
+    cursor: pointer;
+    outline: none;
+    -webkit-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+  }
+  
+  input[type="checkbox"].switch_1:checked{
+    background: #00b900;
+  }
+  
+  input[type="checkbox"].switch_1:after{
+    position: absolute;
+    content: "";
+    width: 1.5em;
+    height: 1.5em;
+    border-radius: 50%;
+    background: #fff;
+    -webkit-box-shadow: 0 0 .25em rgba(0,0,0,.3);
+            box-shadow: 0 0 .25em rgba(0,0,0,.3);
+    -webkit-transform: scale(.7);
+            transform: scale(.7);
+    left: 0;
+    -webkit-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+  }
+  
+  input[type="checkbox"].switch_1:checked:after{
+    left: calc(100% - 1.5em);
+  }
+
+
+
+
 select {
     /* for Firefox */
     -moz-appearance: none;
@@ -686,12 +819,57 @@ select::-ms-expand {
   display: none;
 }
 
-.submit-button {
+.input-telmobile {
+    background: #fff url(/build/telmobile.png) 97% 50% no-repeat;
+}
+
+.input-linkedin {
+    background: #fff url(/build/linkedin.png) 97% 50% no-repeat;
+}
+
+.input-facebook {
+    background: #fff url(/build/facebook.png) 97% 50% no-repeat;
+}
+
+.input-twitter {
+    background: #fff url(/build/twitter.png) 97% 50% no-repeat;
+}
+
+.input-password {
+    background: #fff url(/build/password.png) 97% 50% no-repeat;
+}
+
+.input-tel {
+    background: #fff url(/build/tel.png) 97% 50% no-repeat;
+}
+
+.form-buttons {
+    margin-bottom: 5%;
+    padding-left: 70%;
+}
+
+.submit-button, .return-button {
     width: 140px;
     height: 40px;
-    background-color: #cf1740;
-    color: #ffffff;
     font-weight: 700;
+}
+
+.submit-button {
+    margin-left: 1.5%;
+}
+
+.return-button {
+    margin-right: 1.5%;
+}
+
+.my-form-error-container {
+    height: 122px;
+}
+
+.my-form-error {
+    width: 100%;
+    height: 50px!important;
+    margin-top: 16px;
 }
 
 /* ------------------ FIN FORM ------------------- */
@@ -702,7 +880,9 @@ select::-ms-expand {
     height: initial;
 }
 
-
+.initial-height > div {
+    height: 70px;
+}
 
 /* DASHBOARD CSS */
 .box-gray {
