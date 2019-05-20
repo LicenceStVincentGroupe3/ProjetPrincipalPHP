@@ -33,7 +33,6 @@ class ContactController extends AbstractController
                     $contactPhoto = $form['contactPhoto']->getData();
                     $contactLastName = $form['contactLastName']->getData();
                     $contactFirstName = $form['contactFirstName']->getData();
-                    VarDumper::dump($contact);
 
                 $file = $contactPhoto;
 
