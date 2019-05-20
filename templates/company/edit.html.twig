@@ -118,6 +118,11 @@
 				{{ form_label(form.save) }}
 				{{ form_widget(form.save, {'attr': {'class': 'form-control'}}) }}
 				{{ form_end(form) }}
+
+
+				<a href="/company/list">Enregistrer</a>
+				{% set id_suppress='/company/delete/' ~ company.id %}
+				<button><a href="{{id_suppress}}" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i> Supprimer</a></button>
 			</section>
 
 			<section id="contacts" class="tab-panel">
@@ -138,5 +143,4 @@
 		</div>
 	</div>
 
-	<a href="/company/list">Enregistrer</a>
 {% endblock %}

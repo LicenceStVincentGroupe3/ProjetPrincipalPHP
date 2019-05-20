@@ -16,5 +16,11 @@
 }
 
 .company-nbContact {
+    width: 30px;
     background-color: #cf1740;
+}
+
+.onglets:hover {
+    background-color: rgba(217, 217, 217, 0.2);
+    transition-delay: 0.3;
 }
