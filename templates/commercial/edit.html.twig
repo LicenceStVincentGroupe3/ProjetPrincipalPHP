@@ -18,7 +18,7 @@
 {% block contentBody %}
 
 	<div class="row">
-		<div class="col-lg-7 mx-auto last-update">
+		<div class="col-lg-7 mx-auto last-upd">
 			{% if editCom.CommercialSexe == 1 %}
 				{% set sexe = 'M.'%}
 			{% else %}
@@ -403,7 +403,7 @@
 								</td>
 								<td>
 									{% if company.CompanyAddress is not null %}
-										<img src="{{asset('build/mail.png')}}" class="commercial-mail" title="{{uneEntreprise.CompanyAddress}}" alt="Email de l'entreprise">
+										<img src="{{asset('build/mail.png')}}" class="commercial-mail" title="{{company.CompanyAddress}}" alt="Email de l'entreprise">
 									{% endif %}
 									{% if company.CompanyStandardPhone is not null %}
 										<img src="{{asset('build/tel.png')}}" class="commercial-tel" title="{{company.CompanyStandardPhone}}" alt="Téléphone du standard">
@@ -501,11 +501,11 @@
                                     {% endif %}
                                </td>
 								<td>
-									{% if cont.contactEmail is not null %}
-										<img src="{{asset('build/mail.png')}}" class="commercial-mail" title="{{cont.contactEmail}}" alt="Email du contact">
+									{% if contact.contactEmail is not null %}
+										<img src="{{asset('build/mail.png')}}" class="commercial-mail" title="{{contact.contactEmail}}" alt="Email du contact">
 									{% endif %}
-                                    {% if cont.contactMobilePhone is not null %}
-                                        <img src="{{asset('build/tel.png')}}" class="commercial-tel" title="{{cont.contactMobilePhone}}" alt="Tél. fixe direct du contact">
+                                    {% if contact.contactMobilePhone is not null %}
+                                        <img src="{{asset('build/tel.png')}}" class="commercial-tel" title="{{contact.contactMobilePhone}}" alt="Tél. fixe direct du contact">
                                     {% endif %}
 								</td>
 							</tr>

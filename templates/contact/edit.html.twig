@@ -13,11 +13,12 @@
 {# {% block contentSearch %}
 {% endblock %} #}
 
-{% block h1 %}Contact{% endblock %}
+{% block h1 %}Contacts{% endblock %}
 
 {% block contentBody %}
 
-	<div class="float-left">
+<div class="row">
+	<div class="col-lg-6 mx-auto last-upd">
 		{% if editContact.contactGender == 0 %}
 			{% set sexe = 'M.'%}
 		{% else %}
@@ -30,31 +31,29 @@
 		<h6><b>{{sexe}} {{ editContact.contactFirstName }} {{ editContact.contactLastName }}</b>, {{ editContact.idContactJob.contactJobName }}, {{contactYears}} ans</h6>
 	</div>
 
-	<div class="rightContact">
-		{% if editContact.contactDateUpdatePlug is not null %}
-			{% if editContact.contactStatus == "0" %}
-					<img src="{{asset('build/rouge.png')}}" class="table-img-profile4 rounded-circle" title="Rouge" alt="Statut rouge"><b>Obsolète&nbsp;</b>
-				{% elseif editContact.contactStatus == "1" %}
-					<img src="{{asset('build/vert.png')}}" class="table-img-profile4 rounded-circle" title="Vert" alt="Statut vert"><b>à jour&nbsp;</b>
-				{% else %}
-					<img src="{{asset('build/orange.png')}}" class="table-img-profile4 rounded-circle" title="Orange" alt="Statut orange"><b>à vérifier&nbsp;</b>
-					{% endif %} Dernière mise à jour le {{ editContact.contactDateUpdatePlug|date("d/m/Y", "Europe/Paris") }} à {{ editContact.contactDateUpdatePlug|date("H", "Europe/Paris") }}h{{ editContact.contactDateUpdatePlug|date("i", "Europe/Paris") }}</p>
-		{% endif %}
+	<div class="col-lg-6 mx-auto status">
+		<div class="last-upd2">
+			{% if editContact.contactDateUpdatePlug is not null %}
+				{% if editContact.contactStatus == "0" %}
+						<img src="{{asset('build/rouge.png')}}" class="table-img-profile4 rounded-circle" title="Rouge" alt="Statut rouge"><b>Obsolète&nbsp;</b>
+					{% elseif editContact.contactStatus == "1" %}
+						<img src="{{asset('build/vert.png')}}" class="table-img-profile4 rounded-circle" title="Vert" alt="Statut vert"><b>à jour&nbsp;</b>
+					{% else %}
+						<img src="{{asset('build/orange.png')}}" class="table-img-profile4 rounded-circle" title="Orange" alt="Statut orange"><b>à vérifier&nbsp;</b>
+						{% endif %} Dernière mise à jour le {{ editContact.contactDateUpdatePlug|date("d/m/Y", "Europe/Paris") }} à {{ editContact.contactDateUpdatePlug|date("H", "Europe/Paris") }}h{{ editContact.contactDateUpdatePlug|date("i", "Europe/Paris") }}</p>
+			{% endif %}
+		</div>
+		<div class="status2">
+		{{ form_start(form, {'method': 'POST'}, {'attr': {'novalidate': 'novalidate'}}) }}
+		{{ form_widget(form.contactStatus, {'attr': {'class': 'switch_2'}}) }}
+		</div>
 	</div>
+</div>
 
 	<div class="tabset">
 		<!-- Tab 1 -->
 		<input type="radio" name="tabset" id="tab1" aria-controls="identity" checked>
 		<label for="tab1">Identité</label>
-		<!-- Tab 2 -->
-		<input type="radio" name="tabset" id="tab2" aria-controls="company">
-		<label for="tab2">Entreprise</label>
-		<!-- Tab 3 -->
-		<input type="radio" name="tabset" id="tab3" aria-controls="contact">
-		<label for="tab3">Contacts</label>
-		<!-- Tab 4 -->
-		<input type="radio" name="tabset" id="tab4" aria-controls="historic">
-		<label for="tab4">Historique</label>
 
 		<div class="tab-panels">
 			<section id="identity" class="tab-panel">
@@ -78,7 +77,7 @@
 				</div>
 
 				<div class="row">
-					<div class="col-lg-7 mx-auto">
+					<div class="col-lg-7 mx-auto my-form-left-side">
 						<div class="row my-form-field">
 							<div class="col-lg-4 mx-auto">
 								{{ form_label(form.contactCode, 'Code client', {'label_attr': {'class': 'my-form-label'}}) }}
@@ -151,19 +150,9 @@
 								{{ form_label(form.contactMobilePhone, null, {'label_attr': {'class': 'my-form-label'}}) }}
 							</div>
 							<div class="col-lg-7 mx-auto">
-								{{ form_widget(form.contactMobilePhone, {'attr': {'class': 'form-control my-form-input-big'}}) }}
+								{{ form_widget(form.contactMobilePhone, {'attr': {'class': 'form-control my-form-input-big input-telmobile'}}) }}
 
 								{{ form_errors(form.contactMobilePhone, {'attr': {'class': 'form-error-message'}}) }}
-							</div>
-						</div>
-						<div class="row my-form-field">
-							<div class="col-lg-4 mx-auto">
-								{{ form_label(form.contactDirectLandline, null, {'label_attr': {'class': 'my-form-label'}}) }}
-							</div>
-							<div class="col-lg-7 mx-auto">
-								{{ form_widget(form.contactDirectLandline, {'attr': {'class': 'form-control my-form-input-big'}}) }}
-
-								{{ form_errors(form.contactDirectLandline, {'attr': {'class': 'form-error-message'}}) }}
 							</div>
 						</div>
 						<div class="row my-form-field">
@@ -171,14 +160,34 @@
 								{{ form_label(form.contactLinkedinAddress, 'Profil Linkedin', {'label_attr': {'class': 'my-form-label'}}) }}
 							</div>
 							<div class="col-lg-7 mx-auto">
-								{{ form_widget(form.contactLinkedinAddress, {'attr': {'class': 'form-control my-form-input-big'}}) }}
+								{{ form_widget(form.contactLinkedinAddress, {'attr': {'class': 'form-control my-form-input-big input-linkedin'}}) }}
 
 								{{ form_errors(form.contactLinkedinAddress, {'attr': {'class': 'form-error-message'}}) }}
 							</div>
 						</div>
+						<div class="row my-form-field">
+							<div class="col-lg-4 mx-auto">
+								{{ form_label(form.contactFacebookAddress, 'Profil Linkedin', {'label_attr': {'class': 'my-form-label'}}) }}
+							</div>
+							<div class="col-lg-7 mx-auto">
+								{{ form_widget(form.contactFacebookAddress, {'attr': {'class': 'form-control my-form-input-big input-facebook'}}) }}
+
+								{{ form_errors(form.contactFacebookAddress, {'attr': {'class': 'form-error-message'}}) }}
+							</div>
+						</div>
+						<div class="row my-form-field">
+							<div class="col-lg-4 mx-auto">
+								{{ form_label(form.contactTwitterAddress, 'Profil Linkedin', {'label_attr': {'class': 'my-form-label'}}) }}
+							</div>
+							<div class="col-lg-7 mx-auto">
+								{{ form_widget(form.contactTwitterAddress, {'attr': {'class': 'form-control my-form-input-big input-twitter'}}) }}
+
+								{{ form_errors(form.contactTwitterAddress, {'attr': {'class': 'form-error-message'}}) }}
+							</div>
+						</div>
 					</div>
-					<div class="col-lg-5 mx-auto">
-						<div class="row my-form-field initial-height">
+					<div class="col-lg-5 mx-auto my-form-right-side">
+						<div class="row my-form-field">
 							<div class="col-lg-5 mx-auto">
 								{{ form_label(form.contactEmail, null, {'label_attr': {'class': 'my-form-label'}}) }}
 							</div>
@@ -190,42 +199,12 @@
 						</div>
 						<div class="row my-form-field">
 							<div class="col-lg-5 mx-auto">
-								{{ form_label(form.contactSourceOperation, null, {'label_attr': {'class': 'my-form-label'}}) }}
+								{{ form_label(form.contactOptInCommercialOffers, null, {'label_attr': {'class': 'my-form-label'}}) }}
 							</div>
 							<div class="col-lg-7 mx-auto">
-								{{ form_widget(form.contactSourceOperation, {'attr': {'class': 'form-control my-form-input-big'}}) }}
+								{{ form_widget(form.contactOptInCommercialOffers, {'attr': {'class': 'form-control my-form-input-big'}}) }}
 
-								{{ form_errors(form.contactSourceOperation, {'attr': {'class': 'form-error-message'}}) }}
-							</div>
-						</div>
-						<div class="row my-form-field">
-							<div class="col-lg-5 mx-auto">
-								{{ form_label(form.idCompany, null, {'label_attr': {'class': 'my-form-label'}}) }}
-							</div>
-							<div class="col-lg-7 mx-auto">
-								{{ form_widget(form.idCompany, {'attr': {'class': 'form-control my-form-input-big'}}) }}
-
-								{{ form_errors(form.idCompany, {'attr': {'class': 'form-error-message'}}) }}
-							</div>
-						</div>
-						<div class="row my-form-field">
-							<div class="col-lg-5 mx-auto">
-								{{ form_label(form.idUser, 'Responsable N+1', {'label_attr': {'class': 'my-form-label'}}) }}
-							</div>
-							<div class="col-lg-7 mx-auto">
-								{{ form_widget(form.idUser, {'attr': {'class': 'form-control my-form-input-big'}}) }}
-
-								{{ form_errors(form.idUser, {'attr': {'class': 'form-error-message'}}) }}
-							</div>
-						</div>
-						<div class="row my-form-field">
-							<div class="col-lg-5 mx-auto">
-								{{ form_label(form.contactDecisionLevel, 'Pouvoir décisionnel', {'label_attr': {'class': 'my-form-label'}}) }}
-							</div>
-							<div class="col-lg-7 mx-auto">
-								{{ form_widget(form.contactDecisionLevel, {'attr': {'class': 'form-control my-form-input-big'}}) }}
-
-								{{ form_errors(form.contactDecisionLevel, {'attr': {'class': 'form-error-message'}}) }}
+								{{ form_errors(form.contactOptInCommercialOffers, {'attr': {'class': 'form-error-message'}}) }}
 							</div>
 						</div>
 						<div class="row my-form-field">
@@ -240,12 +219,73 @@
 						</div>
 						<div class="row my-form-field">
 							<div class="col-lg-5 mx-auto">
-								{{ form_label(form.contactOptInCommercialOffers, null, {'label_attr': {'class': 'my-form-label'}}) }}
+								{{ form_label(form.idCompany, null, {'label_attr': {'class': 'my-form-label'}}) }}
 							</div>
 							<div class="col-lg-7 mx-auto">
-								{{ form_widget(form.contactOptInCommercialOffers, {'attr': {'class': 'form-control my-form-input-big'}}) }}
+								{{ form_widget(form.idCompany, {'attr': {'class': 'form-control my-form-input-big'}}) }}
 
-								{{ form_errors(form.contactOptInCommercialOffers, {'attr': {'class': 'form-error-message'}}) }}
+								{{ form_errors(form.idCompany, {'attr': {'class': 'form-error-message'}}) }}
+							</div>
+						</div>
+						<div class="row my-form-field">
+							<div class="col-lg-5 mx-auto">
+								{{ form_label(form.contactPoste, null, {'label_attr': {'class': 'my-form-label'}}) }}
+							</div>
+							<div class="col-lg-7 mx-auto">
+								{{ form_widget(form.contactPoste, {'attr': {'class': 'form-control my-form-input-big'}}) }}
+
+								{{ form_errors(form.contactPoste, {'attr': {'class': 'form-error-message'}}) }}
+							</div>
+						</div>
+						<div class="row my-form-field initial-height">
+							<div class="col-lg-5 mx-auto">
+								{{ form_label(form.arrivalDate, null, {'label_attr': {'class': 'my-form-label'}}) }}
+							</div>
+							<div class="col-lg-7 mx-auto arrival-departure">
+								{{ form_widget(form.arrivalDate, {'attr': {'class': ' my-form-input-tiny2'}}) }}
+
+								{# {{ form_label(form.departureDate) }} #}
+								{{ form_widget(form.departureDate, {'attr': {'class': 'my-form-input-tiny2'}}) }}
+							</div>
+						</div>
+						<div class="row my-form-field">
+							<div class="col-lg-5 mx-auto">
+								{{ form_label(form.contactDecisionLevel, 'Pouvoir décisionnel', {'label_attr': {'class': 'my-form-label'}}) }}
+							</div>
+							<div class="col-lg-7 mx-auto">
+								{{ form_widget(form.contactDecisionLevel, {'attr': {'class': 'form-control my-form-input-big'}}) }}
+
+								{{ form_errors(form.contactDecisionLevel, {'attr': {'class': 'form-error-message'}}) }}
+							</div>
+						</div>
+						<div class="row my-form-field">
+							<div class="col-lg-5 mx-auto">
+								{{ form_label(form.idUser, 'Responsable N+1', {'label_attr': {'class': 'my-form-label'}}) }}
+							</div>
+							<div class="col-lg-7 mx-auto">
+								{{ form_widget(form.idUser, {'attr': {'class': 'form-control my-form-input-big'}}) }}
+
+								{{ form_errors(form.idUser, {'attr': {'class': 'form-error-message'}}) }}
+							</div>
+						</div>
+						<div class="row my-form-field">
+							<div class="col-lg-5 mx-auto">
+								{{ form_label(form.contactDirectLandline, null, {'label_attr': {'class': 'my-form-label'}}) }}
+							</div>
+							<div class="col-lg-7 mx-auto">
+								{{ form_widget(form.contactDirectLandline, {'attr': {'class': 'form-control my-form-input-big input-tel'}}) }}
+
+								{{ form_errors(form.contactDirectLandline, {'attr': {'class': 'form-error-message'}}) }}
+							</div>
+						</div>
+						<div class="row my-form-field">
+							<div class="col-lg-5 mx-auto">
+								{{ form_label(form.contactStandartPhone, null, {'label_attr': {'class': 'my-form-label'}}) }}
+							</div>
+							<div class="col-lg-7 mx-auto">
+								{{ form_widget(form.contactStandartPhone, {'attr': {'class': 'form-control my-form-input-big input-tel'}}) }}
+
+								{{ form_errors(form.contactStandartPhone, {'attr': {'class': 'form-error-message'}}) }}
 							</div>
 						</div>
                         <div class="row my-form-field">

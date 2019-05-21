@@ -143,7 +143,7 @@ class CommercialController extends AbstractController
                     }
  
                     $new->setPassword($password);
-                    $new->addRole($role);
+                    $new->addRole([0 => $role]);
 
                     $display->persist($new);
                     $display->flush();

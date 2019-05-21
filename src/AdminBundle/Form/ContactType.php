@@ -27,9 +27,6 @@ class ContactType extends AbstractType
 	public function buildForm(FormBuilderInterface $builder, array $options)
 	{
 		$builder
-           /* ->add('contactStatus', CheckboxType::class, array(
-                'label'    => 'Statut Actif',
-                'required' => false))    */
 			->add('contactCode', TextType::class, array('label' => 'Code'))
     		->add('contactLastName', TextType::class, array('label' => 'Nom'))
     		->add('contactFirstName', TextType::class,  array('label' => 'Prénom'))
@@ -40,19 +37,28 @@ class ContactType extends AbstractType
     		->add('contactEmail', TextType::class, array('label' => 'Email', 'required' => false))
     		->add('contactMobilePhone', TextType::class, array('label' => 'Tel. Mobile', 'required' => false))
     		->add('contactDirectLandline', TextType::class, array('label' => 'Tel. Fixe direct', 'required' => false))
-            ->add('contactLinkedinAddress', TextType::class, array('label' => 'Adresse Linkedin', 'required' => false))
+			->add('contactStandartPhone', TextType::class, array('label' => 'Tel. du standart', 'required' => false))
+            ->add('contactLinkedinAddress', TextType::class, array('label' => 'Profil Linkedin', 'required' => false))
+			->add('contactFacebookAddress', TextType::class, array('label' => 'Profil Facebook', 'required' => false))
+			->add('contactTwitterAddress', TextType::class, array('label' => 'Profil Twitter', 'required' => false))
+			->add('contactPoste', TextType::class, array('label' => 'Nom du poste', 'required' => false))
 			->add('contactPhoto', FileType::class, ['label' => 'Photo', 'required' => false,
 				'data_class' => null])
-            ->add('contactSourceOperation', TextType::class, ['label' => 'Opération source', 'required' => false])
-            ->add('contactComment', TextareaType::class, array('label' => 'Commentaire', 'required' => false))
+			->add('arrivalDate', DateType::class, ['label' => 'Début/fin du poste', 'required' => false,
+				'widget' => 'single_text'
+			])
+			->add('departureDate', DateType::class, ['label' => 'Date de départ', 'required' => false,
+				'widget' => 'single_text'
+			])
+            ->add('contactComment', TextareaType::class, array('label' => 'Remarques', 'required' => false))
 
     		->add('idUser', EntityType::class, array('class' => Commercial::class,'choice_label' => 'CommercialName', 'label'=>'Commercial'))
 
-    		->add('idCompany', EntityType::class, array('class' => Company::class, 'choice_label' => 'CompanyLastName', 'label'=>'Entreprise'))
+    		->add('idCompany', EntityType::class, array('class' => Company::class, 'choice_label' => 'CompanyLastName', 'label'=>'Entreprise', 'placeholder'=>'', 'required' => false))
 
-    		->add('contactDecisionLevel', ChoiceType::class, array('choices' => array('Très faible'=>1, 'Faible'=>2, 'Moyen'=>3, 'Elevé'=>4, 'Très elevé'=>5)))
+    		->add('contactDecisionLevel', ChoiceType::class, array('choices' => array('Employé'=>1, 'Cadre'=>2, 'Cadre supérieur'=>3, 'Manager'=>4, 'Directeur'=>5)))
 
-    		->add('idContactJob', EntityType::class, array('class' => ContactJob::class, 'choice_label' => 'contactJobName', 'label'=>'Poste' ))
+    		->add('idContactJob', EntityType::class, array('class' => ContactJob::class, 'choice_label' => 'contactJobName', 'label'=>'Métier' ))
 
     		->add('contactOptInCommercialOffers', CheckboxType::class, array('label'    => 'Informations','required' => false))
 
