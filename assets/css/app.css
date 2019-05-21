@@ -223,7 +223,7 @@ a:hover {
 }
 
 .table-img-profile2 {
-    width: 18%;
+    width: 25%;
     margin-right: 5%;
 }
 
@@ -235,9 +235,6 @@ a:hover {
     margin-right: 1%;
 }
 
-.rightContact{
-    margin-left: 60%;
-}
 .form-check{
     padding-left:0;
 }
@@ -507,7 +504,11 @@ a:hover {
 }
 
 .last-update {
+}
 
+.last-upd2 {
+    width: 70%;
+    font-size: 12px;
 }
 
 .status {
@@ -563,6 +564,23 @@ a:hover {
 
 .my-form-input-tiny {
     width: 55%;
+    height: 45px;
+    padding-top: 0.375rem;
+    padding-bottom: 0.375rem;
+    padding-left: 0.75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    background-color: #fff;
+    background-clip: padding-box;
+    -webkit-transition: border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+    transition: border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+}
+
+.my-form-input-tiny2 {
+    width: 72%;
     height: 45px;
     padding-top: 0.375rem;
     padding-bottom: 0.375rem;
@@ -812,7 +830,48 @@ input[type="checkbox"].switch_1{
     left: calc(100% - 1.5em);
   }
 
+/* Switch 2 Specific Styles Start */
 
+
+input[type="checkbox"].switch_2{
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 2.5em;
+    height: 1em;
+    background: #e3111a;
+    border-radius: 3em;
+    position: relative;
+    cursor: pointer;
+    outline: none;
+    -webkit-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+}
+
+input[type="checkbox"].switch_2:checked{
+    background: #00b900;
+}
+
+input[type="checkbox"].switch_2:after{
+    position: absolute;
+    content: "";
+    width: 0.8em;
+    height: 0.7em;
+    border-radius: 50%;
+    background: #fff;
+    -webkit-box-shadow: 0 0 .25em rgba(0,0,0,.3);
+    box-shadow: 0 0 .25em rgba(0,0,0,.3);
+    -webkit-transform: scale(.7);
+    transform: scale(.7);
+    left: 0;
+    -webkit-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+    top: 5%;
+}
+
+input[type="checkbox"].switch_2:checked:after{
+    left: calc(100% - 1em);
+}
 
 
 select {
@@ -972,3 +1031,4 @@ select::-ms-expand {
 .fa-opacity {
     opacity: 0.5;
 }
+

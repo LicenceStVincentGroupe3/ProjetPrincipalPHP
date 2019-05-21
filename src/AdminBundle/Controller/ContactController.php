@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\VarDumper\VarDumper;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 /**
@@ -72,6 +73,9 @@ class ContactController extends AbstractController
                 $editContact = $repository->find($id);
                 // Equivalent du SELECT * where id=(paramètre) //
                 $form = $this->createForm(ContactType::class, $editContact);
+                $form->add('contactStatus', CheckboxType::class, array(
+                    'label'    => 'Statut Actif',
+                    'required' => false));
 
                 $form->handleRequest($request);
                 if ($form->isSubmitted() && $form->isValid() && $request->isMethod('POST')) {

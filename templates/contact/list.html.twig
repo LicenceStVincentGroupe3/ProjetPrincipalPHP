@@ -13,7 +13,7 @@
 {% endfor %}
 
 {% block h1 %}
-	Contact <span class="text-danger h5">({{ nombre }})</span>
+	Contacts <span class="text-danger h5">({{ nombre }})</span>
 {% endblock %}
 
 {% block contentBodyContainer %}
@@ -53,11 +53,11 @@
 								<td>
 									<input type="checkbox" class="checkthis" name="deleteData[]" value="{{ cont.Id }}">
 								</td>
-								<td>
+								<td style="width: 140px">
 									{% if cont.ContactPhoto is not null %}
 										<img src="{{asset('build/images/' ~ cont.ContactPhoto)}}" class="table-img-profile2 rounded-circle" title="Photo" alt="Photo de profil">
 									{% else %}
-										<img src="{{asset('build/Photo.png')}}" class="table-img-profile rounded-circle" title="Photo" alt="Photo de profil">
+										<img src="{{asset('build/Photo.png')}}" class="table-img-profile2 rounded-circle" title="Photo" alt="Photo de profil">
 									{% endif %}
 									<a href="{{ path('editContact', {'id':cont.Id}) }}">	{{cont.ContactFirstName}}
 									</a>
@@ -67,8 +67,13 @@
 									</a>
 								</td>
 								<td>
+									{% if cont.idCompany is not null %}
 									<a href="{{ path('editContact', {'id':cont.Id}) }}">	{{cont.idCompany.CompanyLastName}}
 									</a>
+									{% else %}
+										<a href="{{ path('editContact', {'id':cont.Id}) }}">
+										</a>
+									{% endif %}
 								</td>
 								<td>
 									<a href="{{ path('editContact', {'id':cont.Id}) }}">	{{cont.idContactJob.contactJobName}}
@@ -76,13 +81,23 @@
 								</td>
 
 								<td>
+									{% if cont.idCompany is not null %}
 									<a href="{{ path('editContact', {'id':cont.Id}) }}">	{{cont.idCompany.CompanyPostalCode}}
 									</a>
+									{% else %}
+									<a href="{{ path('editContact', {'id':cont.Id}) }}">
+									</a>
+									{% endif %}
 								</td>
 
                                 <td>
+									{% if cont.idCompany is not null %}
                                     <a href="{{ path('editContact', {'id':cont.Id}) }}">	{{cont.idCompany.CompanyCity}}
                                     </a>
+									{% else %}
+									<a href="{{ path('editContact', {'id':cont.Id}) }}">
+									</a>
+									{% endif %}
                                 </td>
 
                                 <td>
@@ -149,11 +164,11 @@
 				<div class="row">
 					<div class="table-after-entry">
 						<select id="table-nb-entry" class="table-nb-entry unset-outline">
+							<option value="5">5</option>
+							<option value="10">10</option>
 							<option value="15">15</option>
 							<option value="20">20</option>
-							<option value="50">50</option>
-							<option value="100">100</option>
-							<option value="200">200</option>
+							<option value="25">25</option>
 						</select>
 					</div>
 					<div class="table-nb-functions">
@@ -173,7 +188,7 @@
 					</div>
 					<div class="table-after-btn-add">
 						<button class="btn add-button">
-							<a href="{{ path('newContact') }}">Ajouter</a>
+							<a href="{{ path('newContact') }}">AJOUTER</a>
 						</button>
 					</div>
 				</div>

@@ -66,12 +66,17 @@ class Contact
     /**
      * @ORM\Column(type="string", nullable=true)
      */
-    private $contactCP;
+    private $contactPoste;
 
     /**
      * @ORM\Column(type="string", nullable=true)
      */
-    private $contactVille;
+    private $contactFacebookAddress;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $contactTwitterAddress;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
@@ -79,14 +84,19 @@ class Contact
     private $contactBirthDate;
 
     /**
-     * @ORM\Column(type="string", length=14, nullable=true)
+     * @ORM\Column(type="string", length=10, nullable=true)
      */
     private $contactMobilePhone;
 
     /**
-     * @ORM\Column(type="string", length=255,  nullable=true)
+     * @ORM\Column(type="string", length=10,  nullable=true)
      */
     private $contactDirectLandline;
+
+    /**
+     * @ORM\Column(type="string", length=10,  nullable=true)
+     */
+    private $contactStandartPhone;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -102,6 +112,18 @@ class Contact
      * @ORM\Column(type="boolean", nullable=true)
      */
     private $contactVerifiedEmail;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     * @Assert\DateTime
+     */
+    private $arrivalDate;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     * @Assert\DateTime
+     */
+    private $departureDate;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -141,7 +163,7 @@ class Contact
 
     /**
      * @ORM\ManyToOne(targetEntity="App\AdminBundle\Entity\Company", inversedBy="contacts")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $idCompany;
 
@@ -154,6 +176,7 @@ class Contact
     public function __construct()
     {
         $this->contactDatedCreationPlug = new \Datetime();
+        $this->arrivalDate = new \DateTime();
         //$this->$contactDateUpdatePlug = new \Datetime();
     }
 
@@ -258,26 +281,38 @@ class Contact
         return $this;
     }
 
-    public function getContactCP(): ?string
+    public function getContactPoste(): ?string
     {
-        return $this->contactCP;
+        return $this->contactPoste;
     }
 
-    public function setContactCP(?string $contactCP): self
+    public function setContactPoste(?string $contactPoste): self
     {
-        $this->contactCP = $contactCP;
+        $this->contactPoste = $contactPoste;
 
         return $this;
     }
 
-    public function getContactVille(): ?string
+    public function getContactFacebookAddress(): ?string
     {
-        return $this->contactVille;
+        return $this->contactFacebookAddress;
     }
 
-    public function setContactVille(?string $contactVille): self
+    public function setContactFacebookAddress(?string $contactFacebookAddress): self
     {
-        $this->contactVille = $contactVille;
+        $this->contactFacebookAddress = $contactFacebookAddress;
+
+        return $this;
+    }
+
+    public function getContactTwitterAddress(): ?string
+    {
+        return $this->contactTwitterAddress;
+    }
+
+    public function setContactTwitterAddress(?string $contactTwitterAddress): self
+    {
+        $this->contactTwitterAddress = $contactTwitterAddress;
 
         return $this;
     }
@@ -306,14 +341,26 @@ class Contact
         return $this;
     }
 
-    public function getContactDirectLandline(): ?int
+    public function getContactDirectLandline(): ?string
     {
         return $this->contactDirectLandline;
     }
 
-    public function setContactDirectLandline(?int $contactDirectLandline): self
+    public function setContactDirectLandline(?string $contactDirectLandline): self
     {
         $this->contactDirectLandline = $contactDirectLandline;
+
+        return $this;
+    }
+
+    public function getContactStandartPhone(): ?string
+    {
+        return $this->contactStandartPhone;
+    }
+
+    public function setContactStandartPhone(?string $contactStandartPhone): self
+    {
+        $this->contactStandartPhone = $contactStandartPhone;
 
         return $this;
     }
@@ -398,6 +445,30 @@ class Contact
     public function setContactComment(?string $contactComment): self
     {
         $this->contactComment = $contactComment;
+
+        return $this;
+    }
+
+    public function getArrivalDate(): ?\DateTimeInterface
+    {
+        return $this->arrivalDate;
+    }
+
+    public function setArrivalDate(?\DateTimeInterface $arrivalDate): self
+    {
+        $this->arrivalDate = $arrivalDate;
+
+        return $this;
+    }
+
+    public function getDepartureDate(): ?\DateTimeInterface
+    {
+        return $this->departureDate;
+    }
+
+    public function setDepartureDate(?\DateTimeInterface $departureDate): self
+    {
+        $this->departureDate = $departureDate;
 
         return $this;
     }
