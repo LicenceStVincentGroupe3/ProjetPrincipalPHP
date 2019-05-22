@@ -17,6 +17,10 @@
 
 {% block contentBody %}
 
+    <section>
+        <h5>Saisie d'une nouvelle entreprise</h5>
+
+    </section>
     <div class="tabset">
         <!-- Tab 1 -->
         <input type="radio" name="tabset" id="tab1" aria-controls="identite" checked>
@@ -27,7 +31,7 @@
                 {{ form_start(form, {'method': 'POST'}, {'attr': {'novalidate': 'novalidate'}}) }}
                 <div class="file-field">
                     <div class="mb-4">
-                        <img src="{{ asset('build/fond_gris.jpg') }}" class="rounded-circle avatar-pic" title="Photo" alt="Photo de profil">
+                        <img src="{{ asset('build/Photo.png') }}" class="rounded-circle avatar-pic" title="Photo" alt="Photo de profil">
                     </div>
                     <div>
                         <div class="btn btn-mdb-color btn-file float-left waves-effect waves-light">
@@ -37,13 +41,15 @@
                         {{ form_errors(form.CompanyLogo, {'attr': {'class': 'form-error-message'}}) }}
                     </div>
                 </div>
+
                 <div class="row">
                     <div class="col-lg-7 mx-auto">
                         <div class="row my-form-field">
+
                             <div class="col-lg-4 mx-auto">
                                 {{ form_label(form.CompanyCode, null, {'label_attr': {'class': 'my-form-label'}}) }}
                             </div>
-                            <div class="col-lg-7 mx-auto">
+                            <div class="col-lg-7 mx-auto mandatory">
                                 {{ form_widget(form.CompanyCode, {'attr': {'class': 'form-control', 'placeholder': "Ex: ABCD1234"}}) }}
                                 {{ form_errors(form.CompanyCode, {'attr': {'class': 'form-error-message'}}) }}
                             </div>
@@ -52,7 +58,7 @@
                             <div class="col-lg-4 mx-auto">
                                 {{ form_label(form.CompanyLastName) }}
                             </div>
-                            <div class="col-lg-7 mx-auto">
+                            <div class="col-lg-7 mx-auto mandatory">
                                 {{ form_widget(form.CompanyLastName, {'attr': {'class': 'form-control'}}) }}
                                 {{ form_errors(form.CompanyLastName, {'attr': {'class': 'form-error-message'}}) }}
                             </div>
@@ -61,18 +67,36 @@
                             <div class="col-lg-4 mx-auto">
                                 {{ form_label(form.CompanyStatus, null, {'label_attr': {'class': 'my-form-label'}}) }}
                             </div>
-                            <div class="col-lg-7 mx-auto">
+                            <div class="col-lg-7 mx-auto mandatory">
                                 {{ form_widget(form.CompanyStatus, {'attr': {'class': 'form-control my-form-input-big'}}) }}
                                 {{ form_errors(form.CompanyStatus, {'attr': {'class': 'form-error-message'}}) }}
                             </div>
                         </div>
                         <div class="row my-form-field">
                             <div class="col-lg-4 mx-auto">
-                                {{ form_label(form.CompanyCodeNAF, null, {'label_attr': {'class': 'my-form-label'}}) }}
+                                {{ form_label(form.idCompanyCodeNAF, null, {'label_attr': {'class': 'my-form-label'}}) }}
                             </div>
                             <div class="col-lg-7 mx-auto">
-                                {{ form_widget(form.CompanyCodeNAF, {'attr': {'class': 'form-control'}}) }}
-                                {{ form_errors(form.CompanyCodeNAF, {'attr': {'class': 'form-error-message'}}) }}
+                                {{ form_widget(form.idCompanyCodeNAF, {'attr': {'class': 'form-control'}}) }}
+                                {{ form_errors(form.idCompanyCodeNAF, {'attr': {'class': 'form-error-message'}}) }}
+                            </div>
+                        </div>
+                        <div class="row my-form-field">
+                            <div class="col-lg-4 mx-auto">
+                                {{ form_label(form.idCompanyStatus, null, {'label_attr': {'class': 'my-form-label'}}) }}
+                            </div>
+                            <div class="col-lg-7 mx-auto">
+                                {{ form_widget(form.idCompanyStatus, {'attr': {'class': 'form-control'}}) }}
+                                {{ form_errors(form.idCompanyStatus, {'attr': {'class': 'form-error-message'}}) }}
+                            </div>
+                        </div>
+                        <div class="row my-form-field">
+                            <div class="col-lg-4 mx-auto">
+                                {{ form_label(form.idCompanyLegalStatus, null, {'label_attr': {'class': 'my-form-label'}}) }}
+                            </div>
+                            <div class="col-lg-7 mx-auto">
+                                {{ form_widget(form.idCompanyLegalStatus, {'attr': {'class': 'form-control'}}) }}
+                                {{ form_errors(form.idCompanyLegalStatus, {'attr': {'class': 'form-error-message'}}) }}
                             </div>
                         </div>
                         <div class="row my-form-field">
@@ -86,7 +110,7 @@
                         </div>
                         <div class="row my-form-field">
                             <div class="col-lg-4 mx-auto">
-                                {{ form_label(form.idCompanyNbEmployee, null, {'label_attr': {'class': 'my-form-label'}}) }}
+                                {{ form_label(form.idCompanyNbEmployee, {'label_attr': {'class': 'my-form-label'}}) }}
                             </div>
                             <div class="col-lg-7 mx-auto">
                                 {{ form_widget(form.idCompanyNbEmployee, {'attr': {'class': 'form-control my-form-input-big'}}) }}
@@ -95,7 +119,7 @@
                         </div>
                         <div class="row my-form-field">
                             <div class="col-lg-4 mx-auto">
-                                {{ form_label(form.idCompanyTurnover, null, {'label_attr': {'class': 'my-form-label'}}) }}
+                                {{ form_label(form.idCompanyTurnover, {'label_attr': {'class': 'my-form-label'}}) }}
                             </div>
                             <div class="col-lg-7 mx-auto">
                                 {{ form_widget(form.idCompanyTurnover, {'attr': {'class': 'form-control my-form-input-big'}}) }}
@@ -106,11 +130,11 @@
                     <div class="col-lg-5 mx-auto">
                         <div class="row my-form-field initial-height">
                             <div class="col-lg-4 mx-auto">
-                                {{ form_label(form.CompanyComments, null, {'label_attr': {'class': 'my-form-label'}}) }}
+                                {{ form_label(form.CompanyEmail, null, {'label_attr': {'class': 'my-form-label'}}) }}
                             </div>
                             <div class="col-lg-7 mx-auto">
-                                {{ form_widget(form.CompanyComments, {'attr': {'class': 'form-control my-form-input-big'}}) }}
-                                {{ form_errors(form.CompanyComments, {'attr': {'class': 'form-error-message'}}) }}
+                                {{ form_widget(form.CompanyEmail, {'attr': {'class': 'form-control my-form-input-big'}}) }}
+                                {{ form_errors(form.CompanyEmail, {'attr': {'class': 'form-error-message'}}) }}
                             </div>
                         </div>
                         <div class="row my-form-field">
@@ -145,11 +169,11 @@
                         <div class="row my-form-field">
                             <div class="row my-form-field">
                                 <div class="col-lg-4 mx-auto">
-                                    {{ form_label(form.CompanyCity, null, {'label_attr': {'class': 'my-form-label'}}) }}
+                                    {{ form_label(form.idCompanyCountry, {'label_attr': {'class': 'my-form-label'}}) }}
                                 </div>
                                 <div class="col-lg-7 mx-auto">
-                                    {{ form_widget(form.CompanyCity, {'attr': {'class': 'form-control my-form-input-big'}}) }}
-                                    {{ form_errors(form.CompanyCity, {'attr': {'class': 'form-error-message'}}) }}
+                                    {{ form_widget(form.idCompanyCountry, {'attr': {'class': 'form-control my-form-input-big'}}) }}
+                                    {{ form_errors(form.idCompanyCountry, {'attr': {'class': 'form-error-message'}}) }}
                                 </div>
                             </div>
                         </div>
@@ -177,13 +201,6 @@
                         </div>
                         <div class="row my-form-field">
                             <div class="row my-form-field">
-                                <div class="col-lg-4 mx-auto">
-                                    {{ form_label(form.CompanyCodeCommercial, null, {'label_attr': {'class': 'my-form-label'}}) }}
-                                </div>
-                                <div class="col-lg-7 mx-auto">
-                                    {{ form_widget(form.CompanyCodeCommercial, {'attr': {'class': 'form-control my-form-input-big'}}) }}
-                                    {{ form_errors(form.CompanyCodeCommercial, {'attr': {'class': 'form-error-message'}}) }}
-                                </div>
                                 <div class="col-lg-4 mx-auto">
                                     {{ form_label(form.CompanyWebSite, null, {'label_attr': {'class': 'my-form-label'}}) }}
                                 </div>

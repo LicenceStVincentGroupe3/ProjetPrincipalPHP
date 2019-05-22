@@ -8,9 +8,9 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity(repositoryClass="App\AdminBundle\Repository\CompanyBusinessCategoryRepository")
+ * @ORM\Entity(repositoryClass="App\AdminBundle\Repository\CompanyStatusRepository")
  */
-class CompanyBusinessCategory
+class CompanyStatus
 {
     /**
      * @ORM\Id()
@@ -20,20 +20,10 @@ class CompanyBusinessCategory
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=false)
      * @Assert\NotBlank
      */
     private $label;
-
-    /**
-     * @ORM\OneToMany(targetEntity="App\AdminBundle\Entity\Company", mappedBy="idCompanyBusinessCategory")
-     */
-    private $companies;
-
-    public function __construct()
-    {
-        $this->companies = new ArrayCollection();
-    }
 
     public function getId(): ?int
     {
@@ -53,6 +43,16 @@ class CompanyBusinessCategory
     }
 
     /**
+     * @ORM\OneToMany(targetEntity="App\AdminBundle\Entity\Company", mappedBy="idCompanyStatus")
+     */
+    private $companies;
+
+    public function __construct()
+    {
+        $this->companies = new ArrayCollection();
+    }
+
+    /**
      * @return Collection|Company[]
      */
     public function getCompanies(): Collection
@@ -64,9 +64,8 @@ class CompanyBusinessCategory
     {
         if (!$this->companies->contains($company)) {
             $this->companies[] = $company;
-            $company->setIdCompanyBusinessCategory($this);
+            $company->setIdCompanyStatus($this);
         }
-
         return $this;
     }
 
@@ -75,11 +74,10 @@ class CompanyBusinessCategory
         if ($this->companies->contains($company)) {
             $this->companies->removeElement($company);
             // set the owning side to null (unless already changed)
-            if ($company->getIdCompanyBusinessCategory() === $this) {
-                $company->setIdCompanyBusinessCategory(null);
+            if ($company->getIdCompanyStatus() === $this) {
+                $company->setIdCompanyStatus(null);
             }
         }
-
         return $this;
     }
 }
