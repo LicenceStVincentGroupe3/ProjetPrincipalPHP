@@ -2,7 +2,7 @@
 
 namespace App\AdminBundle\Form;
 
-use App\AdminBundle\Entity\CompanyBusinessCategory;
+use App\AdminBundle\Entity\CompanyLegalStatus;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
@@ -11,12 +11,12 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bridge\Doctrine\Form\Type\Entity;
 
-class CompanyBusinessCategoryType extends AbstractType
+class CompanyStatusType extends AbstractType
 {
 	public function buildForm(FormBuilderInterface $builder, array $options)
 	{
 		$builder
-			->add('label', TextType::class, array('label' => 'Libelle de la catégorie'))
+			->add('label', TextType::class, array('label' => 'Libelle du status'))
 	        ->add('save', SubmitType::class, array('label' => 'Valider'))
 	        ->getForm();
 	}
