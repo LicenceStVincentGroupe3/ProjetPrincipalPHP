@@ -50,15 +50,13 @@ class CompanyController extends AbstractController
                 $new->setCompanyLogo($fileName);
             }
 
-
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($new);
             $entityManager->flush();
 
-
             return $this->redirectToRoute('listCompany');
         }
-        return $this->render('company/new.html.twig', array('form' => $form->createView(),));
+        return $this->render('company/new.html.twig', array('form' => $form->createView()));
     }
 
     /**
