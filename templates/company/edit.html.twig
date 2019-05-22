@@ -46,9 +46,9 @@
 				{{ form_widget(form.CompanyCode, {'attr': {'class': 'form-control', 'placeholder': "Ex: ABCD1234"}}) }}
 				{{ form_errors(form.CompanyCode, {'attr': {'class': 'form-error-message'}}) }}
 
-				{{ form_label(form.CompanyCodeCommercial) }}
-				{{ form_widget(form.CompanyCodeCommercial, {'attr': {'class': 'form-control', 'placeholder': "Ex: "}}) }}
-				{{ form_errors(form.CompanyCodeCommercial, {'attr': {'class': 'form-error-message'}}) }}
+				{{ form_label(form.idUser) }}
+				{{ form_widget(form.idUser, {'attr': {'class': 'form-control', 'placeholder': "Ex: "}}) }}
+				{{ form_errors(form.idUser, {'attr': {'class': 'form-error-message'}}) }}
 
 				{{ form_label(form.CompanyStatus) }}
 				{{ form_widget(form.CompanyStatus, {'attr': {'class': 'form-control', 'placeholder': "Ex: "}}) }}
@@ -66,10 +66,6 @@
 				{{ form_widget(form.CompanyAddress, {'attr': {'class': 'form-control', 'placeholder': "Ex: "}}) }}
 				{{ form_errors(form.CompanyAddress, {'attr': {'class': 'form-error-message'}}) }}
 
-				{{ form_label(form.CompanyAddressSupplement) }}
-				{{ form_widget(form.CompanyAddressSupplement, {'attr': {'class': 'form-control', 'placeholder': "Ex: "}}) }}
-				{{ form_errors(form.CompanyAddressSupplement, {'attr': {'class': 'form-error-message'}}) }}
-
 				{{ form_label(form.CompanyPostalCode) }}
 				{{ form_widget(form.CompanyPostalCode, {'attr': {'class': 'form-control', 'placeholder': "Ex: "}}) }}
 				{{ form_errors(form.CompanyPostalCode, {'attr': {'class': 'form-error-message'}}) }}
@@ -86,34 +82,17 @@
 				{{ form_widget(form.CompanyWebSite, {'attr': {'class': 'form-control', 'placeholder': "Ex: "}}) }}
 				{{ form_errors(form.CompanyWebSite, {'attr': {'class': 'form-error-message'}}) }}
 
-				{{ form_label(form.CompanyCreationDate) }}
-				{{ form_widget(form.CompanyCreationDate, {'attr': {'class': 'form-control', 'placeholder': "Ex: "}}) }}
-				{{ form_errors(form.CompanyCreationDate, {'attr': {'class': 'form-error-message'}}) }}
-
 				{{ form_label(form.CompanySiret) }}
 				{{ form_widget(form.CompanySiret, {'attr': {'class': 'form-control', 'placeholder': "Ex: "}}) }}
 				{{ form_errors(form.CompanySiret, {'attr': {'class': 'form-error-message'}}) }}
 
-				{{ form_label(form.CompanyCodeNAF) }}
-				{{ form_widget(form.CompanyCodeNAF, {'attr': {'class': 'form-control', 'placeholder': "Ex: "}}) }}
-				{{ form_errors(form.CompanyCodeNAF, {'attr': {'class': 'form-error-message'}}) }}
-
-				{{ form_label(form.CompanySource) }}
-				{{ form_widget(form.CompanySource, {'attr': {'class': 'form-control', 'placeholder': "Ex: "}}) }}
-				{{ form_errors(form.CompanySource, {'attr': {'class': 'form-error-message'}}) }}
-
-				{{ form_label(form.CompanyCodeCommercial) }}
-				{{ form_widget(form.CompanyCodeCommercial, {'attr': {'class': 'form-control', 'placeholder': "Ex: "}}) }}
-				{{ form_errors(form.CompanyCodeCommercial, {'attr': {'class': 'form-error-message'}}) }}
+				{{ form_label(form.idCompanyCodeNAF) }}
+				{{ form_widget(form.idCompanyCodeNAF, {'attr': {'class': 'form-control', 'placeholder': "Ex: "}}) }}
+				{{ form_errors(form.idCompanyCodeNAF, {'attr': {'class': 'form-error-message'}}) }}
 
 				{{ form_label(form.CompanyStandardPhone) }}
 				{{ form_widget(form.CompanyStandardPhone, {'attr': {'class': 'form-control', 'placeholder': "Ex: "}}) }}
 				{{ form_errors(form.CompanyStandardPhone, {'attr': {'class': 'form-error-message'}}) }}
-
-				{{ form_label(form.CompanyStandardPhone) }}
-				{{ form_widget(form.CompanyStandardPhone, {'attr': {'class': 'form-control', 'placeholder': "Ex: "}}) }}
-				{{ form_errors(form.CompanyStandardPhone, {'attr': {'class': 'form-error-message'}}) }}
-
 
 				{{ form_label(form.save) }}
 				{{ form_widget(form.save, {'attr': {'class': 'form-control'}}) }}

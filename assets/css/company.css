@@ -24,3 +24,11 @@
     background-color: rgba(217, 217, 217, 0.2);
     transition-delay: 0.3;
 }
+
+.mandatory-white {
+    border-color: white;
+}
+
+sidebar-dark .nav-item.active .nav-link, .mandatory-white {
+    border-left: 0.25em solid white;
+}

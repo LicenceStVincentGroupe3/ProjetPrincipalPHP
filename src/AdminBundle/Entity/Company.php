@@ -48,22 +48,22 @@ class Company
     private $CompanyLogo;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="text", nullable=true)
      */
     private $CompanyComments;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $CompanyAddress;
 
     /**
-     * @ORM\Column(type="string", length=10)
+     * @ORM\Column(type="string", length=10, nullable=true)
      */
     private $CompanyPostalCode;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $CompanyCity;
 
@@ -89,17 +89,17 @@ class Company
     private $CompanySiret;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $CompanyStandardPhone;
 
     /**
-     * @ORM\Column(type="string", length=100)
+     * @ORM\Column(type="string", length=100, nullable=true)
      */
     private $CompanyEmail;
 
     /**
-     * @ORM\Column(type="integer", length=11)
+     * @ORM\Column(type="integer", length=11, nullable=true)
      */
     private $CompanyPotential;
 
@@ -110,12 +110,14 @@ class Company
 
     public function __construct()
     {
+        $this->companyCreationDate = new \DateTime(); // Par défaut, la date de création de la fiche commercial est la date d'aujourd'hui
+
         $this->contacts = new ArrayCollection();
     }
   
     /**
      * @ORM\ManyToOne(targetEntity="App\AdminBundle\Entity\CompanyCountry", inversedBy="companies")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $idCompanyCountry;
 
@@ -136,12 +138,6 @@ class Company
      * @ORM\JoinColumn(nullable=true)
      */
     private $idCompanyLegalStatus;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="App\AdminBundle\Entity\CompanyActivitySector", inversedBy="companies")
-     * @ORM\JoinColumn(nullable=true)
-     */
-    private $idCompanyActivitySector;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\AdminBundle\Entity\CompanyNbEmployee", inversedBy="companies")
@@ -250,12 +246,12 @@ class Company
         return $this;
     }
 
-    public function getCompanyEmail(): ?int
+    public function getCompanyEmail(): ?string
     {
         return $this->CompanyEmail;
     }
 
-    public function setCompanyEmail(?int $CompanyEmail): self
+    public function setCompanyEmail(?string $CompanyEmail): self
     {
         $this->CompanyEmail = $CompanyEmail;
 
@@ -381,18 +377,6 @@ class Company
     public function setIdCompanyStatus(?CompanyStatus $idCompanyStatus): self
     {
         $this->idCompanyStatus = $idCompanyStatus;
-
-        return $this;
-    }
-
-    public function getIdCompanyActivitySector(): ?CompanyActivitySector
-    {
-        return $this->idCompanyActivitySector;
-    }
-
-    public function setIdCompanyActivitySector(?CompanyActivitySector $idCompanyActivitySector): self
-    {
-        $this->idCompanyActivitySector = $idCompanyActivitySector;
 
         return $this;
     }

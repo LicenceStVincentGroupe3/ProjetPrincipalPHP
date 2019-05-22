@@ -33,6 +33,23 @@ class CompanyController extends AbstractController
         if ($form->isSubmitted() && $form->isValid())
         {
             $new = $form->getData();
+            $companyPicture = $form['CompanyLogo']->getData();
+            $file = $companyPicture;
+
+            if ($file !== null)
+            {
+                $fileName = $file->getClientOriginalName();
+
+                // On envoit le fichier dans le dossier images
+                try {
+                    $file->move($this->getParameter('images_directory'), $fileName);
+                } catch (FileException $e) {
+                    // S'il y a un soucis pendant l'upload on catch
+                }
+
+                $new->setCompanyLogo($fileName);
+            }
+
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($new);

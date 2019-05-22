@@ -19,25 +19,15 @@ class CompanyCodeNAF
      */
     private $id;
 
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
-
     /**
      * @ORM\Column(type="string", length=255, nullable=false)
      * @Assert\NotBlank
      */
     private $label;
 
-    /**
-     * @ORM\OneToMany(targetEntity="App\AdminBundle\Entity\Company", mappedBy="idCompanyTurnover")
-     */
-    private $companies;
-
-    public function __construct()
+    public function getId(): ?int
     {
-        $this->companies = new ArrayCollection();
+        return $this->id;
     }
 
     public function getLabel(): ?string
@@ -53,6 +43,16 @@ class CompanyCodeNAF
     }
 
     /**
+     * @ORM\OneToMany(targetEntity="App\AdminBundle\Entity\Company", mappedBy="idCompanyCodeNAF")
+     */
+    private $companies;
+
+    public function __construct()
+    {
+        $this->companies = new ArrayCollection();
+    }
+
+    /**
      * @return Collection|Company[]
      */
     public function getCompanies(): Collection
@@ -64,9 +64,8 @@ class CompanyCodeNAF
     {
         if (!$this->companies->contains($company)) {
             $this->companies[] = $company;
-            $company->setIdCompanyCountry($this);
+            $company->setIdCompanyCodeNAF($this);
         }
-
         return $this;
     }
 
@@ -75,11 +74,10 @@ class CompanyCodeNAF
         if ($this->companies->contains($company)) {
             $this->companies->removeElement($company);
             // set the owning side to null (unless already changed)
-            if ($company->getIdCompanyCountry() === $this) {
-                $company->setIdCompanyCountry(null);
+            if ($company->getIdCompanyCodeNAF() === $this) {
+                $company->setIdCompanyCodeNAF(null);
             }
         }
-
         return $this;
     }
 }
