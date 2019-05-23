@@ -17,15 +17,19 @@
 
 {% block contentBody %}
 
-	<div class="float-left">
-		{{company.CompanyLastName}},//nom de l'activité
-
-
-
+	<div class="row">
+		<div class="col-lg-6 mx-auto last-upd">
+			{{company.CompanyLastName}},//nom de l'activité
 		</div>
 
-	<div class="rightContact">
+		<div class="col-lg-6 mx-auto status">
+			<div class="last-upd2">
 
+			</div>
+			<div class="status2">
+
+			</div>
+		</div>
 	</div>
 
 	<div class="tabset mw-100">
@@ -59,7 +63,7 @@
 				</div>
 
 				<div class="row">
-					<div class="col-lg-6 mx-auto">
+					<div class="col-lg-6 mx-auto form-left">
 						<div class="row my-form-field">
 							<div class="col-lg-4 mx-auto">
 								{{ form_label(form.idUser, 'Compte suivi par', {'label_attr': {'class': 'my-form-label'}}) }}
@@ -142,7 +146,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="col-lg-6 mx-auto">
+					<div class="col-lg-6 mx-auto form-right">
 						<div class="row my-form-field">
 							<div class="col-lg-4 mx-auto">
 								{{ form_label(form.CompanyEmail, null, {'label_attr': {'class': 'my-form-label'}}) }}
