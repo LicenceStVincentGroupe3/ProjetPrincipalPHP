@@ -215,5 +215,7 @@ $(document).ready( function () {
 	});*/
 
 	$('#myTableBody').pageMe({pagerSelector:'#myPager',showPrevNext:true,hidePageNumbers:false,perPage:5});
-
+	$(function () {
+		$('[data-toggle="popover"]').popover({html:true,trigger: 'focus'})
+	})
 } );

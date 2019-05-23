@@ -4,8 +4,11 @@ namespace App\AdminBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
+ * @UniqueEntity(fields="contactEmail", message="Adresse mail déjà existant")
  * @ORM\Entity(repositoryClass="App\AdminBundle\Repository\ContactRepository")
  */
 class Contact
@@ -19,25 +22,25 @@ class Contact
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank
+     * @Assert\NotBlank(message = "Ce champ ne peut être vide.")
      */
     private $contactCode;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank
+     * @Assert\NotBlank(message = "Ce champ ne peut être vide.")
      */
     private $contactLastName;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank
+     * @Assert\NotBlank(message = "Ce champ ne peut être vide.")
      */
     private $contactFirstName;
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
-     * @Assert\NotBlank     
+     * @Assert\NotBlank(message = "Ce champ ne peut être vide.")
      */
     private $contactGender;
 
@@ -70,36 +73,49 @@ class Contact
 
     /**
      * @ORM\Column(type="string", nullable=true)
+     * @Assert\Url(message = "Veuillez insérer une URL valide")
      */
     private $contactFacebookAddress;
 
     /**
      * @ORM\Column(type="string", nullable=true)
+     * @Assert\Url(message = "Veuillez insérer une URL valide")
      */
     private $contactTwitterAddress;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     * @Assert\Datetime(message = "Date invalide")
      */
     private $contactBirthDate;
 
     /**
      * @ORM\Column(type="string", length=10, nullable=true)
+     * @Assert\Length(min = 10, minMessage = "Tel. 10 caractères minimun !")
+     * @Assert\Length(max = 10, maxMessage = "Tel. 10 caractères maxnimun !")
+     * @Assert\Regex(pattern="/^(\(0\))?[0-9]+$/", message="Format : 0301010101")
      */
     private $contactMobilePhone;
 
     /**
      * @ORM\Column(type="string", length=10,  nullable=true)
+     * @Assert\Length(min = 10, minMessage = "Tel. 10 caractères minimun !")
+     * @Assert\Length(max = 10, maxMessage = "Tel. 10 caractères maxnimun !")
+     * @Assert\Regex(pattern="/^(\(0\))?[0-9]+$/", message="Format : 0601010101")
      */
     private $contactDirectLandline;
 
     /**
      * @ORM\Column(type="string", length=10,  nullable=true)
+     * @Assert\Length(min = 10, minMessage = "Tel. 10 caractères minimun !")
+     * @Assert\Length(max = 10, maxMessage = "Tel. 10 caractères maxnimun !")
+     * @Assert\Regex(pattern="/^(\(0\))?[0-9]+$/", message="Format : 0601010101")
      */
     private $contactStandartPhone;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Email(message = "Veuillez insérer un email valide")
      */
     private $contactEmail;
 
@@ -127,11 +143,18 @@ class Contact
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Url(message = "Veuillez insérer une URL valide")
      */
     private $contactLinkedinAddress;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\File(
+     *      maxSize = "1024k",
+     *      mimeTypes={ "image/jpeg", "image/png" },
+     *      maxSizeMessage = "La photo ne peut dépasser les 1024 Ko soit 1,024 Mo !",
+     *      mimeTypesMessage = "Format JPEG ou PNG uniquement"
+     * )
      */
     private $contactPhoto;
 
@@ -142,6 +165,7 @@ class Contact
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Assert\Length(max = 255, maxMessage = "Vous ne pouvez pas dépasser 255 caractères")
      */
     private $contactComment;
 

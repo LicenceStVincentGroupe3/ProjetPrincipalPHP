@@ -520,6 +520,16 @@ a:hover {
     margin-right: 10%;
 }
 
+.form-left > div {
+    margin-bottom: 3%;
+    height: 45px;
+}
+
+.form-right > div {
+    margin-bottom: 3%;
+    height: 45px;
+}
+
 
 .my-form-field, .space {
     height: 45px;

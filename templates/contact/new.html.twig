@@ -42,16 +42,29 @@
 				</div>
 
 				<div class="row">
-					<div class="col-lg-7 mx-auto my-form-left-side">
+					<div class="col-lg-6 mx-auto form-left">
 						<div class="row my-form-field">
 							<div class="col-lg-4 mx-auto">
 								{{ form_label(form.contactCode, null, {'label_attr': {'class': 'my-form-label'}}) }}
 							</div>
 							<div class="col-lg-7 mx-auto mandatory">
 								{{ form_widget(form.contactCode, {'attr': {'class': 'form-control my-form-input-little', 'placeholder': "Ex: 1254789"}}) }}
-
-								{{ form_errors(form.contactCode, {'attr': {'class': 'form-error-message'}}) }}
 							</div>
+							{% if form.contactCode.vars.errors|length > 0 %}
+								<div class="col-lg-1 mx-auto pl-0">
+									<button type="button" style="padding: 3px 6px;" class="btn btn-danger rounded-circle" data-title="Erreur de saisie" data-trigger="focus" data-container="body" data-toggle="popover" data-placement="top" data-content="
+                                    {% for error in form.contactCode.vars.errors %}
+                                        -{{ error.messagePluralization is null
+									? error.messageTemplate|trans(error.messageParameters, 'validators')
+									: error.messageTemplate|transchoice(error.messagePluralization, error.messageParameters, 'validators')
+									}}<br>
+                                    {% endfor %}
+                                    "><i class="fas fa-exclamation-circle"></i>
+									</button>
+								</div>
+							{% else %}
+								<div class="col-lg-1 mx-auto pl-0"></div>
+							{% endif %}
 						</div>
 						<div class="row my-form-field">
 							<div class="col-lg-4 mx-auto">
@@ -69,9 +82,22 @@
 							</div>
 							<div class="col-lg-7 mx-auto mandatory">
 								{{ form_widget(form.contactFirstName, {'attr': {'class': 'form-control my-form-input-big'}}) }}
-
-								{{ form_errors(form.contactFirstName, {'attr': {'class': 'form-error-message'}}) }}
 							</div>
+							{% if form.contactFirstName.vars.errors|length > 0 %}
+								<div class="col-lg-1 mx-auto pl-0">
+									<button type="button" style="padding: 3px 6px;" class="btn btn-danger rounded-circle" data-title="Erreur de saisie" data-trigger="focus" data-container="body" data-toggle="popover" data-placement="top" data-content="
+                                    {% for error in form.contactFirstName.vars.errors %}
+                                        -{{ error.messagePluralization is null
+									? error.messageTemplate|trans(error.messageParameters, 'validators')
+									: error.messageTemplate|transchoice(error.messagePluralization, error.messageParameters, 'validators')
+									}}<br>
+                                    {% endfor %}
+                                    "><i class="fas fa-exclamation-circle"></i>
+									</button>
+								</div>
+							{% else %}
+								<div class="col-lg-1 mx-auto pl-0"></div>
+							{% endif %}
 						</div>
 						<div class="row my-form-field">
 							<div class="col-lg-4 mx-auto">
@@ -79,11 +105,24 @@
 							</div>
 							<div class="col-lg-7 mx-auto mandatory">
 								{{ form_widget(form.contactLastName, {'attr': {'class': 'form-control my-form-input-big'}}) }}
-
-								{{ form_errors(form.contactLastName, {'attr': {'class': 'form-error-message'}}) }}
 							</div>
+							{% if form.contactLastName.vars.errors|length > 0 %}
+								<div class="col-lg-1 mx-auto pl-0">
+									<button type="button" style="padding: 3px 6px;" class="btn btn-danger rounded-circle" data-title="Erreur de saisie" data-trigger="focus" data-container="body" data-toggle="popover" data-placement="top" data-content="
+                                    {% for error in form.contactLastName.vars.errors %}
+                                        -{{ error.messagePluralization is null
+									? error.messageTemplate|trans(error.messageParameters, 'validators')
+									: error.messageTemplate|transchoice(error.messagePluralization, error.messageParameters, 'validators')
+									}}<br>
+                                    {% endfor %}
+                                    "><i class="fas fa-exclamation-circle"></i>
+									</button>
+								</div>
+							{% else %}
+								<div class="col-lg-1 mx-auto pl-0"></div>
+							{% endif %}
 						</div>
-						<div class="row my-form-field">
+						<div class="row my-form-field {% if form.contactBirthDate.vars.errors|length > 0 %}my-form-error-container{% endif %}">
 							<div class="col-lg-4 mx-auto">
 								{{ form_label(form.contactBirthDate, null, {'label_attr': {'class': 'my-form-label'}}) }}
 							</div>
@@ -91,12 +130,15 @@
 								<div class="form-group">
 									<div class='input-group date' id='datetimepicker2'>
 										{{ form_widget(form.contactBirthDate, {'attr': {'class': 'my-form-input-tiny'}}) }}
-
-										{{ form_errors(form.contactBirthDate, {'attr': {'class': 'form-error-message'}}) }}
+									</div>
+									{% if form.contactBirthDate.vars.errors|length > 0 %}
+										<div class="alert alert-danger my-form-error">
+											{{ form_errors(form.contactBirthDate, {'attr': {'class': 'list-unstyled mb-0'}}) }}
+										</div>
+									{% endif %}
 										<span class="input-group-addon">
 						                        <span class="glyphicon glyphicon-calendar"></span>
-						                    </span>
-									</div>
+										</span>
 								</div>
 							</div>
 						</div>
@@ -116,9 +158,22 @@
 							</div>
 							<div class="col-lg-7 mx-auto">
 								{{ form_widget(form.contactMobilePhone, {'attr': {'class': 'form-control my-form-input-big input-telmobile'}}) }}
-
-								{{ form_errors(form.contactMobilePhone, {'attr': {'class': 'form-error-message'}}) }}
 							</div>
+							{% if form.contactMobilePhone.vars.errors|length > 0 %}
+								<div class="col-lg-1 mx-auto pl-0">
+									<button type="button" style="padding: 3px 6px;" class="btn btn-danger rounded-circle" data-title="Erreur de saisie" data-trigger="focus" data-container="body" data-toggle="popover" data-placement="top" data-content="
+                                    {% for error in form.contactMobilePhone.vars.errors %}
+                                        -{{ error.messagePluralization is null
+									? error.messageTemplate|trans(error.messageParameters, 'validators')
+									: error.messageTemplate|transchoice(error.messagePluralization, error.messageParameters, 'validators')
+									}}<br>
+                                    {% endfor %}
+                                    "><i class="fas fa-exclamation-circle"></i>
+									</button>
+								</div>
+							{% else %}
+								<div class="col-lg-1 mx-auto pl-0"></div>
+							{% endif %}
 						</div>
 						<div class="row my-form-field">
 							<div class="col-lg-4 mx-auto">
@@ -126,9 +181,22 @@
 							</div>
 							<div class="col-lg-7 mx-auto">
 								{{ form_widget(form.contactLinkedinAddress, {'attr': {'class': 'form-control my-form-input-big input-linkedin'}}) }}
-
-								{{ form_errors(form.contactLinkedinAddress, {'attr': {'class': 'form-error-message'}}) }}
 							</div>
+							{% if form.contactLinkedinAddress.vars.errors|length > 0 %}
+								<div class="col-lg-1 mx-auto pl-0">
+									<button type="button" style="padding: 3px 6px;" class="btn btn-danger rounded-circle" data-title="Erreur de saisie" data-trigger="focus" data-container="body" data-toggle="popover" data-placement="top" data-content="
+                                    {% for error in form.contactLinkedinAddress.vars.errors %}
+                                        -{{ error.messagePluralization is null
+									? error.messageTemplate|trans(error.messageParameters, 'validators')
+									: error.messageTemplate|transchoice(error.messagePluralization, error.messageParameters, 'validators')
+									}}<br>
+                                    {% endfor %}
+                                    "><i class="fas fa-exclamation-circle"></i>
+									</button>
+								</div>
+							{% else %}
+								<div class="col-lg-1 mx-auto pl-0"></div>
+							{% endif %}
 						</div>
 						<div class="row my-form-field">
 							<div class="col-lg-4 mx-auto">
@@ -136,9 +204,22 @@
 							</div>
 							<div class="col-lg-7 mx-auto">
 								{{ form_widget(form.contactFacebookAddress, {'attr': {'class': 'form-control my-form-input-big input-facebook'}}) }}
-
-								{{ form_errors(form.contactFacebookAddress, {'attr': {'class': 'form-error-message'}}) }}
 							</div>
+							{% if form.contactFacebookAddress.vars.errors|length > 0 %}
+								<div class="col-lg-1 mx-auto pl-0">
+									<button type="button" style="padding: 3px 6px;" class="btn btn-danger rounded-circle" data-title="Erreur de saisie" data-trigger="focus" data-container="body" data-toggle="popover" data-placement="top" data-content="
+                                    {% for error in form.contactFacebookAddress.vars.errors %}
+                                        -{{ error.messagePluralization is null
+									? error.messageTemplate|trans(error.messageParameters, 'validators')
+									: error.messageTemplate|transchoice(error.messagePluralization, error.messageParameters, 'validators')
+									}}<br>
+                                    {% endfor %}
+                                    "><i class="fas fa-exclamation-circle"></i>
+									</button>
+								</div>
+							{% else %}
+								<div class="col-lg-1 mx-auto pl-0"></div>
+							{% endif %}
 						</div>
 						<div class="row my-form-field">
 							<div class="col-lg-4 mx-auto">
@@ -146,24 +227,49 @@
 							</div>
 							<div class="col-lg-7 mx-auto">
 								{{ form_widget(form.contactTwitterAddress, {'attr': {'class': 'form-control my-form-input-big input-twitter'}}) }}
-
-								{{ form_errors(form.contactTwitterAddress, {'attr': {'class': 'form-error-message'}}) }}
 							</div>
-						</div>
+							{% if form.contactTwitterAddress.vars.errors|length > 0 %}
+								<div class="col-lg-1 mx-auto pl-0">
+									<button type="button" style="padding: 3px 6px;" class="btn btn-danger rounded-circle" data-title="Erreur de saisie" data-trigger="focus" data-container="body" data-toggle="popover" data-placement="top" data-content="
+                                    {% for error in form.contactTwitterAddress.vars.errors %}
+                                        -{{ error.messagePluralization is null
+									? error.messageTemplate|trans(error.messageParameters, 'validators')
+									: error.messageTemplate|transchoice(error.messagePluralization, error.messageParameters, 'validators')
+									}}<br>
+                                    {% endfor %}
+                                    "><i class="fas fa-exclamation-circle"></i>
+									</button>
+								</div>
+							{% else %}
+								<div class="col-lg-1 mx-auto pl-0"></div>
+							{% endif %}
 					</div>
-					<div class="col-lg-5 mx-auto my-form-right-side">
+					<div class="col-lg-6 mx-auto form-right">
 						<div class="row my-form-field">
-							<div class="col-lg-5 mx-auto">
+							<div class="col-lg-4 mx-auto">
 								{{ form_label(form.contactEmail, null, {'label_attr': {'class': 'my-form-label'}}) }}
 							</div>
 							<div class="col-lg-7 mx-auto">
 								{{ form_widget(form.contactEmail, {'attr': {'class': 'form-control my-form-input-big'}}) }}
-
-								{{ form_errors(form.contactEmail, {'attr': {'class': 'form-error-message'}}) }}
 							</div>
+							{% if form.contactEmail.vars.errors|length > 0 %}
+								<div class="col-lg-1 mx-auto pl-0">
+									<button type="button" style="padding: 3px 6px;" class="btn btn-danger rounded-circle" data-title="Erreur de saisie" data-trigger="focus" data-container="body" data-toggle="popover" data-placement="top" data-content="
+                                    {% for error in form.contactEmail.vars.errors %}
+                                        -{{ error.messagePluralization is null
+									? error.messageTemplate|trans(error.messageParameters, 'validators')
+									: error.messageTemplate|transchoice(error.messagePluralization, error.messageParameters, 'validators')
+									}}<br>
+                                    {% endfor %}
+                                    "><i class="fas fa-exclamation-circle"></i>
+									</button>
+								</div>
+							{% else %}
+								<div class="col-lg-1 mx-auto pl-0"></div>
+							{% endif %}
 						</div>
 						<div class="row my-form-field">
-							<div class="col-lg-5 mx-auto">
+							<div class="col-lg-4 mx-auto">
 								{{ form_label(form.contactOptInCommercialOffers, null, {'label_attr': {'class': 'my-form-label'}}) }}
 							</div>
 							<div class="col-lg-7 mx-auto">
@@ -173,7 +279,7 @@
 							</div>
 						</div>
 						<div class="row my-form-field">
-							<div class="col-lg-5 mx-auto">
+							<div class="col-lg-4 mx-auto">
 								{{ form_label(form.contactOptInNewsletterCustomers, null, {'label_attr': {'class': 'my-form-label'}}) }}
 							</div>
 							<div class="col-lg-7 mx-auto">
@@ -183,7 +289,7 @@
 							</div>
 						</div>
 						<div class="row my-form-field">
-							<div class="col-lg-5 mx-auto">
+							<div class="col-lg-4 mx-auto">
 								{{ form_label(form.idCompany, null, {'label_attr': {'class': 'my-form-label'}}) }}
 							</div>
 							<div class="col-lg-7 mx-auto">
@@ -193,7 +299,7 @@
 							</div>
 						</div>
 						<div class="row my-form-field">
-							<div class="col-lg-5 mx-auto">
+							<div class="col-lg-4 mx-auto">
 								{{ form_label(form.contactPoste, null, {'label_attr': {'class': 'my-form-label'}}) }}
 							</div>
 							<div class="col-lg-7 mx-auto">
@@ -203,7 +309,7 @@
 							</div>
 						</div>
 						<div class="row my-form-field initial-height">
-							<div class="col-lg-5 mx-auto">
+							<div class="col-lg-4 mx-auto">
 								{{ form_label(form.arrivalDate, null, {'label_attr': {'class': 'my-form-label'}}) }}
 							</div>
 							<div class="col-lg-7 mx-auto arrival-departure">
@@ -214,7 +320,7 @@
 							</div>
 						</div>
 						<div class="row my-form-field">
-							<div class="col-lg-5 mx-auto">
+							<div class="col-lg-4 mx-auto">
 								{{ form_label(form.contactDecisionLevel, 'Pouvoir décisionnel', {'label_attr': {'class': 'my-form-label'}}) }}
 							</div>
 							<div class="col-lg-7 mx-auto">
@@ -224,7 +330,7 @@
 							</div>
 						</div>
 						<div class="row my-form-field">
-							<div class="col-lg-5 mx-auto">
+							<div class="col-lg-4 mx-auto">
 								{{ form_label(form.idUser, 'Responsable N+1', {'label_attr': {'class': 'my-form-label'}}) }}
 							</div>
 							<div class="col-lg-7 mx-auto">
@@ -233,35 +339,44 @@
 								{{ form_errors(form.idUser, {'attr': {'class': 'form-error-message'}}) }}
 							</div>
 						</div>
-						<div class="row my-form-field">
-							<div class="col-lg-5 mx-auto">
+						<div class="row my-form-field {% if form.contactDirectLandline.vars.errors|length > 0 %}my-form-error-container{% endif %}">
+							<div class="col-lg-4 mx-auto">
 								{{ form_label(form.contactDirectLandline, null, {'label_attr': {'class': 'my-form-label'}}) }}
 							</div>
 							<div class="col-lg-7 mx-auto">
 								{{ form_widget(form.contactDirectLandline, {'attr': {'class': 'form-control my-form-input-big input-tel'}}) }}
-
-								{{ form_errors(form.contactDirectLandline, {'attr': {'class': 'form-error-message'}}) }}
 							</div>
+							{% if form.contactDirectLandline.vars.errors|length > 0 %}
+								<div class="alert alert-danger my-form-error">
+									{{ form_errors(form.contactDirectLandline, {'attr': {'class': 'list-unstyled mb-0'}}) }}
+								</div>
+							{% endif %}
 						</div>
-						<div class="row my-form-field">
-							<div class="col-lg-5 mx-auto">
+						<div class="row my-form-field {% if form.contactStandartPhone.vars.errors|length > 0 %}my-form-error-container{% endif %}">
+							<div class="col-lg-4 mx-auto">
 								{{ form_label(form.contactStandartPhone, null, {'label_attr': {'class': 'my-form-label'}}) }}
 							</div>
 							<div class="col-lg-7 mx-auto">
 								{{ form_widget(form.contactStandartPhone, {'attr': {'class': 'form-control my-form-input-big input-tel'}}) }}
-
-								{{ form_errors(form.contactStandartPhone, {'attr': {'class': 'form-error-message'}}) }}
 							</div>
+							{% if form.contactStandartPhone.vars.errors|length > 0 %}
+								<div class="alert alert-danger my-form-error">
+									{{ form_errors(form.contactStandartPhone, {'attr': {'class': 'list-unstyled mb-0'}}) }}
+								</div>
+							{% endif %}
 						</div>
-						<div class="row my-form-field">
-							<div class="col-lg-5 mx-auto">
+						<div class="row my-form-field {% if form.contactComment.vars.errors|length > 0 %}my-form-error-container{% endif %}">
+							<div class="col-lg-4 mx-auto">
 								{{ form_label(form.contactComment, null, {'label_attr': {'class': 'my-form-label'}}) }}
 							</div>
 							<div class="col-lg-7 mx-auto">
 								{{ form_widget(form.contactComment, {'attr': {'class': 'form-control my-form-input-big'}}) }}
-
-								{{ form_errors(form.contactComment, {'attr': {'class': 'form-error-message'}}) }}
 							</div>
+							{% if form.contactComment.vars.errors|length > 0 %}
+								<div class="alert alert-danger my-form-error">
+									{{ form_errors(form.contactComment, {'attr': {'class': 'list-unstyled mb-0'}}) }}
+								</div>
+							{% endif %}
 						</div>
 					</div>
 				</div>
@@ -271,7 +386,7 @@
 					<button class="btn btn-white-red return-button" type="button">
 						<a href="{{ path('listCont') }}">ANNULER</a>
 					</button>
-				{{ form_widget(form.save, { 'label': 'Ajouter', 'attr': {'class': 'btn btn-red submit-button'}}) }}
+				{{ form_widget(form.save, { 'label': 'AJOUTER', 'attr': {'class': 'btn btn-red submit-button'}}) }}
 				{{ form_end(form) }}
 				</div>
 			</section>
