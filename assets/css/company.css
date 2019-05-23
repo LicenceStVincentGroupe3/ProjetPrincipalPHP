@@ -42,3 +42,13 @@ textarea {
     min-height: 40px;
     max-height: 100px;
 }
+
+.form-left > div {
+    margin-bottom: 3%;
+    height: 45px;
+}
+
+.form-right > div {
+    margin-bottom: 3%;
+    height: 45px;
+}
