@@ -17,17 +17,26 @@
 
 {% block contentBody %}
 
-	<div class="row">
+	<div class="row pb-4">
 		<div class="col-lg-6 mx-auto last-upd">
-			{{company.CompanyLastName}},//nom de l'activité
+			<span class="font-weight-bold">{{company.CompanyLastName}}</span>,//nom de l'activité ({{ company.CompanyPostalCode }} {{ company.CompanyCity }})
 		</div>
 
 		<div class="col-lg-6 mx-auto status">
 			<div class="last-upd2">
-
+				{% if company.CompanyDateUpdate is not null %}
+					{% if company.CompanyStatus == "0" %}
+						<img src="{{asset('build/rouge.png')}}" class="table-img-profile4 rounded-circle" title="Rouge" alt="Statut rouge"><b>Obsolète&nbsp;</b>
+					{% elseif company.CompanyStatus == "1" %}
+						<img src="{{asset('build/vert.png')}}" class="table-img-profile4 rounded-circle" title="Vert" alt="Statut vert"><b>à jour&nbsp;</b>
+					{% else %}
+						<img src="{{asset('build/orange.png')}}" class="table-img-profile4 rounded-circle" title="Orange" alt="Statut orange"><b>à vérifier&nbsp;</b>
+					{% endif %} Dernière mise à jour le {{ company.CompanyDateUpdate|date("d/m/Y", "Europe/Paris") }} à {{ company.CompanyDateUpdate|date("H", "Europe/Paris") }}h{{ company.CompanyDateUpdate|date("i", "Europe/Paris") }}</p>
+				{% endif %}
 			</div>
 			<div class="status2">
-
+				{{ form_start(form, {'method': 'POST'}, {'attr': {'novalidate': 'novalidate'}}) }}
+				{{ form_widget(form.CompanyStatus, {'attr': {'class': 'switch_2'}}) }}
 			</div>
 		</div>
 	</div>
@@ -72,15 +81,17 @@
 								{{ form_widget(form.idUser, {'attr': {'class': 'form-control'}}) }}
 								{{ form_errors(form.idUser, {'attr': {'class': 'form-error-message'}}) }}
 							</div>
+							<div class="col-lg-1 mx-auto pl-0"></div>
 						</div>
 						<div class="row my-form-field">
 							<div class="col-lg-4 mx-auto">
 								{{ form_label(form.CompanyCode, null, {'label_attr': {'class': 'my-form-label'}}) }}
 							</div>
 							<div class="col-lg-7 mx-auto mandatory">
-								{{ form_widget(form.CompanyCode, {'attr': {'class': 'form-control', 'placeholder': "Ex: ABCD1234"}}) }}
+								{{ form_widget(form.CompanyCode, {'attr': {'class': 'form-control w-50', 'placeholder': "1254789"}}) }}
 								{{ form_errors(form.CompanyCode, {'attr': {'class': 'form-error-message'}}) }}
 							</div>
+							<div class="col-lg-1 mx-auto pl-0"></div>
 						</div>
 						<div class="row my-form-field">
 							<div class="col-lg-4 mx-auto">
@@ -90,6 +101,7 @@
 								{{ form_widget(form.CompanyLastName, {'attr': {'class': 'form-control'}}) }}
 								{{ form_errors(form.CompanyLastName, {'attr': {'class': 'form-error-message'}}) }}
 							</div>
+							<div class="col-lg-1 mx-auto pl-0"></div>
 						</div>
 						<div class="row my-form-field">
 							<div class="col-lg-4 mx-auto">
@@ -99,6 +111,7 @@
 								{{ form_widget(form.idCompanyStatus, {'attr': {'class': 'form-control'}}) }}
 								{{ form_errors(form.idCompanyStatus, {'attr': {'class': 'form-error-message'}}) }}
 							</div>
+							<div class="col-lg-1 mx-auto pl-0"></div>
 						</div>
 						<div class="row my-form-field">
 							<div class="col-lg-4 mx-auto">
@@ -108,6 +121,7 @@
 								{{ form_widget(form.idCompanyCodeNAF, {'attr': {'class': 'form-control'}}) }}
 								{{ form_errors(form.idCompanyCodeNAF, {'attr': {'class': 'form-error-message'}}) }}
 							</div>
+							<div class="col-lg-1 mx-auto pl-0"></div>
 						</div>
 						<div class="row my-form-field">
 							<div class="col-lg-4 mx-auto">
@@ -117,6 +131,7 @@
 								{{ form_widget(form.idCompanyLegalStatus, {'attr': {'class': 'form-control'}}) }}
 								{{ form_errors(form.idCompanyLegalStatus, {'attr': {'class': 'form-error-message'}}) }}
 							</div>
+							<div class="col-lg-1 mx-auto pl-0"></div>
 						</div>
 						<div class="row my-form-field">
 							<div class="col-lg-4 mx-auto">
@@ -124,8 +139,22 @@
 							</div>
 							<div class="col-lg-7 mx-auto mandatory-white">
 								{{ form_widget(form.CompanySiret, {'attr': {'class': 'form-control'}}) }}
-								{{ form_errors(form.CompanySiret, {'attr': {'class': 'form-error-message'}}) }}
 							</div>
+							{% if form.CompanySiret.vars.errors|length > 0 %}
+								<div class="col-lg-1 mx-auto pl-0">
+									<button type="button" style="padding: 3px 6px;" class="btn btn-danger rounded-circle" data-title="Erreur de saisie" data-trigger="focus" data-container="body" data-toggle="popover" data-placement="top" data-content="
+                                    {% for error in form.CompanySiret.vars.errors %}
+                                        -{{ error.messagePluralization is null
+									? error.messageTemplate|trans(error.messageParameters, 'validators')
+									: error.messageTemplate|transchoice(error.messagePluralization, error.messageParameters, 'validators')
+									}}<br>
+                                    {% endfor %}
+                                    "><i class="fas fa-exclamation-circle"></i>
+									</button>
+								</div>
+							{% else %}
+								<div class="col-lg-1 mx-auto pl-0"></div>
+							{% endif %}
 						</div>
 						<div class="row my-form-field">
 							<div class="col-lg-4 mx-auto">
@@ -135,6 +164,7 @@
 								{{ form_widget(form.idCompanyNbEmployee, {'attr': {'class': 'form-control'}}) }}
 								{{ form_errors(form.idCompanyNbEmployee, {'attr': {'class': 'form-error-message'}}) }}
 							</div>
+							<div class="col-lg-1 mx-auto pl-0"></div>
 						</div>
 						<div class="row my-form-field">
 							<div class="col-lg-4 mx-auto">
@@ -144,6 +174,7 @@
 								{{ form_widget(form.idCompanyTurnover, {'attr': {'class': 'form-control'}}) }}
 								{{ form_errors(form.idCompanyTurnover, {'attr': {'class': 'form-error-message'}}) }}
 							</div>
+							<div class="col-lg-1 mx-auto pl-0"></div>
 						</div>
 					</div>
 					<div class="col-lg-6 mx-auto form-right">
@@ -151,10 +182,24 @@
 							<div class="col-lg-4 mx-auto">
 								{{ form_label(form.CompanyEmail, null, {'label_attr': {'class': 'my-form-label'}}) }}
 							</div>
-							<div class="col-lg-7 mx-auto mandatory-white">
+							<div class="col-lg-7 mx-auto">
 								{{ form_widget(form.CompanyEmail, {'attr': {'class': 'form-control'}}) }}
-								{{ form_errors(form.CompanyEmail, {'attr': {'class': 'form-error-message'}}) }}
 							</div>
+							{% if form.CompanyEmail.vars.errors|length > 0 %}
+								<div class="col-lg-1 mx-auto pl-0">
+									<button type="button" style="padding: 3px 6px;" class="btn btn-danger rounded-circle" data-title="Erreur de saisie" data-trigger="focus" data-container="body" data-toggle="popover" data-placement="top" data-content="
+                                    {% for error in form.CompanyEmail.vars.errors %}
+                                        -{{ error.messagePluralization is null
+									? error.messageTemplate|trans(error.messageParameters, 'validators')
+									: error.messageTemplate|transchoice(error.messagePluralization, error.messageParameters, 'validators')
+									}}<br>
+                                    {% endfor %}
+                                    "><i class="fas fa-exclamation-circle"></i>
+									</button>
+								</div>
+							{% else %}
+								<div class="col-lg-1 mx-auto pl-0"></div>
+							{% endif %}
 						</div>
 						<div class="row my-form-field">
 							<div class="col-lg-4 mx-auto">
@@ -164,6 +209,7 @@
 								{{ form_widget(form.CompanyAddress, {'attr': {'class': 'form-control'}}) }}
 								{{ form_errors(form.CompanyAddress, {'attr': {'class': 'form-error-message'}}) }}
 							</div>
+							<div class="col-lg-1 mx-auto pl-0"></div>
 							{#<i class="fas fa-map-marker-alt fa-opacity"></i>#}
 						</div>
 						<div class="row my-form-field">
@@ -172,8 +218,22 @@
 							</div>
 							<div class="col-lg-7 mx-auto">
 								{{ form_widget(form.CompanyPostalCode, {'attr': {'class': 'form-control'}}) }}
-								{{ form_errors(form.CompanyPostalCode, {'attr': {'class': 'form-error-message'}}) }}
 							</div>
+							{% if form.CompanyPostalCode.vars.errors|length > 0 %}
+								<div class="col-lg-1 mx-auto pl-0">
+									<button type="button" style="padding: 3px 6px;" class="btn btn-danger rounded-circle" data-title="Erreur de saisie" data-trigger="focus" data-container="body" data-toggle="popover" data-placement="top" data-content="
+                                    {% for error in form.CompanyPostalCode.vars.errors %}
+                                        -{{ error.messagePluralization is null
+									? error.messageTemplate|trans(error.messageParameters, 'validators')
+									: error.messageTemplate|transchoice(error.messagePluralization, error.messageParameters, 'validators')
+									}}<br>
+                                    {% endfor %}
+                                    "><i class="fas fa-exclamation-circle"></i>
+									</button>
+								</div>
+							{% else %}
+								<div class="col-lg-1 mx-auto pl-0"></div>
+							{% endif %}
 						</div>
 						<div class="row my-form-field">
 							<div class="col-lg-4 mx-auto">
@@ -183,6 +243,7 @@
 								{{ form_widget(form.CompanyCity, {'attr': {'class': 'form-control'}}) }}
 								{{ form_errors(form.CompanyCity, {'attr': {'class': 'form-error-message'}}) }}
 							</div>
+							<div class="col-lg-1 mx-auto pl-0"></div>
 						</div>
 						<div class="row my-form-field">
 							<div class="col-lg-4 mx-auto">
@@ -192,34 +253,76 @@
 								{{ form_widget(form.idCompanyCountry, {'attr': {'class': 'form-control'}}) }}
 								{{ form_errors(form.idCompanyCountry, {'attr': {'class': 'form-error-message'}}) }}
 							</div>
-
+							<div class="col-lg-1 mx-auto pl-0"></div>
 						</div>
 						<div class="row my-form-field">
 							<div class="col-lg-4 mx-auto">
 								{{ form_label(form.CompanyStandardPhone, null, {'label_attr': {'class': 'my-form-label'}}) }}
 							</div>
 							<div class="col-lg-7 mx-auto">
-								{{ form_widget(form.CompanyStandardPhone, {'attr': {'class': 'form-control'}}) }}
-								{{ form_errors(form.CompanyStandardPhone, {'attr': {'class': 'form-error-message'}}) }}
+								{{ form_widget(form.CompanyStandardPhone, {'attr': {'class': 'form-control input-tel'}}) }}
 							</div>
+							{% if form.CompanyStandardPhone.vars.errors|length > 0 %}
+								<div class="col-lg-1 mx-auto pl-0">
+									<button type="button" style="padding: 3px 6px;" class="btn btn-danger rounded-circle" data-title="Erreur de saisie" data-trigger="focus" data-container="body" data-toggle="popover" data-placement="top" data-content="
+                                    {% for error in form.CompanyStandardPhone.vars.errors %}
+                                        -{{ error.messagePluralization is null
+									? error.messageTemplate|trans(error.messageParameters, 'validators')
+									: error.messageTemplate|transchoice(error.messagePluralization, error.messageParameters, 'validators')
+									}}<br>
+                                    {% endfor %}
+                                    "><i class="fas fa-exclamation-circle"></i>
+									</button>
+								</div>
+							{% else %}
+								<div class="col-lg-1 mx-auto pl-0"></div>
+							{% endif %}
 						</div>
 						<div class="row my-form-field">
 							<div class="col-lg-4 mx-auto">
 								{{ form_label(form.CompanyFax, null, {'label_attr': {'class': 'my-form-label'}}) }}
 							</div>
 							<div class="col-lg-7 mx-auto">
-								{{ form_widget(form.CompanyFax, {'attr': {'class': 'form-control'}}) }}
-								{{ form_errors(form.CompanyFax, {'attr': {'class': 'form-error-message'}}) }}
+								{{ form_widget(form.CompanyFax, {'attr': {'class': 'form-control input-fax '}}) }}
 							</div>
+							{% if form.CompanyFax.vars.errors|length > 0 %}
+								<div class="col-lg-1 mx-auto pl-0">
+									<button type="button" style="padding: 3px 6px;" class="btn btn-danger rounded-circle" data-title="Erreur de saisie" data-trigger="focus" data-container="body" data-toggle="popover" data-placement="top" data-content="
+                                    {% for error in form.CompanyFax.vars.errors %}
+                                        -{{ error.messagePluralization is null
+									? error.messageTemplate|trans(error.messageParameters, 'validators')
+									: error.messageTemplate|transchoice(error.messagePluralization, error.messageParameters, 'validators')
+									}}<br>
+                                    {% endfor %}
+                                    "><i class="fas fa-exclamation-circle"></i>
+									</button>
+								</div>
+							{% else %}
+								<div class="col-lg-1 mx-auto pl-0"></div>
+							{% endif %}
 						</div>
 						<div class="row my-form-field">
 							<div class="col-lg-4 mx-auto">
 								{{ form_label(form.CompanyWebSite, null, {'label_attr': {'class': 'my-form-label'}}) }}
 							</div>
 							<div class="col-lg-7 mx-auto">
-								{{ form_widget(form.CompanyWebSite, {'attr': {'class': 'form-control'}}) }}
-								{{ form_errors(form.CompanyWebSite, {'attr': {'class': 'form-error-message'}}) }}
+								{{ form_widget(form.CompanyWebSite, {'attr': {'class': 'form-control input-web'}}) }}
 							</div>
+							{% if form.CompanyWebSite.vars.errors|length > 0 %}
+								<div class="col-lg-1 mx-auto pl-0">
+									<button type="button" style="padding: 3px 6px;" class="btn btn-danger rounded-circle" data-title="Erreur de saisie" data-trigger="focus" data-container="body" data-toggle="popover" data-placement="top" data-content="
+                                {% for error in form.CompanyWebSite.vars.errors %}
+                                    -{{ error.messagePluralization is null
+									? error.messageTemplate|trans(error.messageParameters, 'validators')
+									: error.messageTemplate|transchoice(error.messagePluralization, error.messageParameters, 'validators')
+									}}<br>
+                                {% endfor %}
+                                "><i class="fas fa-exclamation-circle"></i>
+									</button>
+								</div>
+							{% else %}
+								<div class="col-lg-1 mx-auto pl-0"></div>
+							{% endif %}
 						</div>
 						<div class="row my-form-field">
 							<div class="col-lg-4 mx-auto">
@@ -229,11 +332,13 @@
 								{{ form_widget(form.CompanyComments, {'attr': {'class': 'form-control'}}) }}
 								{{ form_errors(form.CompanyComments, {'attr': {'class': 'form-error-message'}}) }}
 							</div>
+							<div class="col-lg-1 mx-auto pl-0"></div>
 						</div>
 					</div>
 				</div>
 
-				<div class="row form-buttons">
+				<br><br><br><br>
+				<div class="row form-buttons mb-0">
 					<button class="btn btn-white-red return-button" type="button">
 						<a href="{{ path('listCompany') }}">ANNULER</a>
 					</button>
@@ -243,26 +348,16 @@
 			</section>
 
 			<section id="contacts" class="tab-panel">
-				<h2>6B. Rauchbier</h2>
-				<p><strong>Overall Impression:</strong>  An elegant, malty German amber lager with a balanced, complementary beechwood smoke character. Toasty-rich malt in aroma and flavor, restrained bitterness, low to high smoke flavor, clean fermentation profile, and an attenuated finish are characteristic.</p>
-				<p><strong>History:</strong> A historical specialty of the city of Bamberg, in the Franconian region of Bavaria in Germany. Beechwood-smoked malt is used to make a Märzen-style amber lager. The smoke character of the malt varies by maltster; some breweries produce their own smoked malt (rauchmalz).</p>
 			</section>
 
 			<section id="notes" class="tab-panel">
-				<h2>6C. Dunkles Bock</h2>
-				<p><strong>Overall Impression:</strong> A dark, strong, malty German lager beer that emphasizes the malty-rich and somewhat toasty qualities of continental malts without being sweet in the finish.</p>
-				<p><strong>History:</strong> Originated in the Northern German city of Einbeck, which was a brewing center and popular exporter in the days of the Hanseatic League (14th to 17th century). Recreated in Munich starting in the 17th century. The name “bock” is based on a corruption of the name “Einbeck” in the Bavarian dialect, and was thus only used after the beer came to Munich. “Bock” also means “Ram” in German, and is often used in logos and advertisements.</p>
 			</section>
 
 			<section id="historique" class="tab-panel">
-				<h2>Historique</h2>
 			</section>
 		</div>
 	</div>
 
 {% endblock %}
 {% block javascript %}
-{{parent()}}
-
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
 {% endblock %}
