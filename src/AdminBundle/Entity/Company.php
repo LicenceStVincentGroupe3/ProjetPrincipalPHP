@@ -20,7 +20,7 @@ class Company
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, unique=true)
      * @Assert\NotBlank
      */
     private $CompanyCode;
@@ -37,7 +37,7 @@ class Company
     private $CompanyDateUpdate;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", nullable=true)
      */
     private $CompanyStatus;
 
@@ -59,6 +59,7 @@ class Company
 
     /**
      * @ORM\Column(type="string", length=20, nullable=true)
+     * @Assert\Length(min = 5, minMessage = "Le code postal doit contenir au minimum 5 caractères !")
      */
     private $CompanyPostalCode;
 
@@ -69,12 +70,14 @@ class Company
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Length(min = 10, minMessage = "Le fax doit contenir 10 chiffres !")
+     * @Assert\Regex(pattern="/^(\(0\))?[0-9]+$/", message="Le format doit être par exemple : 0344715265")
      */
     private $CompanyFax;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Assert\Url
+     * @Assert\Url(message = "Veuillez insérer une URL valide")
      */
     private $CompanyWebSite;
 
@@ -84,17 +87,21 @@ class Company
     private $CompanyCreationDate;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=14, unique=true, nullable=true)
+     * @Assert\Length(min = 14, minMessage = "Le numéro de siret doit contenir 14 caractères")
      */
     private $CompanySiret;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Length(min = 10, minMessage = "Le téléphone doit contenir 10 chiffres")
+     * @Assert\Regex(pattern="/^(\(0\))?[0-9]+$/", message="Le format doit être par exemple : 0632854169")
      */
     private $CompanyStandardPhone;
 
     /**
-     * @ORM\Column(type="string", length=100, nullable=true)
+     * @ORM\Column(type="string", length=100, unique=true, nullable=true)
+     * @Assert\Email(message = "Veuillez insérer un email valide")
      */
     private $CompanyEmail;
 

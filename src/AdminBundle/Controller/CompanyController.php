@@ -74,6 +74,9 @@ class CompanyController extends AbstractController
         $edit = $companyRepository->find($id);
 
         $form = $this->createForm(CompanyType::class, $edit);
+        $form->add('CompanyPotential', IntegerType::class, array('label' => 'Potentiel', 'required' => false))
+        ->add('CompanyStatus', CheckboxType::class, array('label' => 'Statut', 'required' => false));
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid() && $request->isMethod('POST')) 

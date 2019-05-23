@@ -919,6 +919,14 @@ select::-ms-expand {
     background: #fff url(/build/tel.png) 97% 50% no-repeat;
 }
 
+.input-fax {
+    background: #fff url(/build/fax.png) 97% 50% no-repeat;
+}
+
+.input-web {
+    background: #fff url(/build/web.png) 97% 50% no-repeat;
+}
+
 .form-buttons {
     margin-bottom: 5%;
     padding-left: 70%;
