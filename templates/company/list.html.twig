@@ -5,12 +5,9 @@
 {% endblock %}
 
 {% set nombre = 0 %}
-{% for uneEntreprise in lesEntreprises %}
-	{% set nombre = nombre + 1 %}
-{% endfor %}
 
 {% block h1 %}
-	Entreprises <span class="text-danger h5">({{ nombre }})</span>
+	Entreprises <span class="text-danger h5">({{lesEntreprises|length}})</span>
 {% endblock %}
 
 {% block contentBodyContainer %}
@@ -43,14 +40,22 @@
 								<input type="checkbox" class="checkthis" name="deleteData[]" value="{{ uneEntreprise.Id }}">
 							</td>
 							<td>
-								<a href="{{ path('editCompany', {'id':uneEntreprise.Id}) }}">	{{uneEntreprise.CompanyLogo}}</a>
+								{% if uneEntreprise.CompanyLogo is not null %}
+									<img src="{{asset('build/images/' ~ uneEntreprise.CompanyLogo)}}" class="table-img-profile rounded-circle" title="Logo" alt="Aucun logo">
+								{% else %}
+									<img src="{{asset('build/Photo.png')}}" class="table-img-profile rounded-circle" title="Logo" alt="Logo de l'entreprise">
+								{% endif %}
 							</td>
 							<td>
 								<a href="{{ path('editCompany', {'id':uneEntreprise.Id}) }}">	{{uneEntreprise.CompanyLastName}}</a>
 							</td>
 							<td>
-								<a href="{{ path('editCompany', {'id':uneEntreprise.id}) }}">	{{ uneEntreprise.CompanyCodeNAF }}</a>
-							</td>
+								{% if uneEntreprise.idCompanyCodeNAF is not null %}
+									<a href="{{ path('editCompany', {'id':uneEntreprise.id}) }}">	{{uneEntreprise.idCompanyCodeNAF.label}}</a>
+								{% else %}
+									<a href="{{ path('editCompany', {'id':uneEntreprise.id}) }}"></a>
+								{% endif %}
+								</td>
 							<td>
 								<a href="{{ path('editCompany', {'id':uneEntreprise.Id}) }}">	{{uneEntreprise.CompanyPostalCode}}</a>
 							</td>
@@ -140,7 +145,7 @@
 					<ul class="pagination pagination-lg pager" id="myPager"></ul>
 				</div>
 				<div class="table-after-btn-add">
-					<button class="btn add-button"><a href="{{ path('newCompany') }}">Ajouter</a></button>
+					<button class="btn add-button"><a href="{{ path('newCompany') }}">AJOUTER</a></button>
 				</div>
 			</div>
 		</div>

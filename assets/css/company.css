@@ -20,7 +20,35 @@
     background-color: #cf1740;
 }
 
+.company-nbContact-0{
+    width: 30px;
+    background-color: #cf17405c
+}
+
 .onglets:hover {
     background-color: rgba(217, 217, 217, 0.2);
     transition-delay: 0.3;
+}
+
+.mandatory-white {
+    border-color: white;
+}
+
+sidebar-dark .nav-item.active .nav-link, .mandatory-white {
+    border-left: 0.25em solid white;
+}
+
+textarea {
+    min-height: 40px;
+    max-height: 100px;
+}
+
+.form-left > div {
+    margin-bottom: 3%;
+    height: 45px;
+}
+
+.form-right > div {
+    margin-bottom: 3%;
+    height: 45px;
 }

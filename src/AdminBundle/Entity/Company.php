@@ -20,7 +20,7 @@ class Company
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, unique=true)
      * @Assert\NotBlank
      */
     private $CompanyCode;
@@ -34,18 +34,12 @@ class Company
     /**
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private $CompanyDateCreatedPlug;
-
-    /**
-     * @ORM\Column(type="datetime", nullable=true)
-     */
     private $CompanyDateUpdate;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", nullable=true)
      */
     private $CompanyStatus;
-
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -54,38 +48,36 @@ class Company
     private $CompanyLogo;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="text", nullable=true)
      */
     private $CompanyComments;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $CompanyAddress;
 
     /**
-     * @ORM\Column(type="string", length=10)
-     * @Assert\NotBlank
+     * @ORM\Column(type="string", length=20, nullable=true)
+     * @Assert\Length(min = 5, minMessage = "Le code postal doit contenir au minimum 5 caractères !")
      */
     private $CompanyPostalCode;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $CompanyCity;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=false)
-     * @Assert\NotBlank
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Length(min = 10, minMessage = "Le fax doit contenir 10 chiffres !")
+     * @Assert\Regex(pattern="/^(\(0\))?[0-9]+$/", message="Le format doit être par exemple : 0344715265")
      */
     private $CompanyFax;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=false)
-     * @Assert\NotBlank
-     * @Assert\Url
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Url(message = "Veuillez insérer une URL valide")
      */
     private $CompanyWebSite;
 
@@ -95,34 +87,28 @@ class Company
     private $CompanyCreationDate;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=false)
-     * @Assert\NotBlank
+     * @ORM\Column(type="string", length=14, unique=true, nullable=true)
+     * @Assert\Length(min = 14, minMessage = "Le numéro de siret doit contenir 14 caractères")
      */
     private $CompanySiret;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=false)
-     * @Assert\NotBlank
-     */
-    private $CompanyCodeNAF;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=false)
-     * @Assert\NotBlank
-     */
-    private $CompanySource;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank
-     */
-    private $CompanyCodeCommercial;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Length(min = 10, minMessage = "Le téléphone doit contenir 10 chiffres")
+     * @Assert\Regex(pattern="/^(\(0\))?[0-9]+$/", message="Le format doit être par exemple : 0632854169")
      */
     private $CompanyStandardPhone;
+
+    /**
+     * @ORM\Column(type="string", length=100, unique=true, nullable=true)
+     * @Assert\Email(message = "Veuillez insérer un email valide")
+     */
+    private $CompanyEmail;
+
+    /**
+     * @ORM\Column(type="integer", length=11, nullable=true)
+     */
+    private $CompanyPotential;
 
     /**
      * @ORM\OneToMany(targetEntity="App\AdminBundle\Entity\Contact", mappedBy="idCompany")
@@ -131,167 +117,162 @@ class Company
 
     public function __construct()
     {
+        $this->companyCreationDate = new \DateTime(); // Par défaut, la date de création de la fiche commercial est la date d'aujourd'hui
+
         $this->contacts = new ArrayCollection();
     }
   
     /**
      * @ORM\ManyToOne(targetEntity="App\AdminBundle\Entity\CompanyCountry", inversedBy="companies")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $idCompanyCountry;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\AdminBundle\Entity\CompanyLegalStatus", inversedBy="companies")
+     * @ORM\ManyToOne(targetEntity="App\AdminBundle\Entity\CompanyStatus", inversedBy="companies")
      * @ORM\JoinColumn(nullable=false)
+     */
+    private $idCompanyStatus;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\AdminBundle\Entity\Commercial", inversedBy="companies")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $idUser;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\AdminBundle\Entity\CompanyLegalStatus", inversedBy="companies")
+     * @ORM\JoinColumn(nullable=true)
      */
     private $idCompanyLegalStatus;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\AdminBundle\Entity\Commercial", inversedBy="companies")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $idUser;
-
-
-    /**
-     * @ORM\ManyToOne(targetEntity="App\AdminBundle\Entity\CompanyActivitySector", inversedBy="companies")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $idCompanyActivitySector;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="App\AdminBundle\Entity\CompanyBusinessCategory", inversedBy="companies")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $idCompanyBusinessCategory;
-
-    /**
      * @ORM\ManyToOne(targetEntity="App\AdminBundle\Entity\CompanyNbEmployee", inversedBy="companies")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $idCompanyNbEmployee;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\AdminBundle\Entity\CompanyTurnover", inversedBy="companies")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $idCompanyTurnover;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\AdminBundle\Entity\CompanyLastTurnover", inversedBy="companies")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\ManyToOne(targetEntity="App\AdminBundle\Entity\CompanyCodeNAF", inversedBy="companies")
+     * @ORM\JoinColumn(nullable=true)
      */
-    private $idCompanyLastTurnover;
+    private $idCompanyCodeNAF;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getCode(): ?string
+    public function getCompanyCode(): ?string
     {
-        return $this->code;
+        return $this->CompanyCode;
     }
 
-    public function setCode(string $code): self
+    public function setCompanyCode(string $CompanyCode): self
     {
-        $this->code = $code;
+        $this->CompanyCode = $CompanyCode;
 
         return $this;
     }
 
-    public function getLastName(): ?string
+    public function getCompanyLastName(): ?string
     {
-        return $this->lastName;
+        return $this->CompanyLastName;
     }
 
-    public function setLastName(string $lastName): self
+    public function setCompanyLastName(string $CompanyLastName): self
     {
-        $this->lastName = $lastName;
+        $this->CompanyLastName = $CompanyLastName;
 
         return $this;
     }
 
-    public function getCommercialCode(): ?string
+    public function getCompanyStatus(): ?bool
     {
-        return $this->commercialCode;
+        return $this->CompanyStatus;
     }
 
-    public function setCommercialCode(?string $commercialCode): self
+    public function setCompanyStatus(?bool $CompanyStatus): self
     {
-        $this->commercialCode = $commercialCode;
+        $this->CompanyStatus = $CompanyStatus;
 
         return $this;
     }
 
-    public function getStatus(): ?bool
+    public function getCompanyLogo(): ?string
     {
-        return $this->status;
+        return $this->CompanyLogo;
     }
 
-    public function setStatus(?bool $status): self
+    public function setCompanyLogo(?string $CompanyLogo): self
     {
-        $this->status = $status;
+        $this->CompanyLogo = $CompanyLogo;
 
         return $this;
     }
 
-    public function getLogo(): ?string
+    public function getCompanyComments(): ?string
     {
-        return $this->logo;
+        return $this->CompanyComments;
     }
 
-    public function setLogo(?string $logo): self
+    public function setCompanyComments(?string $CompanyComments): self
     {
-        $this->logo = $logo;
+        $this->CompanyComments = $CompanyComments;
 
         return $this;
     }
 
-    public function getComments(): ?string
+    public function getCompanyAddress(): ?string
     {
-        return $this->comments;
+        return $this->CompanyAddress;
     }
 
-    public function setComments(?string $comments): self
+    public function setCompanyAddress(?string $CompanyAddress): self
     {
-        $this->comments = $comments;
+        $this->CompanyAddress = $CompanyAddress;
 
         return $this;
     }
 
-    public function getAddress(): ?string
+    public function getCompanyStandardPhone(): ?string
     {
-        return $this->address;
+        return $this->CompanyStandardPhone;
     }
 
-    public function setAddress(?string $address): self
+    public function setCompanyStandardPhone(?string $CompanyStandardPhone): self
     {
-        $this->address = $address;
+        $this->CompanyStandardPhone = $CompanyStandardPhone;
 
         return $this;
     }
 
-    public function getAddressSupplement(): ?string
+    public function getCompanyEmail(): ?string
     {
-        return $this->addressSupplement;
+        return $this->CompanyEmail;
     }
 
-    public function setAddressSupplement(?string $addressSupplement): self
+    public function setCompanyEmail(?string $CompanyEmail): self
     {
-        $this->addressSupplement = $addressSupplement;
+        $this->CompanyEmail = $CompanyEmail;
 
         return $this;
     }
 
-    public function getStandardPhone(): ?string
+    public function getCompanyPotential(): ?int
     {
-        return $this->standardPhone;
+        return $this->CompanyPotential;
     }
 
-    public function setStandardPhone(?string $standardPhone): self
+    public function setCompanyPotential(?int $CompanyPotential): self
     {
-        $this->standardPhone = $standardPhone;
+        $this->CompanyPotential = $CompanyPotential;
 
         return $this;
     }
@@ -332,122 +313,14 @@ class Company
         return $this;
     }
 
-    public function getCompanyCodeNAF(): ?string
+    public function getIdCompanyLegalStatus(): ?CompanyLegalStatus
     {
-        return $this->CompanyCodeNAF;
+        return $this->idCompanyLegalStatus;
     }
 
-    public function setCompanyCodeNAF(?string $CompanyCodeNAF): self
+    public function setIdCompanyLegalStatus(?CompanyLegalStatus $idCompanyLegalStatus): self
     {
-        $this->CompanyCodeNAF = $CompanyCodeNAF;
-
-        return $this;
-    }
-
-    public function getCompanySource(): ?string
-    {
-        return $this->CompanySource;
-    }
-
-    public function setCompanySource(?string $CompanySource): self
-    {
-        $this->CompanySource = $CompanySource;
-
-        return $this;
-    }
-
-    public function getCompanyCode(): ?string
-    {
-        return $this->CompanyCode;
-    }
-
-    public function setCompanyCode(string $CompanyCode): self
-    {
-        $this->CompanyCode = $CompanyCode;
-
-        return $this;
-    }
-
-    public function getCompanyLastName(): ?string
-    {
-        return $this->CompanyLastName;
-    }
-
-    public function setCompanyLastName(string $CompanyLastName): self
-    {
-        $this->CompanyLastName = $CompanyLastName;
-
-        return $this;
-    }
-
-    public function getCompanyCodeCommercial(): ?string
-    {
-        return $this->CompanyCodeCommercial;
-    }
-
-    public function setCompanyCodeCommercial(string $CompanyCodeCommercial): self
-    {
-        $this->CompanyCodeCommercial = $CompanyCodeCommercial;
-
-        return $this;
-    }
-
-    public function getCompanyStatus(): ?bool
-    {
-        return $this->CompanyStatus;
-    }
-
-    public function setCompanyStatus(bool $CompanyStatus): self
-    {
-        $this->CompanyStatus = $CompanyStatus;
-
-        return $this;
-    }
-
-    public function getCompanyLogo(): ?string
-    {
-        return $this->CompanyLogo;
-    }
-
-    public function setCompanyLogo(string $CompanyLogo): self
-    {
-        $this->CompanyLogo = $CompanyLogo;
-
-        return $this;
-    }
-
-    public function getCompanyComments(): ?string
-    {
-        return $this->CompanyComments;
-    }
-
-    public function setCompanyComments(string $CompanyComments): self
-    {
-        $this->CompanyComments = $CompanyComments;
-
-        return $this;
-    }
-
-    public function getCompanyAddress(): ?string
-    {
-        return $this->CompanyAddress;
-    }
-
-    public function setCompanyAddress(string $CompanyAddress): self
-    {
-        $this->CompanyAddress = $CompanyAddress;
-
-        return $this;
-    }
-
-    public function getCompanyStandardPhone(): ?string
-    {
-        return $this->CompanyStandardPhone;
-    }
-
-    public function setCompanyStandardPhone(string $CompanyStandardPhone): self
-    {
-        $this->CompanyStandardPhone = $CompanyStandardPhone;
+        $this->idCompanyLegalStatus = $idCompanyLegalStatus;
 
         return $this;
     }
@@ -467,7 +340,7 @@ class Company
             $contact->setIdCompany($this);
         }
     }
-  
+
     public function getIdCompanyCountry(): ?CompanyCountry
     {
         return $this->idCompanyCountry;
@@ -476,6 +349,18 @@ class Company
     public function setIdCompanyCountry(?CompanyCountry $idCompanyCountry): self
     {
         $this->idCompanyCountry = $idCompanyCountry;
+
+        return $this;
+    }
+  
+    public function getIdUser(): ?Commercial
+    {
+        return $this->idUser;
+    }
+
+    public function setIdUser(?Commercial $idUser): self
+    {
+        $this->idUser = $idUser;
 
         return $this;
     }
@@ -490,50 +375,15 @@ class Company
             }
         }
     }
-    public function getIdCompanyLegalStatus(): ?CompanyLegalStatus
+
+    public function getIdCompanyStatus(): ?CompanyStatus
     {
-        return $this->idCompanyLegalStatus;
+        return $this->idCompanyStatus;
     }
 
-    public function setIdCompanyLegalStatus(?CompanyLegalStatus $idCompanyLegalStatus): self
+    public function setIdCompanyStatus(?CompanyStatus $idCompanyStatus): self
     {
-        $this->idCompanyLegalStatus = $idCompanyLegalStatus;
-
-        return $this;
-    }
-
-    public function getIdUser(): ?Commercial
-    {
-        return $this->idUser;
-    }
-
-    public function setIdUser(?Commercial $idUser): self
-    {
-        $this->idUser = $idUser;
-
-        return $this;
-    }
-
-    public function getIdCompanyActivitySector(): ?CompanyActivitySector
-    {
-        return $this->idCompanyActivitySector;
-    }
-
-    public function setIdCompanyActivitySector(?CompanyActivitySector $idCompanyActivitySector): self
-    {
-        $this->idCompanyActivitySector = $idCompanyActivitySector;
-
-        return $this;
-    }
-
-    public function getIdCompanyBusinessCategory(): ?CompanyBusinessCategory
-    {
-        return $this->idCompanyBusinessCategory;
-    }
-
-    public function setIdCompanyBusinessCategory(?CompanyBusinessCategory $idCompanyBusinessCategory): self
-    {
-        $this->idCompanyBusinessCategory = $idCompanyBusinessCategory;
+        $this->idCompanyStatus = $idCompanyStatus;
 
         return $this;
     }
@@ -562,14 +412,14 @@ class Company
         return $this;
     }
 
-    public function getIdCompanyLastTurnover(): ?CompanyLastTurnover
+    public function getIdCompanyCodeNAF(): ?CompanyCodeNAF
     {
-        return $this->idCompanyLastTurnover;
+        return $this->idCompanyCodeNAF;
     }
 
-    public function setIdCompanyLastTurnover(?CompanyLastTurnover $idCompanyLastTurnover): self
+    public function setIdCompanyCodeNAF(?CompanyCodeNAF $idCompanyCodeNAF): self
     {
-        $this->idCompanyLastTurnover = $idCompanyLastTurnover;
+        $this->idCompanyCodeNAF = $idCompanyCodeNAF;
 
         return $this;
     }
@@ -582,18 +432,6 @@ class Company
     public function setCompanyCreationDate(\DateTimeInterface $CompanyCreationDate): self
     {
         $this->CompanyCreationDate = $CompanyCreationDate;
-
-        return $this;
-    }
-
-    public function getCompanyDateCreatedPlug(): ?\DateTimeInterface
-    {
-        return $this->CompanyDateCreatedPlug;
-    }
-
-    public function setCompanyDateCreatedPlug(\DateTimeInterface $CompanyDateCreatedPlug): self
-    {
-        $this->CompanyDateCreatedPlug = $CompanyDateCreatedPlug;
 
         return $this;
     }

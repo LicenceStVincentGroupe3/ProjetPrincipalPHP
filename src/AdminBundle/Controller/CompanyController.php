@@ -13,6 +13,8 @@ use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\VarDumper\VarDumper;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 
 // Préfix url
 /**
@@ -33,15 +35,30 @@ class CompanyController extends AbstractController
         if ($form->isSubmitted() && $form->isValid())
         {
             $new = $form->getData();
+            $companyPicture = $form['CompanyLogo']->getData();
+            $file = $companyPicture;
+
+            if ($file !== null)
+            {
+                $fileName = $file->getClientOriginalName();
+
+                // On envoit le fichier dans le dossier images
+                try {
+                    $file->move($this->getParameter('images_directory'), $fileName);
+                } catch (FileException $e) {
+                    // S'il y a un soucis pendant l'upload on catch
+                }
+
+                $new->setCompanyLogo($fileName);
+            }
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($new);
             $entityManager->flush();
 
-
             return $this->redirectToRoute('listCompany');
         }
-        return $this->render('company/new.html.twig', array('form' => $form->createView(),));
+        return $this->render('company/new.html.twig', array('form' => $form->createView()));
     }
 
     /**
@@ -59,6 +76,9 @@ class CompanyController extends AbstractController
         $edit = $companyRepository->find($id);
 
         $form = $this->createForm(CompanyType::class, $edit);
+        $form->add('CompanyPotential', IntegerType::class, array('label' => 'Potentiel', 'required' => false))
+        ->add('CompanyStatus', CheckboxType::class, array('label' => 'Statut', 'required' => false));
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid() && $request->isMethod('POST')) 

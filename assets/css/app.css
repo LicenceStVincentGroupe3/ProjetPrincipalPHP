@@ -552,6 +552,7 @@ a:hover {
 
 .my-form-field select {
     color: #999999;
+    border: 2px solid;
 }
 
 .my-form-label {
@@ -922,6 +923,14 @@ select::-ms-expand {
 
 .input-tel {
     background: #fff url(/build/tel.png) 97% 50% no-repeat;
+}
+
+.input-fax {
+    background: #fff url(/build/fax.png) 97% 50% no-repeat;
+}
+
+.input-web {
+    background: #fff url(/build/web.png) 97% 50% no-repeat;
 }
 
 .form-buttons {
