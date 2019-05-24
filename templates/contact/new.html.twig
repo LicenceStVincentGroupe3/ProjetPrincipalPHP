@@ -7,7 +7,7 @@
 {% block stylesheet %}
 	{{parent()}}
 	{{ encore_entry_link_tags('tabs') }}
-	<!-- <link rel="stylesheet" href="/build/tabs.css"> Autre façon d'appler le fichier css -->
+	<!-- <link rel="stylesheet" href="/build/tabs.css"> Autre façon d'appeler le fichier css -->
 {% endblock %}
 
 {# {% block contentSearch %}
@@ -124,10 +124,10 @@
 							{% endif %}
 						</div>
 						<div class="row my-form-field">
-							<div class="col-lg-4 mx-auto">
+							<div class="col-lg-4">
 								{{ form_label(form.contactBirthDate, null, {'label_attr': {'class': 'my-form-label'}}) }}
 							</div>
-							<div class="col-lg-7 mx-auto mandatory-white">
+							<div class="col-lg-7 mandatory-white">
 								<div class="form-group">
 									<div class='input-group date' id='datetimepicker2'>
 										{{ form_widget(form.contactBirthDate, {'attr': {'class': 'my-form-input-tiny'}}) }}
@@ -255,6 +255,7 @@
 							{% else %}
 								<div class="col-lg-1 mx-auto pl-0"></div>
 							{% endif %}
+						</div>
 					</div>
 					<div class="col-lg-6 mx-auto form-right">
 						<div class="row my-form-field">
@@ -334,8 +335,22 @@
 								{# {{ form_label(form.departureDate) }} #}
 								{{ form_widget(form.departureDate, {'attr': {'class': 'my-form-input-tiny2'}}) }}
 							</div>
-							<div class="col-lg-1 mx-auto pl-0"></div>
-						</div>
+							{% if form.arrivalDate.vars.errors|length > 0 or form.departureDate.vars.errors|length > 0 %}
+								<div class="col-lg-1 mx-auto pl-0">
+									<button type="button" style="padding: 3px 6px;" class="btn btn-danger rounded-circle" data-title="Erreur de saisie" data-trigger="focus" data-container="body" data-toggle="popover" data-placement="top" data-content="
+                                    {% for error in form.departureDate.vars.errors  %}
+                                        -{{ error.messagePluralization is null
+									? error.messageTemplate|trans(error.messageParameters, 'validators')
+									: error.messageTemplate|transchoice(error.messagePluralization, error.messageParameters, 'validators')
+									}}<br>
+                                    {% endfor %}
+                                    "><i class="fas fa-exclamation-circle"></i>
+									</button>
+								</div>
+							{% else %}
+								<div class="col-lg-1 mx-auto pl-0"></div>
+							{% endif %}
+						</div><br><br>
 						<div class="row my-form-field">
 							<div class="col-lg-4 mx-auto">
 								{{ form_label(form.contactDecisionLevel, 'Pouvoir décisionnel', {'label_attr': {'class': 'my-form-label'}}) }}
@@ -435,25 +450,9 @@
 					<button class="btn btn-white-red return-button" type="button">
 						<a href="{{ path('listCont') }}">ANNULER</a>
 					</button>
-				{{ form_widget(form.save, { 'label': 'AJOUTER', 'attr': {'class': 'btn btn-red submit-button'}}) }}
-				{{ form_end(form) }}
+					{{ form_widget(form.save, { 'label': 'AJOUTER', 'attr': {'class': 'btn btn-red submit-button'}}) }}
 				</div>
-			</section>
-
-			<section id="company" class="tab-panel">
-				<h2>6B. Rauchbier</h2>
-				<p><strong>Overall Impression:</strong>  An elegant, malty German amber lager with a balanced, complementary beechwood smoke character. Toasty-rich malt in aroma and flavor, restrained bitterness, low to high smoke flavor, clean fermentation profile, and an attenuated finish are characteristic.</p>
-				<p><strong>History:</strong> A historical specialty of the city of Bamberg, in the Franconian region of Bavaria in Germany. Beechwood-smoked malt is used to make a Märzen-style amber lager. The smoke character of the malt varies by maltster; some breweries produce their own smoked malt (rauchmalz).</p>
-			</section>
-
-			<section id="contact" class="tab-panel">
-				<h2>6C. Dunkles Bock</h2>
-				<p><strong>Overall Impression:</strong> A dark, strong, malty German lager beer that emphasizes the malty-rich and somewhat toasty qualities of continental malts without being sweet in the finish.</p>
-				<p><strong>History:</strong> Originated in the Northern German city of Einbeck, which was a brewing center and popular exporter in the days of the Hanseatic League (14th to 17th century). Recreated in Munich starting in the 17th century. The name “bock” is based on a corruption of the name “Einbeck” in the Bavarian dialect, and was thus only used after the beer came to Munich. “Bock” also means “Ram” in German, and is often used in logos and advertisements.</p>
-			</section>
-
-			<section id="historic" class="tab-panel">
-				<h2>Historique</h2>
+				{{ form_end(form) }}
 			</section>
 		</div>
 	</div>

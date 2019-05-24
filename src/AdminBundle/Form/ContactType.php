@@ -58,9 +58,9 @@ class ContactType extends AbstractType
 
     		->add('idCompany', EntityType::class, array('class' => Company::class, 'choice_label' => 'CompanyLastName', 'label'=>'Entreprise', 'placeholder'=>'', 'required' => false))
 
-    		->add('contactDecisionLevel', ChoiceType::class, array('choices' => array(''=>0, 'Employé'=>1, 'Cadre'=>2, 'Cadre supérieur'=>3, 'Manager'=>4, 'Directeur'=>5, 'required' => false)))
+    		->add('contactDecisionLevel', ChoiceType::class, array('choices' => array('Employé'=>1, 'Cadre'=>2, 'Cadre supérieur'=>3, 'Manager'=>4, 'Directeur'=>5), 'required' => false))
 
-    		->add('idContactJob', EntityType::class, array('class' => ContactJob::class, 'choice_label' => 'contactJobName', 'label'=>'Métier' ))
+    		->add('idContactJob', EntityType::class, array('class' => ContactJob::class, 'choice_label' => 'contactJobName', 'label'=>'Métier', 'placeholder'=>'', 'required' => false))
 
     		->add('contactOptInCommercialOffers', CheckboxType::class, array('label'    => 'Informations','required' => false))
 

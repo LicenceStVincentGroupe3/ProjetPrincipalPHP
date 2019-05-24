@@ -9,6 +9,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @UniqueEntity(fields="contactEmail", message="Adresse mail déjà existant")
+ * @UniqueEntity(fields="contactCode", message="Code du contact déjà existant")
  * @ORM\Entity(repositoryClass="App\AdminBundle\Repository\ContactRepository")
  */
 class Contact
@@ -21,7 +22,7 @@ class Contact
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, unique=true)
      * @Assert\NotBlank(message = "Ce champ ne peut être vide.")
      */
     private $contactCode;
@@ -85,7 +86,7 @@ class Contact
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
-     * @Assert\Datetime(message = "Date invalide")
+     * @Assert\Type("\DateTime", message = "Date invalide(format requis : DD/MM/YYYY)")
      */
     private $contactBirthDate;
 
@@ -131,13 +132,13 @@ class Contact
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
-     * @Assert\DateTime
+     * @Assert\DateTime(message = "Date invalide(format requis : DD/MM/YYYY)")
      */
     private $arrivalDate;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
-     * @Assert\DateTime
+     * @Assert\DateTime(message = "Date invalide(format requis : DD/MM/YYYY)")
      */
     private $departureDate;
 
@@ -193,7 +194,7 @@ class Contact
 
     /**
      * @ORM\ManyToOne(targetEntity="App\AdminBundle\Entity\ContactJob", inversedBy="contacts")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $idContactJob;
 

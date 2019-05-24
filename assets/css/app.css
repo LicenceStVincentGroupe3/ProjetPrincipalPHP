@@ -507,17 +507,13 @@ a:hover {
 }
 
 .last-upd2 {
-    width: 70%;
+    width: 60%;
     font-size: 12px;
 }
 
 .status {
     display: flex;
     justify-content: flex-end;
-}
-
-.status h6 {
-    margin-right: 10%;
 }
 
 .form-left > div {
