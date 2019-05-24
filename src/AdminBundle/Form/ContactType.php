@@ -36,10 +36,10 @@ class ContactType extends AbstractType
     		->add('contactGender', ChoiceType::class, array('choices' => array('Homme'=>0, 'Femme'=>1)))
 
     		->add('contactBirthDate', DateType::class,  array('label' => 'Date de naissance', 'widget' => 'single_text', 'required' => false))
-    		->add('contactEmail', TextType::class, array('label' => 'Email', 'required' => false))
+    		->add('contactEmail', EmailType::class, array('label' => 'Email', 'required' => false))
     		->add('contactMobilePhone', TelType::class, array('label' => 'Tel. Mobile', 'required' => false))
     		->add('contactDirectLandline', TelType::class, array('label' => 'Tel. Fixe direct', 'required' => false))
-			->add('contactStandartPhone', TelType::class, array('label' => 'Tel. du standart', 'required' => false))
+			->add('contactStandartPhone', TelType::class, array('label' => 'Tel. du standard', 'required' => false))
             ->add('contactLinkedinAddress', UrlType::class, array('label' => 'Profil Linkedin', 'required' => false))
 			->add('contactFacebookAddress', UrlType::class, array('label' => 'Profil Facebook', 'required' => false))
 			->add('contactTwitterAddress', UrlType::class, array('label' => 'Profil Twitter', 'required' => false))

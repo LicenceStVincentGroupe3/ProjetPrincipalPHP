@@ -29,7 +29,7 @@
             {% set contactYears = differenceDate.y %}
 
             <h6>
-                <b>{{ sexe }} {{ editContact.contactFirstName }} {{ editContact.contactLastName }}</b>, {% if editContact.idContactJob is not null %}{{ editContact.idContactJob.contactJobName }}{% else %}{% endif %}
+                <b>{{ sexe }} {{ editContact.contactFirstName }} {{ editContact.contactLastName }}</b> {% if editContact.idContactJob is not null %}, {{ editContact.idContactJob.contactJobName }}{% else %}{% endif %}
                 , {{ contactYears }} ans</h6>
         </div>
 
