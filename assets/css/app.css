@@ -223,7 +223,7 @@ a:hover {
 }
 
 .table-img-profile2 {
-    width: 25%;
+    width: 20%;
     margin-right: 5%;
 }
 
@@ -507,7 +507,12 @@ a:hover {
 }
 
 .last-upd2 {
-    width: 60%;
+    width: 55%;
+    font-size: 12px;
+}
+
+.last-upd3{
+    width: 40%;
     font-size: 12px;
 }
 
