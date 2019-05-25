@@ -1,0 +1,125 @@
+{{ form_start(form) }}
+    <div class="row">
+        <div class="col-lg-7 mx-auto my-form-left-side">
+            <div class="row my-form-field {% if form.operationCode.vars.errors|length %}my-form-error-container{% endif %}">
+                <div class="col-lg-4 mx-auto">
+                    {{ form_label(form.operationCode, null, {'label_attr': {'class': 'my-form-label'}}) }}
+                </div>
+                <div class="col-lg-7 mx-auto mandatory">
+                    {{ form_widget(form.operationCode, {'attr': {'class': 'form-control my-form-input-little'}}) }}
+                </div>
+                {% if form.operationCode.vars.errors|length %}
+                    <div class="alert alert-danger my-form-error">
+                        {{ form_errors(form.operationCode, {'attr': {'class': 'list-unstyled mb-0'}}) }}
+                    </div>
+                {% endif %}
+            </div>
+            <div class="row my-form-field {% if form.operationName.vars.errors|length %}my-form-error-container{% endif %}">
+                <div class="col-lg-4 mx-auto">
+                    {{ form_label(form.operationName, null, {'label_attr': {'class': 'my-form-label'}}) }}
+                </div>
+                <div class="col-lg-7 mx-auto mandatory">
+                    {{ form_widget(form.operationName, {'attr': {'class': 'form-control my-form-input-big'}}) }}
+                </div>
+                {% if form.operationName.vars.errors|length %}
+                    <div class="alert alert-danger my-form-error">
+                        {{ form_errors(form.operationName, {'attr': {'class': 'list-unstyled mb-0'}}) }}
+                    </div>
+                {% endif %}
+            </div>
+            <div class="row my-form-field {% if form.operationRevival.vars.errors|length %}my-form-error-container{% endif %}">
+                <div class="col-lg-4 mx-auto">
+                    {{ form_label(form.operationRevival, null, {'label_attr': {'class': 'my-form-label'}}) }}
+                </div>
+                <div class="col-lg-7 mx-auto">
+                    {{ form_widget(form.operationRevival, {'attr': {'class': 'form-control my-form-input-tiny'}}) }}
+                </div>
+                {% if form.operationRevival.vars.errors|length %}
+                    <div class="alert alert-danger my-form-error">
+                        {{ form_errors(form.operationRevival, {'attr': {'class': 'list-unstyled mb-0'}}) }}
+                    </div>
+                {% endif %}
+            </div>
+            <div class="row my-form-field">
+                <div class="col-lg-4 mx-auto">
+                    {{ form_label(form.operationSendingDate, null, {'label_attr': {'class': 'my-form-label'}}) }}
+                </div>
+                <div class="col-lg-7 mx-auto">
+                    <div class="form-group">
+                        <div class='input-group date'>
+                            {{ form_widget(form.operationSendingDate, {'attr': {'class': 'my-form-input-tiny'}}) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row my-form-field">
+                <div class="col-lg-4 mx-auto">
+                    {{ form_label(form.operationClosingDate, null, {'label_attr': {'class': 'my-form-label'}}) }}
+                </div>
+                <div class="col-lg-7 mx-auto">
+                    <div class="form-group">
+                        <div class='input-group date'>
+                            {{ form_widget(form.operationClosingDate, {'attr': {'class': 'my-form-input-tiny'}}) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row my-form-field">
+                <div class="col-lg-4 mx-auto">
+                    {{ form_label(form.operationOptInformation, null, {'label_attr': {'class': 'my-form-label'}}) }}
+                </div>
+                <div class="col-lg-7 mx-auto">
+                    {{ form_widget(form.operationOptInformation, {'attr': {'class': 'form-control my-form-input-big'}}) }}
+                </div>
+            </div>
+            <div class="row my-form-field">
+                <div class="col-lg-4 mx-auto">
+                    {{ form_label(form.operationOptSalesOffer, null, {'label_attr': {'class': 'my-form-label'}}) }}
+                </div>
+                <div class="col-lg-7 mx-auto">
+                    {{ form_widget(form.operationOptSalesOffer, {'attr': {'class': 'form-control my-form-input-big'}}) }}
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-5 mx-auto my-form-right-side">
+            <div class="row my-form-field">
+                <div class="col-lg-5 mx-auto">
+                    {{ form_label(form.author, null,  { "label_attr" : { "class" : "my-form-label"}}) }}
+                </div>
+                <div class="col-lg-7 mx-auto">
+                    {{ form_widget(form.author, { "attr" : { "class" : "form-control my-form-input-big"}}) }}
+                </div>
+            </div>
+            <div class="row my-form-field my-form-input-fat-container {% if form.operationComment.vars.errors|length > 0 %}my-form-error-container{% endif %}">
+                <div class="col-lg-5 mx-auto">
+                    {{ form_label(form.operationComment, null, {'label_attr': {'class': 'my-form-label'}}) }}
+                </div>
+                <div class="col-lg-7 mx-auto">
+                    {{ form_widget(form.operationComment, {'attr': {'class': 'form-control my-form-input-fat'}}) }}
+                </div>
+                {% if form.operationComment.vars.errors|length > 0 %}
+                    <div class="alert alert-danger my-form-error">
+                        {{ form_errors(form.operationComment, {'attr': {'class': 'list-unstyled mb-0'}}) }}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <div class="row form-buttons">
+        {% if app.request.attributes.get("_route") == "operations_new" %}
+            <button class="btn btn-white-red return-button" type="button">
+                <a href="{{ path('operations_index') }}">ANNULER</a>
+            </button>
+            {{ form_widget(form.save, { 'label': 'AJOUTER', 'attr': {'class': 'btn btn-red submit-button'}}) }}
+        {% endif %}
+        {% if app.request.attributes.get("_route") == "operations_edit" %}
+            <button class="btn btn-white-red return-button" type="button">
+               <a href="{{ path('deleteOperation', {'operationCode':operation.OperationCode}) }}">SUPPRIMER</a>
+            </button>
+            <button class="btn btn-white-red return-button" type="button">
+               <a href="#">DUPLIQUER</a>
+            </button>
+            {{ form_widget(form.save, { 'label': 'ENREGISTRER', 'attr': {'class': 'btn btn-red submit-button'}}) }}
+        {% endif %}
+    </div>
+{{ form_end(form) }}

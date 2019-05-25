@@ -24,19 +24,19 @@ class Commercial implements UserInterface, \Serializable
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(message = "Cette champ ne peut être vide.")
+     * @Assert\NotBlank(message = "Ce champ ne peut être vide.")
      */
     private $commercialCode;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(message = "Cette champ ne peut être vide.")
+     * @Assert\NotBlank(message = "Ce champ ne peut être vide.")
      */
     private $commercialName;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(message = "Cette champ ne peut être vide.")
+     * @Assert\NotBlank(message = "Ce champ ne peut être vide.")
      */
     private $commercialFirstname;
 
@@ -47,7 +47,7 @@ class Commercial implements UserInterface, \Serializable
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(message = "Cette champ ne peut être vide.")
+     * @Assert\NotBlank(message = "Ce champ ne peut être vide.")
      */
     private $commercialProfil;
 
@@ -154,7 +154,7 @@ class Commercial implements UserInterface, \Serializable
     private $idCompanyCountry;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\AdminBundle\Entity\Operation", mappedBy="idCommercial")
+     * @ORM\OneToMany(targetEntity="App\AdminBundle\Entity\Operations", mappedBy="author")
      */
     private $operations;
 
@@ -187,6 +187,11 @@ class Commercial implements UserInterface, \Serializable
      */
     private $hierarchy;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $archived;
+
     public function __construct()
     { 
         $this->commercialPlugCreation = new \DateTime(); // Par défaut, la date de création de la fiche commercial est la date d'aujourd'hui
@@ -194,6 +199,7 @@ class Commercial implements UserInterface, \Serializable
         $this->arrivalDate = new \DateTime();
 
         $this->commercialStatus = true;
+        $this->archived = false;
 
         $this->contacts = new ArrayCollection();
         $this->companies = new ArrayCollection();
@@ -244,6 +250,11 @@ class Commercial implements UserInterface, \Serializable
         $this->commercialFirstname = $commercialFirstname;
 
         return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->commercialName . " " . $this->commercialFirstname;
     }
 
     public function getCommercialSexe(): ?bool
@@ -450,7 +461,17 @@ class Commercial implements UserInterface, \Serializable
         return $this;
     }
 
+    public function getArchived(): ?bool
+    {
+        return $this->archived;
+    }
 
+    public function setArchived(?bool $archived): self
+    {
+        $this->archived = $archived;
+
+        return $this;
+    }
 
     public function getUsername() {
         return $this->email;
@@ -608,18 +629,35 @@ class Commercial implements UserInterface, \Serializable
     }
 
     /**
-     * @return Collection|Operation[]
+     * @return Collection|Operations[]
      */
     public function getOperations(): Collection
     {
         return $this->operations;
     }
 
-    public function addOperation(Operation $operation): self
+    public function addOperation(Operations $operation): self
     {
         if (!$this->operations->contains($operation)) {
             $this->operations[] = $operation;
             $operation->setidCommercial($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOperation(Collection $operation): self
+    {
+        if ($this->operations->contains($operation)) {
+            $this->operations->removeElement($operation);
+
+            // set the owning side to null (unless already changed)
+            if ($operation->getAuthor() === $this) {
+                $operation->getAuthor(null);
+            }
+            if ($operation->getCommercialLastUpdate() === $this) {
+                $operation->getCommercialLastUpdate(null);
+            }
         }
 
         return $this;

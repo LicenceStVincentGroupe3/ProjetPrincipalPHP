@@ -74,6 +74,20 @@ class Contact
 
     /**
      * @ORM\Column(type="string", nullable=true)
+     */
+    private $contactFacebookAddress;
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $contactTwitterAddress;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $contactCP;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
      * @Assert\Url(message = "Veuillez insérer une URL valide")
      */
     private $contactFacebookAddress;
@@ -307,6 +321,38 @@ class Contact
     }
 
     public function getContactPoste(): ?string
+    {
+        return $this->contactPoste;
+    }
+    public function setContactPoste(?string $contactPoste): self
+    {
+        $this->contactPoste = $contactPoste;
+        return $this;
+    }
+
+    public function getContactFacebookAddress(): ?string
+    {
+        return $this->contactFacebookAddress;
+    }
+    
+    public function setContactFacebookAddress(?string $contactFacebookAddress): self
+    {
+        $this->contactFacebookAddress = $contactFacebookAddress;
+        return $this;
+    }
+    
+    public function getContactTwitterAddress(): ?string
+    {
+        return $this->contactTwitterAddress;
+    }
+    
+    public function setContactTwitterAddress(?string $contactTwitterAddress): self
+    {
+        $this->contactTwitterAddress = $contactTwitterAddress;
+        return $this;
+    }
+
+    public function getContactCP(): ?string
     {
         return $this->contactPoste;
     }

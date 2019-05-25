@@ -36,7 +36,7 @@
 			{% set differenceDate = date("now").diff(date(editCom.CommercialBirthday)) %}
 			{% set commercialYears = differenceDate.y %}
 			
-			<h6><b>{{sexe}} {{editCom.commercialFirstname}} {{editCom.commercialName}}</b>, {{profil}}, {{commercialYears}} ans</h6>
+			<h5><b>{{sexe}} {{editCom.commercialFirstname}} {{editCom.commercialName}}</b>, {{profil}}, {{commercialYears}} ans</h5>
 		</div>
 		<div class="col-lg-6 mx-auto status">
 			<div class="last-upd3">
@@ -485,10 +485,13 @@
 							</div>
 						</div>
 					</div>
-					<div class="row form-buttons">
-                        <button class="btn btn-white-red return-button" type="button">
-                           <a href="{{ path('listCommercial') }}">ANNULER</a>
-                        </button>
+					<div class="row form-buttons form-buttons-large">
+            <button class="btn btn-white-red return-button" type="button">
+               <a href="{{ path('deleteCommercial', {'id':editCom.Id}) }}">SUPPRIMER</a>
+            </button>
+            <button class="btn btn-white-red return-button button-large" type="button">
+               <a href="#">DEMANDE DE MISE A JOUR</a>
+            </button>
 						{{ form_widget(form.save, {'attr': {'class': 'btn btn-red submit-button'}}) }}
 					</div>
 				{{ form_end(form) }}
@@ -515,10 +518,10 @@
 							<tr>
 								<td>
 									{% if company.CompanyLogo is not null %}
-		                            <img src="{{asset('build/images/' ~ company.CompanyLogo)}}" class="table-img-profile rounded-circle" title="Photo" alt="Aucun logo">
-		                            {% else %}
-		                            <img src="{{asset('build/Photo.png')}}" class="table-img-profile rounded-circle" title="Photo" alt="Logo de l'entreprise">
-		                            {% endif %}
+                  <img src="{{asset('build/images/' ~ company.CompanyLogo)}}" class="table-img-profile rounded-circle" title="Photo" alt="Aucun logo">
+                  {% else %}
+                  <img src="{{asset('build/Photo.png')}}" class="table-img-profile rounded-circle" title="Photo" alt="Logo de l'entreprise">
+                  {% endif %}
 									<a href="{{ path('editCompany', {'id':company.Id}) }}">{{company.CompanyLastName}}</a>
 								</td>
 								<td>
@@ -528,6 +531,7 @@
 										<a href="{{ path('editCompany', {'id':company.id}) }}"></a>
 									{% endif %}
 								</td>
+								
 								<td>
 									<a href="{{ path('editCompany', {'id':company.Id}) }}">{{company.CompanyPostalCode}}</a>
 								</td>
@@ -538,13 +542,13 @@
 									<a href="{{ path('editCompany', {'id':company.Id}) }}">Dylan Noally</a>
 								</td>
 								<td>
-									<div class="company-nbCompany">
+									<div class="badge badge-pill badge-green">
 										<a href="{{ path('editCompany', {'id':company.Id}) }}">Client</a>
 									</div>
 								</td>
 								<td>
 									<div class="company-nbContact">
-										<a href="{{ path('editCompany', {'id':company.Id}) }}">Dylan Noally</a>
+										<a href="{{ path('editCompany', {'id':company.Id}) }}">0</a>
 									</div>
 								</td>
 								<td>
@@ -565,6 +569,7 @@
 					</table>
 				</div>
 
+				{% if listCompany|length != 0 %}
 				<div class="table-after">
 					<div class="row">
 						<div class="table-after-entry">
@@ -581,6 +586,7 @@
 				        </div>
 					</div>
 				</div>
+				{% endif %}
 			</section>
 
 			<section id="contact" class="tab-panel">
@@ -604,10 +610,10 @@
 							<tr>
 								<td>
 									{% if contact.ContactPhoto is not null %}
-		                            <img src="{{asset('build/images/' ~ contact.ContactPhoto)}}" class="table-img-profile rounded-circle" title="Photo" alt="Aucun logo">
-		                            {% else %}
-		                            <img src="{{asset('build/Photo.png')}}" class="table-img-profile rounded-circle" title="Photo" alt="Logo de l'entreprise">
-		                            {% endif %}
+                  <img src="{{asset('build/images/' ~ contact.ContactPhoto)}}" class="table-img-profile rounded-circle" title="Photo" alt="Aucun logo">
+                  {% else %}
+                  <img src="{{asset('build/Photo.png')}}" class="table-img-profile rounded-circle" title="Photo" alt="Logo de l'entreprise">
+                  {% endif %}
 									<a href="{{ path('editContact', {'id':contact.Id}) }}">	{{contact.ContactFirstName}}
 									</a>
 								</td>
@@ -642,37 +648,37 @@
 										</a>
 									{% endif %}
 								</td>
-                                <td>
+                <td>
 									{% if contact.idCompany is not null %}
-                                    <a href="{{ path('editContact', {'id':contact.Id}) }}">	{{contact.idCompany.CompanyCity}}
-                                    </a>
+                    <a href="{{ path('editContact', {'id':contact.Id}) }}">	{{contact.idCompany.CompanyCity}}
+                    </a>
 									{% else %}
 										<a href="{{ path('editContact', {'id':contact.Id}) }}">
 										</a>
 									{% endif %}
-                                </td>
-                                <td>
-                                    {% if contact.contactStatus == "0" %}
-                                        <img src="{{asset('build/rouge.png')}}" class="table-img-profile3 rounded-circle" title="Rouge" alt="Statut rouge">
-                                        <a href="{{ path('editContact', {'id':contact.Id}) }}">Obsolète
-                                        </a>
-                                    {% elseif contact.contactStatus == "1" %}
-                                        <img src="{{asset('build/vert.png')}}" class="table-img-profile3 rounded-circle" title="Vert" alt="Statut vert">
-                                        <a href="{{ path('editContact', {'id':contact.Id}) }}">à jour
-                                        </a>
-                                    {% else %}
-                                        <img src="{{asset('build/orange.png')}}" class="table-img-profile3 rounded-circle" title="Orange" alt="Statut orange">
-                                        <a href="{{ path('editContact', {'id':contact.Id}) }}">à vérifier
-                                        </a>
-                                    {% endif %}
-                               </td>
+                </td>
+                <td>
+                    {% if contact.contactStatus == "0" %}
+                        <img src="{{asset('build/rouge.png')}}" class="table-img-profile3 rounded-circle" title="Rouge" alt="Statut rouge">
+                        <a href="{{ path('editContact', {'id':contact.Id}) }}">Obsolète
+                        </a>
+                    {% elseif contact.contactStatus == "1" %}
+                        <img src="{{asset('build/vert.png')}}" class="table-img-profile3 rounded-circle" title="Vert" alt="Statut vert">
+                        <a href="{{ path('editContact', {'id':contact.Id}) }}">à jour
+                        </a>
+                    {% else %}
+                        <img src="{{asset('build/orange.png')}}" class="table-img-profile3 rounded-circle" title="Orange" alt="Statut orange">
+                        <a href="{{ path('editContact', {'id':contact.Id}) }}">à vérifier
+                        </a>
+                    {% endif %}
+               </td>
 								<td>
 									{% if contact.contactEmail is not null %}
 										<img src="{{asset('build/mail.png')}}" class="commercial-mail" title="{{contact.contactEmail}}" alt="Email du contact">
 									{% endif %}
-                                    {% if contact.contactMobilePhone is not null %}
-                                        <img src="{{asset('build/tel.png')}}" class="commercial-tel" title="{{contact.contactMobilePhone}}" alt="Tél. fixe direct du contact">
-                                    {% endif %}
+                  {% if contact.contactMobilePhone is not null %}
+                      <img src="{{asset('build/tel.png')}}" class="commercial-tel" title="{{contact.contactMobilePhone}}" alt="Tél. fixe direct du contact">
+                  {% endif %}
 								</td>
 							</tr>
 							{% else %}
@@ -684,6 +690,7 @@
 					</table>
 				</div>
 
+				{% if listCompany|length != 0 %}
 				<div class="table-after">
 					<div class="row">
 						<div class="table-after-entry">
@@ -700,6 +707,7 @@
 				        </div>
 					</div>
 				</div>
+				{% endif %}
 			</section>
 
 			<section id="historic" class="tab-panel">
