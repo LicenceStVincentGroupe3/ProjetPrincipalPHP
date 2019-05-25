@@ -51,6 +51,19 @@ class ContactRepository extends ServiceEntityRepository
         return $rowDeleted;
     }
 
+    // ---- Suppression un ou plusieurs commercial(commerciaux) selectionné(s)
+    public function resetContacts($listCom)
+    {
+        return $this->createQueryBuilder('c')
+            ->update()
+            ->set('c.idUser', 'null')
+            ->where('c.idUser IN (:listCom)')
+            ->setParameter('listCom', array_values($listCom))
+            ->getQuery()
+            ->execute()
+        ;
+    }
+
     // /**
     //  * @return Contact[] Returns an array of Contact objects
     //  */

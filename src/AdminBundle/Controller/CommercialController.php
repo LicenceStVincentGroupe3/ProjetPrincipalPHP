@@ -13,11 +13,14 @@ use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\VarDumper\VarDumper;
 use App\AdminBundle\Form\CommercialType;
+use App\AdminBundle\Form\UserSettingsType;
 use App\AdminBundle\Entity\Company;
 use App\AdminBundle\Entity\Contact;
 use App\AdminBundle\Entity\Commercial;
+use App\AdminBundle\Entity\Operations;
 use App\AdminBundle\Entity\CompanyCountry;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Faker;
 
 // Préfix url
 /**
@@ -37,6 +40,8 @@ class CommercialController extends AbstractController
                 $display = $this->getDoctrine()->getManager();
 
                 $new = new Commercial();
+
+                $this->faker = Faker\Factory::create('fr_FR');
 
                 // Variable qui contient le Repository
                 $companyCountry = $display->getRepository(CompanyCountry::class);
@@ -101,6 +106,10 @@ class CommercialController extends AbstractController
                     
                     $file = $commercialPhoto;
 
+                    do {
+                        $commercialCode = $this->faker->regexify("[A-Z]{10}");
+                    } while ($commercial->findOneBy(array("commercialCode" => $commercialCode)) != null);
+
                     if ($file !== null) 
                     {
                         $fileName = $file->getClientOriginalName();
@@ -142,15 +151,14 @@ class CommercialController extends AbstractController
                         $new->setHierarchy($idHierarchy);
                     }
  
+                    $new->setCommercialCode($commercialCode);
                     $new->setPassword($password);
-                    $new->addRole($role);
+                    $new->addRole([0 => $role]);
 
                     $display->persist($new);
                     $display->flush();
-                    // ... do any other work - like sending them an email, etc
-                    // maybe set a "flash" success message for the user
+
                     $this->addFlash('success', 'Votre compte à bien été enregistré.');
-                    //return $this->redirectToRoute('login');
 
                     return $this->redirect($this->generateUrl('listCommercial'));
                 }
@@ -172,7 +180,7 @@ class CommercialController extends AbstractController
     /**
      * @Route("/edit/{id}", requirements={"id"="\d+"}, methods={"GET","POST"}, name="editCommercial")
      */
-    public function edit($id, Request $httpRequest)
+    public function edit($id, Request $httpRequest, UserPasswordEncoderInterface $passwordEncoder)
     {
         if ($this->isGranted('ROLE_COMMERCIAL')) {
 
@@ -256,6 +264,7 @@ class CommercialController extends AbstractController
                     $commercialName = $edit->getCommercialName();
                     $commercialFirstName = $edit->getCommercialFirstname();
                     $commercialPhoto = $form['commercialPhoto']->getData();
+                    $plainPassword = $form['plainPassword']->getData();
 
                     $file = $commercialPhoto;
 
@@ -320,6 +329,12 @@ class CommercialController extends AbstractController
                         $edit->addRole([0 => $role]);
                     }
 
+                    if ($plainPassword !== null) 
+                    {
+                        $password = $passwordEncoder->encodePassword($edit, $edit->getPlainPassword());
+                        $edit->setPassword($password);
+                    }
+
                     $edit->setCommercialLastUpdate(new \DateTime());
 
                     $entityManager->flush();
@@ -346,6 +361,25 @@ class CommercialController extends AbstractController
     }
 
     /**
+     * @Route("/delete/{id}", name="deleteCommercial", requirements={"id"="\d+"}, methods={"GET","POST"})
+     */
+    public function delete($id)
+    {
+        // Appel de Doctrine
+        $display = $this->getDoctrine()->getManager();
+        $commercialRepository = $display->getRepository(Commercial::class);
+        $operationsRepository = $display->getRepository(Operations::class);
+        $contactRepository = $display->getRepository(Contact::class);
+
+        $commercialRepository->resetHierarchy([$id]);
+        $operationsRepository->resetOperation([$id]);
+        $contactRepository->resetContacts([$id]);
+        $commercialRepository->activeArchive([$id]);
+
+        return $this->redirectToRoute('listCommercial');
+    }
+
+    /**
      * @Route("/list", name="listCommercial", methods={"GET","POST"})
      */
     public function list(Request $httpRequest)
@@ -362,13 +396,14 @@ class CommercialController extends AbstractController
 
                 // Variable qui contient le Repository
                 $commercialRepository = $display->getRepository(Commercial::class);
+                $operationsRepository = $display->getRepository(Operations::class);
                 $companyRepository = $display->getRepository(Company::class);
                 $contactRepository = $display->getRepository(Contact::class);
 
                 // Si c'est le Directeur
                 if ($this->isGranted('ROLE_DIRECTEUR')) {
                     // Equivalent du SELECT *
-                    $list = $commercialRepository->findAll();
+                    $list = $commercialRepository->findBy(['archived' => false]);
                 }
                 // Sinon
                 else {
@@ -398,11 +433,6 @@ class CommercialController extends AbstractController
                 // Dans le cas d'une suppression d'un(ou plusieurs) commercial(commerciaux)
                 if ($httpRequest->isMethod('POST'))
                 {
-                    // Appel de Doctrine
-                    $display = $this->getDoctrine()->getManager();
-
-                    $commercialRepository = $display->getRepository(Commercial::class);
-
                     // Contient les name des <input>
                     $formData = Request::createFromGlobals();
 
@@ -411,8 +441,11 @@ class CommercialController extends AbstractController
 
                     // Si l'utilisateur a coché une checkbox
                     if ($listData != null) {
-                        // Appel de la fonction deleteCommercial()
-                        $commercialRepository->deleteCommercial($listData);
+                        // Appel des fonctions resetHierarchy() et activeArchive()
+                        $commercialRepository->resetHierarchy($listData);
+                        $commercialRepository->activeArchive($listData);
+                        $operationsRepository->resetOperation($listData);
+                        $contactRepository->resetContacts($listData);
                     }
 
                     return $this->redirect($this->generateUrl('listCommercial'));
@@ -428,6 +461,78 @@ class CommercialController extends AbstractController
             else {
                 return $this->redirect($this->generateUrl('index'));
             }
+        }
+
+        else {
+
+            return $this->redirect($this->generateUrl('login'));
+        }
+    }
+
+    /**
+     * @Route("/settings/{id}", requirements={"id"="\d+"}, methods={"GET","POST"}, name="settingsCommercial")
+     */
+    public function settings(Request $request, Commercial $commercial, UserPasswordEncoderInterface $passwordEncoder)
+    {
+
+        if ($this->isGranted('ROLE_COMMERCIAL')) {
+            $form = $this->createForm(UserSettingsType::class, $commercial);
+            $form->handleRequest($request);
+
+            if ($form->isSubmitted() && $form->isValid()) {
+                $edit = $form->getData();
+
+                $plainPassword = $form['plainPassword']->getData();
+                $commercialPhoto = $form['commercialPhoto']->getData();
+                $file = $commercialPhoto;
+
+                $entityManager = $this->getDoctrine()->getManager();
+
+                if ($file !== null) 
+                {
+                    // On vérifie si le fichier est en base
+                    if($edit->getCommercialPhoto() !== null) 
+                    {
+                        // Variable qui contient l'ancien fichier
+                        $oldFile = $this->getParameter('images_directory').'/'.
+                          $edit->getCommercialPhoto();
+
+                        // On supprime l'ancien fichier en local
+                        if (file_exists($oldFile)) {
+                            unlink($oldFile);
+                        }
+                    }
+
+                    $fileName = $file->getClientOriginalName();
+                    $newFileName = $commercialName.'_'.$commercialFirstName.'_'.$fileName;
+
+                    // On envoit le fichier dans le dossier images
+                    try {
+                        $file->move($this->getParameter('images_directory'), $newFileName);
+                    } catch (FileException $e) {
+                        // S'il y a un soucis pendant l'upload on catch
+                    }
+
+                    $edit->setCommercialPhoto($newFileName);
+                }
+
+                if ($plainPassword !== null) 
+                {
+                    $password = $passwordEncoder->encodePassword($edit, $edit->getPlainPassword());
+                    $edit->setPassword($password);
+                }
+
+                $edit->setCommercialLastUpdate(new \DateTime());
+
+                $entityManager->flush();
+
+                return $this->redirect($this->generateUrl('index'));
+            }
+
+            return $this->render('commercial/settings.html.twig', [
+                'form' => $form->createView(),
+                'commercial' => $commercial
+            ]);
         }
 
         else {

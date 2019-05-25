@@ -66,6 +66,20 @@ class Contact
     /**
      * @ORM\Column(type="string", nullable=true)
      */
+    private $contactPoste;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $contactFacebookAddress;
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $contactTwitterAddress;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
     private $contactCP;
 
     /**
@@ -255,6 +269,38 @@ class Contact
     {
         $this->contactDecisionLevel = $contactDecisionLevel;
 
+        return $this;
+    }
+
+    public function getContactPoste(): ?string
+    {
+        return $this->contactPoste;
+    }
+    public function setContactPoste(?string $contactPoste): self
+    {
+        $this->contactPoste = $contactPoste;
+        return $this;
+    }
+
+    public function getContactFacebookAddress(): ?string
+    {
+        return $this->contactFacebookAddress;
+    }
+    
+    public function setContactFacebookAddress(?string $contactFacebookAddress): self
+    {
+        $this->contactFacebookAddress = $contactFacebookAddress;
+        return $this;
+    }
+    
+    public function getContactTwitterAddress(): ?string
+    {
+        return $this->contactTwitterAddress;
+    }
+    
+    public function setContactTwitterAddress(?string $contactTwitterAddress): self
+    {
+        $this->contactTwitterAddress = $contactTwitterAddress;
         return $this;
     }
 

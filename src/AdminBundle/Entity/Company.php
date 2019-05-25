@@ -205,12 +205,12 @@ class Company
 
     public function getLastName(): ?string
     {
-        return $this->lastName;
+        return $this->CompanyLastName;
     }
 
     public function setLastName(string $lastName): self
     {
-        $this->lastName = $lastName;
+        $this->CompanyLastName = $lastName;
 
         return $this;
     }
@@ -265,7 +265,7 @@ class Company
 
     public function getAddress(): ?string
     {
-        return $this->address;
+        return $this->CompanyAddress;
     }
 
     public function setAddress(?string $address): self

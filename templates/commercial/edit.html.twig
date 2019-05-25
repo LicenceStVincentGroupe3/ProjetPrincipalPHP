@@ -36,7 +36,7 @@
 			{% set differenceDate = date("now").diff(date(editCom.CommercialBirthday)) %}
 			{% set commercialYears = differenceDate.y %}
 			
-			<h6><b>{{sexe}} {{editCom.commercialFirstname}} {{editCom.commercialName}}</b>, {{profil}}, {{commercialYears}} ans</h6>
+			<h5><b>{{sexe}} {{editCom.commercialFirstname}} {{editCom.commercialName}}</b>, {{profil}}, {{commercialYears}} ans</h5>
 		</div>
 		<div class="col-lg-5 mx-auto status">
 			{% if editCom.CommercialLastUpdate is not null %}
@@ -343,9 +343,12 @@
 							</div>
 						</div>
 					</div>
-					<div class="row form-buttons">
+					<div class="row form-buttons form-buttons-large">
                         <button class="btn btn-white-red return-button" type="button">
-                           <a href="{{ path('listCommercial') }}">Annuler</a>
+                           <a href="{{ path('deleteCommercial', {'id':editCom.Id}) }}">SUPPRIMER</a>
+                        </button>
+                        <button class="btn btn-white-red return-button button-large" type="button">
+                           <a href="#">DEMANDE DE MISE A JOUR</a>
                         </button>
 						{{ form_widget(form.save, {'attr': {'class': 'btn btn-red submit-button'}}) }}
 					</div>
@@ -380,8 +383,13 @@
 									<a href="{{ path('editCompany', {'id':company.Id}) }}">{{company.CompanyLastName}}</a>
 								</td>
 								<td>
-									<a href="{{ path('editCompany', {'id':company.id}) }}">{{ company.CompanyCodeNAF }}</a>
+									{% if company.idCompanyCodeNAF is not null %}
+										<a href="{{ path('editCompany', {'id':company.id}) }}">	{{company.idCompanyCodeNAF.Label}}</a>
+									{% else %}
+										<a href="{{ path('editCompany', {'id':company.id}) }}"></a>
+									{% endif %}
 								</td>
+								
 								<td>
 									<a href="{{ path('editCompany', {'id':company.Id}) }}">{{company.CompanyPostalCode}}</a>
 								</td>
@@ -392,13 +400,13 @@
 									<a href="{{ path('editCompany', {'id':company.Id}) }}">Dylan Noally</a>
 								</td>
 								<td>
-									<div class="company-nbCompany">
+									<div class="badge badge-pill badge-green">
 										<a href="{{ path('editCompany', {'id':company.Id}) }}">Client</a>
 									</div>
 								</td>
 								<td>
 									<div class="company-nbContact">
-										<a href="{{ path('editCompany', {'id':company.Id}) }}">Dylan Noally</a>
+										<a href="{{ path('editCompany', {'id':company.Id}) }}">0</a>
 									</div>
 								</td>
 								<td>
@@ -419,6 +427,7 @@
 					</table>
 				</div>
 
+				{% if listCompany|length != 0 %}
 				<div class="table-after">
 					<div class="row">
 						<div class="table-after-entry">
@@ -435,6 +444,7 @@
 				        </div>
 					</div>
 				</div>
+				{% endif %}
 			</section>
 
 			<section id="contact" class="tab-panel">
@@ -518,6 +528,7 @@
 					</table>
 				</div>
 
+				{% if listCompany|length != 0 %}
 				<div class="table-after">
 					<div class="row">
 						<div class="table-after-entry">
@@ -534,6 +545,7 @@
 				        </div>
 					</div>
 				</div>
+				{% endif %}
 			</section>
 
 			<section id="historic" class="tab-panel">
