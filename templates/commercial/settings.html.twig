@@ -36,7 +36,7 @@
         {% set differenceDate = date("now").diff(date(commercial.CommercialBirthday)) %}
         {% set commercialYears = differenceDate.y %}
         
-        <h6><b>{{sexe}} {{commercial.commercialFirstname}} {{commercial.commercialName}}</b>, {{profil}}, {{commercialYears}} ans</h6>
+        <h5><b>{{sexe}} {{commercial.commercialFirstname}} {{commercial.commercialName}}</b>, {{profil}}, {{commercialYears}} ans</h5>
     </div>
 </div>
 <div class="tabset">
