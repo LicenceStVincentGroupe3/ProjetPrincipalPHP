@@ -13,6 +13,8 @@ use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\VarDumper\VarDumper;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 
 // Préfix url
 /**
@@ -33,15 +35,30 @@ class CompanyController extends AbstractController
         if ($form->isSubmitted() && $form->isValid())
         {
             $new = $form->getData();
+            $companyPicture = $form['CompanyLogo']->getData();
+            $file = $companyPicture;
+
+            if ($file !== null)
+            {
+                $fileName = $file->getClientOriginalName();
+
+                // On envoit le fichier dans le dossier images
+                try {
+                    $file->move($this->getParameter('images_directory'), $fileName);
+                } catch (FileException $e) {
+                    // S'il y a un soucis pendant l'upload on catch
+                }
+
+                $new->setCompanyLogo($fileName);
+            }
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($new);
             $entityManager->flush();
 
-
             return $this->redirectToRoute('listCompany');
         }
-        return $this->render('company/new.html.twig', array('form' => $form->createView(),));
+        return $this->render('company/new.html.twig', array('form' => $form->createView()));
     }
 
     /**
@@ -59,6 +76,9 @@ class CompanyController extends AbstractController
         $edit = $companyRepository->find($id);
 
         $form = $this->createForm(CompanyType::class, $edit);
+        $form->add('CompanyPotential', IntegerType::class, array('label' => 'Potentiel', 'required' => false))
+        ->add('CompanyStatus', CheckboxType::class, array('label' => 'Statut', 'required' => false));
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid() && $request->isMethod('POST')) 
@@ -95,9 +115,9 @@ class CompanyController extends AbstractController
     }
 
     /**
-     * @Route("/list", name="listCompany", methods={"GET"})
+     * @Route("/list", name="listCompany", methods={"GET", "POST"})
      */
-    public function list()
+    public function list(Request $httpRequest)
     {
         if ($this->isGranted('ROLE_COMMERCIAL') || $this->isGranted('ROLE_RESPONSABLE') || $this->isGranted('ROLE_DIRECTEUR'))
         {
@@ -113,6 +133,29 @@ class CompanyController extends AbstractController
             // -------------------------------------------------------------
             // On demande à la vue d'afficher la liste des entreprises
             // -------------------------------------------------------------
+
+            // Dans le cas d'une suppression d'un(ou plusieurs) commercial(commerciaux)
+            if ($httpRequest->isMethod('POST'))
+            {
+                // Appel de Doctrine
+                $display = $this->getDoctrine()->getManager();
+
+                $companyRepository = $display->getRepository(Company::class);
+
+                // Contient les name des <input>
+                $formData = Request::createFromGlobals();
+
+                // On récupère le name de la checkbox
+                $listData = $formData->request->get('deleteData');
+
+                // Si l'utilisateur a coché une checkbox
+                if ($listData != null) {
+                    // Appel de la fonction deleteCommercial()
+                    $companyRepository->deleteCompany($listData);
+                }
+
+                return $this->redirect($this->generateUrl('listCompany'));
+            }
             return $this->render('company/list.html.twig', array('lesEntreprises' => $list, 'companyLink' => true)); // On affecte le tableau à la vue
         }
         else {

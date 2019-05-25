@@ -2,25 +2,25 @@
 
 namespace App\AdminBundle\Repository;
 
-use App\AdminBundle\Entity\CompanyActivitySector;
+use App\AdminBundle\Entity\CompanyStatus;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
- * @method CompanyActivitySector|null find($id, $lockMode = null, $lockVersion = null)
- * @method CompanyActivitySector|null findOneBy(array $criteria, array $orderBy = null)
- * @method CompanyActivitySector[]    findAll()
- * @method CompanyActivitySector[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method CompanyStatus|null find($id, $lockMode = null, $lockVersion = null)
+ * @method CompanyStatus|null findOneBy(array $criteria, array $orderBy = null)
+ * @method CompanyStatus[]    findAll()
+ * @method CompanyStatus[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class CompanyActivitySectorRepository extends ServiceEntityRepository
+class CompanyStatusRepository extends ServiceEntityRepository
 {
     public function __construct(RegistryInterface $registry)
     {
-        parent::__construct($registry, CompanyActivitySector::class);
+        parent::__construct($registry, CompanyStatus::class);
     }
 
     // /**
-    //  * @return CompanyActivitySector[] Returns an array of CompanyActivitySector objects
+    //  * @return CompanyStatus[] Returns an array of CompanyStatus objects
     //  */
     /*
     public function findByExampleField($value)
@@ -37,7 +37,7 @@ class CompanyActivitySectorRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?CompanyActivitySector
+    public function findOneBySomeField($value): ?CompanyStatus
     {
         return $this->createQueryBuilder('c')
             ->andWhere('c.exampleField = :val')

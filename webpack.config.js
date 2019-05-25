@@ -36,6 +36,7 @@ Encore
     .addEntry('tabs', './assets/js/tabs.js')
     .addEntry('sortable', './assets/js/sortable-table.js')
     .addEntry('company', './assets/js/company.js')
+    .addEntry('dashboard', './assets/js/dashboard-import.js')
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()

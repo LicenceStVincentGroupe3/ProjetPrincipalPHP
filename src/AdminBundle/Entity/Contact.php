@@ -4,8 +4,12 @@ namespace App\AdminBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
+ * @UniqueEntity(fields="contactEmail", message="Adresse mail déjà existant")
+ * @UniqueEntity(fields="contactCode", message="Code du contact déjà existant")
  * @ORM\Entity(repositoryClass="App\AdminBundle\Repository\ContactRepository")
  */
 class Contact
@@ -18,26 +22,26 @@ class Contact
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank
+     * @ORM\Column(type="string", length=255, unique=true)
+     * @Assert\NotBlank(message = "Ce champ ne peut être vide.")
      */
     private $contactCode;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank
+     * @Assert\NotBlank(message = "Ce champ ne peut être vide.")
      */
     private $contactLastName;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank
+     * @Assert\NotBlank(message = "Ce champ ne peut être vide.")
      */
     private $contactFirstName;
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
-     * @Assert\NotBlank     
+     * @Assert\NotBlank(message = "Ce champ ne peut être vide.")
      */
     private $contactGender;
 
@@ -84,26 +88,49 @@ class Contact
 
     /**
      * @ORM\Column(type="string", nullable=true)
+     * @Assert\Url(message = "Veuillez insérer une URL valide")
      */
-    private $contactVille;
+    private $contactFacebookAddress;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     * @Assert\Url(message = "Veuillez insérer une URL valide")
+     */
+    private $contactTwitterAddress;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     * @Assert\Type("\DateTime", message = "Date invalide(format requis : DD/MM/YYYY)")
      */
     private $contactBirthDate;
 
     /**
-     * @ORM\Column(type="string", length=14, nullable=true)
+     * @ORM\Column(type="string", length=10, nullable=true)
+     * @Assert\Length(min = 10, minMessage = "Tel. 10 caractères minimun !")
+     * @Assert\Length(max = 10, maxMessage = "Tel. 10 caractères maxnimun !")
+     * @Assert\Regex(pattern="/^(\(0\))?[0-9]+$/", message="Format : 0301010101")
      */
     private $contactMobilePhone;
 
     /**
-     * @ORM\Column(type="string", length=255,  nullable=true)
+     * @ORM\Column(type="string", length=10,  nullable=true)
+     * @Assert\Length(min = 10, minMessage = "Tel. 10 caractères minimun !")
+     * @Assert\Length(max = 10, maxMessage = "Tel. 10 caractères maxnimun !")
+     * @Assert\Regex(pattern="/^(\(0\))?[0-9]+$/", message="Format : 0601010101")
      */
     private $contactDirectLandline;
 
     /**
+     * @ORM\Column(type="string", length=10,  nullable=true)
+     * @Assert\Length(min = 10, minMessage = "Tel. 10 caractères minimun !")
+     * @Assert\Length(max = 10, maxMessage = "Tel. 10 caractères maxnimun !")
+     * @Assert\Regex(pattern="/^(\(0\))?[0-9]+$/", message="Format : 0601010101")
+     */
+    private $contactStandartPhone;
+
+    /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Email(message = "Veuillez insérer un email valide")
      */
     private $contactEmail;
 
@@ -118,12 +145,31 @@ class Contact
     private $contactVerifiedEmail;
 
     /**
+     * @ORM\Column(type="datetime", nullable=true)
+     * @Assert\DateTime(message = "Date invalide(format requis : DD/MM/YYYY)")
+     */
+    private $arrivalDate;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     * @Assert\DateTime(message = "Date invalide(format requis : DD/MM/YYYY)")
+     */
+    private $departureDate;
+
+    /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Url(message = "Veuillez insérer une URL valide")
      */
     private $contactLinkedinAddress;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\File(
+     *      maxSize = "1024k",
+     *      mimeTypes={ "image/jpeg", "image/png" },
+     *      maxSizeMessage = "La photo ne peut dépasser les 1024 Ko soit 1,024 Mo !",
+     *      mimeTypesMessage = "Format JPEG ou PNG uniquement"
+     * )
      */
     private $contactPhoto;
 
@@ -134,6 +180,7 @@ class Contact
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Assert\Length(max = 255, maxMessage = "Vous ne pouvez pas dépasser 255 caractères")
      */
     private $contactComment;
 
@@ -149,25 +196,26 @@ class Contact
 
     /**
      * @ORM\ManyToOne(targetEntity="App\AdminBundle\Entity\Commercial", inversedBy="contacts")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $idUser;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\AdminBundle\Entity\Company", inversedBy="contacts")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $idCompany;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\AdminBundle\Entity\ContactJob", inversedBy="contacts")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $idContactJob;
 
     public function __construct()
     {
         $this->contactDatedCreationPlug = new \Datetime();
+        $this->arrivalDate = new \DateTime();
         //$this->$contactDateUpdatePlug = new \Datetime();
     }
 
@@ -306,24 +354,36 @@ class Contact
 
     public function getContactCP(): ?string
     {
-        return $this->contactCP;
+        return $this->contactPoste;
     }
 
-    public function setContactCP(?string $contactCP): self
+    public function setContactPoste(?string $contactPoste): self
     {
-        $this->contactCP = $contactCP;
+        $this->contactPoste = $contactPoste;
 
         return $this;
     }
 
-    public function getContactVille(): ?string
+    public function getContactFacebookAddress(): ?string
     {
-        return $this->contactVille;
+        return $this->contactFacebookAddress;
     }
 
-    public function setContactVille(?string $contactVille): self
+    public function setContactFacebookAddress(?string $contactFacebookAddress): self
     {
-        $this->contactVille = $contactVille;
+        $this->contactFacebookAddress = $contactFacebookAddress;
+
+        return $this;
+    }
+
+    public function getContactTwitterAddress(): ?string
+    {
+        return $this->contactTwitterAddress;
+    }
+
+    public function setContactTwitterAddress(?string $contactTwitterAddress): self
+    {
+        $this->contactTwitterAddress = $contactTwitterAddress;
 
         return $this;
     }
@@ -352,14 +412,26 @@ class Contact
         return $this;
     }
 
-    public function getContactDirectLandline(): ?int
+    public function getContactDirectLandline(): ?string
     {
         return $this->contactDirectLandline;
     }
 
-    public function setContactDirectLandline(?int $contactDirectLandline): self
+    public function setContactDirectLandline(?string $contactDirectLandline): self
     {
         $this->contactDirectLandline = $contactDirectLandline;
+
+        return $this;
+    }
+
+    public function getContactStandartPhone(): ?string
+    {
+        return $this->contactStandartPhone;
+    }
+
+    public function setContactStandartPhone(?string $contactStandartPhone): self
+    {
+        $this->contactStandartPhone = $contactStandartPhone;
 
         return $this;
     }
@@ -444,6 +516,30 @@ class Contact
     public function setContactComment(?string $contactComment): self
     {
         $this->contactComment = $contactComment;
+
+        return $this;
+    }
+
+    public function getArrivalDate(): ?\DateTimeInterface
+    {
+        return $this->arrivalDate;
+    }
+
+    public function setArrivalDate(?\DateTimeInterface $arrivalDate): self
+    {
+        $this->arrivalDate = $arrivalDate;
+
+        return $this;
+    }
+
+    public function getDepartureDate(): ?\DateTimeInterface
+    {
+        return $this->departureDate;
+    }
+
+    public function setDepartureDate(?\DateTimeInterface $departureDate): self
+    {
+        $this->departureDate = $departureDate;
 
         return $this;
     }
