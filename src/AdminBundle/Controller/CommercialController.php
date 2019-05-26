@@ -348,7 +348,7 @@ class CommercialController extends AbstractController
                 // ----------------------------------
                 // On demande à la vue d'afficher la commande plus tous ses produits
                 // ----------------------------------
-                return $this->render('commercial/edit.html.twig', ['editCom' => $edit, 'form' => $form->createView(), 'listCountry' => $listCountry, 'listHierarchy' => $listHierarchy, 'responsableN1' => $responsableN1, 'listCompany' => $listCompany, 'nbCompany' => $nbCompany, 'listContact' => $listContact, 'nbContact' => $nbContact, 'nbContactCoompany' => $nbContactCompany, 'commercialTeamLink' => true]);
+                return $this->render('commercial/edit.html.twig', ['editCom' => $edit, 'form' => $form->createView(), 'listCountry' => $listCountry, 'listHierarchy' => $listHierarchy, 'responsableN1' => $responsableN1, 'listCompany' => $listCompany, 'nbCompany' => $nbCompany, 'listContact' => $listContact, 'nbContact' => $nbContact, 'nbContactCompany' => $nbContactCompany, 'commercialTeamLink' => true]);
             }
 
             else {
