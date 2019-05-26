@@ -1056,6 +1056,15 @@ select::-ms-expand {
 .gestion-formulaire-checkbox-div {
     display: flex;
 }
+
+.tabset .badges {
+    float: right;
+    margin-top: 15px;
+}
+
+.tabset .badges a {
+    height: 20px;
+}
 /* ------------------ FIN FORM ------------------- */
 /* ---------------------------------------------- */
 /* --------------------------------------------- */
@@ -1168,4 +1177,3 @@ select::-ms-expand {
 .fa-opacity {
     opacity: 0.5;
 }
-

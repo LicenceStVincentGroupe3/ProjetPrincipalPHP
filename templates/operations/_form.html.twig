@@ -6,7 +6,12 @@
                     {{ form_label(form.operationCode, null, {'label_attr': {'class': 'my-form-label'}}) }}
                 </div>
                 <div class="col-lg-7 mx-auto mandatory">
+                    {% if app.request.attributes.get("_route") == "operations_new" %}
+                    {{ form_widget(form.operationCode, {'value' : opeCode.regexify("[A-Z]{10}"),'attr': {'class': 'form-control my-form-input-little'}}) }}
+                    {% endif %}
+                    {% if app.request.attributes.get("_route") == "operations_edit" %}
                     {{ form_widget(form.operationCode, {'attr': {'class': 'form-control my-form-input-little'}}) }}
+                    {% endif %}
                 </div>
                 {% if form.operationCode.vars.errors|length %}
                     <div class="alert alert-danger my-form-error">
@@ -105,21 +110,23 @@
             </div>
         </div>
     </div>
+    {% if app.request.attributes.get("_route") == "operations_new" %}
     <div class="row form-buttons">
-        {% if app.request.attributes.get("_route") == "operations_new" %}
-            <button class="btn btn-white-red return-button" type="button">
-                <a href="{{ path('operations_index') }}">ANNULER</a>
-            </button>
-            {{ form_widget(form.save, { 'label': 'AJOUTER', 'attr': {'class': 'btn btn-red submit-button'}}) }}
-        {% endif %}
-        {% if app.request.attributes.get("_route") == "operations_edit" %}
-            <button class="btn btn-white-red return-button" type="button">
-               <a href="{{ path('deleteOperation', {'operationCode':operation.OperationCode}) }}">SUPPRIMER</a>
-            </button>
-            <button class="btn btn-white-red return-button" type="button">
-               <a href="#">DUPLIQUER</a>
-            </button>
-            {{ form_widget(form.save, { 'label': 'ENREGISTRER', 'attr': {'class': 'btn btn-red submit-button'}}) }}
-        {% endif %}
+        <button class="btn btn-white-red return-button" type="button">
+            <a href="{{ path('operations_index') }}">ANNULER</a>
+        </button>
+        {{ form_widget(form.save, { 'label': 'AJOUTER', 'attr': {'class': 'btn btn-red submit-button'}}) }}
     </div>
+    {% endif %}
+    {% if app.request.attributes.get("_route") == "operations_edit" %}
+    <div class="row form-buttons form-buttons-medium">
+        <button class="btn btn-white-red return-button" type="button">
+           <a href="{{ path('deleteOperation', {'operationCode':operation.OperationCode}) }}">SUPPRIMER</a>
+        </button>
+        <button class="btn btn-white-red return-button" type="button">
+           <a href="#">DUPLIQUER</a>
+        </button>
+        {{ form_widget(form.save, { 'label': 'ENREGISTRER', 'attr': {'class': 'btn btn-red submit-button'}}) }}
+    </div>
+    {% endif %}
 {{ form_end(form) }}

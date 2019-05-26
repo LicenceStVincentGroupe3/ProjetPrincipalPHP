@@ -486,12 +486,12 @@
 						</div>
 					</div>
 					<div class="row form-buttons form-buttons-large">
-            <button class="btn btn-white-red return-button" type="button">
-               <a href="{{ path('deleteCommercial', {'id':editCom.Id}) }}">SUPPRIMER</a>
-            </button>
-            <button class="btn btn-white-red return-button button-large" type="button">
-               <a href="#">DEMANDE DE MISE A JOUR</a>
-            </button>
+			            <button class="btn btn-white-red return-button" type="button">
+			               <a href="{{ path('deleteCommercial', {'id':editCom.Id}) }}">SUPPRIMER</a>
+			            </button>
+			            <button class="btn btn-white-red return-button button-large" type="button">
+			               <a href="#">DEMANDE DE MISE A JOUR</a>
+			            </button>
 						{{ form_widget(form.save, {'attr': {'class': 'btn btn-red submit-button'}}) }}
 					</div>
 				{{ form_end(form) }}

@@ -57,7 +57,7 @@
 								{{ form_label(form.commercialCode, null, {'label_attr': {'class': 'my-form-label'}}) }}
 							</div>
 							<div class="col-lg-7 mx-auto mandatory">
-								{{ form_widget(form.commercialCode, {'attr': {'class': 'form-control my-form-input-little'}}) }}
+								{{ form_widget(form.commercialCode, {'value' : comCode.regexify("[A-Z]{10}"), 'attr': {'class': 'form-control my-form-input-little'}}) }}
 							</div>
 							{% if form.commercialCode.vars.errors|length > 0 %}
 								<div class="col-lg-1 mx-auto pl-0">
