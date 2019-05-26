@@ -526,7 +526,7 @@
 								</td>
 								<td>
 									{% if company.idCompanyCodeNAF is not null %}
-										<a href="{{ path('editCompany', {'id':company.id}) }}">	{{company.idCompanyCodeNAF.Label}}</a>
+									<a href="{{ path('editCompany', {'id':company.id}) }}">{{ company.idCompanyCodeNAF.label }}</a>
 									{% else %}
 										<a href="{{ path('editCompany', {'id':company.id}) }}"></a>
 									{% endif %}

@@ -981,6 +981,10 @@ select::-ms-expand {
     background: #fff url(/build/web.png) 97% 50% no-repeat;
 }
 
+.input-adresse {
+     background: #fff url(/build/adresse.png) 97% 50% no-repeat;
+ }
+
 .form-buttons {
     margin-top: 10%;
     padding-left: 70%;

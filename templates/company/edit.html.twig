@@ -17,15 +17,28 @@
 
 {% block contentBody %}
 
-	<div class="float-left">
-		{{company.CompanyLastName}},//nom de l'activité
-
-
-
+	<div class="row pb-2">
+		<div class="col-lg-6 mx-auto last-upd">
+			<span class="font-weight-bold">{{company.CompanyLastName}}</span>,{% if company.idCompanyCodeNAF is not null %}{{ company.idCompanyCodeNAF.label }}{% endif %} ({{ company.CompanyPostalCode }} {{ company.CompanyCity }})
 		</div>
 
-	<div class="rightContact">
-
+		<div class="col-lg-6 mx-auto status">
+			<div class="last-upd2" style="width: 60%;">
+				{% if company.CompanyDateUpdate is not null %}
+					{% if company.CompanyStatus == "0" %}
+						<img src="{{asset('build/rouge.png')}}" class="table-img-profile4 rounded-circle" title="Rouge" alt="Statut rouge"><b>Obsolète&nbsp;</b>
+					{% elseif company.CompanyStatus == "1" %}
+						<img src="{{asset('build/vert.png')}}" class="table-img-profile4 rounded-circle" title="Vert" alt="Statut vert"><b>à jour&nbsp;</b>
+					{% else %}
+						<img src="{{asset('build/orange.png')}}" class="table-img-profile4 rounded-circle" title="Orange" alt="Statut orange"><b>à vérifier&nbsp;</b>
+					{% endif %} Dernière mise à jour le {{ company.CompanyDateUpdate|date("d/m/Y", "Europe/Paris") }} à {{ company.CompanyDateUpdate|date("H", "Europe/Paris") }}h{{ company.CompanyDateUpdate|date("i", "Europe/Paris") }}</p>
+				{% endif %}
+			</div>
+			<div class="status2">
+				{{ form_start(form, {'method': 'POST'}, {'attr': {'novalidate': 'novalidate'}}) }}
+				{{ form_widget(form.CompanyStatus, {'attr': {'class': 'switch_2'}}) }}
+			</div>
+		</div>
 	</div>
 
 	<div class="tabset mw-100">
@@ -34,13 +47,30 @@
 		<label for="tab1">Identité</label>
 		<!-- Tab 2 -->
 		<input type="radio" name="tabset" id="tab2" aria-controls="contacts">
-		<label for="tab2">Contacts</label>
+		<label for="tab2">Contacts <span class="company-nbContact text-white pl-3 pr-3 pt-1 pb-1">{{nbContact[1]}}</span></label>
 		<!-- Tab 3 -->
 		<input type="radio" name="tabset" id="tab3" aria-controls="notes">
 		<label for="tab3">Notes</label>
 		<!-- Tab 4 -->
 		<input type="radio" name="tabset" id="tab4" aria-controls="historique">
 		<label for="tab4">Historique</label>
+
+		<div class="float-right">
+			{% if company.idCompanyStatus.label == "Client" %}
+			<span class="company-status-client pl-3 pr-3 pt-1 pb-1" style="display: unset; margin: 20px;">{{ company.idCompanyStatus.label }}</span>
+			{% elseif company.idCompanyStatus.label == "Piste" %}
+			<span class="company-status-piste pl-3 pr-3 pt-1 pb-1" style="display: unset; margin: 20px;">{{ company.idCompanyStatus.label }}</span>
+			{% else %}
+				<span class="company-status-prospect pl-3 pr-3 pt-1 pb-1" style="display: unset; margin: 20px;">{{ company.idCompanyStatus.label }}</span>
+			{% endif %}
+		</div>
+		<input id="idCompany" type="hidden" value="{{ company.id }}"/>
+		{% if company.CompanyPotential == NULL %}
+			<input id="potential_level" type="hidden" value="0"/>
+		{% else %}
+			<input id="potential_level" type="hidden" value=" {{ company.CompanyPotential }}"/>
+		{% endif %}
+		<div class="my-rating float-right">Potentiel </div>
 
 		<div class="tab-panels">
 			<section id="identity" class="tab-panel">
@@ -59,7 +89,7 @@
 				</div>
 
 				<div class="row">
-					<div class="col-lg-6 mx-auto">
+					<div class="col-lg-6 mx-auto form-left">
 						<div class="row my-form-field">
 							<div class="col-lg-4 mx-auto">
 								{{ form_label(form.idUser, 'Compte suivi par', {'label_attr': {'class': 'my-form-label'}}) }}
@@ -68,15 +98,17 @@
 								{{ form_widget(form.idUser, {'attr': {'class': 'form-control'}}) }}
 								{{ form_errors(form.idUser, {'attr': {'class': 'form-error-message'}}) }}
 							</div>
+							<div class="col-lg-1 mx-auto pl-0"></div>
 						</div>
 						<div class="row my-form-field">
 							<div class="col-lg-4 mx-auto">
 								{{ form_label(form.CompanyCode, null, {'label_attr': {'class': 'my-form-label'}}) }}
 							</div>
 							<div class="col-lg-7 mx-auto mandatory">
-								{{ form_widget(form.CompanyCode, {'attr': {'class': 'form-control', 'placeholder': "Ex: ABCD1234"}}) }}
+								{{ form_widget(form.CompanyCode, {'attr': {'class': 'form-control w-50', 'placeholder': "1254789"}}) }}
 								{{ form_errors(form.CompanyCode, {'attr': {'class': 'form-error-message'}}) }}
 							</div>
+							<div class="col-lg-1 mx-auto pl-0"></div>
 						</div>
 						<div class="row my-form-field">
 							<div class="col-lg-4 mx-auto">
@@ -86,6 +118,7 @@
 								{{ form_widget(form.CompanyLastName, {'attr': {'class': 'form-control'}}) }}
 								{{ form_errors(form.CompanyLastName, {'attr': {'class': 'form-error-message'}}) }}
 							</div>
+							<div class="col-lg-1 mx-auto pl-0"></div>
 						</div>
 						<div class="row my-form-field">
 							<div class="col-lg-4 mx-auto">
@@ -95,6 +128,7 @@
 								{{ form_widget(form.idCompanyStatus, {'attr': {'class': 'form-control'}}) }}
 								{{ form_errors(form.idCompanyStatus, {'attr': {'class': 'form-error-message'}}) }}
 							</div>
+							<div class="col-lg-1 mx-auto pl-0"></div>
 						</div>
 						<div class="row my-form-field">
 							<div class="col-lg-4 mx-auto">
@@ -104,6 +138,7 @@
 								{{ form_widget(form.idCompanyCodeNAF, {'attr': {'class': 'form-control'}}) }}
 								{{ form_errors(form.idCompanyCodeNAF, {'attr': {'class': 'form-error-message'}}) }}
 							</div>
+							<div class="col-lg-1 mx-auto pl-0"></div>
 						</div>
 						<div class="row my-form-field">
 							<div class="col-lg-4 mx-auto">
@@ -113,6 +148,7 @@
 								{{ form_widget(form.idCompanyLegalStatus, {'attr': {'class': 'form-control'}}) }}
 								{{ form_errors(form.idCompanyLegalStatus, {'attr': {'class': 'form-error-message'}}) }}
 							</div>
+							<div class="col-lg-1 mx-auto pl-0"></div>
 						</div>
 						<div class="row my-form-field">
 							<div class="col-lg-4 mx-auto">
@@ -120,8 +156,22 @@
 							</div>
 							<div class="col-lg-7 mx-auto mandatory-white">
 								{{ form_widget(form.CompanySiret, {'attr': {'class': 'form-control'}}) }}
-								{{ form_errors(form.CompanySiret, {'attr': {'class': 'form-error-message'}}) }}
 							</div>
+							{% if form.CompanySiret.vars.errors|length > 0 %}
+								<div class="col-lg-1 mx-auto pl-0">
+									<button type="button" style="padding: 3px 6px;" class="btn btn-danger rounded-circle" data-title="Erreur de saisie" data-trigger="focus" data-container="body" data-toggle="popover" data-placement="top" data-content="
+                                    {% for error in form.CompanySiret.vars.errors %}
+                                        -{{ error.messagePluralization is null
+									? error.messageTemplate|trans(error.messageParameters, 'validators')
+									: error.messageTemplate|transchoice(error.messagePluralization, error.messageParameters, 'validators')
+									}}<br>
+                                    {% endfor %}
+                                    "><i class="fas fa-exclamation-circle"></i>
+									</button>
+								</div>
+							{% else %}
+								<div class="col-lg-1 mx-auto pl-0"></div>
+							{% endif %}
 						</div>
 						<div class="row my-form-field">
 							<div class="col-lg-4 mx-auto">
@@ -131,6 +181,7 @@
 								{{ form_widget(form.idCompanyNbEmployee, {'attr': {'class': 'form-control'}}) }}
 								{{ form_errors(form.idCompanyNbEmployee, {'attr': {'class': 'form-error-message'}}) }}
 							</div>
+							<div class="col-lg-1 mx-auto pl-0"></div>
 						</div>
 						<div class="row my-form-field">
 							<div class="col-lg-4 mx-auto">
@@ -140,26 +191,42 @@
 								{{ form_widget(form.idCompanyTurnover, {'attr': {'class': 'form-control'}}) }}
 								{{ form_errors(form.idCompanyTurnover, {'attr': {'class': 'form-error-message'}}) }}
 							</div>
+							<div class="col-lg-1 mx-auto pl-0"></div>
 						</div>
 					</div>
-					<div class="col-lg-6 mx-auto">
+					<div class="col-lg-6 mx-auto form-right">
 						<div class="row my-form-field">
 							<div class="col-lg-4 mx-auto">
 								{{ form_label(form.CompanyEmail, null, {'label_attr': {'class': 'my-form-label'}}) }}
 							</div>
-							<div class="col-lg-7 mx-auto mandatory-white">
+							<div class="col-lg-7 mx-auto">
 								{{ form_widget(form.CompanyEmail, {'attr': {'class': 'form-control'}}) }}
-								{{ form_errors(form.CompanyEmail, {'attr': {'class': 'form-error-message'}}) }}
 							</div>
+							{% if form.CompanyEmail.vars.errors|length > 0 %}
+								<div class="col-lg-1 mx-auto pl-0">
+									<button type="button" style="padding: 3px 6px;" class="btn btn-danger rounded-circle" data-title="Erreur de saisie" data-trigger="focus" data-container="body" data-toggle="popover" data-placement="top" data-content="
+                                    {% for error in form.CompanyEmail.vars.errors %}
+                                        -{{ error.messagePluralization is null
+									? error.messageTemplate|trans(error.messageParameters, 'validators')
+									: error.messageTemplate|transchoice(error.messagePluralization, error.messageParameters, 'validators')
+									}}<br>
+                                    {% endfor %}
+                                    "><i class="fas fa-exclamation-circle"></i>
+									</button>
+								</div>
+							{% else %}
+								<div class="col-lg-1 mx-auto pl-0"></div>
+							{% endif %}
 						</div>
 						<div class="row my-form-field">
 							<div class="col-lg-4 mx-auto">
 								{{ form_label(form.CompanyAddress, null, {'label_attr': {'class': 'my-form-label'}}) }}
 							</div>
 							<div class="col-lg-7 mx-auto">
-								{{ form_widget(form.CompanyAddress, {'attr': {'class': 'form-control'}}) }}
+								{{ form_widget(form.CompanyAddress, {'attr': {'class': 'form-control input-adresse'}}) }}
 								{{ form_errors(form.CompanyAddress, {'attr': {'class': 'form-error-message'}}) }}
 							</div>
+							<div class="col-lg-1 mx-auto pl-0"></div>
 							{#<i class="fas fa-map-marker-alt fa-opacity"></i>#}
 						</div>
 						<div class="row my-form-field">
@@ -168,8 +235,22 @@
 							</div>
 							<div class="col-lg-7 mx-auto">
 								{{ form_widget(form.CompanyPostalCode, {'attr': {'class': 'form-control'}}) }}
-								{{ form_errors(form.CompanyPostalCode, {'attr': {'class': 'form-error-message'}}) }}
 							</div>
+							{% if form.CompanyPostalCode.vars.errors|length > 0 %}
+								<div class="col-lg-1 mx-auto pl-0">
+									<button type="button" style="padding: 3px 6px;" class="btn btn-danger rounded-circle" data-title="Erreur de saisie" data-trigger="focus" data-container="body" data-toggle="popover" data-placement="top" data-content="
+                                    {% for error in form.CompanyPostalCode.vars.errors %}
+                                        -{{ error.messagePluralization is null
+									? error.messageTemplate|trans(error.messageParameters, 'validators')
+									: error.messageTemplate|transchoice(error.messagePluralization, error.messageParameters, 'validators')
+									}}<br>
+                                    {% endfor %}
+                                    "><i class="fas fa-exclamation-circle"></i>
+									</button>
+								</div>
+							{% else %}
+								<div class="col-lg-1 mx-auto pl-0"></div>
+							{% endif %}
 						</div>
 						<div class="row my-form-field">
 							<div class="col-lg-4 mx-auto">
@@ -179,6 +260,7 @@
 								{{ form_widget(form.CompanyCity, {'attr': {'class': 'form-control'}}) }}
 								{{ form_errors(form.CompanyCity, {'attr': {'class': 'form-error-message'}}) }}
 							</div>
+							<div class="col-lg-1 mx-auto pl-0"></div>
 						</div>
 						<div class="row my-form-field">
 							<div class="col-lg-4 mx-auto">
@@ -188,34 +270,76 @@
 								{{ form_widget(form.idCompanyCountry, {'attr': {'class': 'form-control'}}) }}
 								{{ form_errors(form.idCompanyCountry, {'attr': {'class': 'form-error-message'}}) }}
 							</div>
-
+							<div class="col-lg-1 mx-auto pl-0"></div>
 						</div>
 						<div class="row my-form-field">
 							<div class="col-lg-4 mx-auto">
 								{{ form_label(form.CompanyStandardPhone, null, {'label_attr': {'class': 'my-form-label'}}) }}
 							</div>
 							<div class="col-lg-7 mx-auto">
-								{{ form_widget(form.CompanyStandardPhone, {'attr': {'class': 'form-control'}}) }}
-								{{ form_errors(form.CompanyStandardPhone, {'attr': {'class': 'form-error-message'}}) }}
+								{{ form_widget(form.CompanyStandardPhone, {'attr': {'class': 'form-control input-tel'}}) }}
 							</div>
+							{% if form.CompanyStandardPhone.vars.errors|length > 0 %}
+								<div class="col-lg-1 mx-auto pl-0">
+									<button type="button" style="padding: 3px 6px;" class="btn btn-danger rounded-circle" data-title="Erreur de saisie" data-trigger="focus" data-container="body" data-toggle="popover" data-placement="top" data-content="
+                                    {% for error in form.CompanyStandardPhone.vars.errors %}
+                                        -{{ error.messagePluralization is null
+									? error.messageTemplate|trans(error.messageParameters, 'validators')
+									: error.messageTemplate|transchoice(error.messagePluralization, error.messageParameters, 'validators')
+									}}<br>
+                                    {% endfor %}
+                                    "><i class="fas fa-exclamation-circle"></i>
+									</button>
+								</div>
+							{% else %}
+								<div class="col-lg-1 mx-auto pl-0"></div>
+							{% endif %}
 						</div>
 						<div class="row my-form-field">
 							<div class="col-lg-4 mx-auto">
 								{{ form_label(form.CompanyFax, null, {'label_attr': {'class': 'my-form-label'}}) }}
 							</div>
 							<div class="col-lg-7 mx-auto">
-								{{ form_widget(form.CompanyFax, {'attr': {'class': 'form-control'}}) }}
-								{{ form_errors(form.CompanyFax, {'attr': {'class': 'form-error-message'}}) }}
+								{{ form_widget(form.CompanyFax, {'attr': {'class': 'form-control input-fax '}}) }}
 							</div>
+							{% if form.CompanyFax.vars.errors|length > 0 %}
+								<div class="col-lg-1 mx-auto pl-0">
+									<button type="button" style="padding: 3px 6px;" class="btn btn-danger rounded-circle" data-title="Erreur de saisie" data-trigger="focus" data-container="body" data-toggle="popover" data-placement="top" data-content="
+                                    {% for error in form.CompanyFax.vars.errors %}
+                                        -{{ error.messagePluralization is null
+									? error.messageTemplate|trans(error.messageParameters, 'validators')
+									: error.messageTemplate|transchoice(error.messagePluralization, error.messageParameters, 'validators')
+									}}<br>
+                                    {% endfor %}
+                                    "><i class="fas fa-exclamation-circle"></i>
+									</button>
+								</div>
+							{% else %}
+								<div class="col-lg-1 mx-auto pl-0"></div>
+							{% endif %}
 						</div>
 						<div class="row my-form-field">
 							<div class="col-lg-4 mx-auto">
 								{{ form_label(form.CompanyWebSite, null, {'label_attr': {'class': 'my-form-label'}}) }}
 							</div>
 							<div class="col-lg-7 mx-auto">
-								{{ form_widget(form.CompanyWebSite, {'attr': {'class': 'form-control'}}) }}
-								{{ form_errors(form.CompanyWebSite, {'attr': {'class': 'form-error-message'}}) }}
+								{{ form_widget(form.CompanyWebSite, {'attr': {'class': 'form-control input-web'}}) }}
 							</div>
+							{% if form.CompanyWebSite.vars.errors|length > 0 %}
+								<div class="col-lg-1 mx-auto pl-0">
+									<button type="button" style="padding: 3px 6px;" class="btn btn-danger rounded-circle" data-title="Erreur de saisie" data-trigger="focus" data-container="body" data-toggle="popover" data-placement="top" data-content="
+                                {% for error in form.CompanyWebSite.vars.errors %}
+                                    -{{ error.messagePluralization is null
+									? error.messageTemplate|trans(error.messageParameters, 'validators')
+									: error.messageTemplate|transchoice(error.messagePluralization, error.messageParameters, 'validators')
+									}}<br>
+                                {% endfor %}
+                                "><i class="fas fa-exclamation-circle"></i>
+									</button>
+								</div>
+							{% else %}
+								<div class="col-lg-1 mx-auto pl-0"></div>
+							{% endif %}
 						</div>
 						<div class="row my-form-field">
 							<div class="col-lg-4 mx-auto">
@@ -225,34 +349,131 @@
 								{{ form_widget(form.CompanyComments, {'attr': {'class': 'form-control'}}) }}
 								{{ form_errors(form.CompanyComments, {'attr': {'class': 'form-error-message'}}) }}
 							</div>
+							<div class="col-lg-1 mx-auto pl-0"></div>
 						</div>
 					</div>
 				</div>
 
-				<div class="row form-buttons">
+				<br><br><br><br>
+				<button class="btn btn-light return-button float-left" type="button">
+					<a href="{{ path('listCompany') }}" class="text-decoration-none text-gray-800"><i class="fas fa-arrow-left"></i> Retour</a>
+				</button>
+				<div class="row form-buttons mb-0" style="padding-left: 40%;">
 					<button class="btn btn-white-red return-button" type="button">
-						<a href="{{ path('listCompany') }}">ANNULER</a>
+						<a href="{{ path('deleteCompany', {'id':company.Id}) }}">SUPPRIMER</a>
 					</button>
-					{{ form_widget(form.save, { 'label': 'AJOUTER', 'attr': {'class': 'btn btn-red submit-button'}}) }}
+					<button class="btn btn-white-red font-weight-bold button-large" type="button">
+						<a href="#">DEMANDE DE MISE A JOUR</a>
+					</button>
+					{{ form_widget(form.save, { 'label': 'ENREGISTRER', 'attr': {'class': 'btn btn-red submit-button'}}) }}
 					{{ form_end(form) }}
 				</div>
 			</section>
 
 			<section id="contacts" class="tab-panel">
-				<h2>6B. Rauchbier</h2>
-				<p><strong>Overall Impression:</strong>  An elegant, malty German amber lager with a balanced, complementary beechwood smoke character. Toasty-rich malt in aroma and flavor, restrained bitterness, low to high smoke flavor, clean fermentation profile, and an attenuated finish are characteristic.</p>
-				<p><strong>History:</strong> A historical specialty of the city of Bamberg, in the Franconian region of Bavaria in Germany. Beechwood-smoked malt is used to make a Märzen-style amber lager. The smoke character of the malt varies by maltster; some breweries produce their own smoked malt (rauchmalz).</p>
+				<div class="table-responsive">
+					<table id="table" class="table sortable-table">
+						<thead>
+						<tr>
+							<th style="width: 220px;" class="sortable" data-field="prenom">Prénom</th>
+							<th style="width: 220px;" class="sortable" data-field="nom">Nom</th>
+							<th style="width: 220px;" class="sortable" data-field="entreprise">Entreprise</th>
+							<th style="width: 220px;" class="sortable" data-field="fonction">Fonction</th>
+							<th style="width: 220px;" class="sortable" data-field="cp">CP</th>
+							<th style="width: 220px;" class="sortable" data-field="vile">Ville</th>
+							<th style="width: 220px;" class="sortable" data-field="contact">Statut</th>
+							<th style="width: 60px;text-align: center;" class="table-field-other no-sortable" data-field="autre">&bull;&bull;&bull;</th>
+						</tr>
+						</thead>
+						<tbody id="myTableBody">
+						{% for contact in listContact %}
+							<tr>
+								<td>
+									{% if contact.ContactPhoto is not null %}
+										<img src="{{asset('build/images/' ~ contact.ContactPhoto)}}" class="table-img-profile rounded-circle" title="Photo" alt="Aucun logo">
+									{% else %}
+										<img src="{{asset('build/Photo.png')}}" class="table-img-profile rounded-circle" title="Photo" alt="Logo du contact">
+									{% endif %}
+									<a href="{{ path('editContact', {'id':contact.Id}) }}">	{{contact.ContactFirstName}}
+									</a>
+								</td>
+								<td>
+									<a href="{{ path('editContact', {'id':contact.Id}) }}">	{{contact.contactLastName}}
+									</a>
+								</td>
+								<td>
+									<a href="{{ path('editContact', {'id':contact.Id}) }}">	{{contact.idCompany.CompanyLastName}}
+									</a>
+								</td>
+								<td>
+									<a href="{{ path('editContact', {'id':contact.Id}) }}">	{{contact.idContactJob.contactJobName}}
+									</a>
+								</td>
+								<td>
+									<a href="{{ path('editContact', {'id':contact.Id}) }}">	{{contact.idCompany.CompanyPostalCode}}
+									</a>
+								</td>
+								<td>
+									<a href="{{ path('editContact', {'id':contact.Id}) }}">	{{contact.idCompany.CompanyCity}}
+									</a>
+								</td>
+								<td>
+									{% if contact.contactStatus == "0" %}
+										<img src="{{asset('build/rouge.png')}}" class="table-img-profile3 rounded-circle" title="Rouge" alt="Statut rouge">
+										<a href="{{ path('editContact', {'id':contact.Id}) }}">Obsolète
+										</a>
+									{% elseif contact.contactStatus == "1" %}
+										<img src="{{asset('build/vert.png')}}" class="table-img-profile3 rounded-circle" title="Vert" alt="Statut vert">
+										<a href="{{ path('editContact', {'id':contact.Id}) }}">à jour
+										</a>
+									{% else %}
+										<img src="{{asset('build/orange.png')}}" class="table-img-profile3 rounded-circle" title="Orange" alt="Statut orange">
+										<a href="{{ path('editContact', {'id':contact.Id}) }}">à vérifier
+										</a>
+									{% endif %}
+								</td>
+								<td>
+									{% if contact.contactEmail is not null %}
+										<img src="{{asset('build/mail.png')}}" class="commercial-mail" title="{{contact.contactEmail}}" alt="Email du contact">
+									{% endif %}
+									{% if contact.contactMobilePhone is not null %}
+										<img src="{{asset('build/tel.png')}}" class="commercial-tel" title="{{contact.contactMobilePhone}}" alt="Tél. fixe direct du contact">
+									{% endif %}
+								</td>
+							</tr>
+						{% else %}
+							<tr>
+								<td colspan="8" class="text-center">Cette entreprise ne possède aucun contact</td>
+							</tr>
+						{% endfor %}
+						</tbody>
+					</table>
+				</div>
+
+				<div class="table-after">
+					<div class="row">
+						<div class="table-after-entry">
+							<select id="table-nb-entry" class="table-nb-entry unset-outline">
+								<option value="15">15</option>
+								<option value="20">20</option>
+								<option value="50">50</option>
+								<option value="100">100</option>
+								<option value="200">200</option>
+							</select>
+						</div>
+						<div class="table-after-pagination">
+							<ul class="pagination pagination-lg pager" id="myPager"></ul>
+						</div>
+					</div>
+				</div>
 			</section>
 
 			<section id="notes" class="tab-panel">
-				<h2>6C. Dunkles Bock</h2>
-				<p><strong>Overall Impression:</strong> A dark, strong, malty German lager beer that emphasizes the malty-rich and somewhat toasty qualities of continental malts without being sweet in the finish.</p>
-				<p><strong>History:</strong> Originated in the Northern German city of Einbeck, which was a brewing center and popular exporter in the days of the Hanseatic League (14th to 17th century). Recreated in Munich starting in the 17th century. The name “bock” is based on a corruption of the name “Einbeck” in the Bavarian dialect, and was thus only used after the beer came to Munich. “Bock” also means “Ram” in German, and is often used in logos and advertisements.</p>
 			</section>
 
 			<section id="historique" class="tab-panel">
-				<h2>Historique</h2>
 			</section>
+
 		</div>
 	</div>
 
@@ -260,5 +481,4 @@
 {% block javascript %}
 {{parent()}}
 
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
 {% endblock %}
