@@ -22,7 +22,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class OperationsController extends AbstractController
 {
     /**
-     * @Route("/new", name="operations_new", methods={"GET","POST"})
+     * @Route("/new", name="newOperation", methods={"GET","POST"})
      */
     function new(Request $request): Response
     {
@@ -47,7 +47,7 @@ class OperationsController extends AbstractController
                 $entityManager->persist($new);
                 $entityManager->flush();
 
-                return $this->redirectToRoute('operations_index');
+                return $this->redirectToRoute('listOperation');
             }
 
             return $this->render('operations/new.html.twig', [
@@ -63,7 +63,7 @@ class OperationsController extends AbstractController
     }
 
     /**
-     * @Route("/edit/{operationCode}", name="operations_edit", methods={"GET","POST"})
+     * @Route("/edit/{operationCode}", name="editOperation", methods={"GET","POST"})
      */
     public function edit(Request $request, Operations $operation): Response
     {
@@ -215,7 +215,7 @@ class OperationsController extends AbstractController
                 $this->getDoctrine()->getManager()->persist($operationForm);
                 $this->getDoctrine()->getManager()->flush();
 
-                return $this->redirectToRoute('operations_edit', [
+                return $this->redirectToRoute('editOperation', [
                     'operationCode' => $operation->getOperationCode(),
                 ]);
             }
@@ -230,7 +230,7 @@ class OperationsController extends AbstractController
 
                 $this->getDoctrine()->getManager()->flush();
 
-                return $this->redirectToRoute('operations_edit', [
+                return $this->redirectToRoute('editOperation', [
                     'operationCode' => $operation->getOperationCode(),
                 ]);
             }
@@ -292,7 +292,7 @@ class OperationsController extends AbstractController
                 $this->getDoctrine()->getManager()->persist($operationSettings);
                 $this->getDoctrine()->getManager()->flush();
 
-                return $this->redirectToRoute('operations_edit', [
+                return $this->redirectToRoute('editOperation', [
                     'operationCode' => $operation->getOperationCode(),
                 ]);
             }
@@ -326,11 +326,11 @@ class OperationsController extends AbstractController
 
         $operationsRepository->activeArchive([$operationCode]);
 
-        return $this->redirectToRoute('operations_index');
+        return $this->redirectToRoute('listOperation');
     }
 
     /**
-     * @Route("/list", name="operations_index", methods={"GET","POST"})
+     * @Route("/list", name="listOperation", methods={"GET","POST"})
      */
     public function list(Request $httpRequest): Response
     {
@@ -367,7 +367,7 @@ class OperationsController extends AbstractController
                     // Appel de la fonction activeArchive()
                     $operationsRepository->activeArchive($listData);
                 }
-                return $this->redirect($this->generateUrl('operations_index'));
+                return $this->redirect($this->generateUrl('listOperation'));
             }
 
             return $this->render('operations/list.html.twig', [

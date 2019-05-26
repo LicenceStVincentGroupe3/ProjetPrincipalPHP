@@ -38,47 +38,47 @@
                                 <input type="checkbox" class="checkthis" name="deleteData[]" value="{{ operation.OperationCode }}">
                             </td>
                             <td>
-                                <a href="{{ path('operations_edit', {'operationCode':operation.OperationCode}) }}">{{ operation.OperationName }}</a>
+                                <a href="{{ path('editOperation', {'operationCode':operation.OperationCode}) }}">{{ operation.OperationName }}</a>
                             </td>
                             <td>
-                                <a href="{{ path('operations_edit', {'operationCode':operation.OperationCode}) }}">{{ operation.OperationCreated|date("d/m/Y") }}</a>
+                                <a href="{{ path('editOperation', {'operationCode':operation.OperationCode}) }}">{{ operation.OperationCreated|date("d/m/Y") }}</a>
                             </td>
                             <td></td>
                             <td></td>
                             <td>
                                 {% if operation.Author is not null %}
-                                    <a href="{{ path('operations_edit', {'operationCode':operation.OperationCode}) }}">
+                                    <a href="{{ path('editOperation', {'operationCode':operation.OperationCode}) }}">
                                         {{ operation.Author.commercialFirstname }} {{ operation.Author.commercialName|upper }}
                                     </a>
                                 {% endif %}
                             </td>
                             <td class="badges">
                                 {% if operation.OperationSendingDate == NULL and operation.OperationClosingDate == NULL %}
-                                    <a class="badge badge-pill badge-orange" href="{{ path('operations_edit', {'operationCode':operation.OperationCode}) }}">
+                                    <a class="badge badge-pill badge-orange" href="{{ path('editOperation', {'operationCode':operation.OperationCode}) }}">
                                         Brouillon
                                     </a>
                                 {% elseif operation.OperationSendingDate < date() and operation.OperationClosingDate > date() %}
-                                    <a class="badge badge-pill badge-green" href="{{ path('operations_edit', {'operationCode':operation.OperationCode}) }}">
+                                    <a class="badge badge-pill badge-green" href="{{ path('editOperation', {'operationCode':operation.OperationCode}) }}">
                                         En cours
                                     </a>
                                 {% elseif operation.OperationSendingDate < date() %}
-                                        <a class="badge badge-pill badge-grey" href="{{ path('operations_edit', {'operationCode':operation.OperationCode}) }}">
+                                        <a class="badge badge-pill badge-grey" href="{{ path('editOperation', {'operationCode':operation.OperationCode}) }}">
                                             Terminée
                                         </a>
                                 {% endif %}
                             </td>
                             <td>
-                                <a href="{{ path('operations_edit', {'operationCode':operation.OperationCode}) }}"></a>
+                                <a href="{{ path('editOperation', {'operationCode':operation.OperationCode}) }}"></a>
                             </td>
                             <td>
                                 {% if operation.Author is not null %}
                                     {% if operation.Author.Email is not null %}
-                                        <a href="{{ path('operations_edit', {'operationCode':operation.OperationCode}) }}">
+                                        <a href="{{ path('editOperation', {'operationCode':operation.OperationCode}) }}">
                                             <img src="{{asset('build/mail.png')}}" class="commercial-mail" title="{{operation.Author.Email}}" alt="Email du commercial">
                                         </a>
                                     {% endif %}
                                     {% if operation.Author.CommercialPhone is not null %}
-                                        <a href="{{ path('operations_edit', {'operationCode':operation.OperationCode}) }}">
+                                        <a href="{{ path('editOperation', {'operationCode':operation.OperationCode}) }}">
                                             <img src="{{asset('build/tel.png')}}" class="commercial-tel" title="{{operation.Author.CommercialPhone}}" alt="Tél. fixe direct du commercial">
                                         </a>
                                     {% endif %}
@@ -145,7 +145,7 @@
                 </div>
                 <div class="table-after-btn-add">
                     <button class="btn add-button">
-                        <a href="{{ path('operations_new') }}">AJOUTER</a>
+                        <a href="{{ path('newOperation') }}">AJOUTER</a>
                     </button>
                 </div>
             </div>

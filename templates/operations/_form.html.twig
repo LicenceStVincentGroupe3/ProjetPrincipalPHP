@@ -1,48 +1,87 @@
 {{ form_start(form) }}
     <div class="row">
         <div class="col-lg-7 mx-auto my-form-left-side">
-            <div class="row my-form-field {% if form.operationCode.vars.errors|length %}my-form-error-container{% endif %}">
+            <div class="row my-form-field">
                 <div class="col-lg-4 mx-auto">
                     {{ form_label(form.operationCode, null, {'label_attr': {'class': 'my-form-label'}}) }}
                 </div>
                 <div class="col-lg-7 mx-auto mandatory">
-                    {% if app.request.attributes.get("_route") == "operations_new" %}
+                    {% if app.request.attributes.get("_route") == "newOperation" %}
                     {{ form_widget(form.operationCode, {'value' : opeCode.regexify("[A-Z]{10}"),'attr': {'class': 'form-control my-form-input-little'}}) }}
                     {% endif %}
-                    {% if app.request.attributes.get("_route") == "operations_edit" %}
+                    {% if app.request.attributes.get("_route") == "editOperation" %}
                     {{ form_widget(form.operationCode, {'attr': {'class': 'form-control my-form-input-little'}}) }}
                     {% endif %}
                 </div>
-                {% if form.operationCode.vars.errors|length %}
-                    <div class="alert alert-danger my-form-error">
-                        {{ form_errors(form.operationCode, {'attr': {'class': 'list-unstyled mb-0'}}) }}
+                {% if form.operationCode.vars.errors|length > 0 %}
+                    <div class="col-lg-1 mx-auto pl-0">
+                        <button type="button" style="padding: 3px 6px;" class="btn btn-danger rounded-circle" data-title="Erreur de saisie" data-trigger="focus" data-container="body" data-toggle="popover" data-placement="top"
+                                data-content="
+                                {% for error in form.operationCode.vars.errors %}
+                                    -{{ error.messagePluralization is null
+                                    ? error.messageTemplate|trans(error.messageParameters, 'validators')
+                                    : error.messageTemplate|transchoice(error.messagePluralization, error.messageParameters, 'validators')
+                                    }}
+                                    <br>
+                                {% endfor %}
+                                ">
+                            <i class="fas fa-exclamation-circle"></i>
+                        </button>
                     </div>
+                {% else %}
+                    <div class="col-lg-1 mx-auto pl-0"></div>
                 {% endif %}
             </div>
-            <div class="row my-form-field {% if form.operationName.vars.errors|length %}my-form-error-container{% endif %}">
+            <div class="row my-form-field">
                 <div class="col-lg-4 mx-auto">
                     {{ form_label(form.operationName, null, {'label_attr': {'class': 'my-form-label'}}) }}
                 </div>
                 <div class="col-lg-7 mx-auto mandatory">
                     {{ form_widget(form.operationName, {'attr': {'class': 'form-control my-form-input-big'}}) }}
                 </div>
-                {% if form.operationName.vars.errors|length %}
-                    <div class="alert alert-danger my-form-error">
-                        {{ form_errors(form.operationName, {'attr': {'class': 'list-unstyled mb-0'}}) }}
+                {% if form.operationName.vars.errors|length > 0 %}
+                    <div class="col-lg-1 mx-auto pl-0">
+                        <button type="button" style="padding: 3px 6px;" class="btn btn-danger rounded-circle" data-title="Erreur de saisie" data-trigger="focus" data-container="body" data-toggle="popover" data-placement="top"
+                                data-content="
+                                {% for error in form.operationName.vars.errors %}
+                                    -{{ error.messagePluralization is null
+                                    ? error.messageTemplate|trans(error.messageParameters, 'validators')
+                                    : error.messageTemplate|transchoice(error.messagePluralization, error.messageParameters, 'validators')
+                                    }}
+                                    <br>
+                                {% endfor %}
+                                ">
+                            <i class="fas fa-exclamation-circle"></i>
+                        </button>
                     </div>
+                {% else %}
+                    <div class="col-lg-1 mx-auto pl-0"></div>
                 {% endif %}
             </div>
-            <div class="row my-form-field {% if form.operationRevival.vars.errors|length %}my-form-error-container{% endif %}">
+            <div class="row my-form-field">
                 <div class="col-lg-4 mx-auto">
                     {{ form_label(form.operationRevival, null, {'label_attr': {'class': 'my-form-label'}}) }}
                 </div>
                 <div class="col-lg-7 mx-auto">
                     {{ form_widget(form.operationRevival, {'attr': {'class': 'form-control my-form-input-tiny'}}) }}
                 </div>
-                {% if form.operationRevival.vars.errors|length %}
-                    <div class="alert alert-danger my-form-error">
-                        {{ form_errors(form.operationRevival, {'attr': {'class': 'list-unstyled mb-0'}}) }}
+                {% if form.operationRevival.vars.errors|length > 0 %}
+                    <div class="col-lg-1 mx-auto pl-0">
+                        <button type="button" style="padding: 3px 6px;" class="btn btn-danger rounded-circle" data-title="Erreur de saisie" data-trigger="focus" data-container="body" data-toggle="popover" data-placement="top"
+                                data-content="
+                                {% for error in form.operationRevival.vars.errors %}
+                                    -{{ error.messagePluralization is null
+                                    ? error.messageTemplate|trans(error.messageParameters, 'validators')
+                                    : error.messageTemplate|transchoice(error.messagePluralization, error.messageParameters, 'validators')
+                                    }}
+                                    <br>
+                                {% endfor %}
+                                ">
+                            <i class="fas fa-exclamation-circle"></i>
+                        </button>
                     </div>
+                {% else %}
+                    <div class="col-lg-1 mx-auto pl-0"></div>
                 {% endif %}
             </div>
             <div class="row my-form-field">
@@ -56,6 +95,24 @@
                         </div>
                     </div>
                 </div>
+                {% if form.operationSendingDate.vars.errors|length > 0 %}
+                    <div class="col-lg-1 mx-auto pl-0">
+                        <button type="button" style="padding: 3px 6px;" class="btn btn-danger rounded-circle" data-title="Erreur de saisie" data-trigger="focus" data-container="body" data-toggle="popover" data-placement="top"
+                                data-content="
+                                {% for error in form.operationSendingDate.vars.errors %}
+                                    -{{ error.messagePluralization is null
+                                    ? error.messageTemplate|trans(error.messageParameters, 'validators')
+                                    : error.messageTemplate|transchoice(error.messagePluralization, error.messageParameters, 'validators')
+                                    }}
+                                    <br>
+                                {% endfor %}
+                                ">
+                            <i class="fas fa-exclamation-circle"></i>
+                        </button>
+                    </div>
+                {% else %}
+                    <div class="col-lg-1 mx-auto pl-0"></div>
+                {% endif %}
             </div>
             <div class="row my-form-field">
                 <div class="col-lg-4 mx-auto">
@@ -68,6 +125,24 @@
                         </div>
                     </div>
                 </div>
+                {% if form.operationClosingDate.vars.errors|length > 0 %}
+                    <div class="col-lg-1 mx-auto pl-0">
+                        <button type="button" style="padding: 3px 6px;" class="btn btn-danger rounded-circle" data-title="Erreur de saisie" data-trigger="focus" data-container="body" data-toggle="popover" data-placement="top"
+                                data-content="
+                                {% for error in form.operationClosingDate.vars.errors %}
+                                    -{{ error.messagePluralization is null
+                                    ? error.messageTemplate|trans(error.messageParameters, 'validators')
+                                    : error.messageTemplate|transchoice(error.messagePluralization, error.messageParameters, 'validators')
+                                    }}
+                                    <br>
+                                {% endfor %}
+                                ">
+                            <i class="fas fa-exclamation-circle"></i>
+                        </button>
+                    </div>
+                {% else %}
+                    <div class="col-lg-1 mx-auto pl-0"></div>
+                {% endif %}
             </div>
             <div class="row my-form-field">
                 <div class="col-lg-4 mx-auto">
@@ -76,6 +151,24 @@
                 <div class="col-lg-7 mx-auto">
                     {{ form_widget(form.operationOptInformation, {'attr': {'class': 'form-control my-form-input-big'}}) }}
                 </div>
+                {% if form.operationOptInformation.vars.errors|length > 0 %}
+                    <div class="col-lg-1 mx-auto pl-0">
+                        <button type="button" style="padding: 3px 6px;" class="btn btn-danger rounded-circle" data-title="Erreur de saisie" data-trigger="focus" data-container="body" data-toggle="popover" data-placement="top"
+                                data-content="
+                                {% for error in form.operationOptInformation.vars.errors %}
+                                    -{{ error.messagePluralization is null
+                                    ? error.messageTemplate|trans(error.messageParameters, 'validators')
+                                    : error.messageTemplate|transchoice(error.messagePluralization, error.messageParameters, 'validators')
+                                    }}
+                                    <br>
+                                {% endfor %}
+                                ">
+                            <i class="fas fa-exclamation-circle"></i>
+                        </button>
+                    </div>
+                {% else %}
+                    <div class="col-lg-1 mx-auto pl-0"></div>
+                {% endif %}
             </div>
             <div class="row my-form-field">
                 <div class="col-lg-4 mx-auto">
@@ -84,41 +177,90 @@
                 <div class="col-lg-7 mx-auto">
                     {{ form_widget(form.operationOptSalesOffer, {'attr': {'class': 'form-control my-form-input-big'}}) }}
                 </div>
+                {% if form.operationOptSalesOffer.vars.errors|length > 0 %}
+                    <div class="col-lg-1 mx-auto pl-0">
+                        <button type="button" style="padding: 3px 6px;" class="btn btn-danger rounded-circle" data-title="Erreur de saisie" data-trigger="focus" data-container="body" data-toggle="popover" data-placement="top"
+                                data-content="
+                                {% for error in form.operationOptSalesOffer.vars.errors %}
+                                    -{{ error.messagePluralization is null
+                                    ? error.messageTemplate|trans(error.messageParameters, 'validators')
+                                    : error.messageTemplate|transchoice(error.messagePluralization, error.messageParameters, 'validators')
+                                    }}
+                                    <br>
+                                {% endfor %}
+                                ">
+                            <i class="fas fa-exclamation-circle"></i>
+                        </button>
+                    </div>
+                {% else %}
+                    <div class="col-lg-1 mx-auto pl-0"></div>
+                {% endif %}
             </div>
         </div>
         <div class="col-lg-5 mx-auto my-form-right-side">
             <div class="row my-form-field">
-                <div class="col-lg-5 mx-auto">
+                <div class="col-lg-4 mx-auto">
                     {{ form_label(form.author, null,  { "label_attr" : { "class" : "my-form-label"}}) }}
                 </div>
                 <div class="col-lg-7 mx-auto">
                     {{ form_widget(form.author, { "attr" : { "class" : "form-control my-form-input-big"}}) }}
                 </div>
+                {% if form.author.vars.errors|length > 0 %}
+                    <div class="col-lg-1 mx-auto pl-0">
+                        <button type="button" style="padding: 3px 6px;" class="btn btn-danger rounded-circle" data-title="Erreur de saisie" data-trigger="focus" data-container="body" data-toggle="popover" data-placement="top"
+                                data-content="
+                                {% for error in form.author.vars.errors %}
+                                    -{{ error.messagePluralization is null
+                                    ? error.messageTemplate|trans(error.messageParameters, 'validators')
+                                    : error.messageTemplate|transchoice(error.messagePluralization, error.messageParameters, 'validators')
+                                    }}
+                                    <br>
+                                {% endfor %}
+                                ">
+                            <i class="fas fa-exclamation-circle"></i>
+                        </button>
+                    </div>
+                {% else %}
+                    <div class="col-lg-1 mx-auto pl-0"></div>
+                {% endif %}
             </div>
-            <div class="row my-form-field my-form-input-fat-container {% if form.operationComment.vars.errors|length > 0 %}my-form-error-container{% endif %}">
-                <div class="col-lg-5 mx-auto">
+            <div class="row my-form-field my-form-input-fat-container">
+                <div class="col-lg-4 mx-auto">
                     {{ form_label(form.operationComment, null, {'label_attr': {'class': 'my-form-label'}}) }}
                 </div>
                 <div class="col-lg-7 mx-auto">
                     {{ form_widget(form.operationComment, {'attr': {'class': 'form-control my-form-input-fat'}}) }}
                 </div>
                 {% if form.operationComment.vars.errors|length > 0 %}
-                    <div class="alert alert-danger my-form-error">
-                        {{ form_errors(form.operationComment, {'attr': {'class': 'list-unstyled mb-0'}}) }}
+                    <div class="col-lg-1 mx-auto pl-0">
+                        <button type="button" style="padding: 3px 6px;" class="btn btn-danger rounded-circle" data-title="Erreur de saisie" data-trigger="focus" data-container="body" data-toggle="popover" data-placement="top"
+                                data-content="
+                                {% for error in form.operationComment.vars.errors %}
+                                    -{{ error.messagePluralization is null
+                                    ? error.messageTemplate|trans(error.messageParameters, 'validators')
+                                    : error.messageTemplate|transchoice(error.messagePluralization, error.messageParameters, 'validators')
+                                    }}
+                                    <br>
+                                {% endfor %}
+                                ">
+                            <i class="fas fa-exclamation-circle"></i>
+                        </button>
                     </div>
+                {% else %}
+                    <div class="col-lg-1 mx-auto pl-0"></div>
                 {% endif %}
             </div>
         </div>
     </div>
-    {% if app.request.attributes.get("_route") == "operations_new" %}
+    {% if app.request.attributes.get("_route") == "newOperation" %}
     <div class="row form-buttons">
         <button class="btn btn-white-red return-button" type="button">
-            <a href="{{ path('operations_index') }}">ANNULER</a>
+            <a href="{{ path('listOperation') }}">ANNULER</a>
         </button>
         {{ form_widget(form.save, { 'label': 'AJOUTER', 'attr': {'class': 'btn btn-red submit-button'}}) }}
     </div>
     {% endif %}
-    {% if app.request.attributes.get("_route") == "operations_edit" %}
+    {% if app.request.attributes.get("_route") == "editOperation" %}
     <div class="row form-buttons form-buttons-medium">
         <button class="btn btn-white-red return-button" type="button">
            <a href="{{ path('deleteOperation', {'operationCode':operation.OperationCode}) }}">SUPPRIMER</a>

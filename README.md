@@ -2,14 +2,13 @@
 
 ## Auteurs
 
-Dylan NOALLY, Dylan POPYK, Gradi MANDAMBU
+Dylan NOALLY, Dylan POPYK, Gradi MANDAMBU FUKIAWU
 
 Ce projet est un projet de fin d'année pour la Licence.
 
 ## Développement
 
-La partie front-office sera développée en Angular version 7.0.
-La partie back-office sera développée en Symfony version 4.1.
+Les partie *front-office* et *back-office* ont été développées en *Symfony version 4.1*.
 
 ## Gestion des données
 
@@ -32,14 +31,13 @@ Concevoir une application web métier appelée "Smart Leads" permettant de répo
 Tout d'abord ouvrez l'invite de commande du système d'exploitation.
 
 Afin de pouvoir utiliser l'application correctement, il est nécessaire d'installer :
-- Composer qui est un environnement d'exécution de commande.
+- Composer qui est un environnement d'exécution de commande.  
 https://getcomposer.org/
 
-- Yarn qui est un environnement d'exécution de commande.
-https://yarnpkg.com/lang/en/
-Pour les personnes possédants *NPM* : utilisez la commande *npm install -g yarn*.
+- Yarn qui est un environnement d'exécution de commande.  
+https://yarnpkg.com/lang/en/  
+Pour les personnes possédants *NPM* : utilisez la commande *npm install -g yarn*.  
 
-```
 Ensuite, allez dans le dossier **www** dans C: \ wamp64
 ```
 $ cd c:wamp64/www
@@ -48,27 +46,33 @@ Ensuite exécutez cette commande pour cloner notre projet :
 ```
 $ git clone git@github.com:LicenceStVincentGroupe3/ProjetPrincipalPHP.git
 ```
-
 Une fois le projet cloné, accédez au dossier nouvellement créé intitulé "ProjetPrincipalPHP".
 ```
 $ cd ProjetPrincipalPHP
+
 ```
 Puis lancez ces commandes qui vont installer un package et tous les packages dont il dépend.
 ```
 $ composer install
+```
+```
 $ yarn install
 ```
 Ensuite, executez les commandes de génération de base de données et des champs qui l'accompagnent.
 ```
 $ php bin/console doctrine:database:create
-php bin/console doctrine:schema:update --force
 ```
-Enfin, allumez le serveur qui ouvrira une page Web contenant notre projet
 ```
-$ php bin/console server:run <> (Si jamais après cette commande le navigateur ne s'ouvre pas automatiquement, allez à l'URL suivante : http://127.0.0.1:8000)
+$ php bin/console doctrine:schema:update --force
+```
+Enfin, allumez le serveur qui ouvrira une page Web contenant le projet.
+```
+$ php bin/console server:run <!-- Si jamais après cette commande le navigateur ne s'ouvre pas automatiquement, allez à l'URL suivante : http://127.0.0.1:8000 -->
 ```
 Puis, lancez le package Webpack Encore qui gère les fichiers .css et .js.
 ```
-$ yarn encore dev <> (Pour la première fois.)
-$ yarn encore dev --watch <> (Pour toutes les fois suivante.)
+$ yarn encore dev <!-- Pour la première fois. -->
+```
+```
+$ yarn encore dev --watch <!-- Pour toutes les fois suivante. -->
 ```

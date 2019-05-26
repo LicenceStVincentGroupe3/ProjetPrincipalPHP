@@ -56,15 +56,15 @@
         {% endif %}
         <span class="badges">
             {% if operation.OperationSendingDate == NULL and operation.OperationClosingDate == NULL %}
-                <a class="badge badge-pill badge-orange" href="{{ path('operations_edit', {'operationCode':operation.OperationCode}) }}">
+                <a class="badge badge-pill badge-orange" href="{{ path('editOperation', {'operationCode':operation.OperationCode}) }}">
                     Brouillon
                 </a>
             {% elseif operation.OperationSendingDate < date() and operation.OperationClosingDate > date() %}
-                <a class="badge badge-pill badge-green" href="{{ path('operations_edit', {'operationCode':operation.OperationCode}) }}">
+                <a class="badge badge-pill badge-green" href="{{ path('editOperation', {'operationCode':operation.OperationCode}) }}">
                     En cours
                 </a>
             {% elseif operation.OperationSendingDate < date() %}
-                    <a class="badge badge-pill badge-grey" href="{{ path('operations_edit', {'operationCode':operation.OperationCode}) }}">
+                    <a class="badge badge-pill badge-grey" href="{{ path('editOperation', {'operationCode':operation.OperationCode}) }}">
                         Terminée
                     </a>
             {% endif %}

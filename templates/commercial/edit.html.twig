@@ -100,14 +100,17 @@
 								</div>
 								{% if form.commercialCode.vars.errors|length > 0 %}
 									<div class="col-lg-1 mx-auto pl-0">
-										<button type="button" style="padding: 3px 6px;" class="btn btn-danger rounded-circle" data-title="Erreur de saisie" data-trigger="focus" data-container="body" data-toggle="popover" data-placement="top" data-content="
-                                    {% for error in form.commercialCode.vars.errors %}
-                                        -{{ error.messagePluralization is null
-										? error.messageTemplate|trans(error.messageParameters, 'validators')
-										: error.messageTemplate|transchoice(error.messagePluralization, error.messageParameters, 'validators')
-										}}<br>
-                                    {% endfor %}
-                                    "><i class="fas fa-exclamation-circle"></i>
+										<button type="button" style="padding: 3px 6px;" class="btn btn-danger rounded-circle" data-title="Erreur de saisie" data-trigger="focus" data-container="body" data-toggle="popover" data-placement="top"
+												data-content="
+												{% for error in form.commercialCode.vars.errors %}
+													-{{ error.messagePluralization is null
+													? error.messageTemplate|trans(error.messageParameters, 'validators')
+													: error.messageTemplate|transchoice(error.messagePluralization, error.messageParameters, 'validators')
+													}}
+													<br>
+												{% endfor %}
+												">
+											<i class="fas fa-exclamation-circle"></i>
 										</button>
 									</div>
 								{% else %}
@@ -132,14 +135,17 @@
 								</div>
 								{% if form.commercialFirstname.vars.errors|length > 0 %}
 									<div class="col-lg-1 mx-auto pl-0">
-										<button type="button" style="padding: 3px 6px;" class="btn btn-danger rounded-circle" data-title="Erreur de saisie" data-trigger="focus" data-container="body" data-toggle="popover" data-placement="top" data-content="
-                                    {% for error in form.commercialFirstname.vars.errors %}
-                                        -{{ error.messagePluralization is null
-										? error.messageTemplate|trans(error.messageParameters, 'validators')
-										: error.messageTemplate|transchoice(error.messagePluralization, error.messageParameters, 'validators')
-										}}<br>
-                                    {% endfor %}
-                                    "><i class="fas fa-exclamation-circle"></i>
+										<button type="button" style="padding: 3px 6px;" class="btn btn-danger rounded-circle" data-title="Erreur de saisie" data-trigger="focus" data-container="body" data-toggle="popover" data-placement="top"
+												data-content="
+												{% for error in form.commercialFirstname.vars.errors %}
+													-{{ error.messagePluralization is null
+													? error.messageTemplate|trans(error.messageParameters, 'validators')
+													: error.messageTemplate|transchoice(error.messagePluralization, error.messageParameters, 'validators')
+													}}
+													<br>
+												{% endfor %}
+												">
+											<i class="fas fa-exclamation-circle"></i>
 										</button>
 									</div>
 								{% else %}
@@ -155,14 +161,17 @@
 								</div>
 								{% if form.commercialName.vars.errors|length > 0 %}
 									<div class="col-lg-1 mx-auto pl-0">
-										<button type="button" style="padding: 3px 6px;" class="btn btn-danger rounded-circle" data-title="Erreur de saisie" data-trigger="focus" data-container="body" data-toggle="popover" data-placement="top" data-content="
-                                    {% for error in form.commercialName.vars.errors %}
-                                        -{{ error.messagePluralization is null
-										? error.messageTemplate|trans(error.messageParameters, 'validators')
-										: error.messageTemplate|transchoice(error.messagePluralization, error.messageParameters, 'validators')
-										}}<br>
-                                    {% endfor %}
-                                    "><i class="fas fa-exclamation-circle"></i>
+										<button type="button" style="padding: 3px 6px;" class="btn btn-danger rounded-circle" data-title="Erreur de saisie" data-trigger="focus" data-container="body" data-toggle="popover" data-placement="top"
+												data-content="
+												{% for error in form.commercialName.vars.errors %}
+													-{{ error.messagePluralization is null
+													? error.messageTemplate|trans(error.messageParameters, 'validators')
+													: error.messageTemplate|transchoice(error.messagePluralization, error.messageParameters, 'validators')
+													}}
+													<br>
+												{% endfor %}
+												">
+											<i class="fas fa-exclamation-circle"></i>
 										</button>
 									</div>
 								{% else %}
@@ -194,14 +203,17 @@
 								</div>
 								{% if form.commercialBirthday.vars.errors|length > 0 %}
 									<div class="col-lg-1 mx-auto pl-0">
-										<button type="button" style="padding: 3px 6px;" class="btn btn-danger rounded-circle" data-title="Erreur de saisie" data-trigger="focus" data-container="body" data-toggle="popover" data-placement="top" data-content="
-                                    {% for error in form.commercialBirthday.vars.errors %}
-                                        -{{ error.messagePluralization is null
-										? error.messageTemplate|trans(error.messageParameters, 'validators')
-										: error.messageTemplate|transchoice(error.messagePluralization, error.messageParameters, 'validators')
-										}}<br>
-                                    {% endfor %}
-                                    "><i class="fas fa-exclamation-circle"></i>
+										<button type="button" style="padding: 3px 6px;" class="btn btn-danger rounded-circle" data-title="Erreur de saisie" data-trigger="focus" data-container="body" data-toggle="popover" data-placement="top"
+												data-content="
+												{% for error in form.commercialBirthday.vars.errors %}
+													-{{ error.messagePluralization is null
+													? error.messageTemplate|trans(error.messageParameters, 'validators')
+													: error.messageTemplate|transchoice(error.messagePluralization, error.messageParameters, 'validators')
+													}}
+													<br>
+												{% endfor %}
+												">
+											<i class="fas fa-exclamation-circle"></i>
 										</button>
 									</div>
 								{% else %}
@@ -220,14 +232,17 @@
 								</div>
 								{% if form.arrivalDate.vars.errors|length > 0 or form.departureDate.vars.errors|length > 0 %}
 									<div class="col-lg-1 mx-auto pl-0">
-										<button type="button" style="padding: 3px 6px;" class="btn btn-danger rounded-circle" data-title="Erreur de saisie" data-trigger="focus" data-container="body" data-toggle="popover" data-placement="top" data-content="
-                                    {% for error in form.departureDate.vars.errors  %}
-                                        -{{ error.messagePluralization is null
-										? error.messageTemplate|trans(error.messageParameters, 'validators')
-										: error.messageTemplate|transchoice(error.messagePluralization, error.messageParameters, 'validators')
-										}}<br>
-                                    {% endfor %}
-                                    "><i class="fas fa-exclamation-circle"></i>
+										<button type="button" style="padding: 3px 6px;" class="btn btn-danger rounded-circle" data-title="Erreur de saisie" data-trigger="focus" data-container="body" data-toggle="popover" data-placement="top"
+												data-content="
+												{% for error in form.departureDate.vars.errors  %}
+													-{{ error.messagePluralization is null
+													? error.messageTemplate|trans(error.messageParameters, 'validators')
+													: error.messageTemplate|transchoice(error.messagePluralization, error.messageParameters, 'validators')
+													}}
+													<br>
+												{% endfor %}
+												">
+											<i class="fas fa-exclamation-circle"></i>
 										</button>
 									</div>
 								{% else %}
@@ -243,14 +258,17 @@
 								</div>
 								{% if form.commercialLinkedinAddress.vars.errors|length > 0 %}
 									<div class="col-lg-1 mx-auto pl-0">
-										<button type="button" style="padding: 3px 6px;" class="btn btn-danger rounded-circle" data-title="Erreur de saisie" data-trigger="focus" data-container="body" data-toggle="popover" data-placement="top" data-content="
-                                    {% for error in form.commercialLinkedinAddress.vars.errors %}
-                                        -{{ error.messagePluralization is null
-										? error.messageTemplate|trans(error.messageParameters, 'validators')
-										: error.messageTemplate|transchoice(error.messagePluralization, error.messageParameters, 'validators')
-										}}<br>
-                                    {% endfor %}
-                                    "><i class="fas fa-exclamation-circle"></i>
+										<button type="button" style="padding: 3px 6px;" class="btn btn-danger rounded-circle" data-title="Erreur de saisie" data-trigger="focus" data-container="body" data-toggle="popover" data-placement="top"
+												data-content="
+												{% for error in form.commercialLinkedinAddress.vars.errors %}
+													-{{ error.messagePluralization is null
+													? error.messageTemplate|trans(error.messageParameters, 'validators')
+													: error.messageTemplate|transchoice(error.messagePluralization, error.messageParameters, 'validators')
+													}}
+													<br>
+												{% endfor %}
+												">
+											<i class="fas fa-exclamation-circle"></i>
 										</button>
 									</div>
 								{% else %}
@@ -266,14 +284,17 @@
 								</div>
 								{% if form.commercialFacebookAddress.vars.errors|length > 0 %}
 									<div class="col-lg-1 mx-auto pl-0">
-										<button type="button" style="padding: 3px 6px;" class="btn btn-danger rounded-circle" data-title="Erreur de saisie" data-trigger="focus" data-container="body" data-toggle="popover" data-placement="top" data-content="
-                                    {% for error in form.commercialFacebookAddress.vars.errors %}
-                                        -{{ error.messagePluralization is null
-										? error.messageTemplate|trans(error.messageParameters, 'validators')
-										: error.messageTemplate|transchoice(error.messagePluralization, error.messageParameters, 'validators')
-										}}<br>
-                                    {% endfor %}
-                                    "><i class="fas fa-exclamation-circle"></i>
+										<button type="button" style="padding: 3px 6px;" class="btn btn-danger rounded-circle" data-title="Erreur de saisie" data-trigger="focus" data-container="body" data-toggle="popover" data-placement="top"
+												data-content="
+												{% for error in form.commercialFacebookAddress.vars.errors %}
+													-{{ error.messagePluralization is null
+													? error.messageTemplate|trans(error.messageParameters, 'validators')
+													: error.messageTemplate|transchoice(error.messagePluralization, error.messageParameters, 'validators')
+													}}
+													<br>
+												{% endfor %}
+												">
+											<i class="fas fa-exclamation-circle"></i>
 										</button>
 									</div>
 								{% else %}
@@ -289,14 +310,17 @@
 								</div>
 								{% if form.commercialTwitterAddress.vars.errors|length > 0 %}
 									<div class="col-lg-1 mx-auto pl-0">
-										<button type="button" style="padding: 3px 6px;" class="btn btn-danger rounded-circle" data-title="Erreur de saisie" data-trigger="focus" data-container="body" data-toggle="popover" data-placement="top" data-content="
-                                    {% for error in form.commercialTwitterAddress.vars.errors %}
-                                        -{{ error.messagePluralization is null
-										? error.messageTemplate|trans(error.messageParameters, 'validators')
-										: error.messageTemplate|transchoice(error.messagePluralization, error.messageParameters, 'validators')
-										}}<br>
-                                    {% endfor %}
-                                    "><i class="fas fa-exclamation-circle"></i>
+										<button type="button" style="padding: 3px 6px;" class="btn btn-danger rounded-circle" data-title="Erreur de saisie" data-trigger="focus" data-container="body" data-toggle="popover" data-placement="top"
+												data-content="
+												{% for error in form.commercialTwitterAddress.vars.errors %}
+													-{{ error.messagePluralization is null
+													? error.messageTemplate|trans(error.messageParameters, 'validators')
+													: error.messageTemplate|transchoice(error.messagePluralization, error.messageParameters, 'validators')
+													}}
+													<br>
+												{% endfor %}
+												">
+											<i class="fas fa-exclamation-circle"></i>
 										</button>
 									</div>
 								{% else %}
@@ -314,14 +338,17 @@
 								</div>
 								{% if form.email.vars.errors|length > 0 %}
 									<div class="col-lg-1 mx-auto pl-0">
-										<button type="button" style="padding: 3px 6px;" class="btn btn-danger rounded-circle" data-title="Erreur de saisie" data-trigger="focus" data-container="body" data-toggle="popover" data-placement="top" data-content="
-                                    {% for error in form.email.vars.errors %}
-                                        -{{ error.messagePluralization is null
-										? error.messageTemplate|trans(error.messageParameters, 'validators')
-										: error.messageTemplate|transchoice(error.messagePluralization, error.messageParameters, 'validators')
-										}}<br>
-                                    {% endfor %}
-                                    "><i class="fas fa-exclamation-circle"></i>
+										<button type="button" style="padding: 3px 6px;" class="btn btn-danger rounded-circle" data-title="Erreur de saisie" data-trigger="focus" data-container="body" data-toggle="popover" data-placement="top"
+												data-content="
+												{% for error in form.email.vars.errors %}
+													-{{ error.messagePluralization is null
+													? error.messageTemplate|trans(error.messageParameters, 'validators')
+													: error.messageTemplate|transchoice(error.messagePluralization, error.messageParameters, 'validators')
+													}}
+													<br>
+												{% endfor %}
+												">
+											<i class="fas fa-exclamation-circle"></i>
 										</button>
 									</div>
 								{% else %}
@@ -365,14 +392,17 @@
 								</div>
 								{% if form.commercialJob.vars.errors|length > 0 %}
 									<div class="col-lg-1 mx-auto pl-0">
-										<button type="button" style="padding: 3px 6px;" class="btn btn-danger rounded-circle" data-title="Erreur de saisie" data-trigger="focus" data-container="body" data-toggle="popover" data-placement="top" data-content="
-                                    {% for error in form.commercialJob.vars.errors %}
-                                        -{{ error.messagePluralization is null
-										? error.messageTemplate|trans(error.messageParameters, 'validators')
-										: error.messageTemplate|transchoice(error.messagePluralization, error.messageParameters, 'validators')
-										}}<br>
-                                    {% endfor %}
-                                    "><i class="fas fa-exclamation-circle"></i>
+										<button type="button" style="padding: 3px 6px;" class="btn btn-danger rounded-circle" data-title="Erreur de saisie" data-trigger="focus" data-container="body" data-toggle="popover" data-placement="top"
+												data-content="
+												{% for error in form.commercialJob.vars.errors %}
+													-{{ error.messagePluralization is null
+													? error.messageTemplate|trans(error.messageParameters, 'validators')
+													: error.messageTemplate|transchoice(error.messagePluralization, error.messageParameters, 'validators')
+													}}
+													<br>
+												{% endfor %}
+												">
+											<i class="fas fa-exclamation-circle"></i>
 										</button>
 									</div>
 								{% else %}
@@ -423,14 +453,17 @@
 								</div>
 								{% if form.commercialMobilePhone.vars.errors|length > 0 %}
 									<div class="col-lg-1 mx-auto pl-0">
-										<button type="button" style="padding: 3px 6px;" class="btn btn-danger rounded-circle" data-title="Erreur de saisie" data-trigger="focus" data-container="body" data-toggle="popover" data-placement="top" data-content="
-                                    {% for error in form.commercialMobilePhone.vars.errors %}
-                                        -{{ error.messagePluralization is null
-										? error.messageTemplate|trans(error.messageParameters, 'validators')
-										: error.messageTemplate|transchoice(error.messagePluralization, error.messageParameters, 'validators')
-										}}<br>
-                                    {% endfor %}
-                                    "><i class="fas fa-exclamation-circle"></i>
+										<button type="button" style="padding: 3px 6px;" class="btn btn-danger rounded-circle" data-title="Erreur de saisie" data-trigger="focus" data-container="body" data-toggle="popover" data-placement="top"
+												data-content="
+												{% for error in form.commercialMobilePhone.vars.errors %}
+													-{{ error.messagePluralization is null
+													? error.messageTemplate|trans(error.messageParameters, 'validators')
+													: error.messageTemplate|transchoice(error.messagePluralization, error.messageParameters, 'validators')
+													}}
+													<br>
+												{% endfor %}
+												">
+											<i class="fas fa-exclamation-circle"></i>
 										</button>
 									</div>
 								{% else %}
@@ -445,17 +478,20 @@
 									{{ form_widget(form.commercialPhone, {'attr': {'class': 'form-control my-form-input-big input-tel'}}) }}
 								</div>
 								{% if form.commercialPhone.vars.errors|length > 0 %}
-									<div class="col-lg-1 mx-auto pl-0">
-										<button type="button" style="padding: 3px 6px;" class="btn btn-danger rounded-circle" data-title="Erreur de saisie" data-trigger="focus" data-container="body" data-toggle="popover" data-placement="top" data-content="
-                                    {% for error in form.commercialPhone.vars.errors %}
-                                        -{{ error.messagePluralization is null
-										? error.messageTemplate|trans(error.messageParameters, 'validators')
-										: error.messageTemplate|transchoice(error.messagePluralization, error.messageParameters, 'validators')
-										}}<br>
-                                    {% endfor %}
-                                    "><i class="fas fa-exclamation-circle"></i>
-										</button>
-									</div>
+								<div class="col-lg-1 mx-auto pl-0">
+									<button type="button" style="padding: 3px 6px;" class="btn btn-danger rounded-circle" data-title="Erreur de saisie" data-trigger="focus" data-container="body" data-toggle="popover" data-placement="top"
+											data-content="
+											{% for error in form.commercialPhone.vars.errors %}
+												-{{ error.messagePluralization is null
+												? error.messageTemplate|trans(error.messageParameters, 'validators')
+												: error.messageTemplate|transchoice(error.messagePluralization, error.messageParameters, 'validators')
+												}}
+												<br>
+											{% endfor %}
+                                    		">
+										<i class="fas fa-exclamation-circle"></i>
+									</button>
+								</div>
 								{% else %}
 									<div class="col-lg-1 mx-auto pl-0"></div>
 								{% endif %}
@@ -469,14 +505,17 @@
 								</div>
 								{% if form.remarks.vars.errors|length > 0 %}
 									<div class="col-lg-1 mx-auto pl-0">
-										<button type="button" style="padding: 3px 6px;" class="btn btn-danger rounded-circle" data-title="Erreur de saisie" data-trigger="focus" data-container="body" data-toggle="popover" data-placement="top" data-content="
-                                    {% for error in form.remarks.vars.errors %}
-                                        -{{ error.messagePluralization is null
-										? error.messageTemplate|trans(error.messageParameters, 'validators')
-										: error.messageTemplate|transchoice(error.messagePluralization, error.messageParameters, 'validators')
-										}}<br>
-                                    {% endfor %}
-                                    "><i class="fas fa-exclamation-circle"></i>
+										<button type="button" style="padding: 3px 6px;" class="btn btn-danger rounded-circle" data-title="Erreur de saisie" data-trigger="focus" data-container="body" data-toggle="popover" data-placement="top"
+												data-content="
+												{% for error in form.remarks.vars.errors %}
+													-{{ error.messagePluralization is null
+													? error.messageTemplate|trans(error.messageParameters, 'validators')
+													: error.messageTemplate|transchoice(error.messagePluralization, error.messageParameters, 'validators')
+													}}
+													<br>
+												{% endfor %}
+												">
+											<i class="fas fa-exclamation-circle"></i>
 										</button>
 									</div>
 								{% else %}
@@ -608,77 +647,64 @@
 						<tbody id="myTableBody">
 							{% for contact in listContact %}
 							<tr>
-								<td>
+								<td style="width: 140px">
 									{% if contact.ContactPhoto is not null %}
-                  <img src="{{asset('build/images/' ~ contact.ContactPhoto)}}" class="table-img-profile rounded-circle" title="Photo" alt="Aucun logo">
-                  {% else %}
-                  <img src="{{asset('build/Photo.png')}}" class="table-img-profile rounded-circle" title="Photo" alt="Logo de l'entreprise">
-                  {% endif %}
-									<a href="{{ path('editContact', {'id':contact.Id}) }}">	{{contact.ContactFirstName}}
-									</a>
+									<img src="{{asset('build/images/' ~ contact.ContactPhoto)}}" class="table-img-profile rounded-circle" title="Photo" alt="Logo de l'entreprise">
+									{% else %}
+									<img src="{{asset('build/Photo.png')}}" class="table-img-profile2 rounded-circle" title="Photo" alt="Aucun logo">
+									{% endif %}
+									<a href="{{ path('editContact', {'id':contact.Id}) }}">	{{contact.ContactFirstName}}</a>
 								</td>
 								<td>
-									<a href="{{ path('editContact', {'id':contact.Id}) }}">	{{contact.contactLastName}}
-									</a>
+									<a href="{{ path('editContact', {'id':contact.Id}) }}">	{{contact.contactLastName}}</a>
 								</td>
 								<td>
 									{% if contact.idCompany is not null %}
-									<a href="{{ path('editContact', {'id':contact.Id}) }}">	{{contact.idCompany.CompanyLastName}}
-									</a>
+									<a href="{{ path('editContact', {'id':contact.Id}) }}">	{{contact.idCompany.CompanyLastName}}</a>
 									{% else %}
-										<a href="{{ path('editContact', {'id':contact.Id}) }}">
-										</a>
+										<a href="{{ path('editContact', {'id':contact.Id}) }}"></a>
 									{% endif %}
 								</td>
 								<td>
 									{% if contact.idContactJob is not null %}
-									<a href="{{ path('editContact', {'id':contact.Id}) }}">	{{contact.idContactJob.contactJobName}}
-									</a>
+									<a href="{{ path('editContact', {'id':contact.Id}) }}">	{{contact.idContactJob.contactJobName}}</a>
 									{% else %}
-									<a href="{{ path('editContact', {'id':contact.Id}) }}">
-									</a>
+									<a href="{{ path('editContact', {'id':contact.Id}) }}"></a>
 									{% endif %}
 								</td>
 								<td>
 									{% if contact.idCompany is not null %}
-									<a href="{{ path('editContact', {'id':contact.Id}) }}">	{{contact.idCompany.CompanyPostalCode}}
-									</a>
+									<a href="{{ path('editContact', {'id':contact.Id}) }}">	{{contact.idCompany.CompanyPostalCode}}</a>
 									{% else %}
-										<a href="{{ path('editContact', {'id':contact.Id}) }}">
-										</a>
+										<a href="{{ path('editContact', {'id':contact.Id}) }}"></a>
 									{% endif %}
 								</td>
-                <td>
+								<td>
 									{% if contact.idCompany is not null %}
-                    <a href="{{ path('editContact', {'id':contact.Id}) }}">	{{contact.idCompany.CompanyCity}}
-                    </a>
+									<a href="{{ path('editContact', {'id':contact.Id}) }}">	{{contact.idCompany.CompanyCity}}</a>
 									{% else %}
-										<a href="{{ path('editContact', {'id':contact.Id}) }}">
-										</a>
+										<a href="{{ path('editContact', {'id':contact.Id}) }}"></a>
 									{% endif %}
-                </td>
-                <td>
-                    {% if contact.contactStatus == "0" %}
-                        <img src="{{asset('build/rouge.png')}}" class="table-img-profile3 rounded-circle" title="Rouge" alt="Statut rouge">
-                        <a href="{{ path('editContact', {'id':contact.Id}) }}">Obsolète
-                        </a>
-                    {% elseif contact.contactStatus == "1" %}
-                        <img src="{{asset('build/vert.png')}}" class="table-img-profile3 rounded-circle" title="Vert" alt="Statut vert">
-                        <a href="{{ path('editContact', {'id':contact.Id}) }}">à jour
-                        </a>
-                    {% else %}
-                        <img src="{{asset('build/orange.png')}}" class="table-img-profile3 rounded-circle" title="Orange" alt="Statut orange">
-                        <a href="{{ path('editContact', {'id':contact.Id}) }}">à vérifier
-                        </a>
-                    {% endif %}
-               </td>
+								</td>
+								<td>
+									{% if contact.contactStatus == "0" %}
+									<img src="{{asset('build/rouge.png')}}" class="table-img-profile3 rounded-circle" title="Rouge" alt="Statut rouge">
+									<a href="{{ path('editContact', {'id':contact.Id}) }}">Obsolète</a>
+									{% elseif contact.contactStatus == "1" %}
+									<img src="{{asset('build/vert.png')}}" class="table-img-profile3 rounded-circle" title="Vert" alt="Statut vert">
+									<a href="{{ path('editContact', {'id':contact.Id}) }}">à jour</a>
+									{% else %}
+									<img src="{{asset('build/orange.png')}}" class="table-img-profile3 rounded-circle" title="Orange" alt="Statut orange">
+									<a href="{{ path('editContact', {'id':contact.Id}) }}">à vérifier</a>
+									{% endif %}
+							   </td>
 								<td>
 									{% if contact.contactEmail is not null %}
 										<img src="{{asset('build/mail.png')}}" class="commercial-mail" title="{{contact.contactEmail}}" alt="Email du contact">
 									{% endif %}
-                  {% if contact.contactMobilePhone is not null %}
-                      <img src="{{asset('build/tel.png')}}" class="commercial-tel" title="{{contact.contactMobilePhone}}" alt="Tél. fixe direct du contact">
-                  {% endif %}
+									{% if contact.contactMobilePhone is not null %}
+										<img src="{{asset('build/tel.png')}}" class="commercial-tel" title="{{contact.contactMobilePhone}}" alt="Tél. fixe direct du contact">
+									{% endif %}
 								</td>
 							</tr>
 							{% else %}
@@ -690,7 +716,7 @@
 					</table>
 				</div>
 
-				{% if listCompany|length != 0 %}
+				{% if listContact|length != 0 %}
 				<div class="table-after">
 					<div class="row">
 						<div class="table-after-entry">
