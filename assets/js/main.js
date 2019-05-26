@@ -567,9 +567,6 @@ $(document).ready( function () {
 		console.log($(this).starRating('getRating'));
 	});
 
-
-} );
-
     $(".gestion_formulaire > .row > div").addClass("col-lg-8");
     $(".gestion_formulaire > .row > p").addClass("col-lg-4");
 
