@@ -29,38 +29,42 @@ class CompanyController extends AbstractController
      */
     public function new(Request $request)
     {
-        $new = new Company();
+        if ($this->isGranted('ROLE_COMMERCIAL') || $this->isGranted('ROLE_RESPONSABLE') || $this->isGranted('ROLE_DIRECTEUR')) {
+            $new = new Company();
 
-        $form = $this->createForm(CompanyType::class, $new);
-        $form->handleRequest($request);
+            $form = $this->createForm(CompanyType::class, $new);
+            $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid())
-        {
-            $new = $form->getData();
-            $companyPicture = $form['CompanyLogo']->getData();
-            $file = $companyPicture;
+            if ($form->isSubmitted() && $form->isValid()) {
+                $new = $form->getData();
+                $companyPicture = $form['CompanyLogo']->getData();
+                $file = $companyPicture;
 
-            if ($file !== null)
-            {
-                $fileName = $file->getClientOriginalName();
+                if ($file !== null) {
+                    $fileName = $file->getClientOriginalName();
 
-                // On envoit le fichier dans le dossier images
-                try {
-                    $file->move($this->getParameter('images_directory'), $fileName);
-                } catch (FileException $e) {
-                    // S'il y a un soucis pendant l'upload on catch
+                    // On envoit le fichier dans le dossier images
+                    try {
+                        $file->move($this->getParameter('images_directory'), $fileName);
+                    } catch (FileException $e) {
+                        // S'il y a un soucis pendant l'upload on catch
+                    }
+
+                    $new->setCompanyLogo($fileName);
                 }
 
-                $new->setCompanyLogo($fileName);
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->persist($new);
+                $entityManager->flush();
+
+                return $this->redirectToRoute('listCompany');
             }
-
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($new);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('listCompany');
+            return $this->render('company/new.html.twig', array('form' => $form->createView()));
         }
-        return $this->render('company/new.html.twig', array('form' => $form->createView()));
+        else
+        {
+            return $this->redirect($this->generateUrl('index'));
+        }
     }
 
     /**
@@ -68,54 +72,59 @@ class CompanyController extends AbstractController
      */
     public function edit($id, Request $request)
     {
-        // Appel de Doctrine
-        $display = $this->getDoctrine()->getManager();
-
-        // Variable qui contient le Repository
-        $companyRepository = $display->getRepository(Company::class);
-
-        // Equivalent du SELECT * where id=(paramètre)
-        $edit = $companyRepository->find($id);
-
-        // Appel de la fonction listContactOfCommercial() du repository de la classe Contact
-        $contactRepository = $display->getRepository(Contact::class);
-        $listContact = $contactRepository->listContactOfCompany($id);
-        $nbContact = $contactRepository->countContact($id);
-
-        $form = $this->createForm(CompanyType::class, $edit);
-        $form->add('CompanyStatus', CheckboxType::class, array('label' => 'Statut', 'required' => false));
-
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid() && $request->isMethod('POST')) 
+        if ($this->isGranted('ROLE_COMMERCIAL') || $this->isGranted('ROLE_RESPONSABLE') || $this->isGranted('ROLE_DIRECTEUR'))
         {
-            $edit = $form->getData();
-            $companyPicture = $form['CompanyLogo']->getData();
-            $file = $companyPicture;
+            // Appel de Doctrine
+            $display = $this->getDoctrine()->getManager();
 
-            if ($file !== null)
-            {
-                $fileName = $file->getClientOriginalName();
+            // Variable qui contient le Repository
+            $companyRepository = $display->getRepository(Company::class);
 
-                // On envoit le fichier dans le dossier images
-                try {
-                    $file->move($this->getParameter('images_directory'), $fileName);
-                } catch (FileException $e) {
-                    // S'il y a un soucis pendant l'upload on catch
+            // Equivalent du SELECT * where id=(paramètre)
+            $edit = $companyRepository->find($id);
+
+            // Appel de la fonction listContactOfCommercial() du repository de la classe Contact
+            $contactRepository = $display->getRepository(Contact::class);
+            $listContact = $contactRepository->listContactOfCompany($id);
+            $nbContact = $contactRepository->countContactOfCompany($id);
+
+            $form = $this->createForm(CompanyType::class, $edit);
+            $form->add('CompanyStatus', CheckboxType::class, array('label' => 'Statut', 'required' => false));
+
+            $form->handleRequest($request);
+
+            if ($form->isSubmitted() && $form->isValid() && $request->isMethod('POST')) {
+                $edit = $form->getData();
+                $companyPicture = $form['CompanyLogo']->getData();
+                $file = $companyPicture;
+
+                if ($file !== null) {
+                    $fileName = $file->getClientOriginalName();
+
+                    // On envoit le fichier dans le dossier images
+                    try {
+                        $file->move($this->getParameter('images_directory'), $fileName);
+                    } catch (FileException $e) {
+                        // S'il y a un soucis pendant l'upload on catch
+                    }
+
+                    $edit->setCompanyLogo($fileName);
                 }
+                $entityManager = $this->getDoctrine()->getManager();
 
-                $edit->setCompanyLogo($fileName);
+                $entityManager->flush();
+
+                return $this->redirectToRoute('listCompany');
             }
-            $entityManager = $this->getDoctrine()->getManager();
 
-            $entityManager->flush();
-
-            return $this->redirectToRoute('listCompany');
+            return $this->render('company/edit.html.twig', array(
+                'form' => $form->createView(), 'company' => $edit, 'listContact' => $listContact, 'nbContact' => $nbContact
+            ));
         }
-
-        return $this->render('company/edit.html.twig', array(
-        'form' => $form->createView(),'company' => $edit,  'listContact' => $listContact, 'nbContact' => $nbContact
-        ));
+        else
+        {
+            return $this->redirect($this->generateUrl('index'));
+        }
     }
 
     /**
@@ -123,15 +132,22 @@ class CompanyController extends AbstractController
      */
     public function changePotential(Request $request, Company $company)
     {
-        $potential = (int)$request->request->get("potential_level");
-        $company->setCompanyPotential($potential);
-        $this->getDoctrine()->getManager()->flush();
-        $data = array(
-            "retour" => true
-        );
-        // $response = new Response(json_encode($data, 200));
-        // $response->headers->set('Content-Type', 'application/json');
-        return new JsonResponse($data);
+        if ($this->isGranted('ROLE_COMMERCIAL') || $this->isGranted('ROLE_RESPONSABLE') || $this->isGranted('ROLE_DIRECTEUR'))
+        {
+            $potential = (int)$request->request->get("potential_level");
+            $company->setCompanyPotential($potential);
+            $this->getDoctrine()->getManager()->flush();
+            $data = array(
+                "retour" => true
+            );
+            // $response = new Response(json_encode($data, 200));
+            // $response->headers->set('Content-Type', 'application/json');
+            return new JsonResponse($data);
+        }
+        else
+        {
+            return $this->redirect($this->generateUrl('index'));
+        }
     }
 
     /**
@@ -139,18 +155,24 @@ class CompanyController extends AbstractController
      */
     public function delete($id)
     {
-        // Appel de Doctrine
-        $display = $this->getDoctrine()->getManager();
+        if ($this->isGranted('ROLE_COMMERCIAL') || $this->isGranted('ROLE_RESPONSABLE') || $this->isGranted('ROLE_DIRECTEUR')) {
+            // Appel de Doctrine
+            $display = $this->getDoctrine()->getManager();
 
-        $companyRepository = $display->getRepository(Company::class);
+            $companyRepository = $display->getRepository(Company::class);
 
-        $delete = $companyRepository->find($id);
+            $delete = $companyRepository->find($id);
 
-        $display->remove($delete);
+            $display->remove($delete);
 
-        $display->flush();
+            $display->flush();
 
-        return $this->redirectToRoute('listCompany');
+            return $this->redirectToRoute('listCompany');
+        }
+        else
+        {
+            return $this->redirect($this->generateUrl('index'));
+        }
     }
 
     /**
@@ -165,9 +187,25 @@ class CompanyController extends AbstractController
 
             // Variable qui contient le Repository
             $companyRepository = $display->getRepository(Company::class);
+            $contactRepository = $display->getRepository(Contact::class);
 
             // Equivalent du SELECT *
             $list = $companyRepository->findAll();
+
+
+            $nbsContact = [];
+
+            // Pour récupérer le nombre d'entreprise et contact géré par un commercial
+            foreach ($list as $key => $value) {
+                // La clé de l'array devient l'id du commercial
+                $key = $value->getId();
+
+                // Appel de la fonction countContact() du repository de la classe Contact
+                $nbContact = $contactRepository->countContactOfCompany($value->getId());
+
+                // Array $nbsContact
+                $nbsContact += [$key => $nbContact[1]]; // Exemple $nbsContact = [2 => 48]
+            }
 
             // -------------------------------------------------------------
             // On demande à la vue d'afficher la liste des entreprises
@@ -195,7 +233,7 @@ class CompanyController extends AbstractController
 
                 return $this->redirect($this->generateUrl('listCompany'));
             }
-            return $this->render('company/list.html.twig', array('lesEntreprises' => $list, 'companyLink' => true)); // On affecte le tableau à la vue
+            return $this->render('company/list.html.twig', array('lesEntreprises' => $list, 'nbContact' => $nbsContact, 'companyLink' => true)); // On affecte le tableau à la vue
         }
         else {
             return $this->redirect($this->generateUrl('index'));

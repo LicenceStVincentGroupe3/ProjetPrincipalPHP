@@ -358,7 +358,7 @@
 				<button class="btn btn-light return-button float-left" type="button">
 					<a href="{{ path('listCompany') }}" class="text-decoration-none text-gray-800"><i class="fas fa-arrow-left"></i> Retour</a>
 				</button>
-				<div class="row form-buttons mb-0" style="padding-left: 40%;">
+				<div class="row form-buttons mt-0 mb-0" style="padding-left: 40%;">
 					<button class="btn btn-white-red return-button" type="button">
 						<a href="{{ path('deleteCompany', {'id':company.Id}) }}">SUPPRIMER</a>
 					</button>
@@ -382,7 +382,7 @@
 							<th style="width: 220px;" class="sortable" data-field="cp">CP</th>
 							<th style="width: 220px;" class="sortable" data-field="vile">Ville</th>
 							<th style="width: 220px;" class="sortable" data-field="contact">Statut</th>
-							<th style="width: 60px;text-align: center;" class="table-field-other no-sortable" data-field="autre">&bull;&bull;&bull;</th>
+							<th style="width: 100px;text-align: center;" class="table-field-other no-sortable" data-field="autre">&bull;&bull;&bull;</th>
 						</tr>
 						</thead>
 						<tbody id="myTableBody">
@@ -390,82 +390,113 @@
 							<tr>
 								<td>
 									{% if contact.ContactPhoto is not null %}
-										<img src="{{asset('build/images/' ~ contact.ContactPhoto)}}" class="table-img-profile rounded-circle" title="Photo" alt="Aucun logo">
+										<img src="{{ asset('build/images/' ~ contact.ContactPhoto) }}"
+											 class="table-img-profile rounded-circle" title="Photo" alt="Aucun logo">
 									{% else %}
-										<img src="{{asset('build/Photo.png')}}" class="table-img-profile rounded-circle" title="Photo" alt="Logo du contact">
+										<img src="{{ asset('build/Photo.png') }}"
+											 class="table-img-profile rounded-circle" title="Photo"
+											 alt="Logo de l'entreprise">
 									{% endif %}
-									<a href="{{ path('editContact', {'id':contact.Id}) }}">	{{contact.ContactFirstName}}
+									<a href="{{ path('editContact', {'id':contact.Id}) }}">    {{ contact.ContactFirstName }}
 									</a>
 								</td>
 								<td>
-									<a href="{{ path('editContact', {'id':contact.Id}) }}">	{{contact.contactLastName}}
+									<a href="{{ path('editContact', {'id':contact.Id}) }}">    {{ contact.contactLastName }}
 									</a>
 								</td>
 								<td>
-									<a href="{{ path('editContact', {'id':contact.Id}) }}">	{{contact.idCompany.CompanyLastName}}
-									</a>
+									{% if contact.idCompany is not null %}
+										<a href="{{ path('editContact', {'id':contact.Id}) }}">    {{ contact.idCompany.CompanyLastName }}
+										</a>
+									{% else %}
+										<a href="{{ path('editContact', {'id':contact.Id}) }}">
+										</a>
+									{% endif %}
 								</td>
 								<td>
-									<a href="{{ path('editContact', {'id':contact.Id}) }}">	{{contact.idContactJob.contactJobName}}
-									</a>
+									{% if contact.idContactJob is not null %}
+										<a href="{{ path('editContact', {'id':contact.Id}) }}">    {{ contact.idContactJob.contactJobName }}
+										</a>
+									{% else %}
+										<a href="{{ path('editContact', {'id':contact.Id}) }}">
+										</a>
+									{% endif %}
 								</td>
 								<td>
-									<a href="{{ path('editContact', {'id':contact.Id}) }}">	{{contact.idCompany.CompanyPostalCode}}
-									</a>
+									{% if contact.idCompany is not null %}
+										<a href="{{ path('editContact', {'id':contact.Id}) }}">    {{ contact.idCompany.CompanyPostalCode }}
+										</a>
+									{% else %}
+										<a href="{{ path('editContact', {'id':contact.Id}) }}">
+										</a>
+									{% endif %}
 								</td>
 								<td>
-									<a href="{{ path('editContact', {'id':contact.Id}) }}">	{{contact.idCompany.CompanyCity}}
-									</a>
+									{% if contact.idCompany is not null %}
+										<a href="{{ path('editContact', {'id':contact.Id}) }}">    {{ contact.idCompany.CompanyCity }}
+										</a>
+									{% else %}
+										<a href="{{ path('editContact', {'id':contact.Id}) }}">
+										</a>
+									{% endif %}
 								</td>
 								<td>
 									{% if contact.contactStatus == "0" %}
-										<img src="{{asset('build/rouge.png')}}" class="table-img-profile3 rounded-circle" title="Rouge" alt="Statut rouge">
+										<img src="{{ asset('build/rouge.png') }}"
+											 class="table-img-profile3 rounded-circle" title="Rouge" alt="Statut rouge">
 										<a href="{{ path('editContact', {'id':contact.Id}) }}">Obsolète
 										</a>
 									{% elseif contact.contactStatus == "1" %}
-										<img src="{{asset('build/vert.png')}}" class="table-img-profile3 rounded-circle" title="Vert" alt="Statut vert">
+										<img src="{{ asset('build/vert.png') }}"
+											 class="table-img-profile3 rounded-circle" title="Vert" alt="Statut vert">
 										<a href="{{ path('editContact', {'id':contact.Id}) }}">à jour
 										</a>
 									{% else %}
-										<img src="{{asset('build/orange.png')}}" class="table-img-profile3 rounded-circle" title="Orange" alt="Statut orange">
+										<img src="{{ asset('build/orange.png') }}"
+											 class="table-img-profile3 rounded-circle" title="Orange"
+											 alt="Statut orange">
 										<a href="{{ path('editContact', {'id':contact.Id}) }}">à vérifier
 										</a>
 									{% endif %}
 								</td>
 								<td>
 									{% if contact.contactEmail is not null %}
-										<img src="{{asset('build/mail.png')}}" class="commercial-mail" title="{{contact.contactEmail}}" alt="Email du contact">
+										<img src="{{ asset('build/mail.png') }}" class="commercial-mail"
+											 title="{{ contact.contactEmail }}" alt="Email du contact">
 									{% endif %}
 									{% if contact.contactMobilePhone is not null %}
-										<img src="{{asset('build/tel.png')}}" class="commercial-tel" title="{{contact.contactMobilePhone}}" alt="Tél. fixe direct du contact">
+										<img src="{{ asset('build/tel.png') }}" class="commercial-tel"
+											 title="{{ contact.contactMobilePhone }}" alt="Tél. fixe direct du contact">
 									{% endif %}
 								</td>
 							</tr>
 						{% else %}
 							<tr>
-								<td colspan="8" class="text-center">Cette entreprise ne possède aucun contact</td>
+								<td colspan="8" class="text-center">Ce commercial ne possède aucun contact</td>
 							</tr>
 						{% endfor %}
 						</tbody>
 					</table>
 				</div>
 
-				<div class="table-after">
-					<div class="row">
-						<div class="table-after-entry">
-							<select id="table-nb-entry" class="table-nb-entry unset-outline">
-								<option value="15">15</option>
-								<option value="20">20</option>
-								<option value="50">50</option>
-								<option value="100">100</option>
-								<option value="200">200</option>
-							</select>
-						</div>
-						<div class="table-after-pagination">
-							<ul class="pagination pagination-lg pager" id="myPager"></ul>
+				{% if listContact|length != 0 %}
+					<div class="table-after">
+						<div class="row">
+							<div class="table-after-entry">
+								<select id="table-nb-entry" class="table-nb-entry unset-outline">
+									<option value="5">5</option>
+									<option value="10">10</option>
+									<option value="15">15</option>
+									<option value="20">20</option>
+									<option value="25">25</option>
+								</select>
+							</div>
+							<div class="table-after-pagination">
+								<ul class="pagination pagination-lg pager" id="myPager"></ul>
+							</div>
 						</div>
 					</div>
-				</div>
+				{% endif %}
 			</section>
 
 			<section id="notes" class="tab-panel">

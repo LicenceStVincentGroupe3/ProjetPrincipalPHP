@@ -21,6 +21,7 @@
     color: #ffffff!important;
     text-align: center;
     text-transform: uppercase;
+    font-weight: 600;
 }
 
 .company-status-prospect {
@@ -29,6 +30,7 @@
     text-align: center;
     color: #ffffff!important;
     text-transform: uppercase;
+    font-weight: 600;
 }
 
 .company-status-piste {
@@ -37,6 +39,7 @@
     text-align: center;
     color: #ffffff!important;
     text-transform: uppercase;
+    font-weight: 600;
 }
 
 .company-nbContact {
