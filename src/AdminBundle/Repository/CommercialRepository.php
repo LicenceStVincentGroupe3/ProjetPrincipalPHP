@@ -95,18 +95,6 @@ class CommercialRepository extends ServiceEntityRepository
         return $result;
     }
 
-    // Retourne les codes commercial séléctionné via critères
-    public function getCommercialViaCriteria($criteria, $value)
-    {
-            $query = $this->createQueryBuilder("c")
-                ->select("c.commercialCode")
-                ->where($criteria .   " = :value")
-                ->setParameter('value', $value)
-                ->getQuery();
-
-        return $query->getResult();
-    }
-
     // /**
     //  * @return Commercial[] Returns an array of Commercial objects
     //  */

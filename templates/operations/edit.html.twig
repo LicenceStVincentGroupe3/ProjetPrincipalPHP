@@ -22,17 +22,19 @@
             <h5><b>{{ operation.OperationName}}</b></h5>
         </div>
         <div class="col-lg-5 mx-auto status">
-            <h6>Créée le {{ operation.OperationCreated|date("d/m/Y")}}</h6>
+            <div class="last-upd3">
+                <h6>Créée le {{ operation.OperationCreated|date("d/m/Y")}}</h6>
+            </div>
             <form name="operations" method="post" enctype="multipart/form-data">
                 {% if operation.OperationSent %}
-                    <input type="checkbox" id="operations_operationSent" name="operations[operationSent]" class="switch_1" value="1" checked="checked">
+                    <input type="checkbox" id="operations_operationSent" name="operations[operationSent]" class="switch_2" value="1" checked="checked">
                 {% else %}
-                    <input type="checkbox" id="operations_operationSent" name="operations[operationSent]" class="switch_1" value="1">
+                    <input type="checkbox" id="operations_operationSent" name="operations[operationSent]" class="switch_2" value="1">
                 {% endif %}
             </form>
         </div>
     </div>
-    <div class="tabset">
+    <div class="tabset mw-100">
         <!-- Tab 1 -->
         <input type="radio" name="tabset" id="tab1" aria-controls="identity" checked>
         <label for="tab1">Informations</label>
@@ -43,15 +45,30 @@
         <input type="radio" name="tabset" id="tab3" aria-controls="opeform">
         <label for="tab3">Formulaire</label>
         {% if (operation.OperationSendingDate != null and operation.OperationClosingDate != null) %}
-            <!-- Tab 4 -->
-            <input type="radio" name="tabset" id="tab4" aria-controls="targetting">
-            <label for="tab4">Ciblage</label>
+        <!-- Tab 4 -->
+        <input type="radio" name="tabset" id="tab4" aria-controls="targetting">
+        <label for="tab4">Ciblage</label>
         {% endif %}
         {% if  ("now"|date("Y-m-d")) >= (operation.OperationSendingDate|date("Y-m-d")) %}
-            <!-- Tab 5 -->
-            <input type="radio" name="tabset" id="tab5" aria-controls="results">
-            <label for="tab5">Résultats</label>
+        <!-- Tab 5 -->
+        <input type="radio" name="tabset" id="tab5" aria-controls="results">
+        <label style="margin-right: 30%;" for="tab5">Résultats</label>
         {% endif %}
+        <span class="badges">
+            {% if operation.OperationSendingDate == NULL and operation.OperationClosingDate == NULL %}
+                <a class="badge badge-pill badge-orange" href="{{ path('editOperation', {'operationCode':operation.OperationCode}) }}">
+                    Brouillon
+                </a>
+            {% elseif operation.OperationSendingDate < date() and operation.OperationClosingDate > date() %}
+                <a class="badge badge-pill badge-green" href="{{ path('editOperation', {'operationCode':operation.OperationCode}) }}">
+                    En cours
+                </a>
+            {% elseif operation.OperationSendingDate < date() %}
+                    <a class="badge badge-pill badge-grey" href="{{ path('editOperation', {'operationCode':operation.OperationCode}) }}">
+                        Terminée
+                    </a>
+            {% endif %}
+        </span>
 
         <div class="tab-panels">
             <section id="identity" class="tab-panel">

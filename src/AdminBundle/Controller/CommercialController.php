@@ -41,8 +41,6 @@ class CommercialController extends AbstractController
 
                 $new = new Commercial();
 
-                $this->faker = Faker\Factory::create('fr_FR');
-
                 // Variable qui contient le Repository
                 $companyCountry = $display->getRepository(CompanyCountry::class);
 
@@ -106,10 +104,6 @@ class CommercialController extends AbstractController
                     
                     $file = $commercialPhoto;
 
-                    do {
-                        $commercialCode = $this->faker->regexify("[A-Z]{10}");
-                    } while ($commercial->findOneBy(array("commercialCode" => $commercialCode)) != null);
-
                     if ($file !== null) 
                     {
                         $fileName = $file->getClientOriginalName();
@@ -151,7 +145,6 @@ class CommercialController extends AbstractController
                         $new->setHierarchy($idHierarchy);
                     }
  
-                    $new->setCommercialCode($commercialCode);
                     $new->setPassword($password);
                     $new->addRole([0 => $role]);
 
@@ -163,7 +156,7 @@ class CommercialController extends AbstractController
                     return $this->redirect($this->generateUrl('listCommercial'));
                 }
 
-                return $this->render('commercial/new.html.twig', ['form' => $form->createView(), 'listCountry' => $listCountry, 'listHierarchy' => $listHierarchy, 'commercialTeamLink' => true]);
+                return $this->render('commercial/new.html.twig', ['form' => $form->createView(), 'listCountry' => $listCountry, 'listHierarchy' => $listHierarchy, 'comCode' => Faker\Factory::create('fr_FR'), 'commercialTeamLink' => true]);
             }
             
             else {

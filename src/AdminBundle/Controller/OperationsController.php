@@ -3,27 +3,12 @@
 namespace App\AdminBundle\Controller;
 
 use Faker;
-use Faker\Factory;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
-use Symfony\Component\VarDumper\VarDumper;
-use App\AdminBundle\Entity\Company;
-use App\AdminBundle\Entity\CompanyCountry;
-use App\AdminBundle\Entity\Contact;
-use App\AdminBundle\Entity\CompanyTurnover;
-use App\AdminBundle\Entity\Operations;
-use App\AdminBundle\Entity\ContactJob;
-use App\AdminBundle\Entity\Commercial;
-use App\AdminBundle\Entity\CompanyActivitySector;
-use App\AdminBundle\Form\OperationsType;
-use App\AdminBundle\Entity\OperationSent;
-use App\AdminBundle\Service\MailerService;
-use App\AdminBundle\Entity\CompanyNbEmployee;
-use App\AdminBundle\Entity\OperationTarget;
-use Knp\Component\Pager\PaginatorInterface;
-use App\AdminBundle\Entity\OperationSettings;
-use App\AdminBundle\Form\OperationTargetType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use App\AdminBundle\Entity\Operations;
+use App\AdminBundle\Form\OperationsType;
+use App\AdminBundle\Entity\OperationSettings;
 use App\AdminBundle\Entity\OperationForm;
 use App\AdminBundle\Form\OperationSettingsType;
 use Symfony\Component\Routing\Annotation\Route;
@@ -37,7 +22,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class OperationsController extends AbstractController
 {
     /**
-     * @Route("/new", name="operations_new", methods={"GET","POST"})
+     * @Route("/new", name="newOperation", methods={"GET","POST"})
      */
     function new(Request $request): Response
     {
@@ -47,8 +32,6 @@ class OperationsController extends AbstractController
 
             $operationsRepository = $display->getRepository(Operations::class);
 
-            $this->faker = Faker\Factory::create('fr_FR');
-
             $new = new Operations();
 
             $form = $this->createForm(OperationsType::class, $new);
@@ -57,11 +40,6 @@ class OperationsController extends AbstractController
             if ($form->isSubmitted() && $form->isValid()) {
                 $data = $request->request->get("operation");
 
-                do {
-                    $operationCode = $this->faker->regexify("[A-Z]{10}");
-                } while ($operationsRepository->findOneBy(array("operationCode" => $operationCode)) != null);
-
-                $new->setOperationCode($operationCode);
                 $new->setOperationCreated(new \DateTime());
                 $new->setOperationSent(false);
 
@@ -69,12 +47,13 @@ class OperationsController extends AbstractController
                 $entityManager->persist($new);
                 $entityManager->flush();
 
-                return $this->redirectToRoute('operations_index');
+                return $this->redirectToRoute('listOperation');
             }
 
             return $this->render('operations/new.html.twig', [
                 'operation' => $new,
                 'form' => $form->createView(),
+                'opeCode' => Faker\Factory::create('fr_FR'),
                 'operationLink' => true
             ]);
         }
@@ -84,7 +63,7 @@ class OperationsController extends AbstractController
     }
 
     /**
-     * @Route("/edit/{operationCode}", name="operations_edit", methods={"GET","POST"})
+     * @Route("/edit/{operationCode}", name="editOperation", methods={"GET","POST"})
      */
     public function edit(Request $request, Operations $operation): Response
     {
@@ -236,7 +215,7 @@ class OperationsController extends AbstractController
                 $this->getDoctrine()->getManager()->persist($operationForm);
                 $this->getDoctrine()->getManager()->flush();
 
-                return $this->redirectToRoute('operations_edit', [
+                return $this->redirectToRoute('editOperation', [
                     'operationCode' => $operation->getOperationCode(),
                 ]);
             }
@@ -251,7 +230,7 @@ class OperationsController extends AbstractController
 
                 $this->getDoctrine()->getManager()->flush();
 
-                return $this->redirectToRoute('operations_edit', [
+                return $this->redirectToRoute('editOperation', [
                     'operationCode' => $operation->getOperationCode(),
                 ]);
             }
@@ -313,7 +292,7 @@ class OperationsController extends AbstractController
                 $this->getDoctrine()->getManager()->persist($operationSettings);
                 $this->getDoctrine()->getManager()->flush();
 
-                return $this->redirectToRoute('operations_edit', [
+                return $this->redirectToRoute('editOperation', [
                     'operationCode' => $operation->getOperationCode(),
                 ]);
             }
@@ -347,11 +326,11 @@ class OperationsController extends AbstractController
 
         $operationsRepository->activeArchive([$operationCode]);
 
-        return $this->redirectToRoute('operations_index');
+        return $this->redirectToRoute('listOperation');
     }
 
     /**
-     * @Route("/list", name="operations_index", methods={"GET","POST"})
+     * @Route("/list", name="listOperation", methods={"GET","POST"})
      */
     public function list(Request $httpRequest): Response
     {
@@ -388,7 +367,7 @@ class OperationsController extends AbstractController
                     // Appel de la fonction activeArchive()
                     $operationsRepository->activeArchive($listData);
                 }
-                return $this->redirect($this->generateUrl('operations_index'));
+                return $this->redirect($this->generateUrl('listOperation'));
             }
 
             return $this->render('operations/list.html.twig', [
