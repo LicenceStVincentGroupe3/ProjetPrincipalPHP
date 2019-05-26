@@ -211,6 +211,20 @@ class CommercialController extends AbstractController
 
                 $nbContactCompany = $contactRepository->countContactOfCompany($id);
 
+                $nbsContact = [];
+                // Equivalent du SELECT *
+                $list = $companyRepository->findAll();
+                foreach ($list as $key => $value) {
+                    // La clé de l'array devient l'id du commercial
+                    $key = $value->getId();
+
+                    // Appel de la fonction countContact() du repository de la classe Contact
+                    $nbContact = $contactRepository->countContactOfCompany($value->getId());
+
+                    // Array $nbsContact
+                    $nbsContact += [$key => $nbContact[1]]; // Exemple $nbsContact = [2 => 48]
+                }
+
                 // Appel de la fonction listContactOfCommercial() du repository de la classe Contact
                 $listContact = $contactRepository->listContactOfCommercial($id);
 
@@ -348,7 +362,7 @@ class CommercialController extends AbstractController
                 // ----------------------------------
                 // On demande à la vue d'afficher la commande plus tous ses produits
                 // ----------------------------------
-                return $this->render('commercial/edit.html.twig', ['editCom' => $edit, 'form' => $form->createView(), 'listCountry' => $listCountry, 'listHierarchy' => $listHierarchy, 'responsableN1' => $responsableN1, 'listCompany' => $listCompany, 'nbCompany' => $nbCompany, 'listContact' => $listContact, 'nbContact' => $nbContact, 'nbContactCompany' => $nbContactCompany, 'commercialTeamLink' => true]);
+                return $this->render('commercial/edit.html.twig', ['editCom' => $edit, 'form' => $form->createView(), 'listCountry' => $listCountry, 'listHierarchy' => $listHierarchy, 'responsableN1' => $responsableN1, 'listCompany' => $listCompany, 'nbCompany' => $nbCompany, 'listContact' => $listContact, 'nbContact' => $nbContact, 'nbContactListCompany' => $nbsContact, 'nbContactCompany' => $nbContactCompany, 'commercialTeamLink' => true]);
             }
 
             else {
