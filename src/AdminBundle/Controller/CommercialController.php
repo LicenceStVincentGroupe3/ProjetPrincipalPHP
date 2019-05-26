@@ -219,10 +219,10 @@ class CommercialController extends AbstractController
                     $key = $value->getId();
 
                     // Appel de la fonction countContact() du repository de la classe Contact
-                    $nbContact = $contactRepository->countContactOfCompany($value->getId());
+                    $nbContactC = $contactRepository->countContactOfCompany($value->getId());
 
                     // Array $nbsContact
-                    $nbsContact += [$key => $nbContact[1]]; // Exemple $nbsContact = [2 => 48]
+                    $nbsContact += [$key => $nbContactC[1]]; // Exemple $nbsContact = [2 => 48]
                 }
 
                 // Appel de la fonction listContactOfCommercial() du repository de la classe Contact
