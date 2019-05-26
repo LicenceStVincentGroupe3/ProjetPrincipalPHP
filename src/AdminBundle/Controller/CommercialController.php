@@ -208,6 +208,9 @@ class CommercialController extends AbstractController
                 // Appel de la fonction countContact() du repository de la classe Contact
                 $nbContact = $contactRepository->countContact($id);
 
+
+                $nbContactCompany = $contactRepository->countContactOfCompany($id);
+
                 // Appel de la fonction listContactOfCommercial() du repository de la classe Contact
                 $listContact = $contactRepository->listContactOfCommercial($id);
 
@@ -345,7 +348,7 @@ class CommercialController extends AbstractController
                 // ----------------------------------
                 // On demande à la vue d'afficher la commande plus tous ses produits
                 // ----------------------------------
-                return $this->render('commercial/edit.html.twig', ['editCom' => $edit, 'form' => $form->createView(), 'listCountry' => $listCountry, 'listHierarchy' => $listHierarchy, 'responsableN1' => $responsableN1, 'listCompany' => $listCompany, 'nbCompany' => $nbCompany, 'listContact' => $listContact, 'nbContact' => $nbContact, 'commercialTeamLink' => true]);
+                return $this->render('commercial/edit.html.twig', ['editCom' => $edit, 'form' => $form->createView(), 'listCountry' => $listCountry, 'listHierarchy' => $listHierarchy, 'responsableN1' => $responsableN1, 'listCompany' => $listCompany, 'nbCompany' => $nbCompany, 'listContact' => $listContact, 'nbContact' => $nbContact, 'nbContactCoompany' => $nbContactCompany, 'commercialTeamLink' => true]);
             }
 
             else {
