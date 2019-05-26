@@ -60,6 +60,7 @@ class Company
     /**
      * @ORM\Column(type="string", length=20, nullable=true)
      * @Assert\Length(min = 5, minMessage = "Le code postal doit contenir au minimum 5 caractères !")
+     * @Assert\Length(max = 20, maxMessage = "Le code postal ne peut contenir plus de 20 caractères !")
      */
     private $CompanyPostalCode;
 
@@ -71,6 +72,7 @@ class Company
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      * @Assert\Length(min = 10, minMessage = "Le fax doit contenir 10 chiffres !")
+     * @Assert\Length(max = 10, maxMessage = "Le fax ne peut contenir plus de 10 caractères !")
      * @Assert\Regex(pattern="/^(\(0\))?[0-9]+$/", message="Le format doit être par exemple : 0344715265")
      */
     private $CompanyFax;
@@ -89,12 +91,14 @@ class Company
     /**
      * @ORM\Column(type="string", length=14, unique=true, nullable=true)
      * @Assert\Length(min = 14, minMessage = "Le numéro de siret doit contenir 14 caractères")
+     * @Assert\Length(max = 14, maxMessage = "Le numéro de siret ne peut contenir plus de 14 caractères !")
      */
     private $CompanySiret;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      * @Assert\Length(min = 10, minMessage = "Le téléphone doit contenir 10 chiffres")
+     * @Assert\Length(max = 10, maxMessage = "Le téléphone ne peut contenir plus de 10 caractères !")
      * @Assert\Regex(pattern="/^(\(0\))?[0-9]+$/", message="Le format doit être par exemple : 0632854169")
      */
     private $CompanyStandardPhone;

@@ -380,7 +380,9 @@
 									<a href="{{ path('editCompany', {'id':company.Id}) }}">{{company.CompanyLastName}}</a>
 								</td>
 								<td>
-									<a href="{{ path('editCompany', {'id':company.id}) }}">{{ company.CompanyCodeNAF }}</a>
+									{% if company.idCompanyCodeNAF is not null %}
+									<a href="{{ path('editCompany', {'id':company.id}) }}">{{ company.idCompanyCodeNAF.label }}</a>
+									{% endif %}
 								</td>
 								<td>
 									<a href="{{ path('editCompany', {'id':company.Id}) }}">{{company.CompanyPostalCode}}</a>

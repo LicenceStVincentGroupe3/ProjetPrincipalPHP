@@ -15,6 +15,8 @@ use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use App\AdminBundle\Entity\Contact;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 // Préfix url
 /**
@@ -75,14 +77,35 @@ class CompanyController extends AbstractController
         // Equivalent du SELECT * where id=(paramètre)
         $edit = $companyRepository->find($id);
 
+        // Appel de la fonction listContactOfCommercial() du repository de la classe Contact
+        $contactRepository = $display->getRepository(Contact::class);
+        $listContact = $contactRepository->listContactOfCompany($id);
+        $nbContact = $contactRepository->countContact($id);
+
         $form = $this->createForm(CompanyType::class, $edit);
-        $form->add('CompanyPotential', IntegerType::class, array('label' => 'Potentiel', 'required' => false))
-        ->add('CompanyStatus', CheckboxType::class, array('label' => 'Statut', 'required' => false));
+        $form->add('CompanyStatus', CheckboxType::class, array('label' => 'Statut', 'required' => false));
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid() && $request->isMethod('POST')) 
         {
+            $edit = $form->getData();
+            $companyPicture = $form['CompanyLogo']->getData();
+            $file = $companyPicture;
+
+            if ($file !== null)
+            {
+                $fileName = $file->getClientOriginalName();
+
+                // On envoit le fichier dans le dossier images
+                try {
+                    $file->move($this->getParameter('images_directory'), $fileName);
+                } catch (FileException $e) {
+                    // S'il y a un soucis pendant l'upload on catch
+                }
+
+                $edit->setCompanyLogo($fileName);
+            }
             $entityManager = $this->getDoctrine()->getManager();
 
             $entityManager->flush();
@@ -91,8 +114,24 @@ class CompanyController extends AbstractController
         }
 
         return $this->render('company/edit.html.twig', array(
-        'form' => $form->createView(),'company' => $edit
+        'form' => $form->createView(),'company' => $edit,  'listContact' => $listContact, 'nbContact' => $nbContact
         ));
+    }
+
+    /**
+     * @Route("/edit/potential/{id}", name="companyPotential", methods={"POST"})
+     */
+    public function changePotential(Request $request, Company $company)
+    {
+        $potential = (int)$request->request->get("potential_level");
+        $company->setCompanyPotential($potential);
+        $this->getDoctrine()->getManager()->flush();
+        $data = array(
+            "retour" => true
+        );
+        // $response = new Response(json_encode($data, 200));
+        // $response->headers->set('Content-Type', 'application/json');
+        return new JsonResponse($data);
     }
 
     /**

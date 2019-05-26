@@ -45,7 +45,7 @@ class CompanyType extends AbstractType
 			->add('CompanySiret', TextType::class, array('label' => 'N° SIRET', 'required' => false))
 			->add('idCompanyCountry', EntityType::class, array('class' => CompanyCountry::class,'choice_label' => 'label', 'label'=>'Pays', 'placeholder'=>'', 'required' => false))
 			->add('idCompanyStatus', EntityType::class, array('class' => CompanyStatus::class,'choice_label' => 'label', 'label'=>'Statut', 'required' => true))
-			->add('idUser', EntityType::class, array('class' => Commercial::class,'choice_label' => 'CommercialName', 'label'=>'Compte suivi par', 'placeholder'=>'', 'required' => false))
+			->add('idUser', EntityType::class, array('class' => Commercial::class,'choice_label' => function ($commercial) {return $commercial->getCommercialFirstName() . ' ' . $commercial->getCommercialName();}, 'label'=>'Compte suivi par', 'placeholder'=>'', 'required' => false))
 			->add('idCompanyNbEmployee', EntityType::class, array('class' => CompanyNbEmployee::class,'choice_label' => 'nbEmployee', 'label'=>'Effectifs', 'placeholder'=>'Non précisé', 'required' => false))
 			->add('idCompanyTurnover', EntityType::class, array('class' => CompanyTurnover::class,'choice_label' => 'turnover', 'label'=>'Chiffre d\'affaires', 'placeholder'=>'Non précisé', 'required' => false))
 			->add('idCompanyCodeNAF', EntityType::class, array('class' => CompanyCodeNAF::class,'choice_label' => 'label', 'label'=>'Activité (NAF)', 'placeholder'=>'Non précisé', 'required' => false))

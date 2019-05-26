@@ -40,6 +40,15 @@ class ContactRepository extends ServiceEntityRepository
         return $result;
     }
 
+    public function listContactOfCompany($com)
+    {
+        $query = $this->createQueryBuilder('c');
+        $query->where('c.idUser = :com')->setParameter('com', $com);
+        $result = $query->getQuery()->getResult();
+
+        return $result;
+    }
+
     public function deleteContact($listCont)
     {
         $em = $this->getEntityManager();
