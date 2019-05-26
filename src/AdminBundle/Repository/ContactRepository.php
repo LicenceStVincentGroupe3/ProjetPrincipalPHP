@@ -43,8 +43,18 @@ class ContactRepository extends ServiceEntityRepository
     public function listContactOfCompany($com)
     {
         $query = $this->createQueryBuilder('c');
-        $query->where('c.idUser = :com')->setParameter('com', $com);
+        $query->where('c.idCompany = :com')->setParameter('com', $com);
         $result = $query->getQuery()->getResult();
+
+        return $result;
+    }
+
+    public function countContactOfCompany($com)
+    {
+        $query = $this->createQueryBuilder('c');
+        $query->select('COUNT(c.id)');
+        $query->where('c.idCompany = :com')->setParameter('com', $com);
+        $result = $query->getQuery()->getSingleResult();
 
         return $result;
     }

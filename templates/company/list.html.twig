@@ -21,7 +21,7 @@
 				<table id="table" class="table sortable-table">
 					<thead>
 					<tr>
-						<th class="no-sortable"><input type="checkbox" id="checkall"></th>
+						<th style="width: 50px;padding-bottom: 0.5%;" class="no-sortable"><input type="checkbox" id="checkall"></th>
 						<th class="no-sortable" data-field="logo"></th>
 						<th class="sortable" data-field="nom">Nom</th>
 						<th class="sortable" data-field="activite">Activité</th>
@@ -78,7 +78,7 @@
 							</td>
 							<td>
 								<div class="company-nbContact">
-									<a href="{{ path('editCompany', {'id':uneEntreprise.Id}) }}">2</a>
+									<a href="{{ path('editCompany', {'id':uneEntreprise.Id}) }}">{{nbContact[uneEntreprise.Id]}}</a>
 								</div>
 							</td>
 							<td>
