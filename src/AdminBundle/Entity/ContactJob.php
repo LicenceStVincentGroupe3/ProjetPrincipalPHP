@@ -20,7 +20,7 @@ class ContactJob
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      * @Assert\NotBlank
      */
     private $contactJobName;
@@ -31,11 +31,6 @@ class ContactJob
     private $contacts;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\AdminBundle\Entity\Participation", mappedBy="idParticipationContact")
-     */
-    private $participations;
-
-    /**
      * @ORM\ManyToMany(targetEntity="App\AdminBundle\Entity\Parameter", mappedBy="idParameterContactJob")
      */
     private $parameters;
@@ -43,7 +38,6 @@ class ContactJob
     public function __construct()
     {
         $this->contacts = new ArrayCollection();
-        $this->participations = new ArrayCollection();
         $this->parameters = new ArrayCollection();
     }
 
@@ -102,34 +96,6 @@ class ContactJob
             if ($contact->getIdContactJob() === $this) {
                 $contact->setIdContactJob(null);
             }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Participation[]
-     */
-    public function getParticipations(): Collection
-    {
-        return $this->participations;
-    }
-
-    public function addParticipation(Participation $participation): self
-    {
-        if (!$this->participations->contains($participation)) {
-            $this->participations[] = $participation;
-            $participation->addIdParticipationContact($this);
-        }
-
-        return $this;
-    }
-
-    public function removeParticipation(Participation $participation): self
-    {
-        if ($this->participations->contains($participation)) {
-            $this->participations->removeElement($participation);
-            $participation->removeIdParticipationContact($this);
         }
 
         return $this;

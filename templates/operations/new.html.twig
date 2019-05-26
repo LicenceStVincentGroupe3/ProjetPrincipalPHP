@@ -1,0 +1,35 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}
+    {{ parent()}}Opération
+{% endblock %}
+
+{% block stylesheet %}
+    {{parent()}}
+    {{ encore_entry_link_tags('tabs') }}
+    <!-- <link rel="stylesheet" href="/build/tabs.css"> Autre façon d'appler le fichier css -->
+{% endblock %}
+
+{# {% block contentSearch %}
+{% endblock %} #}
+
+{% block h1 %}Opération{% endblock %}
+
+{% block contentBody %}
+
+    <section>
+        <h5>Saisie d'une nouvelle opération</h5>
+    </section>
+    <div class="tabset">
+        <!-- Tab 1 -->
+        <input type="radio" name="tabset" id="tab1" aria-controls="identity" checked>
+        <label for="tab1">Informations</label>
+
+        <div class="tab-panels">
+            <section id="identity" class="tab-panel">
+                {{ include('operations/_form.html.twig') }}
+            </section>
+        </div>
+    </div>
+
+{% endblock %}

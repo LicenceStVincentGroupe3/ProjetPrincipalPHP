@@ -1,0 +1,73 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}
+    {{ parent()}}Opération
+{% endblock %}
+
+{% block stylesheet %}
+    {{parent()}}
+    {{ encore_entry_link_tags('tabs') }}
+    <!-- <link rel="stylesheet" href="/build/tabs.css"> Autre façon d'appler le fichier css -->
+{% endblock %}
+
+{# {% block contentSearch %}
+{% endblock %} #}
+
+{% block h1 %}Opération{% endblock %}
+
+{% block contentBody %}
+
+    <div class="row">
+        <div class="col-lg-7 mx-auto last-update">
+            <h5><b>{{ operation.OperationName}}</b></h5>
+        </div>
+        <div class="col-lg-5 mx-auto status">
+            <h6>Créée le {{ operation.OperationCreated|date("d/m/Y")}}</h6>
+            <form name="operations" method="post" enctype="multipart/form-data">
+                {% if operation.OperationSent %}
+                    <input type="checkbox" id="operations_operationSent" name="operations[operationSent]" class="switch_1" value="1" checked="checked">
+                {% else %}
+                    <input type="checkbox" id="operations_operationSent" name="operations[operationSent]" class="switch_1" value="1">
+                {% endif %}
+            </form>
+        </div>
+    </div>
+    <div class="tabset">
+        <!-- Tab 1 -->
+        <input type="radio" name="tabset" id="tab1" aria-controls="identity" checked>
+        <label for="tab1">Informations</label>
+        <!-- Tab 2 -->
+        <input type="radio" name="tabset" id="tab2" aria-controls="opesetting">
+        <label for="tab2">Paramétrage</label>
+        <!-- Tab 3 -->
+        <input type="radio" name="tabset" id="tab3" aria-controls="opeform">
+        <label for="tab3">Formulaire</label>
+        {% if (operation.OperationSendingDate != null and operation.OperationClosingDate != null) %}
+            <!-- Tab 4 -->
+            <input type="radio" name="tabset" id="tab4" aria-controls="targetting">
+            <label for="tab4">Ciblage</label>
+        {% endif %}
+        {% if  ("now"|date("Y-m-d")) >= (operation.OperationSendingDate|date("Y-m-d")) %}
+            <!-- Tab 5 -->
+            <input type="radio" name="tabset" id="tab5" aria-controls="results">
+            <label for="tab5">Résultats</label>
+        {% endif %}
+
+        <div class="tab-panels">
+            <section id="identity" class="tab-panel">
+                {{ include('operations/_form.html.twig') }}
+            </section>
+            <section id="opesetting" class="tab-panel">
+                {{ include('operations/_form_settings.html.twig') }}
+            </section>
+            <section id="opeform" class="tab-panel">
+                {{ include('operations/_form_operation.html.twig') }}
+
+                {# {{ include('operations/_form_operation.html.twig', {'button_label': 'ENREGISTRER'}) }} #}
+            </section>
+            <section id="targetting" class="tab-panel"></section>
+            <section id="results" class="tab-panel"></section>
+        </div>
+    </div>
+
+{% endblock %}

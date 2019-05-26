@@ -76,8 +76,13 @@
 									{% endif %}
 								</td>
 								<td>
-									<a href="{{ path('editContact', {'id':cont.Id}) }}">	{{cont.idContactJob.contactJobName}}
-									</a>
+									{% if cont.idContactJob is not null %}
+										<a href="{{ path('editContact', {'id':cont.Id}) }}">	{{cont.idContactJob.contactJobName}}
+										</a>
+									{% else %}
+										<a href="{{ path('editContact', {'id':cont.Id}) }}">
+										</a>
+									{% endif %}
 								</td>
 
 								<td>
@@ -127,7 +132,7 @@
 							</tr>
 						{% else %}
 							<tr>
-								<td colspan="8" class="text-center">Aucun Contact</td>
+								<td colspan="9" class="text-center">Aucun Contact</td>
 							</tr>
 						{% endfor %}
 						</tbody>

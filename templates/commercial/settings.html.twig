@@ -1,0 +1,158 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}
+    {{ parent()}}Profil
+{% endblock %}
+
+{% block stylesheet %}
+    {{parent()}}
+    {{ encore_entry_link_tags('tabs') }}
+    <!-- <link rel="stylesheet" href="/build/tabs.css"> Autre façon d'appler le fichier css -->
+{% endblock %}
+
+{# {% block contentSearch %}
+{% endblock %} #}
+
+{% block h1 %}Profil{% endblock %}
+
+{% block contentBody %}
+
+<div class="row">
+    <div>
+        {% if commercial.CommercialSexe == 1 %}
+            {% set sexe = 'M.'%}
+        {% else %}
+            {% set sexe = 'Mme.'%}
+        {% endif %}
+
+        {% if commercial.CommercialProfil == 'ROLE_DIRECTEUR' %}
+            {% set profil = 'Directeur commercial' %}
+        {% elseif commercial.CommercialProfil == 'ROLE_RESPONSABLE' %}
+            {% set profil = 'Responsable commercial' %}
+        {% else %}
+            {% set profil = 'Commercial' %}
+        {% endif %}
+
+        {% set differenceDate = date("now").diff(date(commercial.CommercialBirthday)) %}
+        {% set commercialYears = differenceDate.y %}
+        
+        <h5><b>{{sexe}} {{commercial.commercialFirstname}} {{commercial.commercialName}}</b>, {{profil}}, {{commercialYears}} ans</h5>
+    </div>
+</div>
+<div class="tabset">
+    <!-- Tab 1 -->
+    <input type="radio" name="tabset" id="tab1" aria-controls="infos" checked>
+    <label for="tab1">Informations</label>
+
+    <div class="tab-panels">
+        <section id="identity" class="tab-panel">
+            {{ form_start(form, {'method': 'POST'}, {'attr': {'novalidate': 'novalidate'}}) }}
+                <div class="file-field">
+                    <div class="mb-4">
+                        {% if commercial.CommercialPhoto is not null %}
+                        <img src="{{asset('build/images/' ~ commercial.CommercialPhoto)}}" class="rounded-circle avatar-pic" title="Photo" alt="Photo de profil">
+                        {% else %}
+                        <img src="{{asset('build/Photo.png')}}" class="rounded-circle avatar-pic" title="Photo" alt="Photo de profil">
+                        {% endif %}
+                    </div>
+                    <div>
+                      <div class="btn btn-mdb-color btn-file float-left waves-effect waves-light">
+                        <span><i class="fas fa-sync-alt"></i>PHOTO</span>
+                        {{ form_widget(form.commercialPhoto) }}
+                      </div>
+                      {{ form_errors(form.commercialPhoto, {'attr': {'class': 'form-error-message'}}) }}
+                    </div>
+                </div>
+
+                <div class="row">
+                        <div class="col-lg-6 mx-auto my-form-left-side">
+                            <div class="row my-form-field {% if form.email.vars.errors|length > 0 %}my-form-error-container{% endif %}">
+                                <div class="col-lg-5 mx-auto">
+                                    {{ form_label(form.email, null, {'label_attr': {'class': 'my-form-label'}}) }}
+                                </div>
+                                <div class="col-lg-7 mx-auto">
+                                    {{ form_widget(form.email, {'attr': {'class': 'form-control my-form-input-big'}}) }}
+                                </div>
+                                {% if form.email.vars.errors|length > 0 %}
+                                <div class="alert alert-danger my-form-error">
+                                    {{ form_errors(form.email, {'attr': {'class': 'list-unstyled mb-0'}}) }}
+                                </div>
+                                {% endif %}
+                            </div>
+                            <div class="row my-form-field">
+                                <div class="col-lg-5 mx-auto">
+                                    {{ form_label(form.plainPassword, null, {'label_attr': {'class': 'my-form-label'}}) }}
+                                </div>
+                                <div class="col-lg-7 mx-auto">
+                                    {{ form_widget(form.plainPassword, {'attr': {'class': 'form-control my-form-input-big input-plainPassword'}}) }}
+                                </div>
+                            </div>
+
+                            <div class="row my-form-field {% if form.commercialMobilePhone.vars.errors|length > 0 %}my-form-error-container{% endif %}">
+                                <div class="col-lg-5 mx-auto">
+                                    {{ form_label(form.commercialMobilePhone, null, {'label_attr': {'class': 'my-form-label'}}) }}
+                                </div>
+                                <div class="col-lg-7 mx-auto">
+                                    {{ form_widget(form.commercialMobilePhone, {'attr': {'class': 'form-control my-form-input-big input-telmobile'}}) }}
+                                </div>
+                                {% if form.commercialMobilePhone.vars.errors|length > 0 %}
+                                <div class="alert alert-danger my-form-error">
+                                    {{ form_errors(form.commercialMobilePhone, {'attr': {'class': 'list-unstyled mb-0'}}) }}
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="col-lg-6 mx-auto my-form-right-side">
+                            <div class="row my-form-field {% if form.commercialLinkedinAddress.vars.errors|length > 0 %}my-form-error-container{% endif %}">
+                                <div class="col-lg-5 mx-auto">
+                                    {{ form_label(form.commercialLinkedinAddress, null, {'label_attr': {'class': 'my-form-label'}}) }}
+                                </div>
+                                <div class="col-lg-7 mx-auto">
+                                    {{ form_widget(form.commercialLinkedinAddress, {'attr': {'class': 'form-control my-form-input-big input-linkedin'}}) }}
+                                </div>
+                                {% if form.commercialLinkedinAddress.vars.errors|length > 0 %}
+                                <div class="alert alert-danger my-form-error">
+                                    {{ form_errors(form.commercialLinkedinAddress, {'attr': {'class': 'list-unstyled mb-0'}}) }}
+                                </div>
+                                {% endif %}
+                            </div>
+                            <div class="row my-form-field {% if form.commercialFacebookAddress.vars.errors|length > 0 %}my-form-error-container{% endif %}">
+                                <div class="col-lg-5 mx-auto">
+                                    {{ form_label(form.commercialFacebookAddress, null, {'label_attr': {'class': 'my-form-label'}}) }}
+                                </div>
+                                <div class="col-lg-7 mx-auto">
+                                    {{ form_widget(form.commercialFacebookAddress, {'attr': {'class': 'form-control my-form-input-big input-facebook'}}) }}
+                                </div>
+                                {% if form.commercialFacebookAddress.vars.errors|length > 0 %}
+                                <div class="alert alert-danger my-form-error">
+                                    {{ form_errors(form.commercialFacebookAddress, {'attr': {'class': 'list-unstyled mb-0'}}) }}
+                                </div>
+                                {% endif %}
+                            </div>
+                            <div class="row my-form-field {% if form.commercialTwitterAddress.vars.errors|length > 0 %}my-form-error-container{% endif %}">
+                                <div class="col-lg-5 mx-auto">
+                                    {{ form_label(form.commercialTwitterAddress, null, {'label_attr': {'class': 'my-form-label'}}) }}
+                                </div>
+                                <div class="col-lg-7 mx-auto">
+                                    {{ form_widget(form.commercialTwitterAddress, {'attr': {'class': 'form-control my-form-input-big input-twitter'}}) }}
+                                </div>
+                                {% if form.commercialTwitterAddress.vars.errors|length > 0 %}
+                                <div class="alert alert-danger my-form-error">
+                                    {{ form_errors(form.commercialTwitterAddress, {'attr': {'class': 'list-unstyled mb-0'}}) }}
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row form-buttons">
+                        <button class="btn btn-white-red return-button" type="button">
+                           <a href="{{ path('index') }}">Annuler</a>
+                        </button>
+                        {{ form_widget(form.save, {'attr': {'class': 'btn btn-red submit-button'}}) }}
+                    </div>
+                {{ form_end(form) }}
+            </section>
+        </div>
+    </div>
+
+{% endblock %}

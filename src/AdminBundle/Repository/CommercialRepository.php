@@ -19,16 +19,29 @@ class CommercialRepository extends ServiceEntityRepository
         parent::__construct($registry, Commercial::class);
     }
 
-    // Suppression un ou plusieurs commercial(commerciaux) selectionné(s)
-    public function deleteCommercial($listCom)
+    // ---- Suppression un ou plusieurs commercial(commerciaux) selectionné(s)
+    public function resetHierarchy($listCom)
     {
-        $em = $this->getEntityManager();
-        $query = $em->createQueryBuilder();
-        $query->delete(Commercial::class, 'c');
-        $query->where('c.id IN (:listCom)')->setParameter('listCom', array_values($listCom));
-        $rowDeleted = $query->getQuery()->execute();
+        return $this->createQueryBuilder('c')
+            ->update()
+            ->set('c.hierarchy', 'null')
+            ->where('c.hierarchy IN (:listCom)')
+            ->setParameter('listCom', array_values($listCom))
+            ->getQuery()
+            ->execute()
+        ;
+    }
 
-        return $rowDeleted;
+    public function activeArchive($listCom)
+    {
+        return $this->createQueryBuilder('c')
+            ->update()
+            ->set('c.archived', 'true')
+            ->where('c.id IN (:listCom)')
+            ->setParameter('listCom', array_values($listCom))
+            ->getQuery()
+            ->execute()
+        ;
     }
 
     // Liste les responsables N+1 lorsque c'est le directeur qui est connécté
@@ -37,6 +50,7 @@ class CommercialRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('c')
             ->andWhere('c.roles LIKE :director')
             ->orWhere('c.roles LIKE :responsable')
+            ->andWhere('c.archived = false')
             ->setParameter('director', '%'.$director.'%')
             ->setParameter('responsable', '%'.$responsable.'%')
             ->orderBy('c.commercialProfil', 'ASC')
@@ -50,6 +64,7 @@ class CommercialRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('c')
             ->andWhere('c.roles LIKE :responsable')
+            ->andWhere('c.archived = false')
             ->setParameter('responsable', '%'.$responsable.'%')
             ->orderBy('c.commercialProfil', 'ASC')
             ->getQuery()
@@ -71,11 +86,25 @@ class CommercialRepository extends ServiceEntityRepository
     // Retourne toutes les commerciaux qui sont rattachés à l'utilisateur connecté
     public function listCommercialsOfUser($com)
     {
-        $query = $this->createQueryBuilder('c');
-        $query->where('c.hierarchy = :com')->setParameter('com', $com);
+        $query = $this->createQueryBuilder('c')
+        ->andwhere('c.hierarchy = :com')
+        ->andWhere('c.archived = false')
+        ->setParameter('com', $com);
         $result = $query->getQuery()->getResult();
 
         return $result;
+    }
+
+    // Retourne les codes commercial séléctionné via critères
+    public function getCommercialViaCriteria($criteria, $value)
+    {
+            $query = $this->createQueryBuilder("c")
+                ->select("c.commercialCode")
+                ->where($criteria .   " = :value")
+                ->setParameter('value', $value)
+                ->getQuery();
+
+        return $query->getResult();
     }
 
     // /**

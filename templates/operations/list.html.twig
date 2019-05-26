@@ -1,0 +1,158 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}
+    {{ parent()}}Opérations
+{% endblock %}
+
+{# {% block contentSearch %}
+{% endblock %} #}
+
+{% block h1 %}Opérations <span class="text-danger h5">({{listOp|length}})</span>{% endblock %}
+
+{% block contentBodyContainer %}
+
+<div>
+
+    {% block contentBody %}
+
+    <form method="post">
+        <div class="table-responsive">
+            <table id="table" class="table sortable-table">
+                <thead>
+                    <tr>
+                        <th style="width: 4%;padding-bottom: 0.5%;" class="no-sortable"><input type="checkbox" id="checkall"></th>
+                        <th style="width: 15%;" class="sortable" data-field="nom">Nom de l'opération</th>
+                        <th style="width: 13%;" class="sortable" data-field="date">Date de création</th>
+                        <th style="width: 15%;" class="sortable" data-field="entreprises">Entreprises ciblées</th>
+                        <th style="width: 13%;" class="sortable" data-field="catacts">Contacts ciblés</th>
+                        <th style="width: 10%;" class="sortable" data-field="auteur">Auteur</th>
+                        <th style="width: 9%;" class="sortable" data-field="statut">Statut</th>
+                        <th style="width: 15%;" class="sortable" data-field="miseajour">Mise à jour</th>
+                        <th style="width: 6%" class="table-field-other no-sortable" data-field="autre">&bull;&bull;&bull;</th>
+                    </tr>
+                </thead>
+                <tbody id="myTableBody">
+                    {% for operation in listOp %}
+                        <tr>
+                            <td>
+                                <input type="checkbox" class="checkthis" name="deleteData[]" value="{{ operation.OperationCode }}">
+                            </td>
+                            <td>
+                                <a href="{{ path('operations_edit', {'operationCode':operation.OperationCode}) }}">{{ operation.OperationName }}</a>
+                            </td>
+                            <td>
+                                <a href="{{ path('operations_edit', {'operationCode':operation.OperationCode}) }}">{{ operation.OperationCreated|date("d/m/Y") }}</a>
+                            </td>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                {% if operation.Author is not null %}
+                                    <a href="{{ path('operations_edit', {'operationCode':operation.OperationCode}) }}">
+                                        {{ operation.Author.commercialFirstname }} {{ operation.Author.commercialName|upper }}
+                                    </a>
+                                {% endif %}
+                            </td>
+                            <td class="badges">
+                                {% if operation.OperationSendingDate == NULL and operation.OperationClosingDate == NULL %}
+                                    <a class="badge badge-pill badge-orange" href="{{ path('operations_edit', {'operationCode':operation.OperationCode}) }}">
+                                        Brouillon
+                                    </a>
+                                {% elseif operation.OperationSendingDate < date() and operation.OperationClosingDate > date() %}
+                                    <a class="badge badge-pill badge-green" href="{{ path('operations_edit', {'operationCode':operation.OperationCode}) }}">
+                                        En cours
+                                    </a>
+                                {% elseif operation.OperationSendingDate < date() %}
+                                        <a class="badge badge-pill badge-grey" href="{{ path('operations_edit', {'operationCode':operation.OperationCode}) }}">
+                                            Terminée
+                                        </a>
+                                {% endif %}
+                            </td>
+                            <td>
+                                <a href="{{ path('operations_edit', {'operationCode':operation.OperationCode}) }}"></a>
+                            </td>
+                            <td>
+                                {% if operation.Author is not null %}
+                                    {% if operation.Author.Email is not null %}
+                                        <a href="{{ path('operations_edit', {'operationCode':operation.OperationCode}) }}">
+                                            <img src="{{asset('build/mail.png')}}" class="commercial-mail" title="{{operation.Author.Email}}" alt="Email du commercial">
+                                        </a>
+                                    {% endif %}
+                                    {% if operation.Author.CommercialPhone is not null %}
+                                        <a href="{{ path('operations_edit', {'operationCode':operation.OperationCode}) }}">
+                                            <img src="{{asset('build/tel.png')}}" class="commercial-tel" title="{{operation.Author.CommercialPhone}}" alt="Tél. fixe direct du commercial">
+                                        </a>
+                                    {% endif %}
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="9" class="text-center">Aucune opération</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <!-- modal-dialog -->
+        <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Supprimer ce(s) élément(s)</h5>
+                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        Etes-vous sûr ?
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-white-red return-button" type="button" data-dismiss="modal">
+                            Annuler
+                        </button>
+                        <input class="btn btn-red submit-button" type="submit" name="delete" id="delete" value="SUPPRIMER">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+        <div class="table-after">
+            <div class="row">
+                <div class="table-after-entry">
+                    <select id="table-nb-entry" class="table-nb-entry unset-outline">
+                        <option value="5">5</option>
+                        <option value="10">10</option>
+                        <option value="15">15</option>
+                        <option value="20">20</option>
+                        <option value="25">25</option>
+                    </select>
+                </div>
+                <div class="table-nb-functions">
+    				<span class="table-after-delete" data-title="Delete" data-toggle="modal" data-target="#delete">
+                        <img src="{{asset('build/icon-delete.png')}}" title="Supprimer" alt="Icon suppression">
+                    </span>
+                    <span class="table-after-export">
+                        <img src="{{asset('build/icon-export.png')}}" title="Exporter" alt="Icon exportation">
+                    </span>
+                    <span class="table-after-import">
+                        <img src="{{asset('build/icon-import.png')}}" title="Importer" alt="Icon importation">
+                    </span>
+                </div>
+                <div class="table-after-pagination">
+                    <ul class="pagination pagination-lg pager" id="myPager"></ul>
+                </div>
+                <div class="table-after-btn-add">
+                    <button class="btn add-button">
+                        <a href="{{ path('operations_new') }}">AJOUTER</a>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    {% endblock %}
+
+</div>
+
+{% endblock %}
