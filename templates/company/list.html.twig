@@ -51,7 +51,9 @@
 							</td>
 							<td>
 								{% if uneEntreprise.idCompanyCodeNAF is not null %}
-									<a href="{{ path('editCompany', {'id':uneEntreprise.id}) }}">	{{uneEntreprise.idCompanyCodeNAF.label}}</a>
+									{% set activite = [] %}
+									{% set activite = uneEntreprise.idCompanyCodeNAF.label|split('(') %}
+									<a href="{{ path('editCompany', {'id':uneEntreprise.id}) }}">	{{activite[0]}}</a>
 								{% else %}
 									<a href="{{ path('editCompany', {'id':uneEntreprise.id}) }}"></a>
 								{% endif %}
