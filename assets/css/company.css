@@ -15,6 +15,33 @@
     background-color: #6fb4c9;
 }
 
+.company-status-client {
+    background-color: #1ac910;
+    border-radius: 100px;
+    color: #ffffff!important;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.company-status-prospect {
+    background-color: #ffac11;
+    border-radius: 100px;
+    text-align: center;
+    color: #ffffff!important;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.company-status-piste {
+    background-color: #0bc9c5;
+    border-radius: 100px;
+    text-align: center;
+    color: #ffffff!important;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
 .company-nbContact {
     width: 30px;
     background-color: #cf1740;
@@ -52,3 +79,44 @@ textarea {
     margin-bottom: 3%;
     height: 45px;
 }
+
+
+.jq-stars {
+    display: inline-block;
+}
+
+.jq-rating-label {
+    font-size: 22px;
+    display: inline-block;
+    position: relative;
+    vertical-align: top;
+    font-family: helvetica, arial, verdana;
+}
+
+.jq-star {
+    width: 100px;
+    height: 100px;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.jq-star-svg {
+    padding-left: 3px;
+    width: 100%;
+    height: 100% ;
+}
+
+.jq-star:hover .fs-star-svg path {
+}
+
+.jq-star-svg path {
+    /* stroke: #000; */
+    stroke-linejoin: round;
+}
+
+/* un-used */
+.jq-shadow {
+    -webkit-filter: drop-shadow( -2px -2px 2px #888 );
+    filter: drop-shadow( -2px -2px 2px #888 );
+}
+

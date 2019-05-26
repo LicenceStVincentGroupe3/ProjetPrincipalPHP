@@ -1,745 +1,755 @@
 {% extends 'layout.html.twig' %}
 
 {% block title %}
-	{{ parent()}}Equipe commerciale
+    {{ parent() }}Equipe commerciale
 {% endblock %}
 
 {% block stylesheet %}
-	{{parent()}}
-	{{ encore_entry_link_tags('tabs') }}
+    {{ parent() }}
+    {{ encore_entry_link_tags('tabs') }}
     <!-- <link rel="stylesheet" href="/build/tabs.css"> Autre façon d'appler le fichier css -->
 {% endblock %}
-
-{# {% block contentSearch %}
-{% endblock %} #}
 
 {% block h1 %}Equipe commerciale{% endblock %}
 
 {% block contentBody %}
 
-	<div class="row">
-		<div class="col-lg-6 mx-auto last-upd">
-			{% if editCom.CommercialSexe == 1 %}
-				{% set sexe = 'M.'%}
-			{% else %}
-				{% set sexe = 'Mme.'%}
-			{% endif %}
+    <div class="row">
+        <div class="col-lg-6 mx-auto last-upd">
+            {% if editCom.CommercialSexe == 1 %}
+                {% set sexe = 'M.' %}
+            {% else %}
+                {% set sexe = 'Mme.' %}
+            {% endif %}
 
-			{% if editCom.CommercialProfil == 'ROLE_DIRECTEUR' %}
-				{% set profil = 'Directeur commercial' %}
-			{% elseif editCom.CommercialProfil == 'ROLE_RESPONSABLE' %}
-				{% set profil = 'Responsable commercial' %}
-			{% else %}
-				{% set profil = 'Commercial' %}
-			{% endif %}
+            {% if editCom.CommercialProfil == 'ROLE_DIRECTEUR' %}
+                {% set profil = 'Directeur commercial' %}
+            {% elseif editCom.CommercialProfil == 'ROLE_RESPONSABLE' %}
+                {% set profil = 'Responsable commercial' %}
+            {% else %}
+                {% set profil = 'Commercial' %}
+            {% endif %}
 
-			{% set differenceDate = date("now").diff(date(editCom.CommercialBirthday)) %}
-			{% set commercialYears = differenceDate.y %}
-			
-			<h5><b>{{sexe}} {{editCom.commercialFirstname}} {{editCom.commercialName}}</b>, {{profil}}, {{commercialYears}} ans</h5>
-		</div>
-		<div class="col-lg-6 mx-auto status">
-			<div class="last-upd3">
-				{% if editCom.CommercialLastUpdate is not null %}
-				Dernière mise à jour le {{ editCom.CommercialLastUpdate|date("d/m/Y", "Europe/Paris") }}
-				{% endif %}
-			</div>
-{{ form_start(form, {'method': 'POST'}, {'attr': {'novalidate': 'novalidate'}}) }}
-			{{ form_widget(form.commercialStatus, {'attr': {'class': 'switch_2'}}) }}
-		</div>
-	</div>
+            {% set differenceDate = date("now").diff(date(editCom.CommercialBirthday)) %}
+            {% set commercialYears = differenceDate.y %}
 
-	<div class="tabset mw-100">
-		<!-- Tab 1 -->
-		<input type="radio" name="tabset" id="tab1" aria-controls="identity" checked>
-		<label for="tab1">Identité</label>
-		<!-- Tab 2 -->
-		<input type="radio" name="tabset" id="tab2" aria-controls="company">
-		<label for="tab2" class="tab-company">
-			Entreprise 
-			<span class="commercial-nbCompany">{{nbCompany[1]}}</span>
-		</label>
-		<!-- Tab 3 -->
-		<input type="radio" name="tabset" id="tab3" aria-controls="contact">
-		<label for="tab3" class="tab-contact">
-			Contacts
-			<span class="commercial-nbContact">{{nbContact[1]}}</span>
-		</label>
-		<!-- Tab 4 -->
-		<input type="radio" name="tabset" id="tab4" aria-controls="historic">
-		<label for="tab4">Historique</label>
+            <h5><b>{{ sexe }} {{ editCom.commercialFirstname }} {{ editCom.commercialName }}</b>, {{ profil }}, {{ commercialYears }} ans</h5>
+        </div>
+        <div class="col-lg-6 mx-auto status">
+            <div class="last-upd3">
+                {% if editCom.CommercialLastUpdate is not null %}
+                    Dernière mise à jour le {{ editCom.CommercialLastUpdate|date("d/m/Y", "Europe/Paris") }}
+                {% endif %}
+            </div>
+            {{ form_start(form, {'method': 'POST'}, {'attr': {'novalidate': 'novalidate'}}) }}
+            {{ form_widget(form.commercialStatus, {'attr': {'class': 'switch_2'}}) }}
+        </div>
+    </div>
 
-		<div class="tab-panels">
-			<section id="identity" class="tab-panel">
-				
-					<div class="file-field">
-					    <div class="mb-4">
-					      	{% if editCom.CommercialPhoto is not null %}
-							<img src="{{asset('build/images/' ~ editCom.CommercialPhoto)}}" class="rounded-circle avatar-pic" title="Photo" alt="Photo de profil">
-							{% else %}
-							<img src="{{asset('build/Photo.png')}}" class="rounded-circle avatar-pic" title="Photo" alt="Photo de profil">
-							{% endif %}
-					    </div>
-					    <div>
-					      <div class="btn btn-mdb-color btn-file float-left waves-effect waves-light">
-					        <span><i class="fas fa-sync-alt"></i>PHOTO</span>
-					        {{ form_widget(form.commercialPhoto) }}
-					      </div>
-					      {{ form_errors(form.commercialPhoto, {'attr': {'class': 'form-error-message'}}) }}
-					    </div>
-					</div>
+    <div class="tabset mw-100">
+        <!-- Tab 1 -->
+        <input type="radio" name="tabset" id="tab1" aria-controls="identity" checked>
+        <label for="tab1">Identité</label>
+        <!-- Tab 2 -->
+        <input type="radio" name="tabset" id="tab2" aria-controls="company">
+        <label for="tab2" class="tab-company">
+            Entreprise
+            <span class="commercial-nbCompany">{{ nbCompany[1] }}</span>
+        </label>
+        <!-- Tab 3 -->
+        <input type="radio" name="tabset" id="tab3" aria-controls="contact">
+        <label for="tab3" class="tab-contact">
+            Contacts
+            <span class="commercial-nbContact">{{ nbContact[1] }}</span>
+        </label>
+        <!-- Tab 4 -->
+        <input type="radio" name="tabset" id="tab4" aria-controls="historic">
+        <label for="tab4">Historique</label>
+        
+        <div class="tab-panels">
+            <section id="identity" class="tab-panel">
 
-					<div class="row">
-						<div class="col-lg-6 mx-auto form-left">
-							<div class="row my-form-field">
-								<div class="col-lg-4 mx-auto">
-									{{ form_label(form.commercialCode, null, {'label_attr': {'class': 'my-form-label'}}) }}
-								</div>
-								<div class="col-lg-7 mx-auto mandatory">
-									{{ form_widget(form.commercialCode, {'attr': {'class': 'form-control my-form-input-little'}}) }}
-								</div>
-								{% if form.commercialCode.vars.errors|length > 0 %}
-									<div class="col-lg-1 mx-auto pl-0">
-										<button type="button" style="padding: 3px 6px;" class="btn btn-danger rounded-circle" data-title="Erreur de saisie" data-trigger="focus" data-container="body" data-toggle="popover" data-placement="top"
-												data-content="
-												{% for error in form.commercialCode.vars.errors %}
-													-{{ error.messagePluralization is null
-													? error.messageTemplate|trans(error.messageParameters, 'validators')
-													: error.messageTemplate|transchoice(error.messagePluralization, error.messageParameters, 'validators')
-													}}
-													<br>
-												{% endfor %}
-												">
-											<i class="fas fa-exclamation-circle"></i>
-										</button>
-									</div>
-								{% else %}
-									<div class="col-lg-1 mx-auto pl-0"></div>
-								{% endif %}
-							</div>
-							<div class="row my-form-field">
-								<div class="col-lg-4 mx-auto">
-									{{ form_label(form.commercialSexe, 'Genre', {'label_attr': {'class': 'my-form-label'}}) }}
-								</div>
-								<div class="col-lg-7 mx-auto mandatory">
-									{{ form_widget(form.commercialSexe, {'attr': {'class': 'form-control my-form-input-little'}}) }}
-								</div>
-								<div class="col-lg-1 mx-auto pl-0"></div>
-							</div>
-							<div class="row my-form-field">
-								<div class="col-lg-4 mx-auto">
-									{{ form_label(form.commercialFirstname, null, {'label_attr': {'class': 'my-form-label'}}) }}
-								</div>
-								<div class="col-lg-7 mx-auto mandatory">
-									{{ form_widget(form.commercialFirstname, {'attr': {'class': 'form-control my-form-input-big'}}) }}
-								</div>
-								{% if form.commercialFirstname.vars.errors|length > 0 %}
-									<div class="col-lg-1 mx-auto pl-0">
-										<button type="button" style="padding: 3px 6px;" class="btn btn-danger rounded-circle" data-title="Erreur de saisie" data-trigger="focus" data-container="body" data-toggle="popover" data-placement="top"
-												data-content="
-												{% for error in form.commercialFirstname.vars.errors %}
-													-{{ error.messagePluralization is null
-													? error.messageTemplate|trans(error.messageParameters, 'validators')
-													: error.messageTemplate|transchoice(error.messagePluralization, error.messageParameters, 'validators')
-													}}
-													<br>
-												{% endfor %}
-												">
-											<i class="fas fa-exclamation-circle"></i>
-										</button>
-									</div>
-								{% else %}
-									<div class="col-lg-1 mx-auto pl-0"></div>
-								{% endif %}
-							</div>
-							<div class="row my-form-field">
-								<div class="col-lg-4 mx-auto">
-									{{ form_label(form.commercialName, null, {'label_attr': {'class': 'my-form-label'}}) }}
-								</div>
-								<div class="col-lg-7 mx-auto mandatory">
-									{{ form_widget(form.commercialName, {'attr': {'class': 'form-control my-form-input-big'}}) }}
-								</div>
-								{% if form.commercialName.vars.errors|length > 0 %}
-									<div class="col-lg-1 mx-auto pl-0">
-										<button type="button" style="padding: 3px 6px;" class="btn btn-danger rounded-circle" data-title="Erreur de saisie" data-trigger="focus" data-container="body" data-toggle="popover" data-placement="top"
-												data-content="
-												{% for error in form.commercialName.vars.errors %}
-													-{{ error.messagePluralization is null
-													? error.messageTemplate|trans(error.messageParameters, 'validators')
-													: error.messageTemplate|transchoice(error.messagePluralization, error.messageParameters, 'validators')
-													}}
-													<br>
-												{% endfor %}
-												">
-											<i class="fas fa-exclamation-circle"></i>
-										</button>
-									</div>
-								{% else %}
-									<div class="col-lg-1 mx-auto pl-0"></div>
-								{% endif %}
-							</div>
-							<div class="row my-form-field">
-								<div class="col-lg-4 mx-auto">
-									{{ form_label(form.commercialProfil, 'Profil/droits', {'label_attr': {'class': 'my-form-label'}}) }}
-								</div>
-								<div class="col-lg-7 mx-auto mandatory">
-									{{ form_widget(form.commercialProfil, {'attr': {'class': 'form-control my-form-input-big'}}) }}
-								</div>
-								<div class="col-lg-1 mx-auto pl-0"></div>
-							</div>
-							<div class="row my-form-field">
-								<div class="col-lg-4 mx-auto">
-									{{ form_label(form.commercialBirthday, null, {'label_attr': {'class': 'my-form-label'}}) }}
-								</div>
-								<div class="col-lg-7 mx-auto">
-							        <div class="form-group">
-						                <div class='input-group date' id='datetimepicker2'>
-						                    {{ form_widget(form.commercialBirthday, {'attr': {'class': 'my-form-input-tiny'}}) }}
-						                    <span class="input-group-addon">
-						                        <span class="glyphicon glyphicon-calendar"></span>
-						                    </span>
-						                </div>
-						            </div>
-								</div>
-								{% if form.commercialBirthday.vars.errors|length > 0 %}
-									<div class="col-lg-1 mx-auto pl-0">
-										<button type="button" style="padding: 3px 6px;" class="btn btn-danger rounded-circle" data-title="Erreur de saisie" data-trigger="focus" data-container="body" data-toggle="popover" data-placement="top"
-												data-content="
-												{% for error in form.commercialBirthday.vars.errors %}
-													-{{ error.messagePluralization is null
-													? error.messageTemplate|trans(error.messageParameters, 'validators')
-													: error.messageTemplate|transchoice(error.messagePluralization, error.messageParameters, 'validators')
-													}}
-													<br>
-												{% endfor %}
-												">
-											<i class="fas fa-exclamation-circle"></i>
-										</button>
-									</div>
-								{% else %}
-									<div class="col-lg-1 mx-auto pl-0"></div>
-								{% endif %}
-							</div>
-							<div class="row my-form-field initial-height">
-								<div class="col-lg-4 mx-auto">
-									{{ form_label(form.arrivalDate, null, {'label_attr': {'class': 'my-form-label'}}) }}
-								</div>
-								<div class="col-lg-7 mx-auto arrival-departure mandatory-white">
-									{{ form_widget(form.arrivalDate, {'attr': {'class': ' my-form-input-tiny'}}) }}
+                <div class="file-field">
+                    <div class="mb-4">
+                        {% if editCom.CommercialPhoto is not null %}
+                            <img src="{{ asset('build/images/' ~ editCom.CommercialPhoto) }}"
+                                 class="rounded-circle avatar-pic" title="Photo" alt="Photo de profil">
+                        {% else %}
+                            <img src="{{ asset('build/Photo.png') }}" class="rounded-circle avatar-pic" title="Photo"
+                                 alt="Photo de profil">
+                        {% endif %}
+                    </div>
+                    <div>
+                        <div class="btn btn-mdb-color btn-file float-left waves-effect waves-light">
+                            <span><i class="fas fa-sync-alt"></i>PHOTO</span>
+                            {{ form_widget(form.commercialPhoto) }}
+                        </div>
+                        {{ form_errors(form.commercialPhoto, {'attr': {'class': 'form-error-message'}}) }}
+                    </div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-6 mx-auto form-left">
+                    <div class="row my-form-field">
+                      <div class="col-lg-4 mx-auto">
+                        {{ form_label(form.commercialCode, null, {'label_attr': {'class': 'my-form-label'}}) }}
+                      </div>
+                      <div class="col-lg-7 mx-auto mandatory">
+                        {{ form_widget(form.commercialCode, {'attr': {'class': 'form-control my-form-input-little'}}) }}
+                      </div>
+                      {% if form.commercialCode.vars.errors|length > 0 %}
+                        <div class="col-lg-1 mx-auto pl-0">
+                          <button type="button" style="padding: 3px 6px;" class="btn btn-danger rounded-circle" data-title="Erreur de saisie" data-trigger="focus" data-container="body" data-toggle="popover" data-placement="top"
+                              data-content="
+                              {% for error in form.commercialCode.vars.errors %}
+                                -{{ error.messagePluralization is null
+                                ? error.messageTemplate|trans(error.messageParameters, 'validators')
+                                : error.messageTemplate|transchoice(error.messagePluralization, error.messageParameters, 'validators')
+                                }}
+                                <br>
+                              {% endfor %}
+                              ">
+                            <i class="fas fa-exclamation-circle"></i>
+                          </button>
+                        </div>
+                      {% else %}
+                        <div class="col-lg-1 mx-auto pl-0"></div>
+                      {% endif %}
+                    </div>
+                    <div class="row my-form-field">
+                      <div class="col-lg-4 mx-auto">
+                        {{ form_label(form.commercialSexe, 'Genre', {'label_attr': {'class': 'my-form-label'}}) }}
+                      </div>
+                      <div class="col-lg-7 mx-auto mandatory">
+                        {{ form_widget(form.commercialSexe, {'attr': {'class': 'form-control my-form-input-little'}}) }}
+                      </div>
+                      <div class="col-lg-1 mx-auto pl-0"></div>
+                    </div>
+                    <div class="row my-form-field">
+                      <div class="col-lg-4 mx-auto">
+                        {{ form_label(form.commercialFirstname, null, {'label_attr': {'class': 'my-form-label'}}) }}
+                      </div>
+                      <div class="col-lg-7 mx-auto mandatory">
+                        {{ form_widget(form.commercialFirstname, {'attr': {'class': 'form-control my-form-input-big'}}) }}
+                      </div>
+                      {% if form.commercialFirstname.vars.errors|length > 0 %}
+                        <div class="col-lg-1 mx-auto pl-0">
+                          <button type="button" style="padding: 3px 6px;" class="btn btn-danger rounded-circle" data-title="Erreur de saisie" data-trigger="focus" data-container="body" data-toggle="popover" data-placement="top"
+                              data-content="
+                              {% for error in form.commercialFirstname.vars.errors %}
+                                -{{ error.messagePluralization is null
+                                ? error.messageTemplate|trans(error.messageParameters, 'validators')
+                                : error.messageTemplate|transchoice(error.messagePluralization, error.messageParameters, 'validators')
+                                }}
+                                <br>
+                              {% endfor %}
+                              ">
+                            <i class="fas fa-exclamation-circle"></i>
+                          </button>
+                        </div>
+                      {% else %}
+                        <div class="col-lg-1 mx-auto pl-0"></div>
+                      {% endif %}
+                    </div>
+                    <div class="row my-form-field">
+                      <div class="col-lg-4 mx-auto">
+                        {{ form_label(form.commercialName, null, {'label_attr': {'class': 'my-form-label'}}) }}
+                      </div>
+                      <div class="col-lg-7 mx-auto mandatory">
+                        {{ form_widget(form.commercialName, {'attr': {'class': 'form-control my-form-input-big'}}) }}
+                      </div>
+                      {% if form.commercialName.vars.errors|length > 0 %}
+                        <div class="col-lg-1 mx-auto pl-0">
+                          <button type="button" style="padding: 3px 6px;" class="btn btn-danger rounded-circle" data-title="Erreur de saisie" data-trigger="focus" data-container="body" data-toggle="popover" data-placement="top"
+                              data-content="
+                              {% for error in form.commercialName.vars.errors %}
+                                -{{ error.messagePluralization is null
+                                ? error.messageTemplate|trans(error.messageParameters, 'validators')
+                                : error.messageTemplate|transchoice(error.messagePluralization, error.messageParameters, 'validators')
+                                }}
+                                <br>
+                              {% endfor %}
+                              ">
+                            <i class="fas fa-exclamation-circle"></i>
+                          </button>
+                        </div>
+                      {% else %}
+                        <div class="col-lg-1 mx-auto pl-0"></div>
+                      {% endif %}
+                    </div>
+                    <div class="row my-form-field">
+                      <div class="col-lg-4 mx-auto">
+                        {{ form_label(form.commercialProfil, 'Profil/droits', {'label_attr': {'class': 'my-form-label'}}) }}
+                      </div>
+                      <div class="col-lg-7 mx-auto mandatory">
+                        {{ form_widget(form.commercialProfil, {'attr': {'class': 'form-control my-form-input-big'}}) }}
+                      </div>
+                      <div class="col-lg-1 mx-auto pl-0"></div>
+                    </div>
+                    <div class="row my-form-field">
+                      <div class="col-lg-4 mx-auto">
+                        {{ form_label(form.commercialBirthday, null, {'label_attr': {'class': 'my-form-label'}}) }}
+                      </div>
+                      <div class="col-lg-7 mx-auto">
+                            <div class="form-group">
+                                  <div class='input-group date' id='datetimepicker2'>
+                                      {{ form_widget(form.commercialBirthday, {'attr': {'class': 'my-form-input-tiny'}}) }}
+                                      <span class="input-group-addon">
+                                          <span class="glyphicon glyphicon-calendar"></span>
+                                      </span>
+                                  </div>
+                              </div>
+                      </div>
+                      {% if form.commercialBirthday.vars.errors|length > 0 %}
+                        <div class="col-lg-1 mx-auto pl-0">
+                          <button type="button" style="padding: 3px 6px;" class="btn btn-danger rounded-circle" data-title="Erreur de saisie" data-trigger="focus" data-container="body" data-toggle="popover" data-placement="top"
+                              data-content="
+                              {% for error in form.commercialBirthday.vars.errors %}
+                                -{{ error.messagePluralization is null
+                                ? error.messageTemplate|trans(error.messageParameters, 'validators')
+                                : error.messageTemplate|transchoice(error.messagePluralization, error.messageParameters, 'validators')
+                                }}
+                                <br>
+                              {% endfor %}
+                              ">
+                            <i class="fas fa-exclamation-circle"></i>
+                          </button>
+                        </div>
+                      {% else %}
+                        <div class="col-lg-1 mx-auto pl-0"></div>
+                      {% endif %}
+                    </div>
+                    <div class="row my-form-field initial-height">
+                      <div class="col-lg-4 mx-auto">
+                        {{ form_label(form.arrivalDate, null, {'label_attr': {'class': 'my-form-label'}}) }}
+                      </div>
+                      <div class="col-lg-7 mx-auto arrival-departure mandatory-white">
+                        {{ form_widget(form.arrivalDate, {'attr': {'class': ' my-form-input-tiny'}}) }}
 
-									{# {{ form_label(form.departureDate) }} #}
-									{{ form_widget(form.departureDate, {'attr': {'class': 'my-form-input-tiny'}}) }}
-								</div>
-								{% if form.arrivalDate.vars.errors|length > 0 or form.departureDate.vars.errors|length > 0 %}
-									<div class="col-lg-1 mx-auto pl-0">
-										<button type="button" style="padding: 3px 6px;" class="btn btn-danger rounded-circle" data-title="Erreur de saisie" data-trigger="focus" data-container="body" data-toggle="popover" data-placement="top"
-												data-content="
-												{% for error in form.departureDate.vars.errors  %}
-													-{{ error.messagePluralization is null
-													? error.messageTemplate|trans(error.messageParameters, 'validators')
-													: error.messageTemplate|transchoice(error.messagePluralization, error.messageParameters, 'validators')
-													}}
-													<br>
-												{% endfor %}
-												">
-											<i class="fas fa-exclamation-circle"></i>
-										</button>
-									</div>
-								{% else %}
-									<div class="col-lg-1 mx-auto pl-0"></div>
-								{% endif %}
-							</div><br><br>
-							<div class="row my-form-field">
-								<div class="col-lg-4 mx-auto">
-									{{ form_label(form.commercialLinkedinAddress, null, {'label_attr': {'class': 'my-form-label'}}) }}
-								</div>
-								<div class="col-lg-7 mx-auto mandatory-white">
-									{{ form_widget(form.commercialLinkedinAddress, {'attr': {'class': 'form-control my-form-input-big input-linkedin'}}) }}
-								</div>
-								{% if form.commercialLinkedinAddress.vars.errors|length > 0 %}
-									<div class="col-lg-1 mx-auto pl-0">
-										<button type="button" style="padding: 3px 6px;" class="btn btn-danger rounded-circle" data-title="Erreur de saisie" data-trigger="focus" data-container="body" data-toggle="popover" data-placement="top"
-												data-content="
-												{% for error in form.commercialLinkedinAddress.vars.errors %}
-													-{{ error.messagePluralization is null
-													? error.messageTemplate|trans(error.messageParameters, 'validators')
-													: error.messageTemplate|transchoice(error.messagePluralization, error.messageParameters, 'validators')
-													}}
-													<br>
-												{% endfor %}
-												">
-											<i class="fas fa-exclamation-circle"></i>
-										</button>
-									</div>
-								{% else %}
-									<div class="col-lg-1 mx-auto pl-0"></div>
-								{% endif %}
-							</div>
-							<div class="row my-form-field">
-								<div class="col-lg-4 mx-auto">
-									{{ form_label(form.commercialFacebookAddress, null, {'label_attr': {'class': 'my-form-label'}}) }}
-								</div>
-								<div class="col-lg-7 mx-auto mandatory-white">
-									{{ form_widget(form.commercialFacebookAddress, {'attr': {'class': 'form-control my-form-input-big input-facebook'}}) }}
-								</div>
-								{% if form.commercialFacebookAddress.vars.errors|length > 0 %}
-									<div class="col-lg-1 mx-auto pl-0">
-										<button type="button" style="padding: 3px 6px;" class="btn btn-danger rounded-circle" data-title="Erreur de saisie" data-trigger="focus" data-container="body" data-toggle="popover" data-placement="top"
-												data-content="
-												{% for error in form.commercialFacebookAddress.vars.errors %}
-													-{{ error.messagePluralization is null
-													? error.messageTemplate|trans(error.messageParameters, 'validators')
-													: error.messageTemplate|transchoice(error.messagePluralization, error.messageParameters, 'validators')
-													}}
-													<br>
-												{% endfor %}
-												">
-											<i class="fas fa-exclamation-circle"></i>
-										</button>
-									</div>
-								{% else %}
-									<div class="col-lg-1 mx-auto pl-0"></div>
-								{% endif %}
-							</div>
-							<div class="row my-form-field">
-								<div class="col-lg-4 mx-auto">
-									{{ form_label(form.commercialTwitterAddress, null, {'label_attr': {'class': 'my-form-label'}}) }}
-								</div>
-								<div class="col-lg-7 mx-auto mandatory-white">
-									{{ form_widget(form.commercialTwitterAddress, {'attr': {'class': 'form-control my-form-input-big input-twitter'}}) }}
-								</div>
-								{% if form.commercialTwitterAddress.vars.errors|length > 0 %}
-									<div class="col-lg-1 mx-auto pl-0">
-										<button type="button" style="padding: 3px 6px;" class="btn btn-danger rounded-circle" data-title="Erreur de saisie" data-trigger="focus" data-container="body" data-toggle="popover" data-placement="top"
-												data-content="
-												{% for error in form.commercialTwitterAddress.vars.errors %}
-													-{{ error.messagePluralization is null
-													? error.messageTemplate|trans(error.messageParameters, 'validators')
-													: error.messageTemplate|transchoice(error.messagePluralization, error.messageParameters, 'validators')
-													}}
-													<br>
-												{% endfor %}
-												">
-											<i class="fas fa-exclamation-circle"></i>
-										</button>
-									</div>
-								{% else %}
-									<div class="col-lg-1 mx-auto pl-0"></div>
-								{% endif %}
-							</div>
-						</div>
-						<div class="col-lg-6 mx-auto form-right">
-							<div class="row my-form-field {% if form.email.vars.errors|length > 0 %}my-form-error-container{% endif %}">
-								<div class="col-lg-4 mx-auto">
-									{{ form_label(form.email, null, {'label_attr': {'class': 'my-form-label'}}) }}
-								</div>
-								<div class="col-lg-7 mx-auto">
-									{{ form_widget(form.email, {'attr': {'class': 'form-control my-form-input-big'}}) }}
-								</div>
-								{% if form.email.vars.errors|length > 0 %}
-									<div class="col-lg-1 mx-auto pl-0">
-										<button type="button" style="padding: 3px 6px;" class="btn btn-danger rounded-circle" data-title="Erreur de saisie" data-trigger="focus" data-container="body" data-toggle="popover" data-placement="top"
-												data-content="
-												{% for error in form.email.vars.errors %}
-													-{{ error.messagePluralization is null
-													? error.messageTemplate|trans(error.messageParameters, 'validators')
-													: error.messageTemplate|transchoice(error.messagePluralization, error.messageParameters, 'validators')
-													}}
-													<br>
-												{% endfor %}
-												">
-											<i class="fas fa-exclamation-circle"></i>
-										</button>
-									</div>
-								{% else %}
-									<div class="col-lg-1 mx-auto pl-0"></div>
-								{% endif %}
-							</div>
-							<div class="row my-form-field">
-								<div class="col-lg-4 mx-auto">
-									{{ form_label(form.plainPassword, null, {'label_attr': {'class': 'my-form-label'}}) }}
-								</div>
-								<div class="col-lg-7 mx-auto mandatory-white">
-									{{ form_widget(form.plainPassword, {'attr': {'class': 'form-control my-form-input-big input-password'}}) }}
-								</div>
-								<div class="col-lg-1 mx-auto pl-0"></div>
-							</div>
-							<div class="row space"></div>
-							<div class="row my-form-field">
-								<div class="col-lg-4 mx-auto">
-									<label class="my-form-label" for="country">Zone affectée</label>
-								</div>
-								<div class="col-lg-7 mx-auto mandatory-white">
-									<select id="country" name="country" class="form-control my-form-input-big">
-										{% if editCom.IdCompanyCountry is null %}
-											<option value="0">A définir</option>
-										{% else %}
-											<option value="{{editCom.IdCompanyCountry.Id}}">{{editCom.IdCompanyCountry.Label}}</option>
-										{% endif %}
-										{% for country in listCountry %}
-											<option value="{{country.Id}}">{{country.Label}}</option>
-										{% endfor %}
-									</select>
-								</div>
-								<div class="col-lg-1 mx-auto pl-0"></div>
-							</div>
-							<div class="row my-form-field">
-								<div class="col-lg-4 mx-auto">
-									{{ form_label(form.commercialJob, null, {'label_attr': {'class': 'my-form-label'}}) }}
-								</div>
-								<div class="col-lg-7 mx-auto mandatory-white">
-									{{ form_widget(form.commercialJob, {'attr': {'class': 'form-control my-form-input-big'}}) }}
-								</div>
-								{% if form.commercialJob.vars.errors|length > 0 %}
-									<div class="col-lg-1 mx-auto pl-0">
-										<button type="button" style="padding: 3px 6px;" class="btn btn-danger rounded-circle" data-title="Erreur de saisie" data-trigger="focus" data-container="body" data-toggle="popover" data-placement="top"
-												data-content="
-												{% for error in form.commercialJob.vars.errors %}
-													-{{ error.messagePluralization is null
-													? error.messageTemplate|trans(error.messageParameters, 'validators')
-													: error.messageTemplate|transchoice(error.messagePluralization, error.messageParameters, 'validators')
-													}}
-													<br>
-												{% endfor %}
-												">
-											<i class="fas fa-exclamation-circle"></i>
-										</button>
-									</div>
-								{% else %}
-									<div class="col-lg-1 mx-auto pl-0"></div>
-								{% endif %}
-							</div>
-							{% if listHierarchy is defined %}
-							<div class="row my-form-field">
-								<div class="col-lg-4 mx-auto">
-									<label class="my-form-label" for="hierarchy">Responsable N+1</label>
-								</div>
-								<div class="col-lg-7 mx-auto mandatory-white">
-									<select id="hierarchy" name="hierarchy" class="form-control my-form-input-big">
-										{% if editCom.Hierarchy is null %}
-											<option value="0">A définir</option>
-										{% else %}
-											<option value="{{editCom.Hierarchy}}">
-											{% if responsableN1.CommercialProfil == 'ROLE_DIRECTEUR' %}
-												{% set hierarchyName = 'Directeur' %}
-											{% elseif responsableN1.CommercialProfil == 'ROLE_RESPONSABLE' %}
-												{% set hierarchyName = 'Responsable' %}
-											{% endif %}
-											{{hierarchyName}}
-											{{responsableN1.CommercialFirstName}} {{responsableN1.CommercialName}}</option>
-										{% endif %}
-										{% for hierarchy in listHierarchy %}
-										<option value="{{hierarchy.Id}}">
-											{% if hierarchy.CommercialProfil == 'ROLE_DIRECTEUR' %}
-												{% set hierarchyName = 'Directeur' %}
-											{% elseif hierarchy.CommercialProfil == 'ROLE_RESPONSABLE' %}
-												{% set hierarchyName = 'Responsable' %}
-											{% endif %}
-											{{hierarchyName}}
-											{{hierarchy.CommercialFirstName}} {{hierarchy.CommercialName}}
-										</option>
-										{% endfor %}
-									</select>
-								</div>
-								<div class="col-lg-1 mx-auto pl-0"></div>
-							</div>
-							{% endif %}
-							<div class="row my-form-field">
-								<div class="col-lg-4 mx-auto">
-									{{ form_label(form.commercialMobilePhone, null, {'label_attr': {'class': 'my-form-label'}}) }}
-								</div>
-								<div class="col-lg-7 mx-auto mandatory-white">
-									{{ form_widget(form.commercialMobilePhone, {'attr': {'class': 'form-control my-form-input-big input-telmobile'}}) }}
-								</div>
-								{% if form.commercialMobilePhone.vars.errors|length > 0 %}
-									<div class="col-lg-1 mx-auto pl-0">
-										<button type="button" style="padding: 3px 6px;" class="btn btn-danger rounded-circle" data-title="Erreur de saisie" data-trigger="focus" data-container="body" data-toggle="popover" data-placement="top"
-												data-content="
-												{% for error in form.commercialMobilePhone.vars.errors %}
-													-{{ error.messagePluralization is null
-													? error.messageTemplate|trans(error.messageParameters, 'validators')
-													: error.messageTemplate|transchoice(error.messagePluralization, error.messageParameters, 'validators')
-													}}
-													<br>
-												{% endfor %}
-												">
-											<i class="fas fa-exclamation-circle"></i>
-										</button>
-									</div>
-								{% else %}
-									<div class="col-lg-1 mx-auto pl-0"></div>
-								{% endif %}
-							</div>
-							<div class="row my-form-field">
-								<div class="col-lg-4 mx-auto">
-									{{ form_label(form.commercialPhone, null, {'label_attr': {'class': 'my-form-label'}}) }}
-								</div>
-								<div class="col-lg-7 mx-auto mandatory-white">
-									{{ form_widget(form.commercialPhone, {'attr': {'class': 'form-control my-form-input-big input-tel'}}) }}
-								</div>
-								{% if form.commercialPhone.vars.errors|length > 0 %}
-								<div class="col-lg-1 mx-auto pl-0">
-									<button type="button" style="padding: 3px 6px;" class="btn btn-danger rounded-circle" data-title="Erreur de saisie" data-trigger="focus" data-container="body" data-toggle="popover" data-placement="top"
-											data-content="
-											{% for error in form.commercialPhone.vars.errors %}
-												-{{ error.messagePluralization is null
-												? error.messageTemplate|trans(error.messageParameters, 'validators')
-												: error.messageTemplate|transchoice(error.messagePluralization, error.messageParameters, 'validators')
-												}}
-												<br>
-											{% endfor %}
-                                    		">
-										<i class="fas fa-exclamation-circle"></i>
-									</button>
-								</div>
-								{% else %}
-									<div class="col-lg-1 mx-auto pl-0"></div>
-								{% endif %}
-							</div>
-							<div class="row my-form-field my-form-input-fat-container">
-								<div class="col-lg-4 mx-auto">
-									{{ form_label(form.remarks, null, {'label_attr': {'class': 'my-form-label'}}) }}
-								</div>
-								<div class="col-lg-7 mx-auto mandatory-white">
-									{{ form_widget(form.remarks, {'attr': {'class': 'form-control my-form-input-fat'}}) }}
-								</div>
-								{% if form.remarks.vars.errors|length > 0 %}
-									<div class="col-lg-1 mx-auto pl-0">
-										<button type="button" style="padding: 3px 6px;" class="btn btn-danger rounded-circle" data-title="Erreur de saisie" data-trigger="focus" data-container="body" data-toggle="popover" data-placement="top"
-												data-content="
-												{% for error in form.remarks.vars.errors %}
-													-{{ error.messagePluralization is null
-													? error.messageTemplate|trans(error.messageParameters, 'validators')
-													: error.messageTemplate|transchoice(error.messagePluralization, error.messageParameters, 'validators')
-													}}
-													<br>
-												{% endfor %}
-												">
-											<i class="fas fa-exclamation-circle"></i>
-										</button>
-									</div>
-								{% else %}
-									<div class="col-lg-1 mx-auto pl-0"></div>
-								{% endif %}
-							</div>
-						</div>
-					</div>
-					<div class="row form-buttons form-buttons-large">
-			            <button class="btn btn-white-red return-button" type="button">
-			               <a href="{{ path('deleteCommercial', {'id':editCom.Id}) }}">SUPPRIMER</a>
-			            </button>
-			            <button class="btn btn-white-red return-button button-large" type="button">
-			               <a href="#">DEMANDE DE MISE A JOUR</a>
-			            </button>
-						{{ form_widget(form.save, {'attr': {'class': 'btn btn-red submit-button'}}) }}
-					</div>
-				{{ form_end(form) }}
-			</section>
+                        {# {{ form_label(form.departureDate) }} #}
+                        {{ form_widget(form.departureDate, {'attr': {'class': 'my-form-input-tiny'}}) }}
+                      </div>
+                      {% if form.arrivalDate.vars.errors|length > 0 or form.departureDate.vars.errors|length > 0 %}
+                        <div class="col-lg-1 mx-auto pl-0">
+                          <button type="button" style="padding: 3px 6px;" class="btn btn-danger rounded-circle" data-title="Erreur de saisie" data-trigger="focus" data-container="body" data-toggle="popover" data-placement="top"
+                              data-content="
+                              {% for error in form.departureDate.vars.errors  %}
+                                -{{ error.messagePluralization is null
+                                ? error.messageTemplate|trans(error.messageParameters, 'validators')
+                                : error.messageTemplate|transchoice(error.messagePluralization, error.messageParameters, 'validators')
+                                }}
+                                <br>
+                              {% endfor %}
+                              ">
+                            <i class="fas fa-exclamation-circle"></i>
+                          </button>
+                        </div>
+                      {% else %}
+                        <div class="col-lg-1 mx-auto pl-0"></div>
+                      {% endif %}
+                    </div><br><br>
+                    <div class="row my-form-field">
+                      <div class="col-lg-4 mx-auto">
+                        {{ form_label(form.commercialLinkedinAddress, null, {'label_attr': {'class': 'my-form-label'}}) }}
+                      </div>
+                      <div class="col-lg-7 mx-auto mandatory-white">
+                        {{ form_widget(form.commercialLinkedinAddress, {'attr': {'class': 'form-control my-form-input-big input-linkedin'}}) }}
+                      </div>
+                      {% if form.commercialLinkedinAddress.vars.errors|length > 0 %}
+                        <div class="col-lg-1 mx-auto pl-0">
+                          <button type="button" style="padding: 3px 6px;" class="btn btn-danger rounded-circle" data-title="Erreur de saisie" data-trigger="focus" data-container="body" data-toggle="popover" data-placement="top"
+                              data-content="
+                              {% for error in form.commercialLinkedinAddress.vars.errors %}
+                                -{{ error.messagePluralization is null
+                                ? error.messageTemplate|trans(error.messageParameters, 'validators')
+                                : error.messageTemplate|transchoice(error.messagePluralization, error.messageParameters, 'validators')
+                                }}
+                                <br>
+                              {% endfor %}
+                              ">
+                            <i class="fas fa-exclamation-circle"></i>
+                          </button>
+                        </div>
+                      {% else %}
+                        <div class="col-lg-1 mx-auto pl-0"></div>
+                      {% endif %}
+                    </div>
+                    <div class="row my-form-field">
+                      <div class="col-lg-4 mx-auto">
+                        {{ form_label(form.commercialFacebookAddress, null, {'label_attr': {'class': 'my-form-label'}}) }}
+                      </div>
+                      <div class="col-lg-7 mx-auto mandatory-white">
+                        {{ form_widget(form.commercialFacebookAddress, {'attr': {'class': 'form-control my-form-input-big input-facebook'}}) }}
+                      </div>
+                      {% if form.commercialFacebookAddress.vars.errors|length > 0 %}
+                        <div class="col-lg-1 mx-auto pl-0">
+                          <button type="button" style="padding: 3px 6px;" class="btn btn-danger rounded-circle" data-title="Erreur de saisie" data-trigger="focus" data-container="body" data-toggle="popover" data-placement="top"
+                              data-content="
+                              {% for error in form.commercialFacebookAddress.vars.errors %}
+                                -{{ error.messagePluralization is null
+                                ? error.messageTemplate|trans(error.messageParameters, 'validators')
+                                : error.messageTemplate|transchoice(error.messagePluralization, error.messageParameters, 'validators')
+                                }}
+                                <br>
+                              {% endfor %}
+                              ">
+                            <i class="fas fa-exclamation-circle"></i>
+                          </button>
+                        </div>
+                      {% else %}
+                        <div class="col-lg-1 mx-auto pl-0"></div>
+                      {% endif %}
+                    </div>
+                    <div class="row my-form-field">
+                      <div class="col-lg-4 mx-auto">
+                        {{ form_label(form.commercialTwitterAddress, null, {'label_attr': {'class': 'my-form-label'}}) }}
+                      </div>
+                      <div class="col-lg-7 mx-auto mandatory-white">
+                        {{ form_widget(form.commercialTwitterAddress, {'attr': {'class': 'form-control my-form-input-big input-twitter'}}) }}
+                      </div>
+                      {% if form.commercialTwitterAddress.vars.errors|length > 0 %}
+                        <div class="col-lg-1 mx-auto pl-0">
+                          <button type="button" style="padding: 3px 6px;" class="btn btn-danger rounded-circle" data-title="Erreur de saisie" data-trigger="focus" data-container="body" data-toggle="popover" data-placement="top"
+                              data-content="
+                              {% for error in form.commercialTwitterAddress.vars.errors %}
+                                -{{ error.messagePluralization is null
+                                ? error.messageTemplate|trans(error.messageParameters, 'validators')
+                                : error.messageTemplate|transchoice(error.messagePluralization, error.messageParameters, 'validators')
+                                }}
+                                <br>
+                              {% endfor %}
+                              ">
+                            <i class="fas fa-exclamation-circle"></i>
+                          </button>
+                        </div>
+                      {% else %}
+                        <div class="col-lg-1 mx-auto pl-0"></div>
+                      {% endif %}
+                    </div>
+                  </div>
+                  <div class="col-lg-6 mx-auto form-right">
+                    <div class="row my-form-field {% if form.email.vars.errors|length > 0 %}my-form-error-container{% endif %}">
+                      <div class="col-lg-4 mx-auto">
+                        {{ form_label(form.email, null, {'label_attr': {'class': 'my-form-label'}}) }}
+                      </div>
+                      <div class="col-lg-7 mx-auto">
+                        {{ form_widget(form.email, {'attr': {'class': 'form-control my-form-input-big'}}) }}
+                      </div>
+                      {% if form.email.vars.errors|length > 0 %}
+                        <div class="col-lg-1 mx-auto pl-0">
+                          <button type="button" style="padding: 3px 6px;" class="btn btn-danger rounded-circle" data-title="Erreur de saisie" data-trigger="focus" data-container="body" data-toggle="popover" data-placement="top"
+                              data-content="
+                              {% for error in form.email.vars.errors %}
+                                -{{ error.messagePluralization is null
+                                ? error.messageTemplate|trans(error.messageParameters, 'validators')
+                                : error.messageTemplate|transchoice(error.messagePluralization, error.messageParameters, 'validators')
+                                }}
+                                <br>
+                              {% endfor %}
+                              ">
+                            <i class="fas fa-exclamation-circle"></i>
+                          </button>
+                        </div>
+                      {% else %}
+                        <div class="col-lg-1 mx-auto pl-0"></div>
+                      {% endif %}
+                    </div>
+                    <div class="row my-form-field">
+                      <div class="col-lg-4 mx-auto">
+                        {{ form_label(form.plainPassword, null, {'label_attr': {'class': 'my-form-label'}}) }}
+                      </div>
+                      <div class="col-lg-7 mx-auto mandatory-white">
+                        {{ form_widget(form.plainPassword, {'attr': {'class': 'form-control my-form-input-big input-password'}}) }}
+                      </div>
+                      <div class="col-lg-1 mx-auto pl-0"></div>
+                    </div>
+                    <div class="row space"></div>
+                    <div class="row my-form-field">
+                      <div class="col-lg-4 mx-auto">
+                        <label class="my-form-label" for="country">Zone affectée</label>
+                      </div>
+                      <div class="col-lg-7 mx-auto mandatory-white">
+                        <select id="country" name="country" class="form-control my-form-input-big">
+                          {% if editCom.IdCompanyCountry is null %}
+                            <option value="0">A définir</option>
+                          {% else %}
+                            <option value="{{editCom.IdCompanyCountry.Id}}">{{editCom.IdCompanyCountry.Label}}</option>
+                          {% endif %}
+                          {% for country in listCountry %}
+                            <option value="{{country.Id}}">{{country.Label}}</option>
+                          {% endfor %}
+                        </select>
+                      </div>
+                      <div class="col-lg-1 mx-auto pl-0"></div>
+                    </div>
+                    <div class="row my-form-field">
+                      <div class="col-lg-4 mx-auto">
+                        {{ form_label(form.commercialJob, null, {'label_attr': {'class': 'my-form-label'}}) }}
+                      </div>
+                      <div class="col-lg-7 mx-auto mandatory-white">
+                        {{ form_widget(form.commercialJob, {'attr': {'class': 'form-control my-form-input-big'}}) }}
+                      </div>
+                      {% if form.commercialJob.vars.errors|length > 0 %}
+                        <div class="col-lg-1 mx-auto pl-0">
+                          <button type="button" style="padding: 3px 6px;" class="btn btn-danger rounded-circle" data-title="Erreur de saisie" data-trigger="focus" data-container="body" data-toggle="popover" data-placement="top"
+                              data-content="
+                              {% for error in form.commercialJob.vars.errors %}
+                                -{{ error.messagePluralization is null
+                                ? error.messageTemplate|trans(error.messageParameters, 'validators')
+                                : error.messageTemplate|transchoice(error.messagePluralization, error.messageParameters, 'validators')
+                                }}
+                                <br>
+                              {% endfor %}
+                              ">
+                            <i class="fas fa-exclamation-circle"></i>
+                          </button>
+                        </div>
+                      {% else %}
+                        <div class="col-lg-1 mx-auto pl-0"></div>
+                      {% endif %}
+                    </div>
+                    {% if listHierarchy is defined %}
+                    <div class="row my-form-field">
+                      <div class="col-lg-4 mx-auto">
+                        <label class="my-form-label" for="hierarchy">Responsable N+1</label>
+                      </div>
+                      <div class="col-lg-7 mx-auto mandatory-white">
+                        <select id="hierarchy" name="hierarchy" class="form-control my-form-input-big">
+                          {% if editCom.Hierarchy is null %}
+                            <option value="0">A définir</option>
+                          {% else %}
+                            <option value="{{editCom.Hierarchy}}">
+                            {% if responsableN1.CommercialProfil == 'ROLE_DIRECTEUR' %}
+                              {% set hierarchyName = 'Directeur' %}
+                            {% elseif responsableN1.CommercialProfil == 'ROLE_RESPONSABLE' %}
+                              {% set hierarchyName = 'Responsable' %}
+                            {% endif %}
+                            {{hierarchyName}}
+                            {{responsableN1.CommercialFirstName}} {{responsableN1.CommercialName}}</option>
+                          {% endif %}
+                          {% for hierarchy in listHierarchy %}
+                          <option value="{{hierarchy.Id}}">
+                            {% if hierarchy.CommercialProfil == 'ROLE_DIRECTEUR' %}
+                              {% set hierarchyName = 'Directeur' %}
+                            {% elseif hierarchy.CommercialProfil == 'ROLE_RESPONSABLE' %}
+                              {% set hierarchyName = 'Responsable' %}
+                            {% endif %}
+                            {{hierarchyName}}
+                            {{hierarchy.CommercialFirstName}} {{hierarchy.CommercialName}}
+                          </option>
+                          {% endfor %}
+                        </select>
+                      </div>
+                      <div class="col-lg-1 mx-auto pl-0"></div>
+                    </div>
+                    {% endif %}
+                    <div class="row my-form-field">
+                      <div class="col-lg-4 mx-auto">
+                        {{ form_label(form.commercialMobilePhone, null, {'label_attr': {'class': 'my-form-label'}}) }}
+                      </div>
+                      <div class="col-lg-7 mx-auto mandatory-white">
+                        {{ form_widget(form.commercialMobilePhone, {'attr': {'class': 'form-control my-form-input-big input-telmobile'}}) }}
+                      </div>
+                      {% if form.commercialMobilePhone.vars.errors|length > 0 %}
+                        <div class="col-lg-1 mx-auto pl-0">
+                          <button type="button" style="padding: 3px 6px;" class="btn btn-danger rounded-circle" data-title="Erreur de saisie" data-trigger="focus" data-container="body" data-toggle="popover" data-placement="top"
+                              data-content="
+                              {% for error in form.commercialMobilePhone.vars.errors %}
+                                -{{ error.messagePluralization is null
+                                ? error.messageTemplate|trans(error.messageParameters, 'validators')
+                                : error.messageTemplate|transchoice(error.messagePluralization, error.messageParameters, 'validators')
+                                }}
+                                <br>
+                              {% endfor %}
+                              ">
+                            <i class="fas fa-exclamation-circle"></i>
+                          </button>
+                        </div>
+                      {% else %}
+                        <div class="col-lg-1 mx-auto pl-0"></div>
+                      {% endif %}
+                    </div>
+                    <div class="row my-form-field">
+                      <div class="col-lg-4 mx-auto">
+                        {{ form_label(form.commercialPhone, null, {'label_attr': {'class': 'my-form-label'}}) }}
+                      </div>
+                      <div class="col-lg-7 mx-auto mandatory-white">
+                        {{ form_widget(form.commercialPhone, {'attr': {'class': 'form-control my-form-input-big input-tel'}}) }}
+                      </div>
+                      {% if form.commercialPhone.vars.errors|length > 0 %}
+                      <div class="col-lg-1 mx-auto pl-0">
+                        <button type="button" style="padding: 3px 6px;" class="btn btn-danger rounded-circle" data-title="Erreur de saisie" data-trigger="focus" data-container="body" data-toggle="popover" data-placement="top"
+                            data-content="
+                            {% for error in form.commercialPhone.vars.errors %}
+                              -{{ error.messagePluralization is null
+                              ? error.messageTemplate|trans(error.messageParameters, 'validators')
+                              : error.messageTemplate|transchoice(error.messagePluralization, error.messageParameters, 'validators')
+                              }}
+                              <br>
+                            {% endfor %}
+                                              ">
+                          <i class="fas fa-exclamation-circle"></i>
+                        </button>
+                      </div>
+                      {% else %}
+                        <div class="col-lg-1 mx-auto pl-0"></div>
+                      {% endif %}
+                    </div>
+                    <div class="row my-form-field my-form-input-fat-container">
+                      <div class="col-lg-4 mx-auto">
+                        {{ form_label(form.remarks, null, {'label_attr': {'class': 'my-form-label'}}) }}
+                      </div>
+                      <div class="col-lg-7 mx-auto mandatory-white">
+                        {{ form_widget(form.remarks, {'attr': {'class': 'form-control my-form-input-fat'}}) }}
+                      </div>
+                      {% if form.remarks.vars.errors|length > 0 %}
+                        <div class="col-lg-1 mx-auto pl-0">
+                          <button type="button" style="padding: 3px 6px;" class="btn btn-danger rounded-circle" data-title="Erreur de saisie" data-trigger="focus" data-container="body" data-toggle="popover" data-placement="top"
+                              data-content="
+                              {% for error in form.remarks.vars.errors %}
+                                -{{ error.messagePluralization is null
+                                ? error.messageTemplate|trans(error.messageParameters, 'validators')
+                                : error.messageTemplate|transchoice(error.messagePluralization, error.messageParameters, 'validators')
+                                }}
+                                <br>
+                              {% endfor %}
+                              ">
+                            <i class="fas fa-exclamation-circle"></i>
+                          </button>
+                        </div>
+                      {% else %}
+                        <div class="col-lg-1 mx-auto pl-0"></div>
+                      {% endif %}
+                    </div>
+                  </div>
+                </div>
+                <div class="row form-buttons form-buttons-large">
+                        <button class="btn btn-white-red return-button" type="button">
+                           <a href="{{ path('deleteCommercial', {'id':editCom.Id}) }}">SUPPRIMER</a>
+                        </button>
+                        <button class="btn btn-white-red return-button button-large" type="button">
+                           <a href="#">DEMANDE DE MISE A JOUR</a>
+                        </button>
+                  {{ form_widget(form.save, {'attr': {'class': 'btn btn-red submit-button'}}) }}
+                </div>
+              {{ form_end(form) }}
+              
+            </section>
 
-			<section id="company" class="tab-panel">
-				<h2>Entreprises</h2>
-				<div class="table-responsive">
-					<table id="table" class="table sortable-table">
-						<thead>
-							<tr>
-								<th style="width: 220px;" class="sortable" data-field="nom">Nom</th>
-								<th style="width: 220px;" class="sortable" data-field="activite">Activité</th>
-								<th style="width: 220px;" class="sortable" data-field="cp">CP</th>
-								<th style="width: 220px;" class="sortable" data-field="ville">Ville</th>
-								<th style="width: 900px;" class="sortable" data-field="responsable">Responsable du compte</th>
-								<th style="width: 220px;" class="sortable" data-field="statut">Statut</th>
-								<th style="width: 220px;" class="sortable" data-field="contact">Contacts</th>
-								<th style="width: 60px;text-align: center;" class="table-field-other no-sortable" data-field="autre">&bull;&bull;&bull;</th>
-							</tr>
-						</thead>
-						<tbody id="myTableBody">
-							{% for company in listCompany %}
-							<tr>
-								<td>
-									{% if company.CompanyLogo is not null %}
-                  <img src="{{asset('build/images/' ~ company.CompanyLogo)}}" class="table-img-profile rounded-circle" title="Photo" alt="Aucun logo">
-                  {% else %}
-                  <img src="{{asset('build/Photo.png')}}" class="table-img-profile rounded-circle" title="Photo" alt="Logo de l'entreprise">
-                  {% endif %}
-									<a href="{{ path('editCompany', {'id':company.Id}) }}">{{company.CompanyLastName}}</a>
-								</td>
-								<td>
-									{% if company.idCompanyCodeNAF is not null %}
-										<a href="{{ path('editCompany', {'id':company.id}) }}">	{{company.idCompanyCodeNAF.Label}}</a>
-									{% else %}
-										<a href="{{ path('editCompany', {'id':company.id}) }}"></a>
-									{% endif %}
-								</td>
-								
-								<td>
-									<a href="{{ path('editCompany', {'id':company.Id}) }}">{{company.CompanyPostalCode}}</a>
-								</td>
-								<td>
-									<a href="{{ path('editCompany', {'id':company.Id}) }}">{{company.CompanyCity}}</a>
-								</td>
-								<td>
-									<a href="{{ path('editCompany', {'id':company.Id}) }}">Dylan Noally</a>
-								</td>
-								<td>
-									<div class="badge badge-pill badge-green">
-										<a href="{{ path('editCompany', {'id':company.Id}) }}">Client</a>
-									</div>
-								</td>
-								<td>
-									<div class="company-nbContact">
-										<a href="{{ path('editCompany', {'id':company.Id}) }}">0</a>
-									</div>
-								</td>
-								<td>
-									{% if company.CompanyAddress is not null %}
-										<img src="{{asset('build/mail.png')}}" class="commercial-mail" title="{{company.CompanyAddress}}" alt="Email de l'entreprise">
-									{% endif %}
-									{% if company.CompanyStandardPhone is not null %}
-										<img src="{{asset('build/tel.png')}}" class="commercial-tel" title="{{company.CompanyStandardPhone}}" alt="Téléphone du standard">
-									{% endif %}
-								</td>
-							</tr>
-							{% else %}
-							<tr>
-							  <td colspan="8" class="text-center">Ce commercial n'est affecté à aucune entreprise</td>
-							</tr>
-							{% endfor %}
-						</tbody>
-					</table>
-				</div>
+            <section id="company" class="tab-panel">
+            
+                <h2>Entreprises</h2>
+                <div class="table-responsive">
+                    <table id="table" class="table sortable-table">
+                        <thead>
+                        <tr>
+                            <th style="width: 220px;" class="sortable" data-field="nom">Nom</th>
+                            <th style="width: 220px;" class="sortable" data-field="activite">Activité</th>
+                            <th style="width: 220px;" class="sortable" data-field="cp">CP</th>
+                            <th style="width: 220px;" class="sortable" data-field="ville">Ville</th>
+                            <th style="width: 900px;" class="sortable" data-field="responsable">Responsable du compte</th>
+                            <th style="width: 220px;" class="sortable" data-field="statut">Statut</th>
+                            <th style="width: 220px;" class="sortable" data-field="contact">Contacts</th>
+                            <th style="width: 60px;text-align: center;" class="table-field-other no-sortable" data-field="autre">&bull;&bull;&bull;</th>
+                        </tr>
+                        </thead>
+                        <tbody id="myTableBody">
+                        {% for company in listCompany %}
+                            <tr>
+                                <td>
+                                    {% if company.CompanyLogo is not null %}
+                                        <img src="{{asset('build/images/' ~ contact.ContactPhoto)}}" class="table-img-profile rounded-circle" title="Photo" alt="Aucun logo">
+                                    {% else %}
+                                        <img src="{{asset('build/Photo.png')}}" class="table-img-profile rounded-circle" title="Photo" alt="Logo de l'entreprise">
+                                    {% endif %}
+                                    <a href="{{ path('editCompany', {'id':company.Id}) }}">	{{company.CompanyLastName}}</a>
+                                </td>
+                                <td>
+                                    {% if company.idCompanyCodeNAF is not null %}
+                                        {% set activite = [] %}
+                                        {% set activite = company.idCompanyCodeNAF.label|split('(') %}
+                                        <a href="{{ path('editCompany', {'id':company.id}) }}">	{{activite[0]}}</a>
+                                    {% else %}
+                                        <a href="{{ path('editCompany', {'id':company.id}) }}"></a>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    <a href="{{ path('editCompany', {'id':company.Id}) }}">	{{company.CompanyPostalCode}}</a>
+                                </td>
+                                <td>
+                                    <a href="{{ path('editCompany', {'id':company.Id}) }}">	{{company.CompanyCity}}</a>
+                                </td>
+                                <td>
+                                    {% if company.idUser is not null %}
+                                        <a href="{{ path('editCompany', {'id':company.Id}) }}">{{company.idUser.commercialFirstname}} {{company.idUser.commercialName}}</a>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if company.idCompanyStatus.label == "Client" %}
+                                        <span class="company-status-client pl-3 pr-3 pt-1 pb-1 m-0" style="display: unset; margin: 20px;">{{ company.idCompanyStatus.label }}</span>
+                                    {% elseif company.idCompanyStatus.label == "Piste" %}
+                                        <span class="company-status-piste pl-3 pr-3 pt-1 pb-1 m-0" style="display: unset; margin: 20px;">{{ company.idCompanyStatus.label }}</span>
+                                    {% else %}
+                                        <span class="company-status-prospect pl-3 pr-3 pt-1 pb-1 m-0" style="display: unset; margin: 20px;">{{ company.idCompanyStatus.label }}</span>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    <div class="company-nbContact">
+                                        <a href="{{ path('editCompany', {'id':company.id}) }}">{{nbContactListCompany[company.id]}}</a>
+                                    </div>
+                                </td>
+                                <td>
+                                    {% if company.CompanyAddress is not null %}
+                                        <img src="{{asset('build/mail.png')}}" class="commercial-mail" title="{{company.CompanyEmail}}" alt="Email de l'entreprise">
+                                    {% endif %}
+                                    {% if company.CompanyStandardPhone is not null %}
+                                        <img src="{{asset('build/tel.png')}}" class="commercial-tel" title="{{company.CompanyStandardPhone}}" alt="Téléphone du standard">
+                                    {% endif %}
+                                </td>
+                        {% else %}
+                            </tr>
+                                <td colspan="8" class="text-center">Ce commercial n'est affecté à aucune entreprise</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
 
-				{% if listCompany|length != 0 %}
-				<div class="table-after">
-					<div class="row">
-						<div class="table-after-entry">
-							<select id="table-nb-entry" class="table-nb-entry unset-outline">
-								<option value="5">5</option>
-								<option value="10">10</option>
-								<option value="15">15</option>
-								<option value="20">20</option>
-								<option value="25">25</option>
-							</select>
-						</div>
-						<div class="table-after-pagination">
-				           <ul class="pagination pagination-lg pager" id="myPager"></ul>
-				        </div>
-					</div>
-				</div>
-				{% endif %}
-			</section>
+                {% if listCompany|length != 0 %}
+                    <div class="table-after">
+                        <div class="row">
+                            <div class="table-after-entry">
+                                <select id="table-nb-entry" class="table-nb-entry unset-outline">
+                                    <option value="5">5</option>
+                                    <option value="10">10</option>
+                                    <option value="15">15</option>
+                                    <option value="20">20</option>
+                                    <option value="25">25</option>
+                                </select>
+                            </div>
+                            <div class="table-after-pagination">
+                                <ul class="pagination pagination-lg pager" id="myPager"></ul>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+                
+            </section>
 
-			<section id="contact" class="tab-panel">
-				<h2>Contacts</h2>
-				<div class="table-responsive">
-					<table id="table" class="table sortable-table">
-						<thead>
-							<tr>
-								<th style="width: 220px;" class="sortable" data-field="prenom">Prénom</th>
-								<th style="width: 220px;" class="sortable" data-field="nom">Nom</th>
-								<th style="width: 220px;" class="sortable" data-field="entreprise">Entreprise</th>
-								<th style="width: 220px;" class="sortable" data-field="fonction">Fonction</th>
-								<th style="width: 220px;" class="sortable" data-field="cp">CP</th>
-								<th style="width: 220px;" class="sortable" data-field="vile">Ville</th>
-								<th style="width: 220px;" class="sortable" data-field="contact">Statut</th>
-								<th style="width: 60px;text-align: center;" class="table-field-other no-sortable" data-field="autre">&bull;&bull;&bull;</th>
-							</tr>
-						</thead>
-						<tbody id="myTableBody">
-							{% for contact in listContact %}
-							<tr>
-								<td style="width: 140px">
-									{% if contact.ContactPhoto is not null %}
-									<img src="{{asset('build/images/' ~ contact.ContactPhoto)}}" class="table-img-profile rounded-circle" title="Photo" alt="Logo de l'entreprise">
-									{% else %}
-									<img src="{{asset('build/Photo.png')}}" class="table-img-profile2 rounded-circle" title="Photo" alt="Aucun logo">
-									{% endif %}
-									<a href="{{ path('editContact', {'id':contact.Id}) }}">	{{contact.ContactFirstName}}</a>
-								</td>
-								<td>
-									<a href="{{ path('editContact', {'id':contact.Id}) }}">	{{contact.contactLastName}}</a>
-								</td>
-								<td>
-									{% if contact.idCompany is not null %}
-									<a href="{{ path('editContact', {'id':contact.Id}) }}">	{{contact.idCompany.CompanyLastName}}</a>
-									{% else %}
-										<a href="{{ path('editContact', {'id':contact.Id}) }}"></a>
-									{% endif %}
-								</td>
-								<td>
-									{% if contact.idContactJob is not null %}
-									<a href="{{ path('editContact', {'id':contact.Id}) }}">	{{contact.idContactJob.contactJobName}}</a>
-									{% else %}
-									<a href="{{ path('editContact', {'id':contact.Id}) }}"></a>
-									{% endif %}
-								</td>
-								<td>
-									{% if contact.idCompany is not null %}
-									<a href="{{ path('editContact', {'id':contact.Id}) }}">	{{contact.idCompany.CompanyPostalCode}}</a>
-									{% else %}
-										<a href="{{ path('editContact', {'id':contact.Id}) }}"></a>
-									{% endif %}
-								</td>
-								<td>
-									{% if contact.idCompany is not null %}
-									<a href="{{ path('editContact', {'id':contact.Id}) }}">	{{contact.idCompany.CompanyCity}}</a>
-									{% else %}
-										<a href="{{ path('editContact', {'id':contact.Id}) }}"></a>
-									{% endif %}
-								</td>
-								<td>
-									{% if contact.contactStatus == "0" %}
-									<img src="{{asset('build/rouge.png')}}" class="table-img-profile3 rounded-circle" title="Rouge" alt="Statut rouge">
-									<a href="{{ path('editContact', {'id':contact.Id}) }}">Obsolète</a>
-									{% elseif contact.contactStatus == "1" %}
-									<img src="{{asset('build/vert.png')}}" class="table-img-profile3 rounded-circle" title="Vert" alt="Statut vert">
-									<a href="{{ path('editContact', {'id':contact.Id}) }}">à jour</a>
-									{% else %}
-									<img src="{{asset('build/orange.png')}}" class="table-img-profile3 rounded-circle" title="Orange" alt="Statut orange">
-									<a href="{{ path('editContact', {'id':contact.Id}) }}">à vérifier</a>
-									{% endif %}
-							   </td>
-								<td>
-									{% if contact.contactEmail is not null %}
-										<img src="{{asset('build/mail.png')}}" class="commercial-mail" title="{{contact.contactEmail}}" alt="Email du contact">
-									{% endif %}
-									{% if contact.contactMobilePhone is not null %}
-										<img src="{{asset('build/tel.png')}}" class="commercial-tel" title="{{contact.contactMobilePhone}}" alt="Tél. fixe direct du contact">
-									{% endif %}
-								</td>
-							</tr>
-							{% else %}
-							<tr>
-							  <td colspan="8" class="text-center">Ce commercial ne possède aucun contact</td>
-							</tr>
-							{% endfor %}
-						</tbody>
-					</table>
-				</div>
+            <section id="contact" class="tab-panel">
+            
+              <h2>Contacts</h2>
+              <div class="table-responsive">
+                <table id="table" class="table sortable-table">
+                  <thead>
+                    <tr>
+                      <th style="width: 220px;" class="sortable" data-field="prenom">Prénom</th>
+                      <th style="width: 220px;" class="sortable" data-field="nom">Nom</th>
+                      <th style="width: 220px;" class="sortable" data-field="entreprise">Entreprise</th>
+                      <th style="width: 220px;" class="sortable" data-field="fonction">Fonction</th>
+                      <th style="width: 220px;" class="sortable" data-field="cp">CP</th>
+                      <th style="width: 220px;" class="sortable" data-field="vile">Ville</th>
+                      <th style="width: 220px;" class="sortable" data-field="contact">Statut</th>
+                      <th style="width: 60px;text-align: center;" class="table-field-other no-sortable" data-field="autre">&bull;&bull;&bull;</th>
+                    </tr>
+                  </thead>
+                  <tbody id="myTableBody">
+                    {% for contact in listContact %}
+                    <tr>
+                      <td style="width: 140px">
+                        {% if contact.ContactPhoto is not null %}
+                        <img src="{{asset('build/images/' ~ contact.ContactPhoto)}}" class="table-img-profile rounded-circle" title="Photo" alt="Logo de l'entreprise">
+                        {% else %}
+                        <img src="{{asset('build/Photo.png')}}" class="table-img-profile2 rounded-circle" title="Photo" alt="Aucun logo">
+                        {% endif %}
+                        <a href="{{ path('editContact', {'id':contact.Id}) }}">	{{contact.ContactFirstName}}</a>
+                      </td>
+                      <td>
+                        <a href="{{ path('editContact', {'id':contact.Id}) }}">	{{contact.contactLastName}}</a>
+                      </td>
+                      <td>
+                        {% if contact.idCompany is not null %}
+                        <a href="{{ path('editContact', {'id':contact.Id}) }}">	{{contact.idCompany.CompanyLastName}}</a>
+                        {% else %}
+                          <a href="{{ path('editContact', {'id':contact.Id}) }}"></a>
+                        {% endif %}
+                      </td>
+                      <td>
+                        {% if contact.idContactJob is not null %}
+                        <a href="{{ path('editContact', {'id':contact.Id}) }}">	{{contact.idContactJob.contactJobName}}</a>
+                        {% else %}
+                        <a href="{{ path('editContact', {'id':contact.Id}) }}"></a>
+                        {% endif %}
+                      </td>
+                      <td>
+                        {% if contact.idCompany is not null %}
+                        <a href="{{ path('editContact', {'id':contact.Id}) }}">	{{contact.idCompany.CompanyPostalCode}}</a>
+                        {% else %}
+                          <a href="{{ path('editContact', {'id':contact.Id}) }}"></a>
+                        {% endif %}
+                      </td>
+                      <td>
+                        {% if contact.idCompany is not null %}
+                        <a href="{{ path('editContact', {'id':contact.Id}) }}">	{{contact.idCompany.CompanyCity}}</a>
+                        {% else %}
+                          <a href="{{ path('editContact', {'id':contact.Id}) }}"></a>
+                        {% endif %}
+                      </td>
+                      <td>
+                        {% if contact.contactStatus == "0" %}
+                        <img src="{{asset('build/rouge.png')}}" class="table-img-profile3 rounded-circle" title="Rouge" alt="Statut rouge">
+                        <a href="{{ path('editContact', {'id':contact.Id}) }}">Obsolète</a>
+                        {% elseif contact.contactStatus == "1" %}
+                        <img src="{{asset('build/vert.png')}}" class="table-img-profile3 rounded-circle" title="Vert" alt="Statut vert">
+                        <a href="{{ path('editContact', {'id':contact.Id}) }}">à jour</a>
+                        {% else %}
+                        <img src="{{asset('build/orange.png')}}" class="table-img-profile3 rounded-circle" title="Orange" alt="Statut orange">
+                        <a href="{{ path('editContact', {'id':contact.Id}) }}">à vérifier</a>
+                        {% endif %}
+                       </td>
+                      <td>
+                        {% if contact.contactEmail is not null %}
+                          <img src="{{asset('build/mail.png')}}" class="commercial-mail" title="{{contact.contactEmail}}" alt="Email du contact">
+                        {% endif %}
+                        {% if contact.contactMobilePhone is not null %}
+                          <img src="{{asset('build/tel.png')}}" class="commercial-tel" title="{{contact.contactMobilePhone}}" alt="Tél. fixe direct du contact">
+                        {% endif %}
+                      </td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                      <td colspan="8" class="text-center">Ce commercial ne possède aucun contact</td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
 
-				{% if listContact|length != 0 %}
-				<div class="table-after">
-					<div class="row">
-						<div class="table-after-entry">
-							<select id="table-nb-entry" class="table-nb-entry unset-outline">
-								<option value="5">5</option>
-								<option value="10">10</option>
-								<option value="15">15</option>
-								<option value="20">20</option>
-								<option value="25">25</option>
-							</select>
-						</div>
-						<div class="table-after-pagination">
-				           <ul class="pagination pagination-lg pager" id="myPager"></ul>
-				        </div>
-					</div>
-				</div>
-				{% endif %}
-			</section>
+              {% if listContact|length != 0 %}
+              <div class="table-after">
+                <div class="row">
+                  <div class="table-after-entry">
+                    <select id="table-nb-entry" class="table-nb-entry unset-outline">
+                      <option value="5">5</option>
+                      <option value="10">10</option>
+                      <option value="15">15</option>
+                      <option value="20">20</option>
+                      <option value="25">25</option>
+                    </select>
+                  </div>
+                  <div class="table-after-pagination">
+                         <ul class="pagination pagination-lg pager" id="myPager"></ul>
+                      </div>
+                </div>
+              </div>
+              {% endif %}
+              
+            </section>
 
-			<section id="historic" class="tab-panel">
-			</section>
-		</div>
-	</div>
+            <section id="historic" class="tab-panel">
+            
+            </section>
+        </div>
+    </div>
 
 {% endblock %}
 
