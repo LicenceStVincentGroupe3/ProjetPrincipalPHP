@@ -54,7 +54,7 @@ class ContactType extends AbstractType
 			])
             ->add('contactComment', TextareaType::class, array('label' => 'Remarques', 'required' => false))
 
-    		->add('idUser', EntityType::class, array('class' => Commercial::class,'choice_label' => 'commercialName', 'label' => 'Commercial', 'placeholder'=>'', 'required' => false))
+    		->add('idUser', EntityType::class, array('class' => Commercial::class,'choice_label' => function($commercial) {return $commercial->getCommercialFirstName() . ' ' . $commercial->getCommercialName();}, 'label' => 'Commercial', 'placeholder'=>'', 'required' => false))
 
     		->add('idCompany', EntityType::class, array('class' => Company::class, 'choice_label' => 'CompanyLastName', 'label'=>'Entreprise', 'placeholder'=>'', 'required' => false))
 
