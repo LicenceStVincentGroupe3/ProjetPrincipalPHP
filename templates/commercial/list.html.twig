@@ -37,9 +37,9 @@
 						</td>
 						<td>
 							{% if commercial.CommercialPhoto is not null %}
-                            <img src="{{asset('build/images/' ~ commercial.CommercialPhoto)}}" class="table-img-profile rounded-circle" title="Photo" alt="Aucune photo">
+                            <img src="{{asset('build/images/' ~ commercial.CommercialPhoto)}}" class="table-img-profile2 rounded-circle" title="Photo" alt="Aucune photo">
                             {% else %}
-                            <img src="{{asset('build/Photo.png')}}" class="table-img-profile rounded-circle" title="Photo" alt="Photo de profil">
+                            <img src="{{asset('build/Photo.png')}}" class="table-img-profile2 rounded-circle" title="Photo" alt="Photo de profil">
                             {% endif %}
 							<a href="{{ path('editCommercial', {'id':commercial.Id}) }}">	{{commercial.CommercialFirstname}}
 							</a>
