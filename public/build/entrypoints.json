@@ -1,0 +1,64 @@
+{
+  "entrypoints": {
+    "app": {
+      "js": [
+        "/build/runtime.js",
+        "/build/app.js"
+      ],
+      "css": [
+        "/build/app.css"
+      ]
+    },
+    "myTemplate": {
+      "js": [
+        "/build/runtime.js",
+        "/build/myTemplate.js"
+      ],
+      "css": [
+        "/build/myTemplate.css"
+      ]
+    },
+    "login": {
+      "js": [
+        "/build/runtime.js",
+        "/build/login.js"
+      ],
+      "css": [
+        "/build/login.css"
+      ]
+    },
+    "tabs": {
+      "js": [
+        "/build/runtime.js",
+        "/build/tabs.js"
+      ],
+      "css": [
+        "/build/tabs.css"
+      ]
+    },
+    "sortable": {
+      "js": [
+        "/build/runtime.js",
+        "/build/sortable.js"
+      ],
+      "css": [
+        "/build/sortable.css"
+      ]
+    },
+    "company": {
+      "js": [
+        "/build/runtime.js",
+        "/build/company.js"
+      ],
+      "css": [
+        "/build/company.css"
+      ]
+    },
+    "dashboard": {
+      "js": [
+        "/build/runtime.js",
+        "/build/dashboard.js"
+      ]
+    }
+  }
+}
