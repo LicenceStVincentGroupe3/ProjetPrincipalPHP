@@ -566,7 +566,7 @@ class Commercial implements UserInterface, \Serializable
     {
         if (!$this->contacts->contains($contact)) {
             $this->contacts[] = $contact;
-            $contact->setIdUser($this);
+            $contact->setIdContact($this);
         }
         
         return $this;
@@ -595,8 +595,8 @@ class Commercial implements UserInterface, \Serializable
         if ($this->contacts->contains($contact)) {
             $this->contacts->removeElement($contact);
             // set the owning side to null (unless already changed)
-            if ($contact->getIdUser() === $this) {
-                $contact->setIdUser(null);
+            if ($contact->getIdContact() === $this) {
+                $contact->setIdContact(null);
             }
         }
 

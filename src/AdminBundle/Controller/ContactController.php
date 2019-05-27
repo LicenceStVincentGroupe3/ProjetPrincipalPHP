@@ -24,7 +24,10 @@ class ContactController extends AbstractController
     public function new(Request $request, UserPasswordEncoderInterface $passwordEncoder)
     {
                 $contact = new Contact();
+                $display = $this->getDoctrine()->getManager();
                 $form = $this->createForm(ContactType::class, $contact);
+                $repository = $display->getRepository(Contact::class);
+                $listContact = $repository->findAll();
 
                 // La méthode handleRequest de la class form permet de récupérer les valeurs des champs dans les imputs du formulaire //
                 $form->handleRequest($request);
@@ -60,7 +63,7 @@ class ContactController extends AbstractController
                 return $this->redirect($this->generateUrl('listCont'));
                 //return $this->render('contact/new.html.twig', array('form' => $form->createView(),));
                 }
-                return $this->render('contact/new.html.twig', array('form' => $form->createView(),));
+                return $this->render('contact/new.html.twig', array('form' => $form->createView(), 'lesContacts' => $listContact));
     }
 
     /**
@@ -71,6 +74,12 @@ class ContactController extends AbstractController
                 // Appel de Doctrine
                 $repository = $this->getDoctrine()->getManager()->getRepository(Contact::class);
                 $editContact = $repository->find($id);
+
+                $display = $this->getDoctrine()->getManager();
+
+                $repository = $display->getRepository(Contact::class);
+                $listContact = $repository->findAll();
+
                 // Equivalent du SELECT * where id=(paramètre) //
                 $form = $this->createForm(ContactType::class, $editContact);
                 $form->add('contactStatus', CheckboxType::class, array(
@@ -120,7 +129,7 @@ class ContactController extends AbstractController
 
                     return $this->redirect($this->generateUrl('listCont'));
                 }
-                return $this->render('contact/edit.html.twig', ['editContact' => $editContact, 'form' => $form->createView()]);
+                return $this->render('contact/edit.html.twig', array('form' => $form->createView(), 'lesContacts' => $listContact, 'editContact' => $editContact ));
     }
 
 

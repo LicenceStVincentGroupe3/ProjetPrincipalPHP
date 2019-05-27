@@ -30,6 +30,17 @@ class ContactRepository extends ServiceEntityRepository
         return $result;
     }
 
+    // Contact N+1
+    public function listContactN1($idComp)
+    {
+        return $this->createQueryBuilder('c')
+            ->select('c.id, c.contactLastName, c.contactFirstName')
+            ->andWhere('c.idCompany = :idComp')
+            ->setParameter('idComp', $idComp)
+            ->getQuery()
+            ->getResult();
+    }
+
     // Retourne tous les contacts d'un commercial séléctioné
     public function listContactOfCommercial($com)
     {

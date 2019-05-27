@@ -140,31 +140,28 @@
 				</div>
 
 				<!-- modal-dialog -->
-				<div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
-					<!-- modal-content -->
-					<div class="modal-dialog">
-						<div class="modal-content">
-							<div class="modal-header">
-								<h4 class="modal-title custom_align" id="Heading">Suppression</h4>
-							</div>
-							<div class="modal-body">
-								<div class="alert alert-danger">
-									<span class="glyphicon glyphicon-warning-sign"></span>
-									Êtes-vous sûr de vouloir supprimer ces données?
-								</div>
-							</div>
-							<div class="modal-footer ">
-                                <input type="submit" name="delete" id="delete" value="Oui" class="btn btn-danger">
-								<button type="button" class="btn btn-primary" data-dismiss="modal">
-									<span class="glyphicon glyphicon-remove"></span>
-									Annuler
-								</button>
-							</div>
-						</div>
-					</div>
-				</div>
-			</form>
-
+                <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Supprimer ce(s) élément(s)</h5>
+                                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                Etes-vous sûr ?
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-white-red return-button" type="button" data-dismiss="modal">
+                                    <a href="#">Annuler</a>
+                                </button>
+                                <input class="btn btn-red submit-button" type="submit" name="delete" id="delete" value="SUPPRIMER">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
 			<div class="table-after">
 				<div class="row">
 					<div class="table-after-entry">
