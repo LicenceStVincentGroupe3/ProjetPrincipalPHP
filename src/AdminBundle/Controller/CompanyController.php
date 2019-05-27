@@ -95,6 +95,8 @@ class CompanyController extends AbstractController
 
             if ($form->isSubmitted() && $form->isValid() && $request->isMethod('POST')) {
                 $edit = $form->getData();
+
+                $companyName = $edit->$CompanyLastName();
                 $companyPicture = $form['CompanyLogo']->getData();
                 $file = $companyPicture;
 
@@ -113,9 +115,10 @@ class CompanyController extends AbstractController
                         }
                     }
                     $fileName = $file->getClientOriginalName();
+                    $newFileName = $companyName.'_'.$fileName;
                     // On envoit le fichier dans le dossier images
                     try {
-                        $file->move($this->getParameter('images_directory'), $fileName);
+                        $file->move($this->getParameter('images_directory'), $newFileName);
                     } catch (FileException $e) {
                         // S'il y a un soucis pendant l'upload on catch
                     }
