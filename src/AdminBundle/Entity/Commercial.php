@@ -148,10 +148,10 @@ class Commercial implements UserInterface, \Serializable
     private $contacts;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\AdminBundle\Entity\CompanyCountry", inversedBy="commercials")
+     * @ORM\ManyToOne(targetEntity="App\AdminBundle\Entity\AffectedZone", inversedBy="commercials")
      * @ORM\JoinColumn(nullable=true)
      */
-    private $idCompanyCountry;
+    private $idAffectedZone;
 
     /**
      * @ORM\OneToMany(targetEntity="App\AdminBundle\Entity\Operations", mappedBy="author")
@@ -616,14 +616,14 @@ class Commercial implements UserInterface, \Serializable
         return $this;
     }
 
-    public function getIdCompanyCountry(): ?CompanyCountry
+    public function getIdAffectedZone(): ?AffectedZone
     {
-        return $this->idCompanyCountry;
+        return $this->idAffectedZone;
     }
 
-    public function setIdCompanyCountry(?CompanyCountry $idCompanyCountry): self
+    public function setIdAffectedZone(?AffectedZone $idAffectedZone): self
     {
-        $this->idCompanyCountry = $idCompanyCountry;
+        $this->idAffectedZone = $idAffectedZone;
 
         return $this;
     }

@@ -365,17 +365,17 @@
                     <div class="row space"></div>
                     <div class="row my-form-field">
                       <div class="col-lg-4 mx-auto">
-                        <label class="my-form-label" for="country">Zone affectée</label>
+                        <label class="my-form-label" for="zone">Zone affectée</label>
                       </div>
                       <div class="col-lg-7 mx-auto mandatory-white">
-                        <select id="country" name="country" class="form-control my-form-input-big">
-                          {% if editCom.IdCompanyCountry is null %}
+                        <select id="zone" name="zone" class="form-control my-form-input-big">
+                          {% if editCom.IdAffectedZone is null %}
                             <option value="0">A définir</option>
                           {% else %}
-                            <option value="{{editCom.IdCompanyCountry.Id}}">{{editCom.IdCompanyCountry.Label}}</option>
+                            <option value="{{editCom.IdAffectedZone.Id}}">{{editCom.IdAffectedZone.Label}}</option>
                           {% endif %}
-                          {% for country in listCountry %}
-                            <option value="{{country.Id}}">{{country.Label}}</option>
+                          {% for zone in listZone %}
+                            <option value="{{zone.Id}}">{{zone.Label}}</option>
                           {% endfor %}
                         </select>
                       </div>

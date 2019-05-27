@@ -18,7 +18,7 @@ use App\AdminBundle\Entity\Company;
 use App\AdminBundle\Entity\Contact;
 use App\AdminBundle\Entity\Commercial;
 use App\AdminBundle\Entity\Operations;
-use App\AdminBundle\Entity\CompanyCountry;
+use App\AdminBundle\Entity\AffectedZone;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Faker;
 
@@ -42,13 +42,13 @@ class CommercialController extends AbstractController
                 $new = new Commercial();
 
                 // Variable qui contient le Repository
-                $companyCountry = $display->getRepository(CompanyCountry::class);
+                $affectedZone = $display->getRepository(AffectedZone::class);
 
                 // Variable qui contient le Repository
                 $commercial = $display->getRepository(Commercial::class);
 
                 // Equivalent du SELECT *
-                $listCountry = $companyCountry->findAll();
+                $listZone = $affectedZone->findAll();
 
                 $form = $this->createForm(CommercialType::class, $new);
 
@@ -56,7 +56,7 @@ class CommercialController extends AbstractController
                 $formData = Request::createFromGlobals();
 
                 // On récupère le name de la <select>
-                $idCountrySelected = $formData->request->get('country');
+                $idZoneSelected = $formData->request->get('zone');
 
                 // Si c'est le Directeur
                 if ($this->isGranted('ROLE_DIRECTEUR')) {
@@ -120,18 +120,18 @@ class CommercialController extends AbstractController
                     }
 
                     // Si l'utilisateur n'a séléctioné aucune région
-                    if ($idCountrySelected == "0")
+                    if ($idZoneSelected == "0")
                     {
-                       $new->setIdCompanyCountry(null);
+                       $new->setIdAffectedZone(null);
                     }
                     // Sinon
                     else
                     {
                         // On récupère la région séléctionnée
-                        $companySelected = $companyCountry->find($idCountrySelected);
+                        $zoneSelected = $affectedZone->find($idZoneSelected);
 
                         // On l'attribut au commercial
-                        $new->setIdCompanyCountry($companySelected);
+                        $new->setIdAffectedZone($zoneSelected);
                     }
 
                     // Si l'utilisateur n'a séléctioné aucun responsable N+1
@@ -156,7 +156,7 @@ class CommercialController extends AbstractController
                     return $this->redirect($this->generateUrl('listCommercial'));
                 }
 
-                return $this->render('commercial/new.html.twig', ['form' => $form->createView(), 'listCountry' => $listCountry, 'listHierarchy' => $listHierarchy, 'comCode' => Faker\Factory::create('fr_FR'), 'commercialTeamLink' => true]);
+                return $this->render('commercial/new.html.twig', ['form' => $form->createView(), 'listZone' => $listZone, 'listHierarchy' => $listHierarchy, 'comCode' => Faker\Factory::create('fr_FR'), 'commercialTeamLink' => true]);
             }
             
             else {
@@ -182,7 +182,7 @@ class CommercialController extends AbstractController
                 $display = $this->getDoctrine()->getManager();
 
                 $commercialRepository = $display->getRepository(Commercial::class);
-                $companyCountry = $display->getRepository(CompanyCountry::class);
+                $affectedZone = $display->getRepository(AffectedZone::class);
                 $companyRepository = $display->getRepository(Company::class);
                 $contactRepository = $display->getRepository(Contact::class);
 
@@ -190,7 +190,7 @@ class CommercialController extends AbstractController
                 $edit = $commercialRepository->find($id);
 
                 // Equivalent du SELECT *
-                $listCountry = $companyCountry->findAll();
+                $listZone = $affectedZone->findAll();
 
                 // Appel de la fonction countCompany() du repository de la classe Company
                 $nbCompany = $companyRepository->countCompany($id);
@@ -227,7 +227,7 @@ class CommercialController extends AbstractController
                 $formData = Request::createFromGlobals();
 
                 // On récupère le name de la <select>
-                $idCountrySelected = $formData->request->get('country');
+                $idZoneSelected = $formData->request->get('zone');
 
 
                 $form->add('commercialStatus', CheckboxType::class, ['label' => 'Actif', 'required' => false]);
@@ -309,18 +309,18 @@ class CommercialController extends AbstractController
                     }
 
                     // Si l'utilisateur n'a séléctioné aucune région
-                    if ($idCountrySelected == "0")
+                    if ($idZoneSelected == "0")
                     {
-                       $edit->setIdCompanyCountry(null);
+                       $edit->setIdAffectedZone(null);
                     }
                     // Sinon
                     else
                     {
                         // On récupère la région séléctionnée
-                        $companySelected = $companyCountry->find($idCountrySelected);
+                        $zoneSelected = $affectedZone->find($idZoneSelected);
 
                         // On l'attribut au commercial
-                        $edit->setIdCompanyCountry($companySelected);
+                        $edit->setIdAffectedZone($zoneSelected);
                     }
 
                     // Si l'utilisateur n'a séléctioné aucun responsable N+1
@@ -355,7 +355,7 @@ class CommercialController extends AbstractController
                 // ----------------------------------
                 // On demande à la vue d'afficher la commande plus tous ses produits
                 // ----------------------------------
-                return $this->render('commercial/edit.html.twig', ['editCom' => $edit, 'form' => $form->createView(), 'listCountry' => $listCountry, 'listHierarchy' => $listHierarchy, 'responsableN1' => $responsableN1, 'listCompany' => $listCompany, 'nbCompany' => $nbCompany, 'listContact' => $listContact, 'nbContact' => $nbContact, 'nbContactListCompany' => $nbsContact, 'nbContactCompany' => $nbContactCompany, 'commercialTeamLink' => true]);
+                return $this->render('commercial/edit.html.twig', ['editCom' => $edit, 'form' => $form->createView(), 'listZone' => $listZone, 'listHierarchy' => $listHierarchy, 'responsableN1' => $responsableN1, 'listCompany' => $listCompany, 'nbCompany' => $nbCompany, 'listContact' => $listContact, 'nbContact' => $nbContact, 'nbContactListCompany' => $nbsContact, 'nbContactCompany' => $nbContactCompany, 'commercialTeamLink' => true]);
             }
 
             else {

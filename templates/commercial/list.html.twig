@@ -53,8 +53,8 @@
 							</a>
 						</td>
 						<td>
-							{% if commercial.IdCompanyCountry is not null %}
-							<a href="{{ path('editCommercial', {'id':commercial.Id}) }}">	{{commercial.IdCompanyCountry.Label}}
+							{% if commercial.IdAffectedZone is not null %}
+							<a href="{{ path('editCommercial', {'id':commercial.Id}) }}">	{{commercial.IdAffectedZone.Label}}
 							</a>
 							{% endif %}
 						</td>
@@ -106,7 +106,7 @@
                     </div>
                     <div class="modal-footer">
                         <button class="btn btn-white-red return-button" type="button" data-dismiss="modal">
-                            Annuler
+                            <a href="#">Annuler</a>
                         </button>
                         <input class="btn btn-red submit-button" type="submit" name="delete" id="delete" value="SUPPRIMER">
                     </div>
