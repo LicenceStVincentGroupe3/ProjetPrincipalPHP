@@ -19,7 +19,16 @@
 
 	<div class="row pb-2">
 		<div class="col-lg-6 mx-auto last-upd">
-			<span class="font-weight-bold">{{company.CompanyLastName}}</span>,{% if company.idCompanyCodeNAF is not null %}{{ company.idCompanyCodeNAF.label }}{% endif %} ({{ company.CompanyPostalCode }} {{ company.CompanyCity }})
+			<span class="font-weight-bold h5">{{company.CompanyLastName}}, </span>
+			<span class="h5">
+				{% if company.idCompanyCodeNAF is not null %}
+					{% set activite = [] %}
+					{% set activite = company.idCompanyCodeNAF.label|split('(') %}
+					{{ activite[0] }}
+				{% endif %}
+			({{ company.CompanyPostalCode }} {{ company.CompanyCity }})
+			</span>
+
 		</div>
 
 		<div class="col-lg-6 mx-auto status">
@@ -57,11 +66,13 @@
 
 		<div class="float-right">
 			{% if company.idCompanyStatus.label == "Client" %}
-			<span class="company-status-client pl-3 pr-3 pt-1 pb-1" style="display: unset; margin: 20px;">{{ company.idCompanyStatus.label }}</span>
+				<span class="company-status-client pl-3 pr-3 pt-1 pb-1" style="display: unset; margin: 20px;">{{ company.idCompanyStatus.label }}</span>
 			{% elseif company.idCompanyStatus.label == "Piste" %}
-			<span class="company-status-piste pl-3 pr-3 pt-1 pb-1" style="display: unset; margin: 20px;">{{ company.idCompanyStatus.label }}</span>
-			{% else %}
+				<span class="company-status-piste pl-3 pr-3 pt-1 pb-1" style="display: unset; margin: 20px;">{{ company.idCompanyStatus.label }}</span>
+			{% elseif company.idCompanyStatus.label == "Prospect" %}
 				<span class="company-status-prospect pl-3 pr-3 pt-1 pb-1" style="display: unset; margin: 20px;">{{ company.idCompanyStatus.label }}</span>
+			{% else %}
+				<span class="company-status-inactif pl-3 pr-3 pt-1 pb-1" style="display: unset; margin: 20px;">{{ company.idCompanyStatus.label }}</span>
 			{% endif %}
 		</div>
 		<input id="idCompany" type="hidden" value="{{ company.id }}"/>

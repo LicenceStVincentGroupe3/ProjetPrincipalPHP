@@ -1121,9 +1121,15 @@ select::-ms-expand {
     border-radius: 0px;
 }
 
-.btn-dognut {
-    border: 1px solid;
-    border-color: #a9a9a92b;
+.btn-dognut-week {
+    border: 1.5px solid;
+    border-color: #80808042;
+    background-color: transparent;
+}
+
+.btn-dognut-week-bl {
+    border-left: 0px;
+    border-color: #80808042;
 }
 
 .btn-green {
@@ -1180,4 +1186,38 @@ select::-ms-expand {
 
 .fa-opacity {
     opacity: 0.5;
+}
+
+.hr-red {
+    background:red;
+    border: 1px solid;
+    border-color: red;
+}
+
+.hr-orange {
+    background:orange;
+    border: 1px solid;
+    border-color: orange;
+}
+
+.hr-yellow {
+    background:yellow;
+    border: 1px solid;
+    border-color: yellow;
+}
+
+.hr-lightgreen {
+    background:lightgreen;
+    border: 1px solid;
+    border-color: lightgreen;
+}
+
+.hr-green {
+    background:green;
+    border: 1px solid;
+    border-color: green;
+}
+
+.small-text {
+    font-size: 85%;
 }

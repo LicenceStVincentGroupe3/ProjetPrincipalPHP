@@ -42,6 +42,16 @@
     font-weight: 600;
 }
 
+.company-status-inactif {
+    background-color: #c3bfc5;
+    border-radius: 100px;
+    text-align: center;
+    color: #ffffff !important;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+
 .company-nbContact {
     width: 30px;
     background-color: #cf1740;
@@ -49,7 +59,12 @@
 
 .company-nbContact-0{
     width: 30px;
-    background-color: #cf17405c
+    background-color: #cf17405c;
+    border-radius: 100px;
+    text-align: center;
+}
+.company-nbContact-0 a {
+    color: #ffffff !important;
 }
 
 .onglets:hover {
