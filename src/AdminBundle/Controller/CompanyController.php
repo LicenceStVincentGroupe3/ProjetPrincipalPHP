@@ -115,10 +115,9 @@ class CompanyController extends AbstractController
                         }
                     }
                     $fileName = $file->getClientOriginalName();
-                    $newFileName = $companyName.'_'.$fileName;
                     // On envoit le fichier dans le dossier images
                     try {
-                        $file->move($this->getParameter('images_directory'), $newFileName);
+                        $file->move($this->getParameter('images_directory'), $fileName);
                     } catch (FileException $e) {
                         // S'il y a un soucis pendant l'upload on catch
                     }
