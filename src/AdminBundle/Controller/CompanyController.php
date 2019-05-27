@@ -98,9 +98,21 @@ class CompanyController extends AbstractController
                 $companyPicture = $form['CompanyLogo']->getData();
                 $file = $companyPicture;
 
-                if ($file !== null) {
-                    $fileName = $file->getClientOriginalName();
+                if ($file !== null)
+                {
+                    // On vérifie si le fichier est en base
+                    if($edit->getContactPhoto() !== null)
+                    {
+                        // Variable qui contient l'ancien fichier
+                        $oldFile = $this->getParameter('images_directory').'/'.
+                            $edit->getCompanyLogo();
 
+                        // On supprime l'ancien fichier en local
+                        if (file_exists($oldFile)) {
+                            unlink($oldFile);
+                        }
+                    }
+                    $fileName = $file->getClientOriginalName();
                     // On envoit le fichier dans le dossier images
                     try {
                         $file->move($this->getParameter('images_directory'), $fileName);
