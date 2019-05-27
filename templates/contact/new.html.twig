@@ -364,12 +364,20 @@
 						</div>
 						<div class="row my-form-field">
 							<div class="col-lg-4 mx-auto">
-								{{ form_label(form.idUser, 'Responsable N+1', {'label_attr': {'class': 'my-form-label'}}) }}
+								<label class="my-form-label" for="hierarchy">Responsable N+1</label>
 							</div>
 							<div class="col-lg-7 mx-auto mandatory-white">
-								{{ form_widget(form.idUser, {'attr': {'class': 'form-control my-form-input-big'}}) }}
-
-								{{ form_errors(form.idUser, {'attr': {'class': 'form-error-message'}}) }}
+								<select id="hierarchy" name="hierarchy" class="form-control my-form-input-big">
+									{% for cont in lesContacts %}
+										{% if form.idCompany is null %}
+											<option value="0"></option>
+										{% else %}
+											<option value="{{cont.id}}">
+												{{ cont.contactLastName }} {{ cont.ContactFirstName }}
+											</option>
+										{% endif %}
+									{% endfor  %}
+								</select>
 							</div>
 							<div class="col-lg-1 mx-auto pl-0"></div>
 						</div>

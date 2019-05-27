@@ -186,10 +186,10 @@ class Contact
     private $contactOptInCommercialOffers;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\AdminBundle\Entity\Commercial", inversedBy="contacts")
-     * @ORM\JoinColumn(nullable=true)
+     * @ORM\OneToOne(targetEntity="App\AdminBundle\Entity\Contact")
+     * @ORM\JoinColumn(name="id_contact", referencedColumnName="id", nullable=true)
      */
-    private $idUser;
+    private $idContact;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\AdminBundle\Entity\Company", inversedBy="contacts")
@@ -532,14 +532,14 @@ class Contact
         return $this;
     }
 
-    public function getIdUser(): ?Commercial
+    public function getIdContact(): ?Contact
     {
-        return $this->idUser;
+        return $this->idContact;
     }
 
-    public function setIdUser(?Commercial $idUser): self
+    public function setIdContact(?Contact $idContact): self
     {
-        $this->idUser = $idUser;
+        $this->idContact = $idContact;
 
         return $this;
     }
