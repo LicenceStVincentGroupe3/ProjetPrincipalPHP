@@ -112,6 +112,7 @@ class CompanyController extends AbstractController
                 }
                 $entityManager = $this->getDoctrine()->getManager();
 
+                $edit->setCompanyDateUpdate(new \DateTime());
                 $entityManager->flush();
 
                 return $this->redirectToRoute('listCompany');
