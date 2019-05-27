@@ -107,16 +107,15 @@ class CommercialController extends AbstractController
                     if ($file !== null) 
                     {
                         $fileName = $file->getClientOriginalName();
-                        $newFileName = $commercialName.'_'.$commercialFirstName.'_'.$fileName;
 
                         // On envoit le fichier dans le dossier images
                         try {
-                            $file->move($this->getParameter('images_directory'), $newFileName);
+                            $file->move($this->getParameter('images_directory'), $fileName);
                         } catch (FileException $e) {
                             // S'il y a un soucis pendant l'upload on catch
                         }
 
-                        $new->setCommercialPhoto($newFileName);
+                        $new->setCommercialPhoto($fileName);
                     }
 
                     // Si l'utilisateur n'a séléctioné aucune région
@@ -296,16 +295,15 @@ class CommercialController extends AbstractController
                         }
 
                         $fileName = $file->getClientOriginalName();
-                        $newFileName = $commercialName.'_'.$commercialFirstName.'_'.$fileName;
 
                         // On envoit le fichier dans le dossier images
                         try {
-                            $file->move($this->getParameter('images_directory'), $newFileName);
+                            $file->move($this->getParameter('images_directory'), $fileName);
                         } catch (FileException $e) {
                             // S'il y a un soucis pendant l'upload on catch
                         }
 
-                        $edit->setCommercialPhoto($newFileName);
+                        $edit->setCommercialPhoto($fileName);
                     }
 
                     // Si l'utilisateur n'a séléctioné aucune région
