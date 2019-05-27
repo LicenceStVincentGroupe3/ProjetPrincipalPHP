@@ -433,7 +433,7 @@ class Company
         return $this->CompanyCreationDate;
     }
 
-    public function setCompanyCreationDate(\DateTimeInterface $CompanyCreationDate): self
+    public function setCompanyCreationDate(?\DateTimeInterface $CompanyCreationDate): self
     {
         $this->CompanyCreationDate = $CompanyCreationDate;
 
@@ -445,7 +445,7 @@ class Company
         return $this->CompanyDateUpdate;
     }
 
-    public function setCompanyDateUpdate(\DateTimeInterface $CompanyDateUpdate): self
+    public function setCompanyDateUpdate(?\DateTimeInterface $CompanyDateUpdate): self
     {
         $this->CompanyDateUpdate = $CompanyDateUpdate;
 
@@ -457,7 +457,7 @@ class Company
         return $this->CompanyPostalCode;
     }
 
-    public function setCompanyPostalCode(string $CompanyPostalCode): self
+    public function setCompanyPostalCode(?string $CompanyPostalCode): self
     {
         $this->CompanyPostalCode = $CompanyPostalCode;
 
@@ -469,7 +469,7 @@ class Company
         return $this->CompanyCity;
     }
 
-    public function setCompanyCity(string $CompanyCity): self
+    public function setCompanyCity(?string $CompanyCity): self
     {
         $this->CompanyCity = $CompanyCity;
 
