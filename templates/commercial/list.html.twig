@@ -53,8 +53,8 @@
 							</a>
 						</td>
 						<td>
-							{% if commercial.IdCompanyCountry is not null %}
-							<a href="{{ path('editCommercial', {'id':commercial.Id}) }}">	{{commercial.IdCompanyCountry.Label}}
+							{% if commercial.IdAffectedZone is not null %}
+							<a href="{{ path('editCommercial', {'id':commercial.Id}) }}">	{{commercial.IdAffectedZone.Label}}
 							</a>
 							{% endif %}
 						</td>

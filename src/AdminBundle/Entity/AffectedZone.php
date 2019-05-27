@@ -8,9 +8,9 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity(repositoryClass="App\AdminBundle\Repository\CompanyCountryRepository")
+ * @ORM\Entity(repositoryClass="App\AdminBundle\Repository\AffectedZoneRepository")
  */
-class CompanyCountry
+class AffectedZone
 {
     /**
      * @ORM\Id()
@@ -26,13 +26,13 @@ class CompanyCountry
     private $label;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\AdminBundle\Entity\Company", mappedBy="idCompanyCountry")
+     * @ORM\OneToMany(targetEntity="App\AdminBundle\Entity\Commercial", mappedBy="idAffectedZone")
      */
-    private $companies;
+    private $commercials;
 
     public function __construct()
     {
-        $this->companies = new ArrayCollection();
+        $this->commercials = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -53,33 +53,33 @@ class CompanyCountry
     }
 
     /**
-     * @return Collection|Company[]
+     * @return Collection|Commercial[]
      */
-    public function getCompanies(): Collection
+    public function getCommercials(): Collection
     {
-        return $this->companies;
+        return $this->commercials;
     }
 
-    public function addCompany(Company $company): self
+    public function addCommercial(Commercial $commercial): self
     {
-        if (!$this->companies->contains($company)) {
-            $this->companies[] = $company;
-            $company->setIdCompanyCountry($this);
+        if (!$this->commercials->contains($commercial)) {
+            $this->commercials[] = $commercial;
+            $commercial->setIdAffectedZone($this);
         }
 
         return $this;
     }
 
-    public function removeCompany(Company $company): self
+    public function removeCommercial(Commercial $commercial): self
     {
-        if ($this->companies->contains($company)) {
-            $this->companies->removeElement($company);
+        if ($this->contacts->contains($commercial)) {
+            $this->contacts->removeElement($commercial);
             // set the owning side to null (unless already changed)
-            if ($company->getIdCompanyCountry() === $this) {
-                $company->setIdCompanyCountry(null);
+            if ($commercial->getIdAffectedZone() === $this) {
+                $commercial->setIdAffectedZone(null);
             }
         }
-
+        
         return $this;
     }
 }
