@@ -557,7 +557,7 @@
                             <tr>
                                 <td>
                                     {% if company.CompanyLogo is not null %}
-                                        <img src="{{asset('build/images/' ~ contact.ContactPhoto)}}" class="table-img-profile rounded-circle" title="Photo" alt="Aucun logo">
+                                        <img src="{{asset('build/images/' ~ company.CompanyLogo)}}" class="table-img-profile rounded-circle" title="Photo" alt="Aucun logo">
                                     {% else %}
                                         <img src="{{asset('build/Photo.png')}}" class="table-img-profile rounded-circle" title="Photo" alt="Logo de l'entreprise">
                                     {% endif %}
