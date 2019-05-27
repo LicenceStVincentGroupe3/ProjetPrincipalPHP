@@ -96,7 +96,7 @@ class CompanyController extends AbstractController
             if ($form->isSubmitted() && $form->isValid() && $request->isMethod('POST')) {
                 $edit = $form->getData();
 
-                $companyName = $edit->$CompanyLastName();
+                $companyName = $edit->getCompanyLastName();
                 $companyPicture = $form['CompanyLogo']->getData();
                 $file = $companyPicture;
 
