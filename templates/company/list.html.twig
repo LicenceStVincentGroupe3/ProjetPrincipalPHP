@@ -39,7 +39,7 @@
 							<td>
 								<input type="checkbox" class="checkthis" name="deleteData[]" value="{{ uneEntreprise.Id }}">
 							</td>
-							<td>
+							<td style="width: 140px;">
 								{% if uneEntreprise.CompanyLogo is not null %}
 									<img src="{{asset('build/images/' ~ uneEntreprise.CompanyLogo)}}" class="table-img-profile rounded-circle" title="Logo" alt="Aucun logo">
 								{% else %}
