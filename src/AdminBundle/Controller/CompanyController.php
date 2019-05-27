@@ -101,7 +101,7 @@ class CompanyController extends AbstractController
                 if ($file !== null)
                 {
                     // On vérifie si le fichier est en base
-                    if($edit->getContactPhoto() !== null)
+                    if($edit->getCompanyLogo() !== null)
                     {
                         // Variable qui contient l'ancien fichier
                         $oldFile = $this->getParameter('images_directory').'/'.
