@@ -19,6 +19,11 @@ class AffectedZoneRepository extends ServiceEntityRepository
         parent::__construct($registry, AffectedZone::class);
     }
 
+    public function findAllASC()
+    {
+        return $this->findBy(array(), array('label' => 'ASC'));
+    }
+
     // /**
     //  * @return AffectedZone[] Returns an array of AffectedZone objects
     //  */

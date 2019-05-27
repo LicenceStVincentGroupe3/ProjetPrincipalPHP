@@ -48,7 +48,7 @@ class CommercialController extends AbstractController
                 $commercial = $display->getRepository(Commercial::class);
 
                 // Equivalent du SELECT *
-                $listZone = $affectedZone->findAll();
+                $listZone = $affectedZone->findAllASC();
 
                 $form = $this->createForm(CommercialType::class, $new);
 
@@ -190,7 +190,7 @@ class CommercialController extends AbstractController
                 $edit = $commercialRepository->find($id);
 
                 // Equivalent du SELECT *
-                $listZone = $affectedZone->findAll();
+                $listZone = $affectedZone->findAllASC();
 
                 // Appel de la fonction countCompany() du repository de la classe Company
                 $nbCompany = $companyRepository->countCompany($id);
